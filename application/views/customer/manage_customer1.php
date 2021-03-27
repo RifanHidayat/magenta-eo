@@ -1,0 +1,877 @@
+
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="description" content="Ela Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/dashboard/css/cs-skin-elastic.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/dashboard/css/style.css')?>">
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    
+
+   <style>
+    #weatherWidget .currentDesc {
+        color: #ffffff!important;
+    }
+        .traffic-chart {
+            min-height: 335px;
+        }
+        #flotPie1  {
+            height: 150px;
+        }
+        #flotPie1 td {
+            padding:3px;
+        }
+        #flotPie1 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
+        .chart-container {
+            display: table;
+            min-width: 270px ;
+            text-align: left;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        #flotLine5  {
+             height: 105px;
+        }
+
+        #flotBarChart {
+            height: 150px;
+        }
+        #cellPaiChart{
+            height: 160px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <?php
+    $ses=$this->session->userdata('email');
+    $fname=$this->session->userdata('fname');
+    if ($ses==null){
+      redirect("login");
+    }
+  ?>
+                  <!-- Left Panel -->
+        <aside id="left-panel" class="left-panel">
+        <nav class="navbar navbar-expand-sm navbar-default">
+            <div id="main-menu" class="main-menu collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="<?php echo base_url('index.php');?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                    </li>
+
+                         <?php if($user_permission): ?>
+                      <?php if(in_array('createGroup', $user_permission) || in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)): ?>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-inbox"></i>Group</a>
+                        <ul class="sub-menu children dropdown-menu"> 
+                            <?php if(in_array('createGroup', $user_permission)): ?>
+                            <li><i class="fa fa-id-badge"></i><a href="<?php echo base_url('dashboard/add_group');?>">Add Group</a></li>
+                        <?php endif; ?>
+                         <?php if(in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)): ?>
+
+                            <li><i class="fa fa-bars"></i><a href="<?php echo base_url('dashboard/manage_groups');?>">Manage Groups</a></li>
+                             <?php endif; ?>
+
+                        </ul>
+                    </li>
+                      <?php endif; ?>
+                    
+                        <?php if(in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>User</a>
+
+                        <ul class="sub-menu children dropdown-menu">
+                            <?php if(in_array('createUser', $user_permission)): ?>
+                            <li><i class="fa fa-table"></i><a href="<?php echo base_url('dashboard/add_user');?>">Add user</a></li>
+                             <?php endif; ?>
+                            <?php if(in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
+                            <li><i class="fa fa-table"></i><a  href="<?php echo base_url('dashboard/manage_users');?>">Manage Users</a></li>
+                            <?php endif; ?>
+                        </ul>
+
+                    </li>
+                    <?php endif; ?>
+                      <?php if(in_array('createPicPO', $user_permission) || in_array('updatePicPO', $user_permission) || in_array('viewPicPO', $user_permission) || in_array('deletePicPO', $user_permission)): ?>
+
+                    <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>PIC PO</a>
+                        <ul class="sub-menu children dropdown-menu">
+                             <?php if(in_array('createPicPO', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_pic');?>">Add PIC PO</a></li>
+                             <?php endif; ?>
+                            <?php if(in_array('updatePicPO', $user_permission) || in_array('viewPicPO', $user_permission) || in_array('deletePicPO', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_pic');?>">Manage PIC PO</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                     <?php if(in_array('createCustomer', $user_permission) || in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)): ?>
+                     <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Customer</a>
+                        <ul class="sub-menu children dropdown-menu">
+                             <?php if(in_array('createCustomer', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_customer');?>">Add Customer</a></li>
+                             <?php endif; ?>
+                            <?php if(in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_customer');?>">Manage Customer</a></li>
+                              <?php endif; ?>
+                        </ul>
+                    </li>
+                      <?php endif; ?>
+                       <?php if(in_array('createItems', $user_permission) || in_array('updateItems', $user_permission) || in_array('viewItems', $user_permission) || in_array('deleteItems', $user_permission)): ?>
+                        <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cube"></i>Items</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <?php if(in_array('createItems', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_attribute');?>">Add Item </a></li>
+                             <?php endif; ?>
+                            <?php if(in_array('updateItems', $user_permission) || in_array('viewItems', $user_permission) || in_array('deleteItems', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_attribute');?>">Manage Items</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                       <?php if(in_array('createBank', $user_permission) || in_array('updateBank', $user_permission) || in_array('viewBank', $user_permission) || in_array('deleteBank', $user_permission)): ?>
+                        <li class="menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bank"></i>Bank</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <?php if(in_array('createBank', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_bank');?>">Add Bank </a></li>
+                             <?php endif; ?>
+                            <?php if(in_array('updateBank', $user_permission) || in_array('viewbank', $user_permission) || in_array('deleteBank', $user_permission)): ?>
+                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_bank');?>">Manage Bank</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                     <?php endif; ?>
+                     
+
+
+            
+                </ul>
+
+                   
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </aside>
+
+    <!-- /#left-panel -->
+    <!-- Right Panel -->
+    <div id="right-panel" class="right-panel">
+        <!-- Header-->
+     <header id="header" class="header">
+            <div class="top-left">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./"><img src="<?php echo base_url('images/logo.png');?>" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+
+            <div class="top-right">
+
+                <div class="header-menu">
+
+                    <br>
+                 
+
+                    <div class="user-area dropdown float-right">
+                      
+                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <table>
+                                <tr>
+                                    <td><?php echo ($fname); ?><td>
+                                  <!--   <th>  <p><?php echo $fname?><></td> -->
+                                    <td><img class="user-avatar rounded-circle" src="<?php echo base_url('images/avatar.png');?>" alt="User Avatar"></td>
+                                </tr>
+                            </table>
+
+
+                            
+                        </a>
+
+                        <div class="user-menu dropdown-menu">
+                         
+
+                            <a class="nav-link" href="<?php echo base_url('login/logout');?>"><i class="fa fa-power -off"></i>Logout</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- /#header -->
+        <!-- Content -->
+        <div class="content">
+
+             <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+
+          <?php if($this->session->flashdata('success')): ?>
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <?php echo $this->session->flashdata('success'); ?>
+            </div>
+          <?php elseif($this->session->flashdata('error')): ?>
+            <div class="alert alert-error alert-dismissible" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <?php echo $this->session->flashdata('error'); ?>
+            </div>
+          <?php endif; ?>
+          
+           <?php if(in_array('createCustomer', $user_permission)): ?>
+            <a href="<?php echo base_url('dashboard/add_customer') ?>" class="btn btn-primary">Add Customer</a>
+            <?php endif; ?>
+            <hr>
+            <br /> <br />
+
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Manage Customers</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+              <table id="userTable" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Customer Name</th>
+                  <th>Customer Address</th>
+                  <th>Customer phone</th>
+                  <th>NPWP</th>
+                  <th>PIC PO</th>
+                 
+               
+
+                  <th colspan="3"><center>Action</center></th>
+               
+                </tr>
+                </thead>
+                <tbody>
+
+                               
+                    <?php foreach ($customer as $k): ?>
+                      <tr>
+                        <td><?php echo $k->name; ?></td>
+                        <td><?php echo $k->address; ?></td>
+                        <td><?php echo $k->phone; ?></td>
+                        <td><?php echo $k->npwp; ?></td>
+                        <td><?php echo $k->pic_name; ?></td>
+                      
+
+                     
+                      
+                        <td>
+                           <?php if(in_array('updateCustomer', $user_permission)): ?>
+
+                          <font color="#FFFFFF" size="2px">'+'<a class="btn btn-warning btn-xs" onclick="AmbilData('<?php echo $k->id ?>')" data-toggle="modal" data-target="#update"><i class="fa fa-edit"></i> UBAH</a>
+                            <?php endif; ?>
+                             <?php if(in_array('deleteCustomer', $user_permission)): ?>
+                        <font color="#FFFFFF" size="2px"><a class="btn btn-danger btn-xs" onclick="swetalert('<?php echo $k->id?>')"><i class="fa fa-trash"></i><font size="2px"> HAPUS</a>'</td>   
+                        <?php endif; ?> 
+
+                      </tr>
+                    <?php endforeach ?>
+             
+                </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- col-md-12 -->
+      </div>
+      <!-- /.row -->
+      <!-- Modal tambah button updatet data anakk -->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document" data-keyboard="false">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Ubah Data Customer</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <form id="formmodal" method="post" action="<?php echo base_url('user/aksi_update_data_anak'); ?>" name="formid">
+        <div class="box-body">
+               <div class="form-group">
+                    <input type="hidden" name="id">
+                  </div>
+
+        
+            
+                <div class="form-group">
+                  <label for="username">Customer Name</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Customer Name" autocomplete="off">
+                </div>
+                 <small class="text-danger pl-3" id="name_error"></small>
+                 <div class="form-group">
+                  <label for="caddress">Customer Address</label>
+                  <input type="text" class="form-control" id="address" name="address" placeholder="Customer Addrees" autocomplete="off">
+                </div>
+                 <small class="text-danger pl-3" id="address_error"></small>
+
+                  <div class="form-group">
+                  <label for="cphone">Customer Phone</label>
+                  <input type="text" class="form-control" id="phone" name="phone" placeholder="Customer Phone" autocomplete="off">
+                </div>
+                 <small class="text-danger pl-3" id="phone_error"></small>
+
+                <div class="form-group">
+                  <label for="npwp">NPWP</label>
+                  <input type="text" class="form-control" id="npwp" name="npwp" placeholder="NPWP" autocomplete="off">
+                </div>
+                <small class="text-danger pl-3" id="npwp_error"></small>
+
+                     <div class="form-group">
+                  <label for="groups">PIC PO</label>
+                  <select class="form-control" id="pic" name="pic" style="width:99%;" onchange="DataPIC()">
+                    <option value="">Select PiC PO</option>
+                    <?php foreach ($pic as $k): ?>
+                      <option value="<?php echo $k->pic_name ?>"><?php echo $k->pic_name ?></option>
+                    <?php endforeach ?>
+                  </select>
+                </div>
+                <small class="text-danger pl-3" id="pic_error"></small>
+
+                  
+
+                <div class="form-group">
+                  <label for="jabatan">Jabatan PIC PO</label>
+                  <input type="text" readonly  class="form-control" id="jabatan" name="jabatan" placeholder="jabatan" autocomplete="off">
+                </div>
+                 
+      
+
+
+                <div class="form-group">
+                  <label for="email">Email PIC PO</label>
+                  <input type="email" readonly  class="form-control" id="email" name="email" placeholder="Email" autocomplete="off">
+                </div>
+               
+
+              </div>
+              <br>
+              <br>
+              <!-- /.box-body -->
+
+             
+         
+        </form>     
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+        <button type="submit" class="btn btn-primary" onclick="Ubahdata()">Ubah</button>
+
+      </div>
+   
+      
+    </div>
+  </div>
+</div>
+
+    </section>
+ 
+        </div>
+      </div>
+
+        <!-- /.content -->
+        <div class="clearfix"></div>
+        <!-- Footer -->
+        <footer class="site-footer">
+        
+        </footer>
+        <!-- /.site-footer -->
+    </div>
+    <!-- /#right-panel -->
+    <script type="text/javascript" src="<?php echo base_url('assets/dashboard/js/jquery.min.js') ?>"></script>  
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="<?php echo base_url('assets/dashboard/js/main.js');?>"></script>
+
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src="<?php echo base_url('assets/dashboard/js/init/weather-init.js')?>"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="<?php echo base_url('assets/dashboard/js/init/fullcalendar-init.js');?>"></script>
+    <script src="<?php echo base_url('assets/sweetalert/sweetalert2.all.min.js')?>"></script>
+
+    <!--Local Stuff-->
+    <script>
+
+
+        jQuery(document).ready(function($) {
+            "use strict";
+
+            // Pie chart flotPie1
+            var piedata = [
+                { label: "Desktop visits", data: [[1,32]], color: '#5c6bc0'},
+                { label: "Tab visits", data: [[1,33]], color: '#ef5350'},
+                { label: "Mobile visits", data: [[1,35]], color: '#66bb6a'}
+            ];
+
+            $.plot('#flotPie1', piedata, {
+                series: {
+                    pie: {
+                        show: true,
+                        radius: 1,
+                        innerRadius: 0.65,
+                        label: {
+                            show: true,
+                            radius: 2/3,
+                            threshold: 1
+                        },
+                        stroke: {
+                            width: 0
+                        }
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true
+                }
+            });
+            // Pie chart flotPie1  End
+            // cellPaiChart
+            var cellPaiChart = [
+                { label: "Direct Sell", data: [[1,65]], color: '#5b83de'},
+                { label: "Channel Sell", data: [[1,35]], color: '#00bfa5'}
+            ];
+            $.plot('#cellPaiChart', cellPaiChart, {
+                series: {
+                    pie: {
+                        show: true,
+                        stroke: {
+                            width: 0
+                        }
+                    }
+                },
+                legend: {
+                    show: false
+                },grid: {
+                    hoverable: true,
+                    clickable: true
+                }
+
+            });
+            // cellPaiChart End
+            // Line Chart  #flotLine5
+            var newCust = [[0, 3], [1, 5], [2,4], [3, 7], [4, 9], [5, 3], [6, 6], [7, 4], [8, 10]];
+
+            var plot = $.plot($('#flotLine5'),[{
+                data: newCust,
+                label: 'New Data Flow',
+                color: '#fff'
+            }],
+            {
+                series: {
+                    lines: {
+                        show: true,
+                        lineColor: '#fff',
+                        lineWidth: 2
+                    },
+                    points: {
+                        show: true,
+                        fill: true,
+                        fillColor: "#ffffff",
+                        symbol: "circle",
+                        radius: 3
+                    },
+                    shadowSize: 0
+                },
+                points: {
+                    show: true,
+                },
+                legend: {
+                    show: false
+                },
+                grid: {
+                    show: false
+                }
+            });
+            // Line Chart  #flotLine5 End
+            // Traffic Chart using chartist
+            if ($('#traffic-chart').length) {
+                var chart = new Chartist.Line('#traffic-chart', {
+                  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                  series: [
+                  [0, 18000, 35000,  25000,  22000,  0],
+                  [0, 33000, 15000,  20000,  15000,  300],
+                  [0, 15000, 28000,  15000,  30000,  5000]
+                  ]
+              }, {
+                  low: 0,
+                  showArea: true,
+                  showLine: false,
+                  showPoint: false,
+                  fullWidth: true,
+                  axisX: {
+                    showGrid: true
+                }
+            });
+
+                chart.on('draw', function(data) {
+                    if(data.type === 'line' || data.type === 'area') {
+                        data.element.animate({
+                            d: {
+                                begin: 2000 * data.index,
+                                dur: 2000,
+                                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                                to: data.path.clone().stringify(),
+                                easing: Chartist.Svg.Easing.easeOutQuint
+                            }
+                        });
+                    }
+                });
+            }
+            // Traffic Chart using chartist End
+            //Traffic chart chart-js
+            if ($('#TrafficChart').length) {
+                var ctx = document.getElementById( "TrafficChart" );
+                ctx.height = 150;
+                var myChart = new Chart( ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
+                        datasets: [
+                        {
+                            label: "Visit",
+                            borderColor: "rgba(4, 73, 203,.09)",
+                            borderWidth: "1",
+                            backgroundColor: "rgba(4, 73, 203,.5)",
+                            data: [ 0, 2900, 5000, 3300, 6000, 3250, 0 ]
+                        },
+                        {
+                            label: "Bounce",
+                            borderColor: "rgba(245, 23, 66, 0.9)",
+                            borderWidth: "1",
+                            backgroundColor: "rgba(245, 23, 66,.5)",
+                            pointHighlightStroke: "rgba(245, 23, 66,.5)",
+                            data: [ 0, 4200, 4500, 1600, 4200, 1500, 4000 ]
+                        },
+                        {
+                            label: "Targeted",
+                            borderColor: "rgba(40, 169, 46, 0.9)",
+                            borderWidth: "1",
+                            backgroundColor: "rgba(40, 169, 46, .5)",
+                            pointHighlightStroke: "rgba(40, 169, 46,.5)",
+                            data: [1000, 5200, 3600, 2600, 4200, 5300, 0 ]
+                        }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        tooltips: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        hover: {
+                            mode: 'nearest',
+                            intersect: true
+                        }
+
+                    }
+                } );
+            }
+            //Traffic chart chart-js  End
+            // Bar Chart #flotBarChart
+            $.plot("#flotBarChart", [{
+                data: [[0, 18], [2, 8], [4, 5], [6, 13],[8,5], [10,7],[12,4], [14,6],[16,15], [18, 9],[20,17], [22,7],[24,4], [26,9],[28,11]],
+                bars: {
+                    show: true,
+                    lineWidth: 0,
+                    fillColor: '#ffffff8a'
+                }
+            }], {
+                grid: {
+                    show: false
+                }
+            });
+            // Bar Chart #flotBarChart End
+        });
+    </script>
+</body>
+<script type="text/javascript">
+
+         function AmbilId(){
+      $.ajax({
+          type:"post",
+          url:'<?php echo base_url("dashboard/AmbilIDBank")?>',
+          dataType:'json',
+          success:function(hasil){
+             console.log(hasil);
+               console.log("sukses");
+    
+          },
+          error:function(hasil){
+             console.log("gagal");
+    
+           
+          }
+         
+
+      });
+  
+}
+    
+  function swetalert(id){
+  Swal.fire({
+  title: 'Yakin?',
+  text: "Mau menghapus data ini!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  cancelButtonText: 'Batalkan',
+  confirmButtonText: 'Iya'
+}).then((result) => {
+  if (result.value) {
+    $.ajax({
+        url : "<?php echo base_url("dashboard/hapus_customer/3") ?>",
+        type:"post",
+        data:{id:id},
+        success:function(){
+            Swal.fire(
+      'Deleted!',
+      'Data berhasil dihapus.',
+      'success'
+    );
+
+            
+            location.reload();
+
+        },
+        error:function(){
+                Swal.fire(
+      
+      'gagal menghapus data.',
+      'error'
+    );
+        }
+
+    });
+  }
+});
+
+}
+
+
+  function AmbilData(id){
+      $.ajax({
+          type:"post",
+          url:'<?php echo base_url("dashboard/ambilIdCustomer/3")?>',
+          data:{id:id},
+          dataType:'json',
+          success:function(hasil){
+             console.log(hasil);
+                $('[name="name"]').val(hasil[0].name);
+                $('[name="jabatan"]').val(hasil[0].jabatan);
+                $('[name="email"]').val(hasil[0].email);
+                $('[name="phone"]').val(hasil[0].phone);
+                $('[name="address"]').val(hasil[0].address);
+                $('[name="npwp"]').val(hasil[0].npwp);
+                $('[name="id"]').val(hasil[0].id);
+                $('[name="id"]').val(hasil[0].id);
+                $('[name="pic"]').val(hasil[0].pic_name);
+          },
+          error:function(hasil){
+    
+           
+          }
+         
+
+      });
+  
+}
+
+function Ubahdata(){
+    var id=$('[name="id"]').val();
+    var name=$("[name='name']").val();
+    var jabatan=$("[name='jabatan']").val();
+    var email=$("[name='email']").val();
+    var phone=$("[name='phone']").val();
+    var address=$("[name='address']").val();
+    var npwp=$("[name='npwp']").val();
+    var pic=$("[name='pic']").val();
+
+    var jabatam_error=document.getElementById("jabatan_error");
+    var name_error=document.getElementById("name_error");
+    var email_error=document.getElementById("email_error");
+    var phone_error=document.getElementById("phone_error");
+    var address_error=document.getElementById("address_error");
+    var npwp_error=document.getElementById("npwp_error");
+    var pic_error=document.getElementById("pic_error");
+  
+    if (name.trim()==''){
+      name_error.style.border="1 px solid red";
+      name_error.textContent="*Nama Customer masih kosong,silahkan diisi!";
+      $('#name').focus();
+      return false;
+    }else if (address.trim()==''){
+
+      address_error.style.border="1 px solid red";
+      address_error.textContent=" *Address Customer masih kosong,silahkan diisi!";
+      $('#address').focus();
+      return false;
+      name_error.style.border="1 px solid red";
+      name_error.textContent="";
+
+    }else if (phone.trim()==''){
+
+      phone_error.style.border="1 px solid red";
+      phone_error.textContent=" *Phone Customer masih kosong,silahkan diisi!";
+      $('#phone').focus();
+      return false;
+      name_error.style.border="1 px solid red";
+      name_error.textContent="";
+      address_error.style.border="1 px solid red";
+      address_error.textContent="";
+
+    } else if (npwp.trim()==''){
+
+      npwp_error.style.border="1 px solid red";
+      npwp_error.textContent=" *NPWP masih kosong,silahkan diisi!";
+      $('#npwp').focus();
+      return false;
+      name_error.style.border="1 px solid red";
+      name_error.textContent="";
+       address_error.style.border="1 px solid red";
+      address_error.textContent="";
+       address_error.style.border="1 px solid red";
+      address_error.textContent="";
+
+    }else if (pic.trim()==''){
+
+      pic_error.style.border="1 px solid red";
+      pic_error.textContent=" *PIC PO masih kosong,silahkan diisi!";
+      $('#pic').focus();
+      return false;
+      name_error.style.border="1 px solid red";
+      name_error.textContent="";
+       address_error.style.border="1 px solid red";
+      address_error.textContent="";
+       address_error.style.border="1 px solid red";
+      address_error.textContent="";
+       npwp_error.style.border="1 px solid red";
+      npwp_error.textContent="";
+
+    }else{
+      $.ajax({
+type:'POST',
+data:'id='+id+'&name='+name+'&jabatan='+jabatan+'&email='+email+'&phone='+phone+'&address='+address+'&npwp='+npwp+'&pic_name='+pic,
+url :'<?php echo base_url("dashboard/aksi_update_data_customer") ?>',
+dataType:'json',
+success:function(hasil){
+    console.log(hasil);
+          Swal.fire(
+      'success!',
+      'Data berhasil diubah.',
+      'success'
+    );
+  
+    $('#update').hide();
+    $('.modal-backdrop').hide();
+     location.reload();
+},
+error:function(){
+              Swal.fire(
+      'success!',
+      'Data berhasil diubah.',
+      'success'
+    );
+
+    $('#update').hide();
+    $('.modal-backdrop').hide();
+     location.reload();
+   
+}
+
+});
+
+
+    }
+
+
+
+
+}
+
+
+  function DataPIC(){
+      $.ajax({
+          type:"post",
+          url:'<?php echo base_url("dashboard/AmbilDataPIC/")?>',
+          data:'pic_name='+formid.pic[formid.pic.selectedIndex].text,
+          dataType:'json',
+      
+          success:function(hasil){
+             console.log(hasil[0].email);
+              console.log(hasil);
+                $('[name="email"]').val(hasil[0].email);
+                $('[name="jabatan"]').val(hasil[0].jabatan);
+          },
+          error:function(hasil){
+    
+           
+          }
+         
+
+      });
+  
+}
+
+
+
+
+
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+  <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script>
+  
+    
+<!DOCTYPE html>
+<html>
+<style>
+table#disenio{
+    border: 1px solid black; width: 400px; background: #CCC; color: #A41E15;
+}
+table#disenio td, table#disenio th{
+    border: 1px solid black; width: 400px; background: #CCC; color: #A41E15;
+}
+</style>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="<?php echo base_url('assets/lte/plugins/fontawesome-free/css/all.min.css')?>">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/lte/dist/css/adminlte.min.css');?>">
+
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+  <!-- Main content -->
+  <section class="invoice">
+    <!-- title row -->
+
+    <div class="row" id="konten">
+      <div class="col-12 table-responsive">
+        <div style="margin-right:50px">
+       
+            <table id="disenio">
+<thead>
+    <tr>
+        <th>HolaU</th>
+        <th>HolaU</th>
+        <th>HolaU</th>
+        <th>HolaU</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>Hola</td>
+        <td>Hola</td>
+        <td>Hola</td>
+        <td>Hola</td>
+    </tr>
+    <tr>
+        <td>Hola</td>
+        <td>Hola</td>
+        <td>Hola</td>
+        <td>Hola</td>
+    </tr>
+</tbody>
+<a href="javascript:demoFromHTML()" class="button">Run Code</a>
+      </div>
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- ./wrapper -->
+<script type="text/javascript"> 
+ $(document).ready(function() {
+    var doc = new jsPDF();
+    var specialElementHandlers = {
+    '#editor': function (element, renderer) {
+      return true;
+    }
+  };
+   doc.fromHTML($('#konten').html(), 15, 15, {
+      'width': 170,
+      'elementHandlers': specialElementHandlers
+    });
+      doc.save('download.pdf');
+  $('#btn').click(function () {
+   
+    });
+  });
+ 
+</script>
+
+</body>
+</html>
+
+
+
+<!--  -->

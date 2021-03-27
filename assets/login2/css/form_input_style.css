@@ -1,0 +1,107 @@
+<style type="text/css">
+	
+	*{
+		letter-spacing: 3px;
+		font-family:sans-serif;
+	}
+	body{
+		color: white;
+		background-color:#353b48;
+	}
+	h1{
+		font-size: 60px;
+		margin: 0px;
+		padding: 0;
+		text-align: center;
+	}
+	div.main{
+		width: 100%;
+		position: absolute;
+		top: 50%;
+		left:50%;
+		transform: translate(-50%,-50%);
+		vertical-align: middle;
+	}
+	div.main div{
+		position: relative;
+		margin: 430px 0;
+	}
+
+	input[type=text]{
+		border-radius: 3%;
+		width: 100%;
+		padding:20px;
+		border:2px solid white;
+		font-size: 800;
+		background-color:#dfe4ea;
+		color: #57606f;
+		 font-family: "Times New Roman", Times, serif;
+		 font-style: bold;
+		 font-size: 20px;
+
+	}
+	input[type=text]:focus{
+		outline: none;
+	}
+		input[type=password]{
+
+		border-radius: 3%;
+		width: 100%;
+		padding:20px;
+		border:2px solid white;
+		font-size: 800;
+		background-color:#dfe4ea;
+		color: #57606f;
+		 font-family: "Times New Roman", Times, serif;
+		 font-style: bold;
+		 font-size: 20px;
+
+	}
+	input[type=password]:focus{
+		outline: none;
+	}
+	.active{
+		top: -25px;
+		font-size: 20px;
+		font-weight: 900;
+		letter-spacing: 6px;
+		text-transform: uppercase;
+	}
+	.container_register{
+		margin: auto;
+		margin-top: 30px;
+		margin-bottom: 50px
+		margin-left:50%;
+		
+	}
+	.container_register001{
+		border-radius: 20px;
+		width: 600px;
+		background-color: white;
+		padding-left: 70px;
+		padding-right: 70px;
+		margin: auto;
+		margin-top: 30px;
+		margin-bottom: 50px
+		margin-left:50%;
+		padding-top: 20px;
+		padding-bottom: 50px;
+		
+	}
+		.container_login001{
+		border-radius: 20px;
+		width: 600px;
+		background-color: white;
+	
+		margin: auto;
+		margin-top: 150px;
+		padding-top: 50px;
+		padding-bottom: 50px;
+		padding-left: 70px;
+		padding-right: 70px;
+		
+		
+	}
+	button{
+		background-color: #a4b0be;
+	}
