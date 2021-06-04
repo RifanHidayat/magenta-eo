@@ -2618,6 +2618,7 @@ return $baris;
                 }else{
                   $status="";
                 }
+           
                 $sub_array = array();  
                 $sub_array[] = $row->quotation_number;
                  $sub_array[] = $row->date_quotation;
