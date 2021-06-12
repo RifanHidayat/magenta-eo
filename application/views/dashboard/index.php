@@ -1,461 +1,626 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
 
-<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard</title>
-    <meta name="description" content="Ela Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
-    <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="<?php echo base_url('assets/dashboard/css/cs-skin-elastic.css')?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/dashboard/css/style.css')?>">
-    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
-
-    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
-   <style>
-    #weatherWidget .currentDesc {
-        color: #ffffff!important;
-    }
-        .traffic-chart {
-            min-height: 335px;
-        }
-        #flotPie1  {
-            height: 150px;
-        }
-        #flotPie1 td {
-            padding:3px;
-        }
-        #flotPie1 table {
-            top: 20px!important;
-            right: -10px!important;
-        }
-        .chart-container {
-            display: table;
-            min-width: 270px ;
-            text-align: left;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        #flotLine5  {
-             height: 105px;
-        }
-
-        #flotBarChart {
-            height: 150px;
-        }
-        #cellPaiChart{
-            height: 160px;
-        }
-
-    </style>
-</head>
-
-<body>
-  <?php
-    $ses=$this->session->userdata('email');
-    $fname=$this->session->userdata('fname');
-    if ($ses==null){
-      redirect("login");
-    }
-  ?>
+    <!-- Main content -->
+    <section class="content">
 
 
-     <aside id="left-panel" class="left-panel">
-        <nav class="navbar navbar-expand-sm navbar-default">
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="<?php echo base_url('index.php');?>"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
-                    </li>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <!-- AREA CHART -->
 
-                         <?php if($user_permission): ?>
-                      <?php if(in_array('createGroup', $user_permission) || in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)): ?>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-inbox"></i>Group</a>
-                        <ul class="sub-menu children dropdown-menu"> 
-                            <?php if(in_array('createGroup', $user_permission)): ?>
-                            <li><i class="fa fa-id-badge"></i><a href="<?php echo base_url('dashboard/add_group');?>">Add Group</a></li>
-                        <?php endif; ?>
-                         <?php if(in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)): ?>
+                    <!-- /.card -->
 
-                            <li><i class="fa fa-bars"></i><a href="<?php echo base_url('dashboard/manage_groups');?>">Manage Groups</a></li>
-                             <?php endif; ?>
+                    <!-- DONUT CHART -->
 
-                        </ul>
-                    </li>
-                      <?php endif; ?>
-                    
-                        <?php if(in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>User</a>
+                    <!-- /.card -->
 
-                        <ul class="sub-menu children dropdown-menu">
-                            <?php if(in_array('createUser', $user_permission)): ?>
-                            <li><i class="fa fa-table"></i><a href="<?php echo base_url('dashboard/add_user');?>">Add user</a></li>
-                             <?php endif; ?>
-                            <?php if(in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)): ?>
-                            <li><i class="fa fa-table"></i><a  href="<?php echo base_url('dashboard/manage_users');?>">Manage Users</a></li>
-                            <?php endif; ?>
-                        </ul>
-
-                    </li>
-                    <?php endif; ?>
-                      <?php if(in_array('createPicPO', $user_permission) || in_array('updatePicPO', $user_permission) || in_array('viewPicPO', $user_permission) || in_array('deletePicPO', $user_permission)): ?>
-
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-th"></i>PIC PO</a>
-                        <ul class="sub-menu children dropdown-menu">
-                             <?php if(in_array('createPicPO', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_pic');?>">Add PIC PO</a></li>
-                             <?php endif; ?>
-                            <?php if(in_array('updatePicPO', $user_permission) || in_array('viewPicPO', $user_permission) || in_array('deletePicPO', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_pic');?>">Manage PIC PO</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                    <?php endif; ?>
-                     <?php if(in_array('createCustomer', $user_permission) || in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)): ?>
-                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-user-circle"></i>Customer</a>
-                        <ul class="sub-menu children dropdown-menu">
-                             <?php if(in_array('createCustomer', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_customer');?>">Add Customer</a></li>
-                             <?php endif; ?>
-                            <?php if(in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_customer');?>">Manage Customer</a></li>
-                              <?php endif; ?>
-                        </ul>
-                    </li>
-                      <?php endif; ?>
-                       <?php if(in_array('createItems', $user_permission) || in_array('updateItems', $user_permission) || in_array('viewItems', $user_permission) || in_array('deleteItems', $user_permission)): ?>
-                        <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cube"></i>Items</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <?php if(in_array('createItems', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_attribute');?>">Add Item </a></li>
-                             <?php endif; ?>
-                            <?php if(in_array('updateItems', $user_permission) || in_array('viewItems', $user_permission) || in_array('deleteItems', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_attribute');?>">Manage Items</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-           <?php endif; ?>
-                       <?php if(in_array('createBank', $user_permission) || in_array('updateBank', $user_permission) || in_array('viewBank', $user_permission) || in_array('deleteBank', $user_permission)): ?>
-                        <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-bank"></i>Bank</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <?php if(in_array('createBank', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/add_bank');?>">Add Bank </a></li>
-                             <?php endif; ?>
-                            <?php if(in_array('updateBank', $user_permission) || in_array('viewbank', $user_permission) || in_array('deleteBank', $user_permission)): ?>
-                            <li><i class="menu-icon fa fa-th"></i><a href="<?php echo base_url('dashboard/manage_bank');?>">Manage Bank</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                    <?php endif; ?>
-                     <?php endif; ?>
-                     
+                    <!-- PIE CHART -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Total Summary</h3>
 
 
-            
-                </ul>
-
-                   
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside>
-
-
-    <div id="right-panel" class="right-panel">
-        <!-- Header-->
-        <header id="header" class="header">
-            <div class="top-left">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="<?php echo base_url('images/logo.png');?>" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a>
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
-                </div>
-            </div>
-
-            <div class="top-right">
-
-                <div class="header-menu">
-
-                    <br>
-                 
-
-                    <div class="user-area dropdown float-right">
-                      
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <table>
-                                <tr>
-                                    <td><?php echo ($fname); ?><td>
-                                  <!--   <th>  <p><?php echo $fname?><></td> -->
-                                    <td><img class="user-avatar rounded-circle" src="<?php echo base_url('images/avatar.png');?>" alt="User Avatar"></td>
-                                </tr>
-                            </table>
-
-
-                            
-                        </a>
-
-                        <div class="user-menu dropdown-menu">
-                         
-
-                            <a class="nav-link" href="<?php echo base_url('login/logout');?>"><i class="fa fa-power -off"></i>Logout</a>
                         </div>
+                        <div class="card-body">
+                            <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col (LEFT) -->
+                <div class="col-md-6">
+                    <!-- LINE CHART -->
+
+                    <!-- /.card -->
+
+                    <!-- BAR CHART -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Status Quotation Event</h3>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChartEvent" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
 
+
+
                 </div>
+                <!-- /.col (RIGHT) -->
             </div>
-        </header>
-        <!-- /#header -->
-        <!-- Content -->
-        <div class="content">
-            <!-- Animated -->
-          
-        </div>
-      </div>
+            <!-- /.row -->
 
-        <!-- /.content -->
-        <div class="clearfix"></div>
-        <!-- Footer -->
-        <footer class="site-footer">
-        
-        </footer>
-        <!-- /.site-footer -->
-    </div>
-    <!-- /#right-panel -->
+            <div class="row">
+                <div class="col-md-6">
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="<?php echo base_url('assets/dashboard/js/main.js');?>"></script>
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Status Quotation Other</h3>
 
-    <!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
-    <!--Chartist Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChartOther" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+                </div>
+                <!-- /.col (LEFT) -->
+                <div class="col-md-6">
+                    <!-- LINE CHART -->
 
-    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="<?php echo base_url('assets/dashboard/js/init/weather-init.js')?>"></script>
+                    <!-- /.card -->
 
-    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="<?php echo base_url('assets/dashboard/js/init/fullcalendar-init.js');?>"></script>
+                    <!-- BAR CHART -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Status BAST</h3>
 
-    <!--Local Stuff-->
-    <script>
-        jQuery(document).ready(function($) {
-            "use strict";
 
-            // Pie chart flotPie1
-            var piedata = [
-                { label: "Desktop visits", data: [[1,32]], color: '#5c6bc0'},
-                { label: "Tab visits", data: [[1,33]], color: '#ef5350'},
-                { label: "Mobile visits", data: [[1,35]], color: '#66bb6a'}
-            ];
+                        </div>
+                        <div class="card card-primary">
+                            <div class="chart">
+                                <canvas id="barChartBast" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
 
-            $.plot('#flotPie1', piedata, {
-                series: {
-                    pie: {
-                        show: true,
-                        radius: 1,
-                        innerRadius: 0.65,
-                        label: {
-                            show: true,
-                            radius: 2/3,
-                            threshold: 1
+
+
+                </div>
+                <!-- /.col (RIGHT) -->
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Status Faktur</h3>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChartFaktur" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col (LEFT) -->
+                <div class="col-md-6">
+                    <!-- LINE CHART -->
+
+                    <!-- /.card -->
+
+                    <!-- BAR CHART -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Data Status Delivery</h3>
+
+
+                        </div>
+                        <div class="card-body">
+                            <div class="chart">
+                                <canvas id="barChartDelivery" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+
+
+                </div>
+                <!-- /.col (RIGHT) -->
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script>
+    $(document).ready(function() {
+
+
+        dataquotation('barChartEvent', 'getStatatusEvent', "quotation", "openquotation", "rejectquotation", "closequotation");
+        dataquotation('barChartOther', 'getStatatusOther', "quotationother", "openquotationother", "rejectquotationother", "closequotationother");
+
+        dataquotationevent('barChartBast', 'getStatatusBast', "quotationbast", "openquotationbast", "rejectquotationbast", "closequotationbast");
+
+        dataquotationevent('barChartFaktur', 'getStatatusFaktur', "quotationfaktur", "openquotationfaktur", "rejectquotationfaktur", "closequotationfaktur");
+        dataquotationevent('barChartDelivery', 'getStatatusDelivery', "quotationDeliery", "openquotationDelivery", "rejectquotationDelivery", "closequotationDelivery");
+
+    });
+
+    function dataquotation(id, aksi, label, open, reject, close) {
+        //getStatatusEvent
+        //getStatatusOther
+        //getStatatusFaktur
+        //getStatatusDelivery
+        $.ajax({
+            type: "post",
+            url: '<?php echo base_url("Dashboard/") ?>' + aksi,
+
+            dataType: 'json',
+            success: function(data) {
+                label = [];
+                open = [];
+                reject = [];
+                close = [];
+                final = [];
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var b = data[i].date;
+                    var b1 = b.toString();
+                    var b2 = b1.substring(5, 7);
+                    var tahun = b1.substring(0, 4);
+                    var bulan;
+
+                    //               switch(parseInt(b2)) {
+                    //               if 0:  varbulan = "Januari"; break;
+                    //               case 1: bulan = "Februari"; break;
+                    //               case 2: bulan = "Maret"; break;
+                    //               case 3: bulan = "April"; break;
+                    //               case 4: bulan = "Mei"; break;
+                    //               case 5: bulan = "Juni"; break;
+                    //               case 6: bulan = "Juli"; break;
+                    //               case 7: bulan = "Agustus"; break;
+                    //               case 8: bulan = "September"; break;
+                    //               case 9: bulan = "Oktober"; break;
+                    //               case 10: bulan = "November"; break;
+                    //               case 11: bulan = "Desember"; break;
+                    // }
+                    if (parseInt(b2) == 1) {
+                        bulan = "Desember"
+
+                    } else if (parseInt(b2) == 2) {
+                        bulan = "Februari"
+
+                    } else if (parseInt(b2) == 3) {
+                        bulan = "Maret"
+
+                    } else if (parseInt(b2) == 4) {
+                        bulan = "April"
+
+                    } else if (parseInt(b2) == 5) {
+                        bulan = "Mei"
+
+                    } else if (parseInt(b2) == 6) {
+                        bulan = "Juni"
+
+                    } else if (parseInt(b2) == 7) {
+                        bulan = "Juli"
+
+                    } else if (parseInt(b2) == 8) {
+                        bulan = "Agustus"
+
+                    } else if (parseInt(b2) == 9) {
+                        bulan = "September"
+
+                    } else if (parseInt(b2) == 10) {
+                        bulan = "Oktober"
+
+                    } else if (parseInt(b2) == 11) {
+                        bulan = "November"
+
+                    } else if (parseInt(b2) == 12) {
+                        bulan = "Desember"
+
+                    }
+                    var d = new Date(data[i].date);
+                    label.push(bulan + " " + tahun);
+                    open.push(data[i].Open);
+                    reject.push(data[i].Reject);
+                    close.push(data[i].Close);
+                    final.push(data[i].Final);
+
+                }
+
+
+
+
+
+                var areaChartData = {
+                    labels: label,
+                    datasets: [{
+                            label: 'Reject',
+                            backgroundColor: '#f56954',
+                            borderColor: 'rgba(60,141,188,0.8)',
+                            pointRadius: false,
+                            pointColor: '#3b8bba',
+                            pointStrokeColor: 'rgba(60,141,188,1)',
+                            pointHighlightFill: '#f39c12',
+                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            data: reject
                         },
-                        stroke: {
-                            width: 0
-                        }
-                    }
-                },
-                grid: {
-                    hoverable: true,
-                    clickable: true
+
+                        {
+                            label: 'Open',
+                            backgroundColor: '#f39c12',
+                            borderColor: 'rgba(210, 214, 222, 1)',
+                            pointRadius: false,
+                            pointColor: 'rgba(210, 214, 222, 1)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: open
+                        },
+                        {
+                            label: 'Close',
+                            backgroundColor: '#00a65a',
+                            borderColor: 'rgba(210, 214, 222, 1)',
+                            pointRadius: false,
+                            pointColor: 'rgba(210, 214, 222, 1)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: close
+                        },
+                        {
+                            label: 'Final',
+                            backgroundColor: '#00FFFF',
+                            borderColor: 'rgba(210, 214, 222, 1)',
+                            pointRadius: false,
+                            pointColor: 'rgba(210, 214, 222, 1)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: final
+                        },
+                    ]
                 }
-            });
-            // Pie chart flotPie1  End
-            // cellPaiChart
-            var cellPaiChart = [
-                { label: "Direct Sell", data: [[1,65]], color: '#5b83de'},
-                { label: "Channel Sell", data: [[1,35]], color: '#00bfa5'}
-            ];
-            $.plot('#cellPaiChart', cellPaiChart, {
-                series: {
-                    pie: {
-                        show: true,
-                        stroke: {
-                            width: 0
-                        }
-                    }
-                },
-                legend: {
-                    show: false
-                },grid: {
-                    hoverable: true,
-                    clickable: true
+                var myCanvas = document.getElementById('' + id);
+                var barChartCanvas = myCanvas.getContext('2d');
+                //var barChartCanvas = $('#' + id).get(0).getContext('2d')
+                var barChartData = jQuery.extend(true, {}, areaChartData)
+                var temp0 = areaChartData.datasets[0]
+                var temp1 = areaChartData.datasets[1]
+                barChartData.datasets[0] = temp1
+                barChartData.datasets[1] = temp0
+
+                var barChartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    datasetFill: false
                 }
 
-            });
-            // cellPaiChart End
-            // Line Chart  #flotLine5
-            var newCust = [[0, 3], [1, 5], [2,4], [3, 7], [4, 9], [5, 3], [6, 6], [7, 4], [8, 10]];
+                var barChart = new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: barChartOptions
+                })
 
-            var plot = $.plot($('#flotLine5'),[{
-                data: newCust,
-                label: 'New Data Flow',
-                color: '#fff'
-            }],
-            {
-                series: {
-                    lines: {
-                        show: true,
-                        lineColor: '#fff',
-                        lineWidth: 2
-                    },
-                    points: {
-                        show: true,
-                        fill: true,
-                        fillColor: "#ffffff",
-                        symbol: "circle",
-                        radius: 3
-                    },
-                    shadowSize: 0
-                },
-                points: {
-                    show: true,
-                },
-                legend: {
-                    show: false
-                },
-                grid: {
-                    show: false
-                }
-            });
-            // Line Chart  #flotLine5 End
-            // Traffic Chart using chartist
-            if ($('#traffic-chart').length) {
-                var chart = new Chartist.Line('#traffic-chart', {
-                  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                  series: [
-                  [0, 18000, 35000,  25000,  22000,  0],
-                  [0, 33000, 15000,  20000,  15000,  300],
-                  [0, 15000, 28000,  15000,  30000,  5000]
-                  ]
-              }, {
-                  low: 0,
-                  showArea: true,
-                  showLine: false,
-                  showPoint: false,
-                  fullWidth: true,
-                  axisX: {
-                    showGrid: true
-                }
-            });
 
-                chart.on('draw', function(data) {
-                    if(data.type === 'line' || data.type === 'area') {
-                        data.element.animate({
-                            d: {
-                                begin: 2000 * data.index,
-                                dur: 2000,
-                                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                                to: data.path.clone().stringify(),
-                                easing: Chartist.Svg.Easing.easeOutQuint
-                            }
-                        });
-                    }
-                });
+
+
+
+            },
+            error: function(hasil) {
+
+
             }
-            // Traffic Chart using chartist End
-            //Traffic chart chart-js
-            if ($('#TrafficChart').length) {
-                var ctx = document.getElementById( "TrafficChart" );
-                ctx.height = 150;
-                var myChart = new Chart( ctx, {
-                    type: 'line',
-                    data: {
-                        labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
-                        datasets: [
-                        {
-                            label: "Visit",
-                            borderColor: "rgba(4, 73, 203,.09)",
-                            borderWidth: "1",
-                            backgroundColor: "rgba(4, 73, 203,.5)",
-                            data: [ 0, 2900, 5000, 3300, 6000, 3250, 0 ]
-                        },
-                        {
-                            label: "Bounce",
-                            borderColor: "rgba(245, 23, 66, 0.9)",
-                            borderWidth: "1",
-                            backgroundColor: "rgba(245, 23, 66,.5)",
-                            pointHighlightStroke: "rgba(245, 23, 66,.5)",
-                            data: [ 0, 4200, 4500, 1600, 4200, 1500, 4000 ]
-                        },
-                        {
-                            label: "Targeted",
-                            borderColor: "rgba(40, 169, 46, 0.9)",
-                            borderWidth: "1",
-                            backgroundColor: "rgba(40, 169, 46, .5)",
-                            pointHighlightStroke: "rgba(40, 169, 46,.5)",
-                            data: [1000, 5200, 3600, 2600, 4200, 5300, 0 ]
-                        }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        tooltips: {
-                            mode: 'index',
-                            intersect: false
-                        },
-                        hover: {
-                            mode: 'nearest',
-                            intersect: true
-                        }
 
-                    }
-                } );
-            }
-            //Traffic chart chart-js  End
-            // Bar Chart #flotBarChart
-            $.plot("#flotBarChart", [{
-                data: [[0, 18], [2, 8], [4, 5], [6, 13],[8,5], [10,7],[12,4], [14,6],[16,15], [18, 9],[20,17], [22,7],[24,4], [26,9],[28,11]],
-                bars: {
-                    show: true,
-                    lineWidth: 0,
-                    fillColor: '#ffffff8a'
-                }
-            }], {
-                grid: {
-                    show: false
-                }
-            });
-            // Bar Chart #flotBarChart End
+
         });
-    </script>
-</body>
-</html>
+
+    }
+
+
+    function dataquotationevent(id, aksi, label, open, reject, close) {
+        //getStatatusEvent
+        //getStatatusOther
+        //getStatatusFaktur
+        //getStatatusDelivery
+        $.ajax({
+            type: "post",
+            url: '<?php echo base_url("Dashboard/") ?>' + aksi,
+
+            dataType: 'json',
+            success: function(data) {
+                label = [];
+                open = [];
+                reject = [];
+                close = [];
+
+
+                for (var i = 0; i < data.length; i++) {
+
+                    var b = data[i].date;
+                    var b1 = b.toString();
+                    var b2 = b1.substring(5, 7);
+                    var tahun = b1.substring(0, 4);
+                    var bulan;
+
+                    //               switch(parseInt(b2)) {
+                    //               if 0:  varbulan = "Januari"; break;
+                    //               case 1: bulan = "Februari"; break;
+                    //               case 2: bulan = "Maret"; break;
+                    //               case 3: bulan = "April"; break;
+                    //               case 4: bulan = "Mei"; break;
+                    //               case 5: bulan = "Juni"; break;
+                    //               case 6: bulan = "Juli"; break;
+                    //               case 7: bulan = "Agustus"; break;
+                    //               case 8: bulan = "September"; break;
+                    //               case 9: bulan = "Oktober"; break;
+                    //               case 10: bulan = "November"; break;
+                    //               case 11: bulan = "Desember"; break;
+                    // }
+                    if (parseInt(b2) == 1) {
+                        bulan = "Desember"
+
+                    } else if (parseInt(b2) == 2) {
+                        bulan = "Februari"
+
+                    } else if (parseInt(b2) == 3) {
+                        bulan = "Maret"
+
+                    } else if (parseInt(b2) == 4) {
+                        bulan = "April"
+
+                    } else if (parseInt(b2) == 5) {
+                        bulan = "Mei"
+
+                    } else if (parseInt(b2) == 6) {
+                        bulan = "Juni"
+
+                    } else if (parseInt(b2) == 7) {
+                        bulan = "Juli"
+
+                    } else if (parseInt(b2) == 8) {
+                        bulan = "Agustus"
+
+                    } else if (parseInt(b2) == 9) {
+                        bulan = "September"
+
+                    } else if (parseInt(b2) == 10) {
+                        bulan = "Oktober"
+
+                    } else if (parseInt(b2) == 11) {
+                        bulan = "November"
+
+                    } else if (parseInt(b2) == 12) {
+                        bulan = "Desember"
+
+                    }
+                    var d = new Date(data[i].date);
+                    label.push(bulan + " " + tahun);
+                    open.push(data[i].Open);
+                    reject.push(data[i].Reject);
+                    close.push(data[i].Close);
+
+                }
+
+
+                var areaChartData = {
+                    labels: label,
+                    datasets: [{
+
+
+                            label: 'Reject',
+                            backgroundColor: '#f56954',
+                            borderColor: 'rgba(60,141,188,0.8)',
+                            pointRadius: false,
+                            pointColor: '#3b8bba',
+                            pointStrokeColor: 'rgba(60,141,188,1)',
+                            pointHighlightFill: '#f39c12',
+                            pointHighlightStroke: 'rgba(60,141,188,1)',
+                            data: reject
+                        },
+
+                        {
+                            label: 'Open',
+                            backgroundColor: '#f39c12',
+                            borderColor: 'rgba(210, 214, 222, 1)',
+                            pointRadius: false,
+                            pointColor: 'rgba(210, 214, 222, 1)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: open
+                        },
+                        {
+                            label: 'Close',
+                            backgroundColor: '#00a65a',
+                            borderColor: 'rgba(210, 214, 222, 1)',
+                            pointRadius: false,
+                            pointColor: 'rgba(210, 214, 222, 1)',
+                            pointStrokeColor: '#c1c7d1',
+                            pointHighlightFill: '#fff',
+                            pointHighlightStroke: 'rgba(220,220,220,1)',
+                            data: close
+                        },
+                    ]
+                }
+                // var barChartCanvas = $('#' + id).get(0).getContext('2d')
+                var myCanvas = document.getElementById('' + id);
+                var barChartCanvas = myCanvas.getContext('2d');
+                var barChartData = jQuery.extend(true, {}, areaChartData)
+                var temp0 = areaChartData.datasets[0]
+                var temp1 = areaChartData.datasets[1]
+                barChartData.datasets[0] = temp1
+                barChartData.datasets[1] = temp0
+
+                var barChartOptions = {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    datasetFill: false
+                }
+
+                var barChart = new Chart(barChartCanvas, {
+                    type: 'bar',
+                    data: barChartData,
+                    options: barChartOptions
+                })
+
+
+
+
+
+            },
+            error: function(hasil) {
+
+
+            }
+
+
+        });
+
+    }
+
+
+
+    $(function() {
+
+
+        var donutData = {
+            labels: [
+                'Quotation Event',
+                'Quotation Other',
+                'Faktur Event',
+                'Faktur Other',
+
+
+            ],
+            datasets: [{
+                data: [<?php echo $totalquotation ?>, <?php echo $totalquotationother; ?>, <?php echo $totalfaktur; ?>, <?php echo $totalfakturother; ?>],
+                backgroundColor: ['#f56954', '#00a65a', '#f39c12', '#FFD700'],
+            }]
+        }
+        var donutOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+        }
+
+        var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+        var pieData = donutData;
+        var pieOptions = {
+            maintainAspectRatio: false,
+            responsive: true,
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var dataset = data.datasets[tooltipItem.datasetIndex];
+                        var labels = data.labels[tooltipItem.index];
+                        var currentValue = dataset.data[tooltipItem.index];
+                        return labels + ": Rp. " + currentValue.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."); + "";
+                    }
+                }
+            }
+        }
+        //Create pie or douhnut chart
+        // You can switch between pie and douhnut using the method below.
+        var pieChart = new Chart(pieChartCanvas, {
+            type: 'pie',
+            data: pieData,
+            options: pieOptions
+        })
+
+        //-------------
+        //- BAR CHART -
+        //-------------
+        // var barChartCanvas = $('#barChart').get(0).getContext('2d')
+
+        var myCanvas = document.getElementById('barChart');
+        var barChartCanvas = myCanvas.getContext('2d');
+        var barChartData = jQuery.extend(true, {}, areaChartData)
+        var temp0 = areaChartData.datasets[0]
+        var temp1 = areaChartData.datasets[1]
+        barChartData.datasets[0] = temp1
+        barChartData.datasets[1] = temp0
+
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            datasetFill: false
+        }
+
+        var barChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        })
+
+        //---------------------
+        //- STACKED BAR CHART -
+        //---------------------
+        var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
+        var stackedBarChartData = jQuery.extend(true, {}, barChartData)
+
+        var stackedBarChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                xAxes: [{
+                    stacked: true,
+                }],
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+
+        var stackedBarChart = new Chart(stackedBarChartCanvas, {
+            type: 'bar',
+            data: stackedBarChartData,
+            options: stackedBarChartOptions
+        })
+    })
+
+    function toDate(dateStr) {
+        var parts = dateStr.split("-")
+        return new Date(parts[2], parts[1] - 1, parts[0])
+    }
+
+    $("#dashboarMainNav").addClass('active');
+</script>
