@@ -495,9 +495,9 @@
                                       <td style="width: 10%">
                                         <center><?php echo $k->frrequency . " " . $k->satuanf; ?></center>
                                       </td>
-                                      <td style="width: 15%">IDR <p align="right" style="margin-top: -21px;"><?php echo $k->rate; ?></p>
+                                      <td style="width: 15%">IDR <p align="right" style="margin-top: -21px;"><?php echo number_format($k->rate, 0, ",", ".") ?></p>
                                       </td>
-                                      <td style="width: 20%">IDR <p align="right" style="margin-top: -21px;"> <?php echo $k->subtotal; ?></p>
+                                      <td style="width: 20%">IDR <p align="right" style="margin-top: -21px;"> <?php echo number_format($k->subtotal, 0, ",", ".") ?></p>
                                       </td>
                                     </tr>
                                   <?php  } ?>
@@ -592,9 +592,9 @@
                                       <td style="width: 10%">
                                         <center><?php echo $k->frrequency . " " . $k->satuanf; ?></center>
                                       </td>
-                                      <td style="width: 15%">IDR <p align="right" style="margin-top: -21px;"><?php echo $k->rate; ?></p>
+                                      <td style="width: 15%">IDR <p align="right" style="margin-top: -21px;"><?php echo number_format($k->rate, 0, ",", ".") ?></p>
                                       </td>
-                                      <td style="width: 20%">IDR <p align="right" style="margin-top: -21px;"><?php echo $k->subtotal; ?></p>
+                                      <td style="width: 20%">IDR <p align="right" style="margin-top: -21px;"><?php echo number_format($k->subtotal, 0, ",", ".") ?></p>
                                       </td>
                                     </tr>
                                   <?php  } ?>
@@ -695,15 +695,11 @@
                     <center>
                       <div id="ViewImage"></div>
                     </center>
-
-
                     <br>
                     <br>
                   </div>
                 </div>
               </div>
-
-
 
 
               <!-- /.container-fluid -->
@@ -740,8 +736,6 @@
               var fee = hasil[0].nonfee.toString().replace(/[^\w\s]/gi, '');
               var asf = hasil[0].asf.toString().replace(/[^\w\s]/gi, '');
               var sub_total = Number(cos) + Number(fee) + Number(asf);
-
-
               $('#customerEvent').val(hasil[0].customer_event);
               $('[name="Quatations_number"]').val(hasil[0].quotation_number);
               $('[name="date_expired_event"]').val(hasil[0].date_expired);
@@ -758,18 +752,17 @@
               $('[name="picEvent"]').val(hasil[0].id_event);
               $('[name="id_customer"]').val(hasil[0].id_customer);
               $('#picEvent1').val(hasil[0].pic_event);
-              $('#asf').val(hasil[0].asf);
-              $('[name="Comissionable_cost"]').val(hasil[0].comissionable_cost);
-              $('#non_fee').val(hasil[0].nonfee);
-              $('#ppn').val(hasil[0].ppn);
-              $('#pph').val(hasil[0].pph);
+              $('#asf').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+              $('[name="Comissionable_cost"]').val(hasil[0].comissionable_cost.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+              $('#non_fee').val(hasil[0].nonfee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+              $('#ppn').val(hasil[0].ppn.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+              $('#pph').val('(' + hasil[0].pph.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + ')');
               $('#total_summary').val(sub_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-              $('#grand_total').val(hasil[0].grand_total);
-
+              $('#grand_total').val(hasil[0].grand_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
               $('#status').val(hasil[0].status);
               $('#revisi').val(hasil[0].revisi);
               $('#netto_event').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-              $('#discount_event').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+              $('#discount_event').val('(' + hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + ')');
               $('#discount_percent_event').val(hasil[0].discount_percent);
 
 
@@ -790,11 +783,7 @@
 
 
 
-
-
-
         //get pic even even
-
         function updateStatus() {
           var status = $('[name="status"]').val();
           var quotation_number = $('[name="Quatations_number"]').val();
@@ -808,8 +797,6 @@
             success: function(hasil) {
               console.log(status);
               if (hasil.pesan == '1') {
-
-
                 Swal.fire({
                   title: "success!",
                   text: "Status berhasil diubah.",
@@ -817,8 +804,6 @@
                   timer: 2000,
                   showCancelButton: false,
                   showConfirmButton: false
-
-
                 });
                 $('#statusUpdate').hide();
                 $('.modal-backdrop').hide();
@@ -838,15 +823,11 @@
                   showCancelButton: false,
                   showConfirmButton: false
 
-
                 });
                 $('#statusUpdate').hide();
                 $('.modal-backdrop').hide();
                 elementStatus1();
               }
-
-
-
             },
             error: function() {
               console.log('error');
@@ -895,11 +876,11 @@
         function AmbilDataImage(fileName, type) {
 
           if (type == 'pdf') {
-            html = '<object type="application/pdf" data="<?php echo base_url('assets/images_/') ?>' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
+            html = '<object type="application/pdf" data="' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
 
 
           } else {
-            html = '<center><img style="height: 80vh; width:80vh"  src="<?php echo base_url('assets/images_/') ?>' + fileName + '" ></center>';
+            html = '<center><img style="height: 80vh; width:80vh"  src="' + fileName + '" ></center>';
 
           }
 

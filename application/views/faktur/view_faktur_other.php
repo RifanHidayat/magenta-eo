@@ -814,11 +814,11 @@
   function AmbilDataImage(fileName, type) {
 
     if (type == 'pdf') {
-      html = '<object type="application/pdf" data="<?php echo base_url('assets/imagefaktur/') ?>' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
+      html = '<object type="application/pdf" data="' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
 
 
     } else {
-      html = '<center><img style="height: 80vh; width:80vh"  src="<?php echo base_url('assets/imagefaktur/') ?>' + fileName + '" ></center>';
+      html = '<center><img style="height: 80vh; width:80vh"  src="' + fileName + '" ></center>';
 
     }
 

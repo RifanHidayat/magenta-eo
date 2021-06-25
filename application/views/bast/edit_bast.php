@@ -138,11 +138,11 @@
                   <div class="form-group" id="qnumber">
                     <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Sisa BAST</label>
                     <div class="col-sm-12">
-                      <input type="text" required="" value="<?php echo $sisa_bast ?>" class="form-control" id="total_summary" readonly="" name="sisaBast" autocomplete="off" value="<?php echo set_value('title_event') ?>">
+                      <input type="text" required="" value="<?php echo number_format($sisa_bast, 0, ",", ".") ?>" class="form-control" id="total_summary" readonly="" name="sisaBast" autocomplete="off" value="<?php echo set_value('title_event') ?>">
                     </div>
                   </div>
 
-                  <div class="form-group" id="qnumber" hidden="">
+                  <div class="form-group" id="qnumber" hidden>
                     <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Sisa BAST </label>
                     <div class="col-sm-12">
                       <input type="text" required="" class="form-control" value="<?php echo ($sisa_bast) ?>" id="total_summary" readonly="" name="sisaBast1" autocomplete="off" value="<?php echo set_value('title_event') ?>">
@@ -278,8 +278,12 @@
                     <div class="col-sm-12">
                       <input oninput="checkBast()" value="<?php echo ($totalBast) ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
                     </div>
-
-
+                  </div>
+                  <div class="form-group" id="qnumber" hidden>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-8 control-label">Total BAST</label>
+                    <div class="col-sm-12">
+                      <input oninput="checkBast()" value="<?php echo ($totalBast) ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast1" name="totalBast1" autocomplete="off">
+                    </div>
                   </div>
                   <?= form_error('date_event', '<small class="text-danger pl-3">', '</small>') ?>
 
@@ -308,13 +312,6 @@
 
                 </div>
 
-
-
-
-
-
-
-
               </form>
 
 
@@ -336,6 +333,8 @@
 
 <script type="text/javascript">
   //sisaBast();
+  //checkBast();
+  sisaBast();
 
   $(function() {
     var dateToday = new Date();
@@ -389,7 +388,7 @@
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
     initialPreview: [
-      '<object type="application/pdf" data="<?php echo base_url('assets/imagebastpo/' . $imgpo) ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/imagebastpo/' . $imgpo) ?>" ></object>'
+      '<object type="application/pdf" data="<?php echo $imgpo ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $imgpo ?>" ></object>'
     ],
   });
   $("#imggr").fileinput({
@@ -411,7 +410,7 @@
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
     initialPreview: [
-      '<object type="application/pdf" data="<?php echo base_url('assets/imagebastgr/' . $imggr) ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/imagebastgr/' . $imggr) ?>" ></object>'
+      '<object type="application/pdf" data="<?php echo $imggr ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $imggr ?>" ></object>'
     ],
   });
 
@@ -455,23 +454,45 @@
 
   }
 
+  function sisaBast() {
+    var totalBast1 = $('[name="totalBast1"]').val();
+    var totalBast = Number(totalBast1.replace(/[^\w\s]/gi, ''));
+
+    var sisa = $('[name="sisaBast"]').val();
+    var sisa1 = Number(sisa.replace(/[^\w\s]/gi, ''));
+
+    var totalSisa = Number(totalBast) + Number(sisa1);
+    $('[name="sisaBast1"]').val(totalSisa);
+
+
+  }
+
   //validasi sisa bast
-  // function checkBast(){
-  //  var totalBast1=$('[name="totalBast"]').val();
-  //   var totalBast = Number(totalBast1.replace(/[^\w\s]/gi, ''));
-  //   var sisa1=$('[name="sisaBast1"]').val();
-  //   var sisa = Number(sisa1.replace(/[^\w\s]/gi, ''));
+  function checkBast() {
+    var totalBast1 = $('[name="totalBast"]').val();
+    var totalBast = Number(totalBast1.replace(/[^\w\s]/gi, ''));
+    // var totalBast2 = $('[name="totalBast"]').val();
+    // var totalBast3 = Number(totalBast2.replace(/[^\w\s]/gi, ''));
+    var sisa1 = $('[name="sisaBast1"]').val();
+    var sisa = Number(sisa1.replace(/[^\w\s]/gi, ''));
+    //var sisa3 = Number(sisa) - Number(totalBast);
+    var sisaBastnow = Number(sisa) - Number(totalBast);
 
-  //   if (totalBast>sisa){
-  //     alert("Total Bast tidak boleh melebihi "+sisa1);
-  //     $('[name="totalBast"]').val(sisa1);
-
-
-  //   }
-  //    //sisaBast();
+    $('[name="sisaBast"]').val(sisaBastnow.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."))
 
 
 
-  //  }
+    if (sisaBastnow < 0) {
+      alert("Total Bast tidak boleh melebihi " + sisa.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+      $('[name="totalBast"]').val(sisa.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+      $('[name="sisaBast"]').val("0")
+
+
+    }
+    //sisaBast();
+
+
+
+  }
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/rupiah.js') ?>"></script>

@@ -170,26 +170,11 @@
 
            </tr>
          </table>
-
-
-
-
-
        </div>
-
-
-
      </div>
      <hr style="height: 5px; border-width: 6px; background-color:#696969; margin-top:25px  ">
-
      <!-- Table row -->
-
-
      <div class="row">
-
-
-
-
 
 
        <div class="col-13 table-responsive justify-content">
@@ -250,7 +235,7 @@
 
              <tr>
 
-               <td style="border: none" colspan="4" rowspan="5" valign="top">
+               <td style="border: none" colspan="4" rowspan="6" valign="top">
                  <p style="margin-top: -150px">Terbilang : <?php terbilang(str_replace('.', '', $total_faktur)) ?>
                </td>
                <th style="width: 20%">Subtotal</th>
@@ -263,14 +248,8 @@
                     $cos = (str_replace('.', '', $jasa));
                     $total = $asff + $cos;
                     echo "IDR " . number_format($total, 0, ",", ".");
-
-
-
                     ?>
-
-
                </th>
-
              </tr>
              <tr>
 
@@ -298,7 +277,27 @@
 
                </th>
 
+
              </tr>
+             <tr>
+
+               <th>Netto</th>
+
+               <th align="right">
+                 <p align="right">
+                   <?php
+
+                    echo "IDR " . $ppn;
+
+
+
+                    ?>
+
+
+               </th>
+
+             </tr>
+
              <tr>
 
                <th>PPN</th>

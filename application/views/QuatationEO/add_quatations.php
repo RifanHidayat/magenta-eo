@@ -383,7 +383,7 @@
 
 
 
-                                <th style="text-align:left;">Grand Total</th>
+                                <th style="text-align:left;">Sub Total</th>
                                 <th colspan="1">
 
                                   <input id="grandtotalnon<?php echo (str_replace(' ', '', $k->name)) ?>" readonly="" style="width:100%" type="text" class="form-control" required=""> <input id="grandtotalnonhidden<?php echo (str_replace(' ', '', $k->name)) ?>" readonly="" style="width:100%" type="text" class="form-control" required="" hidden="">
@@ -1215,7 +1215,7 @@
 
 
   tinymce.init({
-    selector: 'textarea#description',
+    selector: 'textarea.description',
     height: 10,
     menubar: false,
     plugins: [
@@ -1272,7 +1272,7 @@
     });
 
     tinymce.init({
-      selector: 'textarea#description' + Nomor,
+      selector: 'textarea.description',
       height: 200,
       menubar: false,
       plugins: [

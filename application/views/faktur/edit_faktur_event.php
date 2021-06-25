@@ -91,7 +91,7 @@
 
                   </div>
                   <div class="form-group" id="kanan">
-                    <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                    <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off">
 
@@ -157,7 +157,7 @@
 
                   </div>
 
-                  <div class="form-group" id="qnumber" hidden="">
+                  <div class="form-group" id="qnumber" hidden>
 
                     <label for="email_event" style="text-align:left;" class="col-sm-7 control-label">ppn </label>
                     <div class="col-sm-12">
@@ -167,7 +167,7 @@
 
                   </div>
 
-                  <div class="form-group" id="qnumber" hidden="">
+                  <div class="form-group" id="qnumber" hidden>
 
                     <label for="email_event" style="text-align:left;" class="col-sm-7 control-label">pph </label>
                     <div class="col-sm-12">
@@ -419,7 +419,7 @@
 
                       <td></td>
                       <td></td>
-                      <th style="width: 20%">Sub Total</th>
+                      <th style="width: 20%">Subtotal</th>
                       <td> <input type="text" readonly="" class="form-control" id="subtotal" name="subtotal" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
 
@@ -551,7 +551,7 @@
 
 
     DataQuotation($('[name="id_faktur"]').val());
-    TambahBarisBaruFaktur();
+    //  TambahBarisBaruFaktur();
     hitungFaktur();
     total_faktur();
 
@@ -570,6 +570,7 @@
 
       success: function(hasil) {
         console.log(hasil);
+        $('#tevent').val("tes");
 
         $('[name="Quatations_number"]').val(hasil[0].quotation_number);
         $('[name="date_quotation"]').val(hasil[0].date_quotation);
@@ -587,6 +588,9 @@
         $('[name="pic_customer"]').val(hasil[0].pic_name);
         $('#faktur_number').val(hasil[0].faktur_number);
 
+        $('[name="kpph"]').val(hasil[0].karakteristik_pph);
+        $('[name="kppn"]').val(hasil[0].karakteristik_ppn);
+
 
         $('#Quatations_number').val(hasil[0].quotation_number);
         $('#seri_faktur').val(hasil[0].ser_faktur);
@@ -598,6 +602,7 @@
 
         $('[name="bastNumber"]').val(hasil[0].bast_number);
         $('[name="totalBast"]').val(hasil[0].totalBast);
+
 
 
 
@@ -675,7 +680,7 @@
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
     initialPreview: [
-      '<object type="application/pdf" data="<?php echo base_url('assets/imagefaktur/' . $img) ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/imagefaktur/' . $img) ?>" ></object>'
+      '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo  $img ?>" ></object>'
     ],
   });
 

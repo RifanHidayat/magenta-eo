@@ -1245,7 +1245,7 @@
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
     initialPreview: [
-      '<object type="application/pdf" data="<?php echo base_url('assets/imagefaktur/' . $img) ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/imagefaktur/' . $img) ?>" ></object>'
+      '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $img ?>" ></object>'
     ],
   });
   $("#fakturMainNav").addClass('active');

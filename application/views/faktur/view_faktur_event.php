@@ -114,7 +114,7 @@
 
                 </div>
                 <div class="form-group" id="kanan">
-                  <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                  <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                   <div class="col-sm-12">
                     <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off">
 
@@ -131,11 +131,9 @@
                   </div>
                 </div>
                 <div class="form-group" id="kanan">
-                  <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Nettto</label>
+                  <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Netto</label>
                   <div class="col-sm-12">
                     <input type="text" value="<?php echo number_format($netto, 0, ",", ".") ?>" class="form-control" id="netto" readonly="" name="netto" autocomplete="off">
-
-
                   </div>
                 </div>
 
@@ -431,7 +429,7 @@
 
                     <tr>
 
-                      <td colspan="3" rowspan="5"><b>Terbilang :</b></b>
+                      <td colspan="3" rowspan="6"><b>Terbilang :</b></b>
                         <p id="terbilang1" name="terbilang1"></p>
                       </td>
                       <th style="width: 20%">Subtotal</th>
@@ -463,6 +461,21 @@
                           } else {
                             echo $diskon_harga;
                           }
+
+
+                          ?>
+
+                        </p>
+                      </th>
+
+                    </tr>
+                    <tr>
+
+                      <th>Netto</th>
+
+                      <th>IDR <p align="right" style="margin-top: -21px;">
+                          <?php
+                          echo $netto1;
 
 
                           ?>
@@ -708,11 +721,11 @@
   function AmbilDataImage(fileName, type) {
 
     if (type == 'pdf') {
-      html = '<object type="application/pdf" data="<?php echo base_url('assets/imagefaktur/') ?>' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
+      html = '<object type="application/pdf" data="' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
 
 
     } else {
-      html = '<center><img style="height: 80vh; width:80vh"  src="<?php echo base_url('assets/imagefaktur/') ?>' + fileName + '" ></center>';
+      html = '<center><img style="height: 80vh; width:80vh"  src="' + fileName + '" ></center>';
 
     }
 

@@ -11,15 +11,11 @@ use Aws\Exception\AwsException;
 class Quotation extends CI_Controller
 {
   var $permission = array();
-  private $S3;
-
 
 
   public function __construct()
   {
     parent::__construct();
-
-
     $this->load->helper('url');
     $this->load->library('form_validation');
     $this->load->model('model_pic');
@@ -29,8 +25,6 @@ class Quotation extends CI_Controller
     $this->load->model('model_bank');
     $this->load->model('model_quotationevent');
     $this->load->library('aws3');
-
-
     $this->load->helper(array('form', 'url'));
 
     $group_data = array();
@@ -44,37 +38,83 @@ class Quotation extends CI_Controller
     }
   }
 
-
   public function upload_image_add($quotation_number)
   {
-    $this->load->helper('file');
-    $config['upload_path']          = './assets/images/';
 
+    $config['upload_path']          = './assets/images/';
     $config['allowed_types']        = 'gif|jpg|png|pdf';
-    $config['max_width']            = 20000;
-    $config['max_size'] = '30000';
-    $config['max_width'] = '10240';
     $config['file_name'] =  $quotation_number;
 
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
-
     if (!$this->upload->do_upload('imagenes')) {
-
       $error = $this->upload->display_errors();
       return "";
     } else {
-      $Image_data = $this->upload->data();
-      $image_data = $this->aws3->sendFile("arenzha", $_FILES['imagenes']);
-
-      $data = array('upload_data' => $image_data['file_name']);
-      // $type = explode('.', $_FILES['imagenes']['name']);
-      // $type = $type[count($type) - 1];
-      // $path = $config['file_name'] . '.' . $type;
-      // return $path;
-      return $image_data;
+      $image_data = $this->upload->data();
+      $type = explode('.', $_FILES['imagenes']['name']);
+      $type = $type[count($type) - 1];
+      $filename = $config['file_name'] . '.' . $type;
+      $path = 'eo/quotation/' . $filename;
+      $image_data['file_name'] = $this->aws3->sendFile("arenzha", $_FILES['imagenes'], $path);
+      $data = array('upload_data' =>  $image_data['file_name']);
+      return $image_data['file_name'];
     }
   }
+  public function upload_image_other($quotation_number)
+  {
+
+    $config['upload_path']          = './assets/imageother/';
+    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['file_name'] =  $quotation_number;
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+    $this->load->library('upload', $config);
+    if (!$this->upload->do_upload('imagenesother')) {
+      $error = $this->upload->display_errors();
+      return "";
+    } else {
+      $image_data = $this->upload->data();
+      $type = explode('.', $_FILES['imagenesother']['name']);
+      $type = $type[count($type) - 1];
+      $filename = $config['file_name'] . '.' . $type;
+      $path = 'eo/quotation/' . $filename;
+      $image_data['file_name'] = $this->aws3->sendFile("arenzha", $_FILES['imagenesother'], $path);
+      $data = array('upload_data' =>  $image_data['file_name']);
+      return $image_data['file_name'];
+    }
+  }
+
+
+  // public function upload_image_add($quotation_number)
+  // {
+  //   $this->load->helper('file');
+  //   $config['upload_path']          = './assets/images/';
+  //   $config['allowed_types']        = 'gif|jpg|png|pdf';
+  //   $config['max_width']            = 20000;
+  //   $config['max_size'] = '30000';
+  //   $config['max_width'] = '10240';
+  //   $config['file_name'] =  $quotation_number;
+
+  //   $this->load->library('upload', $config);
+  //   $this->upload->initialize($config);
+
+  //   if (!$this->upload->do_upload('imagenes')) {
+
+  //     $error = $this->upload->display_errors();
+  //     return "";
+  //   } else {
+  //     $Image_data = $this->upload->data();
+  //     $image_data = $this->aws3->sendFile("arenzha", $_FILES['imagenes']);
+
+  //     $data = array('upload_data' => $image_data['file_name']);
+  //     // $type = explode('.', $_FILES['imagenes']['name']);
+  //     // $type = $type[count($type) - 1];
+  //     // $path = $config['file_name'] . '.' . $type;
+  //     // return $path;
+  //     return $image_data;
+  //   }
+  // }
 
   public function manage_quotation_other()
   {
@@ -107,106 +147,7 @@ class Quotation extends CI_Controller
     $this->load->view('QuatationEO/manage_quatations_event', $this->data);
     $this->load->view('tamplate/footer', $this->data);
   }
-  // public function add_quotation(){
-  // //                 if((!in_array('createQuatations', $this->permission)) AND (!in_array('createQuatationsother', $this->permission))) {
-  // //   redirect('dashboard', 'refresh');
-  // // }
 
-  // //   $this->data['pic']=$this->db->get('pic_po')->result();
-  // //   $this->data['pic_event']=$this->db->get('pic_eventr')->result();
-  // //   $where=[
-  // //    "active"=>"Active",
-  // //    "metode"=>"Comissionable Cost"
-  // //   ];
-  // //   $where1=[
-  // //    "active"=>"Active",
-  // //    "metode"=>"No-Fee Cost"
-  // //   ];
-
-  // //   $this->data['item']=$this->db->get_where('attributes',$where)->result();
-
-
-  // //    $this->data['item_non']=$this->db->get_where('attributes',$where1)->result();
-
-
-
-  // //   $this->data['customer']=$this->db->get('customer')->result();
-  // //               $where=[
-  // //                     'Active'=>"Active"
-
-  // //               ];
-  // //   $this->db->select('*');
-  // //   $this->db->from('attributes');
-  // //   $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');         
-  // //   $this->db->where('attribute_values.status', "Active");
-  // //   $this->data['data_item'] =$this->db->get()->result();  
-
-
-
-  // //         $this->db->select('*');
-  // //         $this->db->from('attributes');
-  // //         $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-
-  // //               $this->db->where('attribute_values.status', "Active");
-  // //               $this->data['core']=$this->db->get()->result();
-
-  // //         $this->db->select('*');
-  // //         $this->db->from('attributes');
-  // //         $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-  // //         $this->db->where('attributes.name', "Event Team");
-  // //               $this->db->where('attribute_values.status', "Active");
-  // //               $this->data['event'] = $this->db->get()->result();  
-
-  // //         $this->db->select('*');
-  // //         $this->db->from('attributes');
-  // //         $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-  // //          $this->db->where('attributes.name', "Production");
-  // //                $this->db->where('attribute_values.status', "Active");
-  // //                $this->data['productional'] = $this->db->get()->result();  
-
-  // //         $this->db->select('*');
-  // //         $this->db->from('attributes');
-  // //         $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-  // //         $this->db->where('attributes.name', "Talent");
-  // //                $this->db->where('attribute_values.status', "Active");
-  // //                $this->data['talent'] = $this->db->get()->result();      
-
-  // //         $this->db->select('*');
-  // //         $this->db->from('attributes');
-  // //         $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-  // //         $this->db->where('attributes.name', "venue");
-  // //               $this->db->where('attribute_values.status', "Active");
-  // //               $this->data['venue'] = $this->db->get()->result();  
-
-  // //         $this->db->select('*');
-  // //         $this->db->from('attributes');
-  // //         $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-  // //         $this->db->where('attributes.name', "gimmick");
-  // //                $this->db->where('attribute_values.status', "Active");
-  // //                $this->data['gimmick'] = $this->db->get()->result();   
-
-
-  //         // $this->db->select('*');
-  //         // $this->db->from('attributes');
-  //         // $this->db->join('attribute_values','attributes.id = attribute_values.attribute_parent_id');   
-  //         //  $this->db->where('attributes.name', "Operational");
-  //         //        $this->db->where('attribute_values.status', "Active");
-  //         //        $this->data['operational'] = $this->db->get()->result();
-
-  //         //       $this->form_validation->set_rules('Quatations_number_event','Quotation Number','required|trim|is_unique[tb_users.username]');
-
-  //                 $this->form_validation->set_message('is_unique',' *{field} sudah digunakan silakan update Quotation Number');
-  //              if ($this->form_validation->run()==false){
-  //                $this->load->view('tamplate/header',$this->data);
-  //                $this->load->view('tamplate/sidebar',$this->data);
-  //                $this->load->view('QuatationEO/add_quatations',$this->data);
-  //                $this->load->view('tamplate/footer',$this->data);
-  //                 }else{
-  //                   aksi_add_quotation();
-  //                 }
-
-
-  // }
   public function add_quotation()
   {
     if ((!in_array('createQuatations', $this->permission)) and (!in_array('createQuatationsother', $this->permission))) {
@@ -419,39 +360,9 @@ class Quotation extends CI_Controller
     $this->db->delete('delivery_item');
   }
   //Save image other
-  public function upload_image_other($quotation_number)
-  {
-
-    $config['upload_path']          = './assets/imageother/';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
-    $config['max_size']             = 1000;
-    $config['max_width']            = 2000;
-    $config['max_height']           = 1024;
-    $config['file_name'] =  $quotation_number;
-
-
-
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
-
-    $this->load->library('upload', $config);
-    if (!$this->upload->do_upload('imagenesother')) {
-
-      $error = $this->upload->display_errors();
-      return "";
-    } else {
-      $data = array('upload_data' => $this->upload->data());
-      $type = explode('.', $_FILES['imagenesother']['name']);
-      $type = $type[count($type) - 1];
-
-      $path = $config['file_name'] . '.' . $type;
-      return ($data == true) ? $path : false;
-    }
-  }
 
   public function aksi_add_quotation_other()
   {
-
 
     $title_event = $this->input->post('title_event_otther');
     $quotation_number = $this->input->post('Quatations_number_other');
@@ -461,9 +372,7 @@ class Quotation extends CI_Controller
     $customer_event = $this->input->post('customerOther');
     $name_pic = $this->input->post('picOther1');
     $email_pic = $this->input->post('emailOther');
-
     $management = $this->input->post('asf_other');
-
     $date_quotation = $this->input->post('date_quotation');
     $date_expired = $this->input->post('date_expired_other');
     $asf_percen_other = $this->input->post("asf_percen_other");
@@ -506,14 +415,9 @@ class Quotation extends CI_Controller
             'grandtotal' => $sub_total,
             'quotation_number' => $quotation_number,
             'revisi' => '0',
-
-
           ];
           // $t=+(int) $c[$i];
-
           $this->db->insert('quotation_other_item', $data);
-
-
           $i++;
         }
       }
@@ -547,7 +451,7 @@ class Quotation extends CI_Controller
         'id_po' => $id_po,
         'id_event' => $id_event,
         'id_customer' => $id_customer,
-        'sisa_bast' => $netto,
+        'sisa_bast' => preg_replace("/[^0-9]/", "", $netto),
         'grand_total' => $grand_total_other,
         'revisi' => '0',
         'discount_percent' => $discount_percent,
@@ -821,13 +725,6 @@ class Quotation extends CI_Controller
     $this->db->where('quotation_number', $data1['quotation_number']);
     $this->data['quotation_sub_item'] = $this->db->get()->result();
 
-    // $this->db->select('revisi');
-    //   $this->db->from('quotations_revisi');
-    //   $this->db->where('quotation_number',$data1['quotation_number']);
-    //   $revisi=$this->db->get()->result();
-    //   $this->data['revisi']=$revisi;
-
-    //$this->db->distinct(); 
     $this->db->select('quotation_item.item_value,attribute_values.satuanq,attribute_values.satuanf,quotation_item.rate,quotation_item.quantity,quotation_item.frrequency,quotation_item.subtotal,quotation_item.name_item');
 
     $this->db->from("quotation_item");
@@ -974,9 +871,7 @@ class Quotation extends CI_Controller
         $b = $this->input->post('FrequencyDescription');
         $c = $this->input->post('UniPriceDescription');
         $d = $this->input->post('AmmountDescription');
-
         $e = $this->input->post('id');
-
         $f = $this->input->post('QuantityDescription');
 
         if ($a[1] != null) {
@@ -1008,7 +903,6 @@ class Quotation extends CI_Controller
 
         if ($upload_image == '') {
           $data1 = [
-
             'date_quotation' => $date_quotation,
             'customer' => $customer_event,
             'tittle_event' => $title_event,
@@ -1029,7 +923,7 @@ class Quotation extends CI_Controller
             'id_customer' => $id_customer,
             'grand_total' => $grand_total_other,
             'revisi' => $update,
-            'sisa_bast' => $total_description,
+            'sisa_bast' => preg_replace("/[^0-9]/", "", $total_description),
             'discount_percent' => $discount_percent_other,
             'discount' => $discount_other
           ];
@@ -1283,6 +1177,8 @@ class Quotation extends CI_Controller
     $this->data['ppn'] = $row['ppn'];
     $this->data['pph'] = $row['pph'];
     $this->data['grand_total'] = $row['grand_total'];
+    $this->data['discount'] = $row['discount'];
+    $this->data['netto'] = $row['netto'];
 
 
     $this->data['total'] = $row['total_summary'];
@@ -1377,8 +1273,6 @@ class Quotation extends CI_Controller
     $discount = preg_replace("/[^0-9]/", "", $discount1);
 
 
-
-
     if ($quotation_event != "") {
       $i = 0; // untuk loopingnya
       $a = $this->input->post('quantity');
@@ -1388,8 +1282,6 @@ class Quotation extends CI_Controller
       $e = $this->input->post('name');
       $f = $this->input->post('metode');
       $g = $this->input->post('item_value');
-
-
 
       if ($a[0] !== null) {
         foreach ($a as $row) {
@@ -1405,8 +1297,8 @@ class Quotation extends CI_Controller
           $data = [
             'quantity' => $row,
             'frrequency' => $b[$i],
-            'rate' => $c[$i],
-            'subtotal' => $d[$i],
+            'rate' => (str_replace('.', '', $c[$i])),
+            'subtotal' => (str_replace('.', '', $d[$i])),
             'name_item' => $e[$i],
             'quotation_number' => $quotation_event,
             'metode' => $f[$i],
@@ -1427,9 +1319,11 @@ class Quotation extends CI_Controller
 
 
       $upload_image = $this->upload_image_add($quotation_event);
-      if ($upload_image == '') {
-        $upload_image = "dafault.png";
-      }
+      // if ($upload_image == '') {
+      //   $upload_image = "dafault.png";
+      // }
+
+      //$upload_image = "dafault.png";
       $data1 = [
         'quotation_number' => $quotation_event,
         'quotation_number_revisi' => $quotation_event,
@@ -1439,15 +1333,15 @@ class Quotation extends CI_Controller
         'pic_name' => $pic_event,
         'pic_email' => $email_event,
         'venue_event' => $Vanue_event,
-        'asf' => $asf,
+        'asf' => (str_replace('.', '', $asf)),
         'date_event' => $date_event,
-        'comissionable_cost' => $Comissionable_cost,
-        'ppn' => $ppn,
-        'pph' => $pph,
+        'comissionable_cost' => (str_replace('.', '', $Comissionable_cost)),
+        'ppn' => (str_replace('.', '', $ppn)),
+        'pph' => preg_replace("/[^0-9]/", "", $pph),
         'date_expired' => $date_expired,
         'asfp' => $asf_percen,
-        'total_summary' => $total_summary,
-        'nonfee' => $non_fee,
+        'total_summary' => (str_replace('.', '', $total_summary)),
+        'nonfee' => (str_replace('.', '', $non_fee)),
         'pic_event' => $picEvent,
         'email_event' => $emailEvent,
         'customer_event' => $customerEvent,
@@ -1455,9 +1349,9 @@ class Quotation extends CI_Controller
         'id_customer' => $id_customer,
         'id_pic_event' => $id_event,
         'id_po' => $id_po,
-        'grand_total' => $grand_total,
-        'sisa_bast' => $netto,
-        'netto' => $netto,
+        'grand_total' => (str_replace('.', '', $grand_total)),
+        'sisa_bast' => (str_replace('.', '', $netto)),
+        'netto' => (str_replace('.', '', $netto)),
         'discount_percent' => $discount_percent,
         'discount' => $discount,
 
@@ -1528,12 +1422,10 @@ class Quotation extends CI_Controller
     $non_fee = $this->input->post("non_fee");
     $asf_percen = $this->input->post("asf_percen");
     $date_expired = $this->input->post("date_expired_event");
-
     $customerEvent = $this->input->post("customerEvent");
     $picEvent = $this->input->post("picEvent1");
     $id_event = $this->input->post("picEvent");
     $emailEvent = $this->input->post("emailEvent");
-
     $id_customer = $this->input->post("id_customer");
     $grand_total = $this->input->post("grand_total");
     $revisi = $this->input->post("revisi");
@@ -1541,9 +1433,9 @@ class Quotation extends CI_Controller
     $netto1 = $this->input->post("netto_event");
     $discount_percent1 = $this->input->post("discount_percent_event");
     $discount1 = $this->input->post("discount_event");
-    $netto = preg_replace("/[^0-9]/", "", $netto1);
+    $netto = $netto1;
     $discount_percent = $discount_percent1;
-    $discount = preg_replace("/[^0-9]/", "", $discount1);
+    $discount = $discount1;
 
     $quotation_number_revisii = $this->input->post("quotation_number_revisi");
 
@@ -1581,8 +1473,8 @@ class Quotation extends CI_Controller
             $data = [
               'quantity' => $row,
               'frrequency' => $b[$i],
-              'rate' => $c[$i],
-              'subtotal' => $d[$i],
+              'rate' => (str_replace('.', '', $c[$i])),
+              'subtotal' => (str_replace('.', '', $d[$i])),
               'name_item' => $e[$i],
               'quotation_number' => $quotation_event,
               'metode' => $f[$i],
@@ -1595,41 +1487,36 @@ class Quotation extends CI_Controller
             $i++;
           }
         }
-        $upload_image = $this->upload_image($quotation_event);
+        $upload_image = $this->upload_image_add($quotation_event);
 
         if ($upload_image == '') {
           $data1 = [
-
             'date_quotation' => $Date_quotation,
             'customer' => $customer_event,
             'tittle_event' => $title_event,
             'pic_name' => $pic_event,
             'pic_email' => $email_event,
             'venue_event' => $Vanue_event,
-            'asf' => $asf,
+            'asf' => (str_replace('.', '', $asf)),
             'date_event' => $date_event,
-            'comissionable_cost' => $Comissionable_cost,
-            'ppn' => $ppn,
-            'pph' => $pph,
+            'comissionable_cost' => (str_replace('.', '', $Comissionable_cost)),
+            'ppn' => (str_replace('.', '', $ppn)),
+            'pph' => preg_replace("/[^0-9]/", "", $pph),
             'date_expired' => $date_expired,
             'asfp' => $asf_percen,
-            'total_summary' => $total_summary,
-            'nonfee' => $non_fee,
+            'total_summary' => (str_replace('.', '', $total_summary)),
+            'nonfee' => (str_replace('.', '', $non_fee)),
             'pic_event' => $picEvent,
             'email_event' => $emailEvent,
             'customer_event' => $customerEvent,
             'id_customer' => $id_customer,
             'id_pic_event' => $id_event,
             'id_po' => $id_po,
-            'grand_total' => $grand_total,
-
-            'sisa_bast' => $netto,
-            'netto' => $netto,
+            'grand_total' => (str_replace('.', '', $grand_total)),
+            'sisa_bast' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $netto)),
             'discount_percent' => $discount_percent,
-            'discount' => $discount,
-
-
-
+            'discount' => preg_replace("/[^0-9]/", "", $discount),
           ];
         } else {
           $data1 = [
@@ -1640,30 +1527,27 @@ class Quotation extends CI_Controller
             'pic_name' => $pic_event,
             'pic_email' => $email_event,
             'venue_event' => $Vanue_event,
-            'asf' => $asf,
+            'asf' => (str_replace('.', '', $asf)),
             'date_event' => $date_event,
-            'comissionable_cost' => $Comissionable_cost,
-            'ppn' => $ppn,
-            'pph' => $pph,
+            'comissionable_cost' => (str_replace('.', '', $Comissionable_cost)),
+            'ppn' => (str_replace('.', '', $ppn)),
+            'pph' => preg_replace("/[^0-9]/", "", $pph),
             'date_expired' => $date_expired,
             'asfp' => $asf_percen,
-            'total_summary' => $total_summary,
-            'nonfee' => $non_fee,
+            'total_summary' => (str_replace('.', '', $total_summary)),
+            'nonfee' => (str_replace('.', '', $non_fee)),
             'pic_event' => $picEvent,
             'email_event' => $emailEvent,
             'customer_event' => $customerEvent,
-
-            //'image' => $upload_image,
+            'image' => $upload_image,
             'id_customer' => $id_customer,
             'id_pic_event' => $id_event,
             'id_po' => $id_po,
-            'grand_total' => $grand_total,
-
-            'sisa_bast' => $netto,
-            'netto' => $netto,
+            'grand_total' => (str_replace('.', '', $grand_total)),
+            'sisa_bast' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $netto)),
             'discount_percent' => $discount_percent,
-            'discount' => $discount,
-
+            'discount' => preg_replace("/[^0-9]/", "", $discount),
 
           ];
         }
@@ -1672,12 +1556,7 @@ class Quotation extends CI_Controller
         $where = array('quotation_number' => $quotation_event);
         $this->db->where($where);
         $update = $this->db->update('quotations', $data1);
-
-
-
         $this->session->set_flashdata('success', 'Successfully updated');
-
-
         redirect("Quotation/manage_quotation");
       }
     } else {
@@ -1691,74 +1570,61 @@ class Quotation extends CI_Controller
         $f = $this->input->post('metode');
         $g = $this->input->post('item_value');
         //$h = $this->input->post('id');
-
-
         if ($a[0] != null) {
-
           foreach ($a as $row) {
             $data2 = [
               'quotation_number' => $quotation_number_revisii . '-Rev' . $revisi,
               'name' => $e[$i],
               'metode' => $f[$i],
-
             ];
 
             $data = [
               'quantity' => $row,
               'frrequency' => $b[$i],
-              'rate' => $c[$i],
-              'subtotal' => $d[$i],
+              'rate' => (str_replace('.', '', $c[$i])),
+              'subtotal' => (str_replace('.', '', $d[$i])),
               'name_item' => $e[$i],
               'quotation_number' => $quotation_number_revisii . '-Rev' . $revisi,
               'metode' => $f[$i],
               'item_value' => $g[$i],
-
-
             ];
             $this->db->insert('quotation_item', $data);
             $this->db->insert('quotation_sub_item', $data2);
-
-
-
             $i++;
           }
         }
-        $upload_image = $this->upload_image($quotation_event);
-
+        $upload_image = $this->upload_image_add($quotation_event);
         if ($upload_image == '') {
           $data1 = [
             'quotation_number' => $quotation_number_revisii . '-Rev' . $revisi,
-
             'quotation_number_revisi' => $quotation_number_revisii,
-
             'date_quotation' => $Date_quotation,
             'customer' => $customer_event,
             'tittle_event' => $title_event,
             'pic_name' => $pic_event,
             'pic_email' => $email_event,
             'venue_event' => $Vanue_event,
-            'asf' => $asf,
+            'asf' => (str_replace('.', '', $asf)),
             'date_event' => $date_event,
-            'comissionable_cost' => $Comissionable_cost,
-            'ppn' => $ppn,
-            'pph' => $pph,
+            'comissionable_cost' => (str_replace('.', '', $Comissionable_cost)),
+            'ppn' => (str_replace('.', '', $ppn)),
+            'pph' => preg_replace("/[^0-9]/", "", $pph),
             'date_expired' => $date_expired,
             'asfp' => $asf_percen,
-            'total_summary' => $total_summary,
-            'nonfee' => $non_fee,
+            'total_summary' => (str_replace('.', '', $total_summary)),
+            'nonfee' => (str_replace('.', '', $non_fee)),
             'pic_event' => $picEvent,
             'email_event' => $emailEvent,
             'customer_event' => $customerEvent,
             'id_customer' => $id_customer,
             'id_pic_event' => $id_event,
             'id_po' => $id_po,
-            'grand_total' => $grand_total,
-
-            'sisa_bast' => $netto,
+            'grand_total' => (str_replace('.', '', $grand_total)),
+            'sisa_bast' => (str_replace('.', '', $netto)),
             'image' => $this->input->post('filequotation'),
-            'netto' => $netto,
+            'netto' => (str_replace('.', '', $netto)),
             'discount_percent' => $discount_percent,
-            'discount' => $discount,
+            'discount' => preg_replace("/[^0-9]/", "", $discount),
 
 
 
@@ -1775,15 +1641,15 @@ class Quotation extends CI_Controller
             'pic_name' => $pic_event,
             'pic_email' => $email_event,
             'venue_event' => $Vanue_event,
-            'asf' => $asf,
+            'asf' => (str_replace('.', '', $asf)),
             'date_event' => $date_event,
-            'comissionable_cost' => $Comissionable_cost,
-            'ppn' => $ppn,
-            'pph' => $pph,
+            'comissionable_cost' => (str_replace('.', '', $Comissionable_cost)),
+            'ppn' => (str_replace('.', '', $ppn)),
+            'pph' => preg_replace("/[^0-9]/", "", $pph),
             'date_expired' => $date_expired,
             'asfp' => $asf_percen,
-            'total_summary' => $total_summary,
-            'nonfee' => $non_fee,
+            'total_summary' => (str_replace('.', '', $total_summary)),
+            'nonfee' => (str_replace('.', '', $non_fee)),
             'pic_event' => $picEvent,
             'email_event' => $emailEvent,
             'customer_event' => $customerEvent,
@@ -1792,12 +1658,11 @@ class Quotation extends CI_Controller
             'id_customer' => $id_customer,
             'id_pic_event' => $id_event,
             'id_po' => $id_po,
-            'grand_total' => $grand_total,
-
-            'sisa_bast' => $netto,
-            'netto' => $netto,
+            'grand_total' => (str_replace('.', '', $grand_total)),
+            'sisa_bast' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $netto)),
             'discount_percent' => $discount_percent,
-            'discount' => $discount,
+            'discount' => preg_replace("/[^0-9]/", "", $discount),
 
 
           ];
@@ -2498,8 +2363,8 @@ class Quotation extends CI_Controller
       $sub_array[] = $row->customer;
       $sub_array[] = $row->tittle_event;
 
-      $sub_array[] = $row->comissionable_cost;
-      $sub_array[] = $row->nonfee;
+      $sub_array[] = number_format($row->comissionable_cost, 0, ",", ".");
+      $sub_array[] = number_format($row->nonfee, 0, ",", ".");
       $sub_array[] = number_format($row->netto, 0, ",", ".");
       $sub_array[] = number_format($row->sisa_bast, 0, ",", ".");
       $sub_array[] = $row->po_number;
@@ -2626,7 +2491,7 @@ class Quotation extends CI_Controller
       $sub_array[] = number_format($row->discount, 0, ",", ".");
       $sub_array[] = $row->total;
 
-      $sub_array[] = $row->sisa_bast;
+      $sub_array[] = number_format($row->sisa_bast, 0, ",", ".");
       $sub_array[] = $row->po_number;
 
       $sub_array[] = $status;

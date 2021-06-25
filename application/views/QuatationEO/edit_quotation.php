@@ -23,8 +23,6 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
-
-
             <div class="card">
               <div class="card-header">
                 <h3 class="box-title"><b>Edit Quotation Event</b></h3>
@@ -302,11 +300,7 @@
                           <div class="col-sm-12">
                             <input type="email" readonly class="form-control" id="kpph" name="kpph" autocomplete="off" value="<?php echo set_value('emailEvent') ?>">
                           </div>
-
-
                         </div>
-
-
                         <div class="form-group" id="qnumber" hidden="">
 
                           <label for="groups" id="qnumber" style="text-align:left;" class="col-sm-7 control-label">PIC Name</label>
@@ -929,7 +923,7 @@
             Baris += '</td>';
 
             Baris += '<td>';
-            Baris += '<input   onkeyup="convertToRupiah(this);" class="form-control ratee" type="text"   oninput="hitunggrandtotal<?php echo (str_replace(' ', '', $k->name)) ?>()" name="rate[]" id="Rate<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"  class="form-control deposit"  required="" value="<?php echo $it->rate ?>"   > ';
+            Baris += '<input   onkeyup="convertToRupiah(this);" class="form-control ratee" type="text"   oninput="hitunggrandtotal<?php echo (str_replace(' ', '', $k->name)) ?>()" name="rate[]" id="Rate<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"  class="form-control deposit"  required="" value="<?php echo number_format($it->rate, 0, ',', '.') ?>"   > ';
             Baris += '</td>';
 
             Baris += '<td >';
@@ -1005,7 +999,7 @@
 
 
             Baris += '<td>';
-            Baris += '<input  onkeyup="convertToRupiah(this);" class="form-control ratee" type="text"   oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()" name="rate[]" id="RateNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"  class="form-control deposit"  required="" value="<?php echo $it->rate ?>" > ';
+            Baris += '<input  onkeyup="convertToRupiah(this);" class="form-control ratee" type="text"   oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()" name="rate[]" id="RateNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"  class="form-control deposit"  required="" value="<?php echo number_format($it->rate, 0, ',', '.') ?>" > ';
             Baris += '</td>';
 
 
@@ -1134,6 +1128,7 @@
       totalsummary();
       pph();
 
+
     }
 
     function totalsummary() {
@@ -1146,7 +1141,7 @@
       $('#total_summary').val(hitung1);
       $('[name="total_summaryhidden"]').val(hitung);
       discount_event_function();
-      ppn();
+
       grand_total();
 
 
@@ -1185,8 +1180,9 @@
       var data = $('[name="kppn"]').val();
       if (data == "noppn") {
 
-        var total_summary = $('[name="total_summaryhidden"]').val();
-        var hitung = Number(total_summary) * 0;
+        var total = $('#netto_event').val();
+        var total1 = total.replace(/[^\w\s]/gi, '');
+        var hitung = Number(total1) * 0;
         var a = Math.round(hitung);
         var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
         $('[name="ppn"]').val(hitung1);
@@ -1195,8 +1191,9 @@
 
       } else {
 
-        var total_summary = $('[name="total_summaryhidden"]').val();
-        var hitung = Number(total_summary) * 0.1;
+        var total = $('#netto_event').val();
+        var total1 = total.replace(/[^\w\s]/gi, '');
+        var hitung = Number(total1) * 0.1;
         var a = Math.round(hitung);
         var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
         $('[name="ppn"]').val(hitung1);
@@ -1306,12 +1303,7 @@
 
     }
 
-
-
-
-
     $("#imagenes").fileinput({
-
       overwriteInitial: true,
       maxFileSize: 20000,
       showClose: false,
@@ -1329,7 +1321,7 @@
       },
       allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
       initialPreview: [
-        '<object type="application/pdf" data="<?php echo base_url('assets/images/' . $img) ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/' . $img) ?>" ></object>'
+        '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php $img ?>" ></object>'
       ],
     });
     //get pic even even
@@ -1342,7 +1334,6 @@
         $('[name="kpph"]').val('');
         $('[name="kppn"]').val('');
         $('[name="id_customer"]').val('');
-
         pph();
         ppn();
         validasiEvent();
@@ -1382,10 +1373,7 @@
 
 
         });
-
-
       }
-
 
     }
 
@@ -1415,6 +1403,7 @@
       var a = Math.round(hasil);
       var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
       $('#netto_event').val(hasil1);
+      ppn();
 
 
 

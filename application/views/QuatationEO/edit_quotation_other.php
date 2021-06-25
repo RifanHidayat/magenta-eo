@@ -342,7 +342,7 @@
                             <label for="Quatations_number" style="text-align:left;" class="col-sm-2 control-label">%</label>
                           </div>
                           <div class="col-sm-12">
-                            <input type="text" onkeyup="convertToRupiah(this);" readonly="" class="col-sm-12 form-control" id="discount_other" name="discount_other" autocomplete="off" readonly="" value="0" oninput="discount_other_normal()">
+                            <input type="text" onkeyup="convertToRupiah(this);" class="col-sm-12 form-control" id="discount_other" name="discount_other" autocomplete="off" value="0" oninput="discount_other_normal()">
                             <!-- <input type="text" readonly="" class="form-control" id="discount_event_hidden" name="discount_event_hidden" autocomplete="off" readonly="" value="0" hidden=""> -->
                           </div>
                         </div>
@@ -384,8 +384,8 @@
                             <th style="width: 5%">
                               <center>Frequency</center>
                             </th>
-                            <th style="width: 25%">Unit Price</th>
-                            <th style="width: 20%"> Amount</th>
+                            <th style="width: 20%">Unit Price</th>
+                            <th style="width: 25%"> Amount</th>
                             <th><button class="btn btn-sm bg-gradient-secondary" id="BarisBaruDescription"><i class="fa fa-plus"></i> </button></th>
                           </tr>
                         </thead>
@@ -395,9 +395,12 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <th style="text-align:left;">Grand Total</th>
-                            <th colspan="2">
-                              <input id="grandtotaldescription" readonly="" style="width:80%" type="text" class="form-control" required=""> <input id="grandtotaldescriptionhidden" readonly="" style="width:80%" type="text" class="form-control" required="" hidden="">
+                            <td></td>
+
+
+                            <th style="text-align:left;">Sub Total</th>
+                            <th colspan="1">
+                              <input id="grandtotaldescription" readonly="" style="width:100%" type="text" class="form-control" required=""> <input id="grandtotaldescriptionhidden" readonly="" style="width:100%" type="text" class="form-control" required="" hidden="">
                             </th>
                           </tr>
 
@@ -439,6 +442,7 @@
   </div>
 
 
+  <script src="<?php echo base_url('assets/lte/tiny/tinymce.min.js') ?>" referrerpolicy="origin" referrerpolicy="origin"></script>
 
 
   <script type="text/javascript">
@@ -474,6 +478,8 @@
       BarisBaruDescription();
       hitungDescription();
       AmbilData();
+      hitungnetto();
+
 
     });
     // $('#SimpanData').submit(function(e) {
@@ -538,9 +544,6 @@
             // pph_description();
             // ppn_description();
             validasiOther();
-
-
-
           },
           error: function(hasil) {
 
@@ -673,10 +676,6 @@
         Baris += '</td>';
         Baris += '</tr>';
 
-        // onkeyup="convertToRupiah(this);"
-
-
-
 
         $("#tableLoopDescription tbody").append(Baris);
         $("#tableLoopDescription tbody tr").each(function() {
@@ -733,6 +732,7 @@
       $('#grandtotaldescription').val(hitung1);
       $('#grandtotaldescriptionhidden').val(hitung);
       hitungnetto();
+      total_description();
 
 
     }
@@ -777,6 +777,7 @@
       total_description();
       ppn_description();
       pph_description();
+      // discount_other_function();
       // discount_other_normal();
 
 
@@ -797,7 +798,9 @@
     function total_description() {
       var netto = $('#netto_hidden').val();
       var management = $('#asf_other_hidden').val();
-      var hasil = Math.round(Number(netto) + Number(management));
+      var discount = $('#discount_other').val().replace(/[^\w\s]/gi, '');
+      var hasil = Math.round(Number(netto) + Number(management) - Number(discount));
+
       var hasil1 = hasil.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
       $('#total_description').val(hasil1);
       $('#total_description_hidden').val(hasil);
@@ -973,6 +976,7 @@
           discount_other_function();
 
           hitungDescription();
+          discount_other_function()
 
 
         },
@@ -1005,7 +1009,7 @@
       },
       allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
       initialPreview: [
-        '<object type="application/pdf" data="<?php echo base_url('assets/imageother/' . $image) ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/imageother/' . $image) ?>" ></object>'
+        '<object type="application/pdf" data="<?php echo $image ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $image ?>" ></object>'
       ],
     });
 
@@ -1097,22 +1101,14 @@
 
       }
       // if (startDate!=''){
-
-
       // }else{
-
-
       // }
 
     }
 
 
-
-
-
     $(function() {
       var dateToday = new Date();
-
       $('#date_quotation').datepicker({
         dateFormat: 'yy-mm-dd',
         showButtonPanel: true,
@@ -1184,10 +1180,11 @@
 
 
       $('#discount_percent_other').val(hasil);
-      ppn();
+      //ppn();
       netto_other_function();
-      grand_total();
-      // discount_other_function();
+      // grand_total();
+      discount_other_function();
+      hitungnetto();
 
 
     }
@@ -1204,12 +1201,32 @@
       var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
       $('#discount_other').val(hasil1);
 
-      ppn();
+      // ppn();
       netto_other_function();
-      grand_total();
+      // grand_total();
+      total_description();
+      hitungnetto();
 
     }
 
+    function netto_other_function() {
+      var discount = $('#discount_other').val();
+      var discount1 = discount.replace(/[^\w\s]/gi, '');
+
+      var asf1 = $('#asf_other').val();
+      var asf = asf1.replace(/[^\w\s]/gi, '');
+
+      var total_summary = $('#netto').val();
+      var total_summary1 = total_summary.replace(/[^\w\s]/gi, '');
+      var hasil = Number(total_summary1) + Number(asf) - Number(discount1);
+      var a = Math.round(hasil);
+      var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+      $('#netto_other').val(hasil1);
+      total_description();
+
+
+
+    }
     $("#quotationMainNav").addClass('active');
     $("#manageQuotationotherNav").addClass('active');
     $("#openQuotationNav").addClass('menu-open');

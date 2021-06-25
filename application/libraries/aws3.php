@@ -28,18 +28,16 @@ class Aws3
 
         ]);
     }
-    function sendFile($bucketName, $filename)
+    function sendFile($bucketName, $filename, $path)
     {
 
         $result = $this->S3->putObject(array(
             "Bucket" => $bucketName,
-            'Key' => $filename['name'],
-            'Sourcefile' => $filename['tmp_name'],
-            'ACL' => 'public-read',
-
+            'Key' => $path,
+            'SourceFile' => $filename['tmp_name'],
+            'ContentType' => 'image/png',
             'StorageClass' => 'STANDARD',
-
-
+            'ACL' => 'public-read',
         ));
         return $result["ObjectURL"];
     }

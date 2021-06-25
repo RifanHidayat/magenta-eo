@@ -195,7 +195,7 @@
           <tr>
 
             <td colspan="4"><b>Grand Total</b></td>
-            <td align="right">IDR <?php echo $nonfee; ?></td>
+            <td align="right">IDR <?php echo number_format($nonfee, 0, ",", ".");  ?></td>
           </tr>
           <tr>
             <td colspan="5"><b>Comissionable Cost</b></th>
@@ -222,32 +222,40 @@
           <tr>
 
             <td colspan="4"><b>Grand Total</b></td>
-            <td align="right">IDR <?php echo  $comissionable_cost; ?></td>
+            <td align="right">IDR <?php echo   number_format($comissionable_cost, 0, ",", "."); ?></td>
           </tr>
 
           <tr>
-            <td rowspan="5" colspan="3"></td>
+            <td rowspan="7" colspan="3"></td>
 
             <td colspan="1" style="width: 20%"><b>ASF</b></td>
-            <td style="width: 35%" align="right"><b>IDR <?php echo  $asf; ?></b></td>
+            <td style="width: 35%" align="right"><b>IDR <?php echo  number_format($asf, 0, ",", ".");; ?></b></td>
           </tr>
           <tr>
 
             <td colspan="1"><b>Sub Total</b></td>
-            <td align="right"><b>IDR <?php echo  $total; ?></b></td>
+            <td align="right"><b>IDR <?php echo  number_format($total, 0, ",", ".");; ?></b></td>
           </tr></b>
           <tr>
+            <td colspan="1" style=""><b>Discount</b></td>
+            <td align="right"><b>IDR (<?php echo number_format($discount, 0, ",", ".");; ?>)</b></td>
+          </tr>
+          <tr>
+            <td colspan="1" style=""><b>Netto</b></td>
+            <td align="right"><b>IDR <?php echo number_format($netto, 0, ",", ".");; ?></b></td>
+          </tr>
+          <tr>
             <td colspan="1" style=""><b>PPN</b></td>
-            <td align="right"><b>IDR <?php echo $ppn; ?></b></td>
+            <td align="right"><b>IDR <?php echo number_format($ppn, 0, ",", ".");; ?></b></td>
           </tr>
           <tr>
             <td colspan="1"><b>PPh</b></td>
-            <td align="right"><b>IDR <?php echo  $pph; ?></b></td>
+            <td align="right"><b>IDR (<?php echo number_format($pph, 0, ",", ".");; ?>)</b></td>
           </tr>
           <tr>
 
             <td colspan="1"><b>Grand Total</b></td>
-            <td align="right"><b>IDR <?php echo  $grand_total; ?></b></td>
+            <td align="right"><b>IDR <?php echo  number_format($grand_total, 0, ",", "."); ?></b></td>
           </tr></b>
 
 
@@ -349,9 +357,9 @@
                         <center><?php echo $k->frrequency . " " . $k->satuanf; ?></center>
                       </td>
                       <td style="width: 15%" align="right">
-                        <right>IDR <?php echo $k->rate; ?></right>
+                        <right>IDR <?php echo number_format($k->rate, 0, ",", ".");; ?></right>
                       </td>
-                      <td style="width: 20%" align="right">IDR <?php echo $k->subtotal; ?></td>
+                      <td style="width: 20%" align="right">IDR <?php echo number_format($k->subtotal, 0, ",", "."); ?></td>
                     </tr>
                   <?php  } ?>
                 <?php endforeach ?>
@@ -442,8 +450,8 @@
                       <td style="width: 12%">
                         <center><?php echo $k->frrequency . " " . $k->satuanf; ?></center>
                       </td>
-                      <td style="width: 15%" align="right">IDR <?php echo $k->rate; ?></td>
-                      <td style="width: 20%" align="right">IDR <?php echo $k->subtotal; ?></td>
+                      <td style="width: 15%" align="right">IDR <?php echo number_format($k->rate, 0, ",", "."); ?></td>
+                      <td style="width: 20%" align="right">IDR <?php echo number_format($k->subtotal, 0, ",", "."); ?></td>
                     </tr>
                   <?php  } ?>
                 <?php endforeach ?>

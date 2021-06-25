@@ -968,7 +968,7 @@
     var dateToday = new Date();
 
     $('#date_faktur').datepicker({
-      dateFormat: 'dd/mm/yyyy',
+      dateFormat: 'dd/mm/yy',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,

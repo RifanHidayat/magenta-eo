@@ -383,7 +383,7 @@
                 Swal.fire({
                   icon: 'info',
                   title: 'Oops...',
-                  text: 'Data BAST sudah tersedia',
+                  text: 'BAST tidak dapat dibuat lagi',
 
                 });
 

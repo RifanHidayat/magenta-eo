@@ -341,7 +341,7 @@
 
 
                       <div class="form-group" id="qnumber">
-                        <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Netto</label>
+                        <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
                         <div class="col-sm-12">
                           <input type="text" class="form-control" required="" readonly="" id="netto" name="netto" autocomplete="off" value="0">
                           <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" value="0" hidden="">
@@ -378,7 +378,7 @@
                       </div>
 
                       <div class="form-group" id="qnumber">
-                        <label for="total" style="text-align:left;" class="col-sm-6 control-label">Total</label>
+                        <label for="total" style="text-align:left;" class="col-sm-6 control-label">Netto</label>
                         <div class="col-sm-12">
                           <input type="text" required="" class="form-control" id="total_description" name="total_description" readonly="" autocomplete="off" value="0">
 
@@ -689,11 +689,11 @@
     function AmbilDataImage(fileName, type) {
 
       if (type == 'pdf') {
-        html = '<object type="application/pdf" data="<?php echo base_url('assets/imageother/') ?>' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
+        html = '<object type="application/pdf" data="' + fileName + '" width="100%" height="500" style="height: 85vh;"></object>'
 
 
       } else {
-        html = '<center><img style="height: 80vh; width:80vh"  src="<?php echo base_url('assets/imageother/') ?>' + fileName + '" ></center>';
+        html = '<center><img style="height: 80vh; width:80vh"  src="' + fileName + '" ></center>';
 
       }
 

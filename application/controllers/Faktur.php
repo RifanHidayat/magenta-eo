@@ -16,6 +16,7 @@ class Faktur extends CI_Controller
     $this->load->model('model_attribute');
     $this->load->model('model_bank');
     $this->load->helper(array('form', 'url'));
+    $this->load->library('aws3');
 
     $group_data = array();
     if (empty($this->session->userdata('email'))) {
@@ -28,6 +29,65 @@ class Faktur extends CI_Controller
       $this->permission = unserialize($group_data['permission']);
     }
   }
+
+  // public function upload_image_faktur($quotation_number)
+  // {
+  //   $config['upload_path']          = './assets/imagefaktur';
+  //   $config['allowed_types']        = 'gif|jpg|png|pdf';
+  //   $config['max_size']             = 2000;
+  //   $config['max_width']            = 2000;
+  //   $config['max_height']           = 1024;
+  //   $config['file_name'] =  $quotation_number;
+
+  //   $this->load->library('upload', $config);
+  //   $this->upload->initialize($config);
+
+
+  //   // $config['max_width']  = '1024';s
+  //   // $config['max_height']  = '768';
+
+  //   $this->load->library('upload', $config);
+  //   if (!$this->upload->do_upload('imagenes')) {
+
+  //     $error = $this->upload->display_errors();
+  //     return "";
+  //   } else {
+  //     $data = array('upload_data' => $this->upload->data());
+  //     $type = explode('.', $_FILES['imagenes']['name']);
+  //     $type = $type[count($type) - 1];
+
+  //     $path = $config['file_name'] . '.' . $type;
+  //     return ($data == true) ? $path : false;
+  //   }
+  // }
+
+
+  public function upload_image_faktur($faktur_number)
+  {
+
+    $config['upload_path']          = './assets/imagefaktur';
+    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['file_name'] =  $faktur_number;
+
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+
+    $this->load->library('upload', $config);
+    if (!$this->upload->do_upload('imagenes')) {
+      $error = $this->upload->display_errors();
+      return "";
+    } else {
+      $image_data = $this->upload->data();
+      $type = explode('.', $_FILES['imagenes']['name']);
+      $type = $type[count($type) - 1];
+      $filename = $config['file_name'] . '.' . $type;
+      $path = 'eo/faktur/' . $filename;
+      $image_data['file_name'] = $this->aws3->sendFile("arenzha", $_FILES['imagenes'], $path);
+      $data = array('upload_data' =>  $image_data['file_name']);
+      return $image_data['file_name'];
+    }
+  }
+
   public function index()
   {
     redirect('Faktur/add_faktur', 'refresh');
@@ -267,12 +327,22 @@ class Faktur extends CI_Controller
 
       $totalBast = str_replace('.', '', $row['total_sub']);
 
+      $cos = str_replace('.', '', $row['comissionable_cost']);
+      $nonfee = str_replace('.', '', $row['nonfee']);
+      $material = $cos + $nonfee;
+      $netto = $material + preg_replace("/[^0-9]/", "", $row['asf'] - preg_replace("/[^0-9]/", "", $row['diskon_harga']));
+
       $asff = (($row['asfp'] / 100)) * $totalBast;
-      $asf = number_format($asff, 0, ",", ".");
       $material = $totalBast - $asff;
       $material1 = number_format($material, 0, ",", ".");
-      $this->data['as'] = $asf;
+      $this->data['as'] = $asff;
       $this->data['material'] = $material1;
+
+      // $this->data['material'] = number_format($material, 0, ',', '.');
+      // $this->data['as'] = $row['asf'];
+      $this->data['netto1'] = number_format($netto, 0, ',', '.');
+
+
 
       // $this->data['npwp']=$row['npwp'];
       $this->data['syarat_pembayaran'] = $row['syarat_pembayaran'];
@@ -436,8 +506,6 @@ class Faktur extends CI_Controller
         "date_faktur" => $date_faktur,
         "REF" => $ref,
         "syarat_pembayaran" => $syarat_pembayaran,
-
-
       ];
     } else {
       $data = [
@@ -447,7 +515,6 @@ class Faktur extends CI_Controller
         "date_faktur" => $date_faktur,
         "REF" => $ref,
         "syarat_pembayaran" => $syarat_pembayaran,
-
         "image" => $upload_image
 
       ];
@@ -1059,15 +1126,26 @@ class Faktur extends CI_Controller
       $this->data['total'] = $row['total_summary'];
       $this->data['asf'] = $row['asf'];
 
-      $totalBast = str_replace('.', '', $row['totalBast']);
+      // $totalBast = str_replace('.', '', $row['totalBast']);
 
-      $asf = ($row['asfp'] / 100) * $totalBast;
-      $asff = round($asf);
+      // $asf = ($row['asfp'] / 100) * $totalBast;
+      // $asff = round($asf);
 
-      $jasa = $totalBast - $asff;
+      // $jasa = $totalBast - $asff;
 
-      $this->data['asf'] = number_format($asff, 0, ",", ".");
-      $this->data['jasa'] = number_format($jasa, 0, ",", ".");
+      // $this->data['asf'] = number_format($asff, 0, ",", ".");
+      // $this->data['jasa'] = number_format($jasa, 0, ",", ".");
+
+      $cos = str_replace('.', '', $row['comissionable_cost']);
+      $nonfee = str_replace('.', '', $row['nonfee']);
+      $material = $cos + $nonfee;
+      $netto = $material + preg_replace("/[^0-9]/", "", $row['asf'] - preg_replace("/[^0-9]/", "", $row['diskon_harga']));
+
+
+      $this->data['jasa'] = number_format($material, 0, ',', '.');
+      $this->data['asf'] = $row['asf'];
+      $this->data['netto1'] = number_format($netto, 0, ',', '.');
+
 
 
 
@@ -1192,43 +1270,7 @@ class Faktur extends CI_Controller
       $mpdf->Output();
     }
   }
-  public function upload_image_faktur($quotation_number)
-  {
 
-    $config['upload_path']          = './assets/imagefaktur';
-
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
-
-    $config['max_size']             = 2000;
-
-    $config['max_width']            = 2000;
-
-    $config['max_height']           = 1024;
-    $config['file_name'] =  $quotation_number;
-
-
-
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
-
-
-    // $config['max_width']  = '1024';s
-    // $config['max_height']  = '768';
-
-    $this->load->library('upload', $config);
-    if (!$this->upload->do_upload('imagenes')) {
-
-      $error = $this->upload->display_errors();
-      return "";
-    } else {
-      $data = array('upload_data' => $this->upload->data());
-      $type = explode('.', $_FILES['imagenes']['name']);
-      $type = $type[count($type) - 1];
-
-      $path = $config['file_name'] . '.' . $type;
-      return ($data == true) ? $path : false;
-    }
-  }
 
 
   function cekFaktur()

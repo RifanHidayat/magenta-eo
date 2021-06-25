@@ -256,9 +256,6 @@
 
                   </div>
                   <?= form_error('date_event', '<small class="text-danger pl-3">', '</small>') ?>
-
-
-
                   <br>
                   <br>
                   <br>

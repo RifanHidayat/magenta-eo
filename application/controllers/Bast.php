@@ -15,6 +15,7 @@ class Bast extends CI_Controller
     $this->load->model('model_groups');
     $this->load->model('model_attribute');
     $this->load->model('model_bank');
+    $this->load->library('aws3');
 
     $group_data = array();
     if (empty($this->session->userdata('email'))) {
@@ -22,7 +23,6 @@ class Bast extends CI_Controller
       $user_id = $this->session->userdata('id');
       $this->load->model('model_groups');
       $group_data = $this->model_groups->getUserGroupByUserId($user_id);
-
       $this->data['user_permission'] = unserialize($group_data['permission']);
       $this->permission = unserialize($group_data['permission']);
     }
@@ -30,6 +30,55 @@ class Bast extends CI_Controller
   public function index()
   {
     redirect('Bast/create_bast', 'refresh');
+  }
+
+
+
+  public function upload_image_po($file_name)
+  {
+    $config['upload_path']          = './assets/imagebastpo/';
+    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['file_name'] =  $file_name;
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+    if (!$this->upload->do_upload('imgpo')) {
+      $error = $this->upload->display_errors();
+      return "";
+    } else {
+
+      $image_data = $this->upload->data();
+      $type = explode('.', $_FILES['imgpo']['name']);
+      $type = $type[count($type) - 1];
+      $filename = $config['file_name'] . '.' . $type;
+      $path = 'eo/bast/' . $filename;
+      $image_data['file_name'] = $this->aws3->sendFile("arenzha", $_FILES['imgpo'], $path);
+      $data = array('upload_data' =>  $image_data['file_name']);
+      return $image_data['file_name'];
+    }
+  }
+
+  //Save image other
+  public function upload_image_gr($file_name)
+  {
+    $name = base64_encode(random_bytes(10));
+    $config['upload_path']          = './assets/imagebastgr';
+    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['file_name'] =  $file_name;
+    $this->load->library('upload', $config);
+    $this->upload->initialize($config);
+    if (!$this->upload->do_upload('imggr')) {
+      $error = $this->upload->display_errors();
+      return "";
+    } else {
+      $image_data = $this->upload->data();
+      $type = explode('.', $_FILES['imggr']['name']);
+      $type = $type[count($type) - 1];
+      $filename = $config['file_name'] . '.' . $type;
+      $path = 'eo/bast/' . $filename;
+      $image_data['file_name'] = $this->aws3->sendFile("arenzha", $_FILES['imggr'], $path);
+      $data = array('upload_data' =>  $image_data['file_name']);
+      return $image_data['file_name'];
+    }
   }
 
   public function create_bast($id)
@@ -42,11 +91,8 @@ class Bast extends CI_Controller
     $this->db->where('id', $id);
     $data1 = $this->db->get()->row_array();
 
-
-
     $this->form_validation->set_rules('Quatations_number', 'Quotation', 'required');
     $this->form_validation->set_message('is_unique', ' *{field} number telah digunakan');
-
 
     if ($this->form_validation->run() == false) {
       $this->data['Quotation'] = $this->db->get('quotations')->result();
@@ -88,17 +134,21 @@ class Bast extends CI_Controller
   }
   public function aksi_add_bast()
   {
+    $bast_number = $this->input->post('bast_number');
+
+    $po_number = $this->input->post('po_number');
+    $gr_number = $this->input->post('gr_number');
     $quotation_number = $this->input->post('Quatations_number');
     $date_bast = $this->input->post('date_bast');
     $date_po = $this->input->post('po_number');
-    $upload_image_po = $this->upload_image_po($quotation_number, $date_bast, $date_po);
-    $upload_image_gr = $this->upload_image_gr($quotation_number, $date_bast, $date_po);
-    if ($upload_image_po == '') {
-      $upload_image_po = "dafault.png";
-    }
-    if ($upload_image_gr == '') {
-      $upload_image_gr = "dafault.png";
-    }
+    $upload_image_po = $this->upload_image_po($bast_number . '-' . $date_bast . '-' . $po_number);
+    $upload_image_gr = $this->upload_image_gr($bast_number . '-' . $gr_number);
+    // if ($upload_image_po == '') {
+    //   $upload_image_po = "dafault.png";
+    // }
+    // if ($upload_image_gr == '') {
+    //   $upload_image_gr = "dafault.png";
+    // }
 
     $data = [
       'quotation_number' => $this->input->post('Quatations_number'),
@@ -124,11 +174,9 @@ class Bast extends CI_Controller
 
     $idd = substr($quotation_number, 0, 2);
     $where = array("quotation_number" => $quotation_number);
-    $sisa1 = number_format($sisa, 0, ",", ".");
-    $dataupdate = array("sisa_bast" => $this->input->post('sisaBast'));
+    $sisa1 = $this->input->post('total_summary');
+    $dataupdate = array("sisa_bast" => str_replace('.', '', $this->input->post('sisaBast')));
     if ($idd == "QE") {
-
-
       $this->db->where($where);
       $this->db->update('quotations', $dataupdate);
     } else {
@@ -168,46 +216,66 @@ class Bast extends CI_Controller
   }
   public function hapus($id)
   {
-    $id = $this->input->post("id");
 
+
+
+    $id = $this->input->post("id");
     $this->db->select('*');
     $this->db->from('bast');
     $this->db->where('id_bast', $id);
-
+    //update sisa bast quotation
     $data = $this->db->get()->row_array();
+    $quotation_number = $data['quotation_number'];
+    $totalBast = $data['totalBast'];
+    $idd = substr($quotation_number, 0, 2);
+    $where = array("quotation_number" => $quotation_number);
+    if ($idd == "QE") {
+      $this->db->select('*');
+      $this->db->from('quotations');
+      $this->db->where('quotation_number', $quotation_number);
+      $data = $this->db->get()->row_array();
+
+      $sisaBast = $data['sisa_bast'];
+      $totalSisa = $sisaBast + str_replace('.', '', $totalBast);
+      $dataupdate = array("sisa_bast" => $totalSisa);
+      $this->db->where($where);
+      $this->db->update('quotations', $dataupdate);
+    } else {
+      $this->db->select('*');
+      $this->db->from('quotation_other');
+      $this->db->where('quotation_number', $quotation_number);
+      $data = $this->db->get()->row_array();
+      $sisaBast = $data['sisa_bast'];
+      $totalSisa = $sisaBast + str_replace('.', '', $totalBast);
+      $dataupdate = array("sisa_bast" => $totalSisa);
+      $this->db->where($where);
+      $this->db->update('quotation_other', $dataupdate);
+    }
+    //delete bast
 
     $this->db->where('id_bast', $id);
     $this->db->delete('bast');
 
+
+
+    //delete faktur
     $this->db->select('*');
     $this->db->from('faktur');
     $this->db->where('id_bast', $id);
     $data = $this->db->get()->row_array();
-
-
-
-
-
     $this->db->where('faktur_number', $data['faktur_number']);
     $this->db->delete('faktur_item');
-
     $this->db->where('id_bast', $id);
     $this->db->delete('faktur');
 
+
+    //delete delivery
     $this->db->select('*');
     $this->db->from('delivery');
     $this->db->where('id_faktur', $data['id_faktur']);
     $data1 = $this->db->get()->row_array();
-
-
-
-
-
     $this->db->where('faktur_number', $data['faktur_number']);
     $this->db->delete('delivery');
-
-
-
     $this->db->where('quotation_number', $data1['Delivery_number']);
     $this->db->delete('delivery_item');
     unlink("assets/imagebastpo/" . $data['image_po']);
@@ -284,7 +352,7 @@ class Bast extends CI_Controller
       $this->load->view('bast/edit_bast', $this->data);
       $this->load->view('tamplate/footer', $this->data);
     } else {
-      $this->aksi_update_bast($quotation_number);
+      $this->aksi_update_bast($id);
     }
   }
 
@@ -369,8 +437,14 @@ class Bast extends CI_Controller
     $quotation_number = $this->input->post('Quatations_number');
     $date_bast = $this->input->post('date_bast');
     $date_po = $this->input->post('po_number');
-    $upload_image_po = $this->upload_image_po($quotation_number, $date_bast, $date_po);
-    $upload_image_gr = $this->upload_image_gr($quotation_number, $date_bast, $date_po);
+    $bast_number = $this->input->post('bast_number');
+    $po_number = $this->input->post('po_number');
+    $gr_number = $this->input->post('gr_number');
+
+    $upload_image_po = $this->upload_image_po($bast_number . '-' . $date_bast . '-' . $po_number);
+    $upload_image_gr = $this->upload_image_gr($bast_number . '-' . $gr_number);
+
+
     if (($upload_image_po == '') and ($upload_image_gr == '')) {
       $data = [
         'quotation_number' => $this->input->post('Quatations_number'),
@@ -384,9 +458,6 @@ class Bast extends CI_Controller
         'date_bast' => $this->input->post('date_bast'),
         'jabatan' => $this->input->post('jabatan_pic'),
         'totalBast' => $this->input->post('totalBast'),
-
-
-
       ];
     } else if (($upload_image_po != '') and ($upload_image_gr == '')) {
       $data = [
@@ -442,20 +513,20 @@ class Bast extends CI_Controller
 
 
 
-    $where = array("quotation_number" => $quotation_number);
+    $where = array("id_bast" => $id);
     $this->db->where($where);
     $this->db->update('bast', $data);
     $this->session->set_flashdata('success', 'Successfully updated');
 
-
-
     $totalBast = str_replace('.', '', $this->input->post('totalBast'));
     $sisaBast = str_replace('.', '', $this->input->post('total_summary'));
+
     $sisa = $sisaBast - $totalBast;
     $idd = substr($quotation_number, 0, 2);
     $where = array("quotation_number" => $quotation_number);
     $sisa1 = number_format($sisa, 0, ",", ".");
-    $dataupdate = array("sisa_bast" => $sisa1);
+    $dataupdate = array("sisa_bast" =>  str_replace('.', '', $this->input->post('sisaBast')));
+
     if ($idd == "QE") {
       $this->db->where($where);
       $this->db->update('quotations', $dataupdate);
@@ -599,74 +670,11 @@ class Bast extends CI_Controller
   }
 
   //Save image other
-  public function upload_image_po($quotation_number, $datebast, $ponumber)
-  {
-    $config['upload_path']          = './assets/imagebastpo/';
-
-
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
-
-    $config['max_size']             = 1000;
-
-    $config['max_width']            = 2000;
-
-    $config['max_height']           = 1024;
-    $config['file_name'] =  $quotation_number;
 
 
 
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
 
 
-    if (!$this->upload->do_upload('imgpo')) {
-
-      $error = $this->upload->display_errors();
-      return "";
-    } else {
-      $data = array('upload_data' => $this->upload->data());
-      $type = explode('.', $_FILES['imgpo']['name']);
-      $type = $type[count($type) - 1];
-
-      $path = $config['file_name'] . '.' . $type;
-      return ($data == true) ? $path : false;
-    }
-  }
-
-  //Save image other
-  public function upload_image_gr($quotation_number, $date_bast, $ponumber)
-  {
-    $name = base64_encode(random_bytes(10));
-    $config['upload_path']          = './assets/imagebastgr';
-
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
-
-    $config['max_size']             = 1000;
-
-    $config['max_width']            = 2000;
-
-    $config['max_height']           = 1024;
-    $config['file_name'] =  $quotation_number . '' . $date_bast . '' . $ponumber;
-
-
-
-    $this->load->library('upload', $config);
-    $this->upload->initialize($config);
-
-
-    if (!$this->upload->do_upload('imggr')) {
-
-      $error = $this->upload->display_errors();
-      return "";
-    } else {
-      $data = array('upload_data' => $this->upload->data());
-      $type = explode('.', $_FILES['imggr']['name']);
-      $type = $type[count($type) - 1];
-
-      $path = $config['file_name'] . '.' . $type;
-      return ($data == true) ? $path : false;
-    }
-  }
   function cekBast1()
   {
     $id = $this->input->post('quotation_number');

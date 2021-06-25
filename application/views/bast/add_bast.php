@@ -427,7 +427,7 @@
       success: function(hasil) {
         console.log(hasil[0].email);
         console.log(hasil);
-        $('#po_number').val("2021");
+        $('#po_number').val(hasil[0].po_number);
 
         $('[name="Quatations_number"]').val(hasil[0].quotation_number);
         $('[name="date_quotation"]').val(hasil[0].date_quotation);
@@ -435,7 +435,7 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="venue_event"]').val(hasil[0].venue_event);
         $('[name="date_event"]').val(hasil[0].date_event);
-        $('[name="total_summary"]').val(hasil[0].total_summary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="total_summary"]').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="jabatan_pic"]').val(hasil[0].jabatan);
         $('[name="pic_po"]').val(hasil[0].pic_name);
         $('[name="date_po"]').val(hasil[0].date_po_number);
@@ -595,9 +595,7 @@
       main2: '{preview} {remove} {browse}'
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-    initialPreview: [
-      '<object type="application/pdf"  style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/default.png') ?>" ></object>'
-    ],
+
   });
 
   $("#imggr").fileinput({
@@ -618,9 +616,7 @@
       main2: '{preview} {remove} {browse}'
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-    initialPreview: [
-      '<object type="application/pdf"  style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/default.png') ?>" ></object>'
-    ],
+
   });
 
   $("#bastMainNav").addClass('active');

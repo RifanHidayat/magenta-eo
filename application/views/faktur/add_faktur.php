@@ -122,23 +122,14 @@
                         <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Netto </label>
                         <div class="col-sm-12">
                           <input type="text" class="form-control" id="netto" readonly="" name="netto" autocomplete="off" value="0">
-
-
                         </div>
-
                       </div>
                       <div class="form-group" id="kanan">
                         <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Discount </label>
                         <div class="col-sm-12">
-                          <input type="text" class="form-control" id="discount" readonly="" name="discount" autocomplete="off" value="0">
-
-
+                          <input readonly type="text" class="form-control" id="discount" readonly="" name="discount" autocomplete="off" value="0">
                         </div>
-
                       </div>
-
-
-
                       <div class="form-group" id="kanan">
                         <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">BAST Number</label>
                         <div class="col-sm-12">
@@ -163,20 +154,13 @@
                     </div>
 
                     <div class="col-md-6 col-xs-12 pull pull-left">
-
-
-
                       <div class="form-group" id="qnumber">
                         <label for="Quatations_number_other" style="text-align:left;" class="col-sm-6 control-label">Quotation Number</label>
                         <div class="col-sm-12">
                           <input readonly="" type="text" readonly="" class="form-control" id="Quatations_number" name="Quatations_number" value="<?php echo $quotation_number ?>" autocomplete="off" value="<?php echo set_value('Quatations_number') ?>">
                         </div>
-
                       </div>
                       <?= form_error('Quatations_number', '<small class="text-danger pl-3">', '</small>') ?>
-
-
-
                       <div class="form-group" id="qnumber">
                         <label for="Date_event" style="text-align:left;" class="col-sm-6 control-label">Date Quotation</label>
                         <div class="col-sm-12">
