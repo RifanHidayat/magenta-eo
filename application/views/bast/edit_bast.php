@@ -130,7 +130,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Netto</label>
                     <div class="col-sm-12">
-                      <input type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo $total_summary  ?>">
+                      <input type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo number_format($netto, 0, ",", ".")  ?>">
                     </div>
                   </div>
                   <?= form_error('title_event', '<small class="text-danger pl-10">', '</small>') ?>
@@ -363,7 +363,7 @@
       changeYear: true,
 
       buttonImageOnly: true,
-      minDate: dateToday,
+
       maxDate: '+30Y',
       yearRange: '1999:2030',
       inline: true

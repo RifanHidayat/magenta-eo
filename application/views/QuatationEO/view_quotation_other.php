@@ -430,9 +430,9 @@
                               <td>
                                 <center><?php echo $k->frequency ?></center>
                               </td>
-                              <td>IDR <p align="right" style="margin-top: -21px;"><?php echo $k->unitprice ?></p>
+                              <td>IDR <p align="right" style="margin-top: -21px;"><?php echo number_format($k->unitprice, 0, ',', '.') ?></p>
                               </td>
-                              <td>IDR <p align="right" style="margin-top: -21px;"><?php echo $k->amount ?></p>
+                              <td>IDR <p align="right" style="margin-top: -21px;"><?php echo number_format($k->amount, 0, ',', '.') ?></p>
                               </td>
                             </tr>
                           <?php endforeach ?>
@@ -568,14 +568,14 @@
 
           $('#id_customerother').val(hasil[0].id_customer);
 
-          $('#netto').val(hasil[0].netto);
+          $('#netto').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#asfp').val(hasil[0].asfp);
-          $('#asf_other').val(hasil[0].asf);
-          $('#total_description').val(hasil[0].total);
+          $('#asf_other').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#total_description').val(hasil[0].total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#note').val(hasil[0].note);
-          $('#ppn_description').val(hasil[0].ppn);
-          $('#pph_description').val(hasil[0].pph23);
-          $('#grand_total_other').val(hasil[0].grand_total);
+          $('#ppn_description').val(hasil[0].ppn.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#pph_description').val(hasil[0].pph23.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#grand_total_other').val(hasil[0].grand_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#revisi').val(hasil[0].revisi);
 
 

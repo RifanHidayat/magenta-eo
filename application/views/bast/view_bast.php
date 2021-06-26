@@ -151,9 +151,9 @@
 
 
                 <div class="form-group" id="qnumber">
-                  <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Total Summary</label>
+                  <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Netto</label>
                   <div class="col-sm-12">
-                    <input readonly="" type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo $total_summary ?>">
+                    <input readonly="" type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo number_format($total_summary, 0, ',', '.') ?>">
                   </div>
                 </div>
                 <div class="form-group" id="qnumber">

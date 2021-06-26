@@ -422,16 +422,9 @@
                       <th style="width: 20%">Subtotal</th>
                       <td> <input type="text" readonly="" class="form-control" id="subtotal" name="subtotal" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
-
-
-
-
                     </tr>
 
-
-
                     <tr>
-
                       <td></td>
                       <td></td>
 
@@ -463,13 +456,7 @@
 
                       <td><input readonly="" style="width: 100% " type="text" oninput="hitungdiskon();" class="form-control" id="hasilnetto" name="hasilnetto" autocomplete="off" placeholder="0"> </td>
 
-
-
-
-
-
                     </tr>
-
                     <td></td>
                     <td></td>
 
@@ -503,33 +490,13 @@
                     </tr>
                     <tr>
                       <td colspan="7"><input type="text" readonly="" class="form-control" id="terbilang1" name="terbilang1" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
-
                     </tr>
-
-
-
-
-
                   </tfoot>
                 </table>
-
-
                 <div class="form-group text-left">
                   <button type="submit" class="btn btn-primary"></i>Save Changes</button>
-
-
-
                 </div>
-
-
-
               </form>
-
-
-
-
-
-
             </div>
             <!-- /.box -->
           </div>
@@ -578,10 +545,10 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="venue_event"]').val(hasil[0].venue_event);
         $('[name="date_event"]').val(hasil[0].date_event);
-        $('[name="total_summary"]').val(hasil[0].total_summary);
-        $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost);
-        $('[name="non_fee"]').val(hasil[0].nonfee);
-        $('[name="asff"]').val(hasil[0].asf);
+        $('[name="total_summary"]').val(hasil[0].total_summary.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="non_fee"]').val(hasil[0].nonfee.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="asff"]').val(hasil[0].asf.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="npwp"]').val(hasil[0].npwp);
         $('[name="alamat_customer"]').val(hasil[0].address);
         $('[name="jabatan"]').val(hasil[0].jabatan);
@@ -601,7 +568,7 @@
         $('[name="gr_number"]').val(hasil[0].gr_number);
 
         $('[name="bastNumber"]').val(hasil[0].bast_number);
-        $('[name="totalBast"]').val(hasil[0].totalBast);
+        $('[name="totalBast"]').val(hasil[0].totalBast.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
 
 
 
@@ -959,7 +926,7 @@
       changeYear: true,
 
       buttonImageOnly: true,
-      minDate: dateToday,
+
       maxDate: '+30Y',
       yearRange: '1999:2030',
       inline: true

@@ -163,7 +163,7 @@ class Bast extends CI_Controller
       'jabatan' => $this->input->post('jabatan_pic'),
       'image_gr' => $upload_image_gr,
       'image_po' => $upload_image_po,
-      'totalBast' => $this->input->post('totalBast'),
+      'totalBast' => str_replace('.', '', $this->input->post('totalBast')),
 
     ];
     //<?php echo "IDR ".number_format($total,0,",",".");
@@ -291,7 +291,7 @@ class Bast extends CI_Controller
     $idd = substr($quotation_number, 0, 2);
     if ($idd == "QE") {
 
-      $this->db->select('venue_event,date_event,total_summary,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,totalBast,quotations.sisa_bast');
+      $this->db->select('venue_event,netto,date_event,total_summary,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,totalBast,quotations.sisa_bast');
       $this->db->from('bast');
       $this->db->join('quotations', 'quotations.quotation_number = bast.quotation_number');
       $this->db->where('bast.id_bast', $id);
@@ -299,6 +299,7 @@ class Bast extends CI_Controller
       $this->data['venue_event'] = $row['venue_event'];
       $this->data['date_event'] = $row['date_event'];
       $this->data['total_summary'] = $row['total_summary'];
+      $this->data['netto'] = $row['netto'];
     } else {
       $this->db->select('total,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,totalBast,quotation_other.sisa_bast');
       $this->db->from('bast');
@@ -457,7 +458,7 @@ class Bast extends CI_Controller
         'date_po' => $this->input->post('date_po'),
         'date_bast' => $this->input->post('date_bast'),
         'jabatan' => $this->input->post('jabatan_pic'),
-        'totalBast' => $this->input->post('totalBast'),
+        'totalBast' => str_replace('.', '', $this->input->post('totalBast')),
       ];
     } else if (($upload_image_po != '') and ($upload_image_gr == '')) {
       $data = [
@@ -471,7 +472,7 @@ class Bast extends CI_Controller
         'date_po' => $this->input->post('date_po'),
         'date_bast' => $this->input->post('date_bast'),
         'jabatan' => $this->input->post('jabatan_pic'),
-        'totalBast' => $this->input->post('totalBast'),
+        'totalBast' => str_replace('.', '', $this->input->post('totalBast')),
         'image_po' => $upload_image_po
 
 
@@ -488,7 +489,7 @@ class Bast extends CI_Controller
         'date_po' => $this->input->post('date_po'),
         'date_bast' => $this->input->post('date_bast'),
         'jabatan' => $this->input->post('jabatan_pic'),
-        'totalBast' => $this->input->post('totalBast'),
+        'totalBast' => str_replace('.', '', $this->input->post('totalBast')),
         'image_gr' => $upload_image_gr
       ];
     } else {
@@ -502,7 +503,7 @@ class Bast extends CI_Controller
         'bast_number' => $this->input->post('bast_number'),
         'date_po' => $this->input->post('date_po'),
         'date_bast' => $this->input->post('date_bast'),
-        'totalBast' => $this->input->post('totalBast'),
+        'totalBast' => str_replace('.', '', $this->input->post('totalBast')),
         'jabatan' => $this->input->post('jabatan_pic'),
         'image_gr' => $upload_image_gr,
         'image_po' => $upload_image_po
@@ -897,7 +898,7 @@ class Bast extends CI_Controller
         $sub_array[] = $row->tittle_event;
         $sub_array[] = $row->po_number_bast;
         $sub_array[] = $row->gr_number;
-        $sub_array[] = $row->total;
+        $sub_array[] = number_format($row->total, 0, ",", ".");
         $sub_array[] = $status;
         $sub_array[] = $row->noteStatus;
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view . ' ' . $faktur . ' ' . $delivery;
@@ -978,7 +979,7 @@ class Bast extends CI_Controller
         $sub_array[] = $row->tittle_event;
         $sub_array[] = $row->po_number_bast;
         $sub_array[] = $row->gr_number;
-        $sub_array[] = $row->total;;
+        $sub_array[] = number_format($row->total, 0, ',', '.');
         $sub_array[] = $status;
         $sub_array[] = $row->noteStatus;
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view . ' ' . ' ' . $faktur . ' ' . $delivery;

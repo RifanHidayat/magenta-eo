@@ -108,7 +108,7 @@
                 <div class="form-group" id="kanan">
                   <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">ASF</label>
                   <div class="col-sm-12">
-                    <input type="text" readonly="" class="form-control" readonly="" id="asf" name="asf" value="<?php echo ($asf) ?>" autocomplete="off">
+                    <input type="text" readonly="" class="form-control" readonly="" id="asf" name="asf" value="<?php echo number_format($asf, 0, ',', '.'); ?>" autocomplete="off">
 
                   </div>
 
@@ -419,7 +419,7 @@
                       <td colspan="3">Jasa-ASF</td>
 
 
-                      <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo "$as"; ?></p>
+                      <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $asf ?></p>
                       </th>
 
                     </tr>
@@ -436,11 +436,8 @@
 
                       <th style="width: 50%;">IDR <p align="right" style="margin-top: -21px;">
                           <?php
-                          $fee = (str_replace('.', '', $nonfee));
-                          $asff = (str_replace('.', '', $as));
-                          $cos = (str_replace('.', '', $material));
-                          $total = $asff + $cos;
-                          echo number_format($total, 0, ",", ".");
+
+                          echo $sub_total;
 
 
 
@@ -459,7 +456,7 @@
                           if ($diskon == "") {
                             echo "(0)";
                           } else {
-                            echo $diskon_harga;
+                            echo '(' . $diskon_harga . ')';
                           }
 
 
@@ -475,7 +472,7 @@
 
                       <th>IDR <p align="right" style="margin-top: -21px;">
                           <?php
-                          echo $netto1;
+                          echo $netto2;
 
 
                           ?>
@@ -490,16 +487,10 @@
 
                       <th>IDR <p align="right" style="margin-top: -21px;">
                           <?php
-
-                          echo $ppn;
-
-
-
+                          echo $ppn_faktur;
                           ?>
-
                         </p>
                       </th>
-
                     </tr>
                     <tr>
 
@@ -508,7 +499,7 @@
                       <th>IDR <p align="right" style="margin-top: -21px;">
                           <?php
 
-                          echo $pph23;
+                          echo '(' . number_format($pph23, 0, ',', '.') . ')';
 
 
 
@@ -526,7 +517,7 @@
                       <th>IDR <p align="right" style="margin-top: -21px;">
                           <?php
 
-                          echo $total_faktur;
+                          echo number_format($total_faktur, 0, ',', '.');
 
 
 
@@ -641,9 +632,9 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="venue_event"]').val(hasil[0].venue_event);
         $('[name="date_event"]').val(hasil[0].date_event);
-        $('[name="total_summary"]').val(hasil[0].total_summary);
-        $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost);
-        $('[name="non_fee"]').val(hasil[0].nonfee);
+        $('[name="total_summary"]').val(hasil[0].total_summary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="non_fee"]').val(hasil[0].nonfee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
 
         $('[name="npwp"]').val(hasil[0].npwp);
         $('[name="alamat_customer"]').val(hasil[0].address);
@@ -662,7 +653,7 @@
 
         $('[name="ref"]').val(hasil[0].po_number);
         $('[name="gr_number"]').val(hasil[0].gr_number);
-        $('[name="totalBast"]').val(hasil[0].totalBast);
+        $('[name="totalBast"]').val(hasil[0].totalBast.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="bastNumber"]').val(hasil[0].bast_number);
 
         // var totalBast1 =hasil[0].totalBast;

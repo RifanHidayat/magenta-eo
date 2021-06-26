@@ -82,7 +82,7 @@
                   <div class="form-group" id="kanan">
                     <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">ASF</label>
                     <div class="col-sm-12">
-                      <input type="text" readonly="" class="form-control" readonly="" id="asff" name="asff" autocomplete="off" value="<?php echo ($asf) ?>">
+                      <input type="text" readonly="" class="form-control" readonly="" id="asff" name="asff" autocomplete="off" value="<?php echo number_format($asf, 0, ',', '.') ?>">
 
                     </div>
 
@@ -126,7 +126,7 @@
                   <div class="form-group" id="kanan">
                     <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Total BAST</label>
                     <div class="col-sm-12">
-                      <input value="<?php echo ($totalBast) ?>" readonly="" type="text" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
+                      <input value="<?php echo number_format($totalBast, 0, ',', '.') ?>" readonly="" type="text" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
                     </div>
                   </div>
 
@@ -527,17 +527,17 @@
     $('.btnSave').attr('disabled', 'disabled');
     $('.loadingIndikdator').show();
 
+
   }
 
   function hiddenIndikator() {
     $('.btnSave').removeAttr('disabled');
     $('.loadingIndikdator').hide();
 
+
   }
   $(document).ready(function() {
     hiddenIndikator();
-
-
     generetfaktur();
     DataQuotation($('#Quatations_number').val());
 
@@ -553,14 +553,9 @@
       dataType: 'json',
       success: function(hasil) {
         console.log(hasil);
-
-
         $('[name="faktur_number"]').val("MM-XX-" + hasil.data);
-
       },
       error: function(hasil) {
-
-
 
       }
 
@@ -589,11 +584,11 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="venue_event"]').val(hasil[0].venue_event);
         $('[name="date_event"]').val(hasil[0].date_event);
-        $('[name="total_summary"]').val(hasil[0].total_summary);
+        $('[name="total_summary"]').val(hasil[0].total_summary.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         var cos = hasil[0].comissionable_cost;
         console.log(cos);
-        $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost);
-        $('[name="non_fee"]').val(hasil[0].nonfee);
+        $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="non_fee"]').val(hasil[0].nonfee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         var nonfeee = hasil[0].nonfee;
         console.log(nonfeee);
         //$('[name="asf"]').val(hasil[0].asf);
@@ -641,21 +636,9 @@
         //  // var ss = subtotal.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
         //  // $('[name="subtotal"]').val(s);
         sum_faktur();
-
-
-
         hitungdiskon();
         hitungppn();
         hitungpph();
-
-
-
-
-
-
-
-
-
       },
       error: function(hasil) {
 
@@ -699,8 +682,6 @@
     hitungppn();
     hitungpph();
     hitung_faktur();
-
-
 
     //hitungnetto();
   }
@@ -965,7 +946,7 @@
 
   }
   $(function() {
-    var dateToday = new Date();
+
 
     $('#date_faktur').datepicker({
       dateFormat: 'dd/mm/yy',
@@ -974,7 +955,7 @@
       changeYear: true,
 
       buttonImageOnly: true,
-      minDate: dateToday,
+
       maxDate: '+30Y',
       yearRange: '1999:2030',
       inline: true

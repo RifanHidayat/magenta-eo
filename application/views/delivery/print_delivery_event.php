@@ -130,9 +130,9 @@
                 <th style="width: 130px">
                   <center>Pengirim</center>
                 </th>
-                <th>
+                <td>
                   <center><?php echo $pengirim; ?></center>
-                </th>
+                </td>
 
 
               </tr>
@@ -251,25 +251,51 @@
                   <center>1</center>
                 </td>
                 <td>Total Non-Fee Cost</td>
-                <th align="right"><?php echo "IDR " . $nonfee; ?></th>
+                <th align="right"><?php echo "IDR " . number_format($nonfee, 0, ',', '.') ?></th>
 
               </tr>
               <tr>
                 <td>
                   <center>2</center>
                 </td>
-                <td>Total Commisionable Cost</td>
-                <th align="right"><?php echo "IDR " . $comissionable_cost; ?></th>
+                <td>Total Commissionable Cost</td>
+                <th align="right"><?php echo "IDR " . number_format($comissionable_cost, 0, ',', '.'); ?></th>
 
               </tr>
               <tr>
                 <td>
                   <center>3</center>
                 </td>
-                <td>Total Summary</td>
-                <th align="right"><?php echo "IDR " . $total; ?></th>
+                <td>ASF</td>
+                <th align="right"><?php echo "IDR " . $asf; ?></th>
 
               </tr>
+              <tr>
+                <td>
+                  <center>4</center>
+                </td>
+                <td>Sub Total</td>
+                <th align="right"><?php echo "IDR " . $sub_total; ?></th>
+
+              </tr>
+
+              <tr>
+                <td>
+                  <center>5</center>
+                </td>
+                <td>Discount</td>
+                <th align="right"><?php echo "IDR " . $discount; ?></th>
+
+              </tr>
+              <tr>
+                <td>
+                  <center>6</center>
+                </td>
+                <td>Netto</td>
+                <th align="right"><?php echo "IDR " . $netto; ?></th>
+
+              </tr>
+
 
           </table>
 

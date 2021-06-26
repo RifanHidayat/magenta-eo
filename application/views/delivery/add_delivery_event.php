@@ -47,40 +47,30 @@
 
 
                 <div class="col-md-6 col-xs-12 pull pull-left">
-
-
-
-
                   <div class="form-group" id="qnumber">
-                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-10 control-label">Quotation Number</label>
+                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-7 control-label">Quotation Number</label>
                     <div class="col-sm-12">
                       <input readonly="" type="text" readonly="" class="form-control" id="Quatations_number" name="Quatations_number" autocomplete="off" value="<?php echo $quotation_number ?>">
                     </div>
 
                   </div>
-
-
-
                   <div class="form-group" id="qnumber">
-                    <label for="Date_event" style="text-align:left;" class="col-sm-10 control-label">Date Quotation</label>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-7 control-label">Date Quotation</label>
                     <div class="col-sm-12">
                       <input type="text" readonly="" class="form-control" required="" id="date_quotation" name="date_quotation" autocomplete="off" value="<?php echo set_value('Date_event') ?>">
                     </div>
                     <?= form_error('date_quotation', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
-
                   <div class="form-group" id="qnumber">
-                    <label for="Date_event" style="text-align:left;" class="col-sm-10 control-label">Customer</label>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-7 control-label">Customer</label>
                     <div class="col-sm-12">
                       <input type="text" readonly="" class="form-control" required="" id="customer" name="customer" autocomplete="off" value="<?php echo set_value('customer') ?>">
                     </div>
                     <?= form_error('Date_event', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
-
-
                   <div class="form-group" id="qnumber">
 
-                    <label for="groups" id="qnumber" style="text-align:left;" class="col-sm-10 control-label">Alamat Customer</label>
+                    <label for="groups" id="qnumber" style="text-align:left;" class="col-sm-7 control-label">Alamat Customer</label>
                     <div class="col-sm-12">
                       <textarea rows="5" readonly class="form-control" id="alamat_customer" name="alamat_customer" autocomplete="off" value="<?php echo set_value('customer_other') ?>"></textarea>
 
@@ -88,94 +78,76 @@
                     <?= form_error('customer_other', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
 
-
-
-
                   <div class="form-group" id="qnumber">
-                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Title Event</label>
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Title Event</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" required="" readonly="" id="title_event" name="title_event" autocomplete="off">
                       <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" hidden="">
                     </div>
                   </div>
-                  <?= form_error('title_event', '<small class="text-danger pl-3">', '</small>') ?>
-
 
                   <div class="form-group" id="qnumber">
-                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">PO Number</label>
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Venue Event</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="venue_event" name="venue_event" autocomplete="off">
+
+                    </div>
+                  </div>
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Date event</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="date_event" name="date_event" autocomplete="off">
+
+                    </div>
+                  </div>
+                  <?= form_error('title_event', '<small class="text-danger pl-3">', '</small>') ?>
+
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">BAST Number</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="bast_number" name="bast_number" autocomplete="off">
+
+                    </div>
+                  </div>
+
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">PO Number</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" required="" readonly="" id="po_number" name="po_number" autocomplete="off">
 
                     </div>
                   </div>
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Date PO</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="date_po" name="date_po" autocomplete="off">
+
+                    </div>
+                  </div>
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Total BAST</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="total_bast" name="total_bast" autocomplete="off">
+
+                    </div>
+                  </div>
+
                   <?= form_error('po_number', '<small class="text-danger pl-3">', '</small>') ?>
-
-
-
-
-
                 </div>
-                <br>
-                <br>
-
-                <table class="col-10 table justify-center table-bordered" align="center" style="margin: auto;" border="1" align="center">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th scope="col" style="width: 5%;">
-                        <center>No</center>
-                      </th>
-                      <th scope="col" style="width: 50%;">
-                        <center>Description</center>
-                      </th>
-                      <th scope="col" style="width: 15%;">Total</th>
-
-                    </tr>
-
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <center>1</center>
-                      </td>
-                      <td>Total Non-Fee Cost</td>
-                      <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $nonfee; ?></p>
-                      </th>
-
-                    </tr>
-                    <tr>
-                      <td>
-                        <center>2</center>
-                      </td>
-                      <td>Total Comissionable Cost</td>
-                      <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $comissionable_cost; ?></p>
-                      </th>
-
-                    </tr>
-                    <tr>
-                      <td>
-                        <center>3</center>
-                      </td>
-                      <td>Total Summary</td>
-                      <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $total; ?></p>
-                      </th>
-
-                    </tr>
-
-                </table>
-
 
 
 
 
                 <br>
                 <br>
+
                 <hr style="height: 1px; border-width: 1px; background-color:#696969;">
                 <div class="col-md-6 col-xs-12 pull pull-left">
 
 
 
                   <div class="form-group" id="qnumber" hidden>
-                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-10 control-label">Id Faktur</label>
+                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-7 control-label">Id Faktur</label>
                     <div class="col-sm-12">
                       <input type="text" readonly="" class="form-control" id="id_bast" name="id_bast" value="<?php echo ($id_bast) ?>" autocomplete="off" value="<?php echo set_value('delivery_order') ?>">
                     </div>
@@ -183,14 +155,14 @@
                   </div>
 
                   <div class="form-group" id="qnumber">
-                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-10 control-label">Delivery Order Number</label>
+                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-7 control-label">Delivery Order Number</label>
                     <div class="col-sm-12">
                       <input type="text" readonly="" class="form-control" id="delivery_order" name="delivery_order" autocomplete="off" value="<?php echo set_value('delivery_order') ?>">
                     </div>
 
                   </div>
                   <div class="form-group" id="qnumber">
-                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-10 control-label">Pengirim</label>
+                    <label for="Quatations_number_other" style="text-align:left;" class="col-sm-7 control-label">Pengirim</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="pengirim" name="pengirim" autocomplete="off" value="<?php echo set_value('delivery_order') ?>">
                     </div>
@@ -199,7 +171,7 @@
 
 
                   <div class="form-group" id="qnumber">
-                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Tanggal Pengiriman</label>
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Tanggal Pengiriman</label>
                     <div class="col-sm-12">
                       <input onkeypress="return false;" onchange="generet_delivery()" onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="tanggal_pengiriman" name="tanggal_pengiriman" autocomplete="off">
 
@@ -208,7 +180,7 @@
                   <?= form_error('tanggal_pengiriman', '<small class="text-danger pl-3">', '</small>') ?>
 
                   <div class="form-group" id="qnumber">
-                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Nomor Kendaraan</label>
+                    <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Nomor Kendaraan</label>
 
                     <div class="col-sm-12">
                       <input type="text" class="form-control" required="" id="platnomor" name="platnomor" autocomplete="off">
@@ -218,7 +190,7 @@
                   <?= form_error('tanggal_pengiriman', '<small class="text-danger pl-3">', '</small>') ?>
 
                   <div class="form-group" id="qnumber">
-                    <label for="Date_event" style="text-align:left;" class="col-sm-10 control-label">Gudang</label>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-7 control-label">Gudang</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" required="" id="gudang" name="gudang" autocomplete="off" value="<?php echo ('Magenta Mediatama') ?>">
                     </div>
@@ -236,7 +208,7 @@
                    </div> -->
 
                   <div class="form-group" id="qnumber">
-                    <label for="Date_event" style="text-align:left;" class="col-sm-10 control-label">Tagihan Ke</label>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-7 control-label">Tagihan Ke</label>
                     <div class="col-sm-12">
                       <textarea rows="5" class="form-control" required="" id="tagihan" name="tagihan" autocomplete="off" value="<?php echo set_value('date_expired_other') ?>"></textarea>
                     </div>
@@ -244,7 +216,7 @@
                   </div>
 
                   <div class="form-group" id="qnumber">
-                    <label for="Date_event" style="text-align:left;" class="col-sm-10 control-label">Kirim Ke</label>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-7 control-label">Kirim Ke</label>
                     <div class="col-sm-12">
                       <select onchange="Datagudang();" class="form-control" required="" id="kirimm" name="kirimm" style="height: 100px">
                         <option value="">Select Gudang</option>
@@ -257,7 +229,7 @@
                     <?= form_error('gudang', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
                   <div class="form-group" id="qnumber">
-                    <label for="Date_event" style="text-align:left;" class="col-sm-10 control-label"></label>
+                    <label for="Date_event" style="text-align:left;" class="col-sm-7 control-label"></label>
                     <div class="col-sm-12">
                       <textarea readonly="" rows="5" class="form-control" required="" id="kirim" name="kirim" autocomplete="off" value="<?php echo set_value('date_expired_other') ?>"></textarea>
                     </div>
@@ -337,9 +309,16 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="alamat_customer"]').val(hasil[0].address);
         $('[name="po_number"]').val(hasil[0].po_number);
+        $('[name="title_event"]').val(hasil[0].tittle_event);
+
+        $('[name="venue_event"]').val(hasil[0].venue_event);
+        $('[name="date_po"]').val(hasil[0].date_po);
+        $('[name="date_event"]').val(hasil[0].date_event);
 
 
         $('[name="tagihan"]').val(hasil[0].address);
+        $('[name="bast_number"]').val(hasil[0].bast_number);
+        $('[name="total_bast"]').val(hasil[0].totalBast.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
 
 
 
@@ -394,7 +373,7 @@
       changeYear: true,
 
       buttonImageOnly: true,
-      minDate: dateToday,
+
       maxDate: '+30Y',
       yearRange: '1999:2030',
       inline: true

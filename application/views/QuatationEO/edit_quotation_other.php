@@ -842,7 +842,7 @@
 
         var hasil = Math.round(Number(management) * 0);
         var hasil1 = hasil.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-        $('#pph_descriptionhidden').val(hasil);
+        $('#pph_description_hidden').val(hasil);
         $('#pph_description').val('(' + hasil1 + ')');
         grand_total_other();
 
@@ -853,7 +853,7 @@
 
         var hasil = Math.round(Number(management) * 0.02);
         var hasil1 = hasil.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-        $('#pph_descriptionhidden').val(hasil);
+        $('#pph_description_hidden').val(hasil);
         $('#pph_description').val('(' + hasil1 + ')');
         grand_total_other();
 

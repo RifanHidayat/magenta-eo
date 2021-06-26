@@ -724,6 +724,24 @@ class Delivery extends CI_Controller
       // $this->load->view('delivery/print_delivery_event',$this->data);
       //  $this->load->view('tamplate/footer1',$this->data);
 
+      $cos = str_replace('.', '', $row['comissionable_cost']);
+      $nonfee = str_replace('.', '', $row['nonfee']);
+
+      $pembagi = $row['totalBast'] / $row['netto'];
+      $diskon_harga = $pembagi * $row['discount'];
+      $cos1 = $pembagi * $cos;
+      $nonfee1 = $pembagi * $nonfee;
+      $material = $cos1 + $nonfee1;
+      $asf = $row['asf'] * $pembagi;
+      $sub_total = $asf + $material;
+      $netto = $sub_total - $diskon_harga;
+      $this->data['material'] = number_format(round($material), 0, ',', '.');
+      $this->data['asf'] = number_format(round($asf), 0, ',', '.');
+      $this->data['sub_total'] = number_format(round($sub_total), 0, ',', '.');
+      $this->data['netto'] = number_format(round($netto), 0, ',', '.');
+
+      $this->data['discount'] = number_format(round($diskon_harga), 0, ',', '.');
+
 
       $mpdf = new \Mpdf\Mpdf([
         'mode' => 'utf-8',

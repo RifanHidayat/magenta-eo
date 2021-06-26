@@ -61,20 +61,13 @@
                       </div>
 
 
-                      <div class="form-group" id="kanan">
+                      <div class="form-group" hidden id="kanan">
                         <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Comissionable Cost</label>
                         <div class="col-sm-12">
                           <input readonly="" type="text" class="form-control" id="comissionabale_cost" name="comissionabale_cost" autocomplete="off" value="<?php echo set_value('comissionabale_cost') ?>">
                         </div>
                       </div>
-                      <div class="form-group" id="kanan">
-                        <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">ASF</label>
-                        <div class="col-sm-12">
-                          <input type="text" readonly="" class="form-control" readonly="" id="asf" name="asf" autocomplete="off" value="0">
 
-                        </div>
-
-                      </div>
                       <div hidden class="form-group" id="kanan">
                         <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">ASF</label>
                         <div class="col-sm-12">
@@ -83,7 +76,7 @@
                         </div>
 
                       </div>
-                      <div class="form-group" id="kanan">
+                      <div class="form-group" hidden id="kanan">
                         <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Non-Fee Cost</label>
                         <div class="col-sm-12">
                           <input type="text" class="form-control" id="non_fee" readonly="" name="non_fee" autocomplete="off">
@@ -109,6 +102,8 @@
                         </div>
 
                       </div>
+
+
                       <div class="form-group" id="kanan">
                         <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Discount </label>
                         <div class="col-sm-12">
@@ -124,12 +119,7 @@
                           <input type="text" class="form-control" id="netto" readonly="" name="netto" autocomplete="off" value="0">
                         </div>
                       </div>
-                      <div class="form-group" id="kanan">
-                        <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Discount </label>
-                        <div class="col-sm-12">
-                          <input readonly type="text" class="form-control" id="discount" readonly="" name="discount" autocomplete="off" value="0">
-                        </div>
-                      </div>
+
                       <div class="form-group" id="kanan">
                         <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">BAST Number</label>
                         <div class="col-sm-12">
@@ -145,7 +135,7 @@
                       <div class="form-group" id="kanan">
                         <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Total BAST</label>
                         <div class="col-sm-12">
-                          <input value="<?php echo ($totalBast) ?>" readonly="" type="text" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
+                          <input value="<?php echo number_format($totalBast, 0, ',', '.') ?>" readonly="" type="text" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
                         </div>
                       </div>
 
@@ -375,7 +365,7 @@
 
                     </div>
                     <div style="overflow-x:auto;width:100%">
-                      <table class="table" border="0" id="tablefaktur" style="width:130%">
+                      <table class="table" border="0" id="tablefaktur" style="width:150%">
                         <thead>
                           <tr>
 
@@ -389,6 +379,7 @@
 
                             <th style="width: 35%">Deskripsi Barang</th>
                             <th style="width: 15%">Keterangan</th>
+                            <th style="width: 7%"> Quantity</th>
                             <th style="width: 7%"> KTS</th>
                             <th style="width: 15%">Harga Satuan</th>
                             <th style="width: 25%"> Amount</th>
@@ -399,6 +390,7 @@
                         <tbody></tbody>
                         <tfoot>
                           <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -418,8 +410,9 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <th>ASF</th>
-                            <td> <input type="text" readonly="" class="form-control" id="asf" name="asf" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
+                            <td> <input type="text" readonly="" class="form-control" id="asf_faktur" name="asf" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
 
 
@@ -428,6 +421,7 @@
                           </tr>
                           <tr>
                           <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -435,21 +429,23 @@
                             <td></td>
 
                             <td style="display: flex; margin: 0;top: 10px;">
-                              <p><b>Diskon</b></p><input style="width: 70px; margin-left: 80px;" type="number" oninput="hitungdiskon();" class="form-control" id="diskon" name="diskon" autocomplete="off" placeholder="0" value="<?php echo set_value('email_other') ?>">
+                              <p><b>Discount</b></p><input hidden style="width: 70px; margin-left: 80px;" type="number" oninput="hitungdiskon();" class="form-control" id="diskon_faktur" name="diskon" autocomplete="off" placeholder="0" value="<?php echo set_value('email_other') ?>">
                               <p hidden style="margin-left: 5px; margin-top: 5px;">%</p>
                             </td>
-                            <td><input readonly="" style="width: 100% " type="text" oninput="hitungdiskon();" class="form-control" id="hasildiskon" name="hasildiskon" autocomplete="off" placeholder="0"> </td>
+                            <td><input readonly="" style="width: 100% " type="text" oninput="hitungdiskon();" class="form-control" id="hasildiskon_faktur" name="hasildiskon" autocomplete="off" placeholder="0"> </td>
                           </tr>
                           <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
                           <td></td>
-                          <th>Total</th>
-                          <td> <input type="text" readonly="" class="form-control" id="total" name="total" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
+                          <td></td>
+                          <th>Netto</th>
+                          <td> <input type="text" readonly="" class="form-control" id="netto_faktur" name="total" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
                           </tr>
                           <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -470,6 +466,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
 
                             <th>PPh23</th>
                             <td><input type="text" readonly="" class="form-control" id="pph23" name="pph23" autocomplete="off" value="<?php echo set_value('pph23') ?>"></td>
@@ -482,6 +479,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
 
                             <th>Total Faktur</th>
                             <td><input type="text" readonly="" class="form-control" id="total_faktur" name="total_faktur" autocomplete="off" value="<?php echo set_value('total_faktur') ?>"></td>
@@ -489,11 +487,11 @@
                           </tr>
 
                           <tr>
-                            <td colspan="7">Terbilang</td>
+                            <td colspan="9">Terbilang</td>
 
                           </tr>
                           <tr>
-                            <td colspan="7"><input type="text" readonly="" class="form-control" id="terbilang1" name="terbilang1" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
+                            <td colspan="9"><input type="text" readonly="" class="form-control" id="terbilang1" name="terbilang1" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
                           </tr>
 
@@ -581,15 +579,15 @@
             $('[name="title_event"]').val(hasil[0].tittle_event);
             $('[name="venue_event"]').val(hasil[0].venue_event);
             $('[name="date_event"]').val(hasil[0].date_event);
-            $('[name="total_summary"]').val(hasil[0].sub_total);
+            $('[name="total_summary"]').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost);
             $('[name="non_fee"]').val(hasil[0].nonfee);
-            $('[name="asf"]').val(hasil[0].asf);
+            $('[name="asf"]').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('[name="npwp"]').val(hasil[0].npwp);
             $('[name="alamat_customer"]').val(hasil[0].address);
             $('[name="jabatan"]').val(hasil[0].jabatan);
-            $('[name="netto"]').val(hasil[0].netto);
-            $('#discount').val(hasil[0].discount);
+            $('[name="netto"]').val(hasil[0].total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            $('#discount').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('#diskon').val(hasil[0].discount_percent);
             $('[name="kppnn"]').val(hasil[0].karakteristik_ppn);
             $('[name="kpphh"]').val(hasil[0].karakteristik_pph);
@@ -612,9 +610,6 @@
 
             }
             ?>
-
-
-
           },
           error: function(hasil) {
 
@@ -655,19 +650,23 @@
           Baris += '<td>';
           Baris += '<input type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription"  required="" oninput="" >';
           Baris += '</td>';
-
           Baris += '<td>';
-          Baris += '<input  type="text" name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+
+          Baris += '<input  type="text" readonly name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  onkeyup="convertToRupiah(this);"  type="text" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()" >';
+          Baris += '<input  type="text" readonly name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+          Baris += '</td>';
+
+          Baris += '<td>';
+          Baris += '<input  onkeyup="convertToRupiah(this);"  readonly type="text" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()" >';
           Baris += '</td>';
 
           Baris += '<td>';
 
 
-          Baris += '<input oninput="hitungFaktur();"  type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
+          Baris += '<input oninput="hitungFaktur();" readonly  type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
           Baris += '</td>';
           Baris += '<td class="text-center">';
           Baris += '<a hidden class="btn btn-sm btn-danger" data-toggle="tooltip" id="HapusBaris" ><font color="white"><i class="fa fa-times"></font></a>';
@@ -725,11 +724,15 @@
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  type="text" name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="totalSub1();" >';
+          Baris += '<input readonly  type="text" readonly name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  onkeyup="convertToRupiah(this);"  type="text" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="totalSub1()" >';
+          Baris += '<input  type="text" readonly name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="totalSub1();" >';
+          Baris += '</td>';
+
+          Baris += '<td>';
+          Baris += '<input  readonly onkeyup="convertToRupiah(this);"  type="text" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="totalSub1()" >';
           Baris += '</td>';
 
           Baris += '<td>';
@@ -806,15 +809,19 @@
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  type="text" value="<?php echo $k->frequency; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="totalSub1()" >';
+          Baris += '<input  readonly type="text" value="<?php echo $k->quantity; ?>"  name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="totalSub1()" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->unitprice; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="totalSub1()" >';
+          Baris += '<input readonly  type="text" value="<?php echo $k->frequency; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="totalSub1()" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input hidden  oninput="totalSub1();"  value="<?php echo $k->frequency; ?>"   type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
+          Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->unitprice; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="totalSub1()" >';
+          Baris += '</td>';
+
+          Baris += '<td>';
+          Baris += '<input hidden readonly  oninput="totalSub1();"  value="<?php echo $k->frequency; ?>"   type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
           Baris += '</td>';
           Baris += '<td class="text-center">';
           Baris += `<a hidden class="btn btn-sm btn-danger" data-toggle="tooltip" id="HapusBaris"  data-row="${Nomor}" ><font color="white"><i class="fa fa-times"></font></a>`;
@@ -871,27 +878,26 @@
           Baris += '</textarea>';
           Baris += '</td>';
 
-          Baris += '<td style="width:30%" >';
-          Baris += '<textarea  class="form-control description"  name="deskripsibarang[]"  id="DescriptionBarang' + Nomor + '" >';
-          Baris += `<?php echo $k->desciption ?>`;
-          Baris += '</textarea>';
-          Baris += '</td>';
 
 
           Baris += '<td>';
-          Baris += '<input value="' + d + '"   type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription"  required="" oninput="" >';
+          Baris += '<input   type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription"  required="" oninput="" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  type="text" value="<?php echo $k->frequency; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+          Baris += '<input readonly  type="text" value="<?php echo $k->quantity; ?>"  name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="totalSub1()" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->unitprice; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()" >';
+          Baris += '<input readonly  type="text" value="<?php echo $k->frequency; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input  oninput="hitungFaktur();"  value="<?php echo $k->frequency; ?>"   type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
+          Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->unitprice; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()" >';
+          Baris += '</td>';
+
+          Baris += '<td>';
+          Baris += '<input readonly  oninput="hitungFaktur();"  value="<?php echo $k->frequency; ?>"   type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
           Baris += '</td>';
           Baris += '<td class="text-center">';
           Baris += `<a hidden class="btn btn-sm btn-danger" data-toggle="tooltip" id="HapusBaris"  data-row="${Nomor}" ><font color="white"><i class="fa fa-times"></font></a>`;
@@ -944,30 +950,56 @@
       function hitungFaktur() {
         var hitung = 0;
         $('#tablefaktur tbody tr').each(function() {
-          var kts = $(this).find('td:nth-child(4) input').val();
-          var unitprice = $(this).find('td:nth-child(5) input').val();
+          var kts = $(this).find('td:nth-child(5) input').val();
+          var quantity = $(this).find('td:nth-child(4) input').val();
+          var unitprice = $(this).find('td:nth-child(6) input').val();
           var unitprice1 = unitprice.replace(/[^\w\s]/gi, '');
-          data = Number(kts) * Number(unitprice1)
+          data = Number(kts) * Number(unitprice1) * Number(quantity);
           var ss = data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-          var amount = $(this).find('td:nth-child(6) input').val(ss);
+          var amount = $(this).find('td:nth-child(7) input').val(ss);
 
 
           hitung = Number(hitung) + Number(data);
 
 
         });
-        var a = Math.round(hitung);
-        var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-        $('#subtotal').val(hitung1);
-        total();
-        hitungdiskon();
-        hitungppn();
-        hitungpph();
+        // var a = Math.round(hitung);
+        // var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+        // $('#subtotal').val(hitung1);
+        // total();
+        // hitungdiskon();
 
-        hitung_faktur();
+
+        // hitung_faktur();
+        var total_bast = $('#totalBast').val();
+        var total_bast1 = total_bast.replace(/[^\w\s]/gi, '');
+        var netto = $('#netto').val();
+        var netto1 = netto.replace(/[^\w\s]/gi, '');
+        var asf = $('#asf').val();
+        var asf1 = asf.replace(/[^\w\s]/gi, '');
+        var discount = $('#discount').val();
+        var discount1 = discount.replace(/[^\w\s]/gi, '');
+        var pembagi = Number(total_bast1) / Number(netto1);
+
+        var sub_total = Math.round(Number(pembagi) * Number(netto1));
+        var asf2 = Math.round(Number(pembagi) * Number(asf1));
+        var discount2 = Math.round(Number(pembagi) * Number(discount1));
+        var netto2 = Math.round(Number(sub_total) + Number(asf2) + Number(discount2))
+        $('#subtotal').val(sub_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('#asf_faktur').val(asf2);
+        $('#hasildiskon_faktur').val(discount2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('#netto_faktur').val(netto2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+
+
+        // hitungppn();
+        // hitungpph();
+
+
+
 
 
       }
+
 
       function totalSub1() {
         var totalBast1 = $('#totalBast').val();
@@ -999,6 +1031,7 @@
         var total = Number(asf1) + Number(subtotal1);
         var total1 = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
         $('#total').val(total1);
+
 
 
       }
@@ -1266,7 +1299,7 @@
           changeYear: true,
 
           buttonImageOnly: true,
-          minDate: dateToday,
+
           maxDate: '+30Y',
           yearRange: '1999:2030',
           inline: true

@@ -204,11 +204,8 @@
 
                <!--  <td align="right"><p align="right">IDR 
                     <?php
-                    $fee = (str_replace('.', '', $nonfee));
-                    $asff = (str_replace('.', '', $asf));
-                    $cos = (str_replace('.', '', $comissionable_cost));
-                    $total = $cos + $fee;
-                    echo number_format($total, 0, ",", ".");
+
+                    echo $material;
 
                     ?>
                    </p>
@@ -216,7 +213,7 @@
                     </td> -->
 
                <th align="right">
-                 <p align="right"><?php echo "IDR " . $jasa; ?>
+                 <p align="right"><?php echo "IDR " . $material; ?>
                </th>
 
              </tr>
@@ -226,7 +223,7 @@
                </td>
                <td colspan="4">Jasa - ASF </td>
                <th align="right">
-                 <p align="right"><?php echo "IDR " . $asf; ?>
+                 <p align="right"><?php echo "IDR " . $asf ?>
                </th>
 
              </tr>
@@ -243,21 +240,14 @@
                <th style="width: 30%;" align="right">
                  <p align="right">
                    <?php
-                    //$fee=(str_replace('.', '', $nonfee));
-                    $asff = (str_replace('.', '', $asf));
-                    $cos = (str_replace('.', '', $jasa));
-                    $total = $asff + $cos;
-                    echo "IDR " . number_format($total, 0, ",", ".");
+
+                    echo "IDR " . $sub_total;
                     ?>
                </th>
              </tr>
              <tr>
 
-               <th>Discount <?php if ($diskon == "") {
-                              echo "0%";
-                            } else {
-                              echo $diskon . "%";
-                            } ?>
+               <th>Discount
 
                </th>
 
@@ -268,7 +258,7 @@
                       echo "(0)";
                     } else {
 
-                      echo 'IDR ' . $diskon_harga;
+                      echo '(IDR ' . number_format($diskon_harga, 0, ',', '.') . ')';
                     }
 
 
@@ -287,7 +277,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . $ppn;
+                    echo "IDR " . $netto2;
 
 
 
@@ -306,7 +296,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . $ppn;
+                    echo "IDR " . number_format($ppn, 0, ',', '.')
 
 
 
@@ -324,7 +314,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . $pph23;
+                    echo "(IDR " . number_format($pph23, 0, ',', '.') . ')'
 
 
 
@@ -343,7 +333,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . $total_faktur;
+                    echo "IDR " . number_format($total_faktur, 0, ',', '.')
 
 
 

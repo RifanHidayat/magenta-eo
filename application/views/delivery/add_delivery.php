@@ -587,7 +587,7 @@
       changeYear: true,
 
       buttonImageOnly: true,
-      minDate: dateToday,
+
       maxDate: '+30Y',
       yearRange: '1999:2030',
       inline: true

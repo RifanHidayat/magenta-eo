@@ -69,7 +69,7 @@
                         <br><br>
                         <div class="col-md-10 col-xs-10 pull pull-right">
                           <div class="form-group" id="kanan">
-                            <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label" id="Comissionable_cost">Comissionable Cost</label>
+                            <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label" id="Comissionable_cost">Commissionable Cost</label>
                             <div class="col-sm-12">
                               <input type="text" class="form-control " readonly="" id="Comissionable_cost" name="Comissionable_cost" readonly="" autocomplete="off" value="0">
 
@@ -395,7 +395,7 @@
                         <br>
                         <hr>
 
-                        <h3>Comissionable cost</h3>
+                        <h3>Commissionable cost</h3>
                         <?php foreach ($item as $k) : ?>
                           <br>
                           <input style="width: 20%" type="button" class="btn btn-info btn-color-custom" value="<?php echo $k->name ?>" id="btn<?php echo (str_replace(' ', '', $k->name)) ?>">
@@ -2091,7 +2091,7 @@
 
 
     }
-
+    number_format($grand_total, 0, ",", ".");
 
   }
 

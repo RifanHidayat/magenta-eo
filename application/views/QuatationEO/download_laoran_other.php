@@ -195,15 +195,15 @@
                     <th style="width: 5%;background-color: #808080">
                       <center>No</center>
                     </th>
-                    <th style="width: 25%;background-color: #808080">Description</th>
+                    <th style="width: 35%;background-color: #808080">Description</th>
                     <th style="width: 5%;background-color: #808080">
                       <center>Quantity</center>
                     </th>
                     <th style="width: 5%;background-color: #808080">
                       <center>Frequency</center>
                     </th>
-                    <th style="width: 25%;background-color: #808080">Unit Price</th>
-                    <th style="width: 30%;background-color: #808080">Amount</th>
+                    <th style="width: 15%;background-color: #808080">Unit Price</th>
+                    <th style="width: 20%;background-color: #808080">Amount</th>
                   </tr>
                 </thead>
 
@@ -224,8 +224,8 @@
                       <td>
                         <center><?php echo $k->frequency ?></center>
                       </td>
-                      <td align="right">IDR <?php echo $k->unitprice ?></td>
-                      <td align="right">IDR <?php echo $k->amount ?></td>
+                      <td align="right">IDR <?php echo number_format($k->unitprice, 0, ',', '.') ?></td>
+                      <td align="right">IDR <?php echo number_format($k->amount, 0, ',', '.') ?></td>
                     </tr>
                   <?php endforeach ?>
                 <tfoot>
