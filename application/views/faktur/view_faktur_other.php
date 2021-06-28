@@ -92,18 +92,26 @@
                 </div>
 
 
-                <div class="form-group" id="kanan">
+                <div class="form-group" id="kanan" hidden>
                   <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Comissionable Cost</label>
                   <div class="col-sm-12">
                     <input readonly="" type="text" class="form-control" id="comissionabale_cost" name="comissionabale_cost" autocomplete="off" value="<?php echo set_value('comissionabale_cost') ?>">
                   </div>
                 </div>
 
-                <div class="form-group" id="kanan">
+                <div class="form-group" id="kanan" hidden>
                   <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Non-Fee Cost</label>
                   <div class="col-sm-12">
                     <input type="text" class="form-control" id="non_fee" readonly="" name="non_fee" autocomplete="off">
 
+
+                  </div>
+
+                </div>
+                <div class="form-group" id="kanan">
+                  <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                  <div class="col-sm-12">
+                    <input type="text" readonly="" class="form-control" readonly="" id="sub_total" name="sub_total" autocomplete="off">
 
                   </div>
 
@@ -117,7 +125,15 @@
 
                 </div>
                 <div class="form-group" id="kanan">
-                  <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Total Summary</label>
+                  <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">Discount</label>
+                  <div class="col-sm-12">
+                    <input type="text" readonly="" class="form-control" readonly="" id="discount" name="discount" autocomplete="off">
+
+                  </div>
+
+                </div>
+                <div class="form-group" id="kanan">
+                  <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Netto</label>
                   <div class="col-sm-12">
                     <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off">
 
@@ -256,7 +272,7 @@
                 <?= form_error('title_event', '<small class="text-danger pl-3">', '</small>') ?>
 
 
-                <div class="form-group" id="qnumber">
+                <div class="form-group" id="qnumber" hidden>
                   <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Venue Event</label>
                   <div class="col-sm-12">
                     <input type="text" class="form-control" required="" readonly="" id="venu_event" name="venue_event" autocomplete="off">
@@ -267,7 +283,7 @@
 
 
 
-                <div class="form-group" id="qnumber">
+                <div class="form-group" id="qnumber" hidden>
                   <label for="total" style="text-align:left;" class="col-sm-6 control-label">Date Event</label>
                   <div class="col-sm-12">
                     <input readonly="" type="text" required="" class="form-control" id="date_event" name="date_event" readonly="" autocomplete="off">
@@ -398,9 +414,13 @@
                         <th style="width: 10%">Barang</th>
                         <th style="width: 20%">Deskripsi Barang</th>
                         <th style="width: 20%">Keterangan</th>
-                        <th style="width: 10%">
+                        <th style="width: 7%">
+                          <center>Quantity</center>
+                        </th>
+                        <th style="width: 7%">
                           <center>KTS</center>
                         </th>
+
                         <th style="width: 15%">Harga Satuan</th>
                         <th style="width: 30%">Ammount</th>
                       </tr>
@@ -417,18 +437,20 @@
                             <center><?php echo $no ?></center>
                           </td>
                           <td>
-                            <center><?php echo $k->barang ?></center>
+                            <?php echo $k->barang ?>
                           </td>
                           <td>
-                            <center><?php echo $k->deskripsi_barang ?></center>
-                          </td>
+                            <?php echo $k->deskripsi_barang ?> </td>
                           <td><?php echo $k->keterangan ?></td>
+                          <td>
+                            <center><?php echo $k->quantity ?></center>
+                          </td>
                           <td>
                             <center><?php echo $k->kts ?></center>
                           </td>
-                          <td>IDR <p align="right" style="margin-top: -21px;"> <?php echo $k->harga_satuan ?></p>
+                          <td>IDR <p align="right" style="margin-top: -21px;"> <?php echo number_format($k->harga_satuan, 0, ',', '.') ?></p>
                           </td>
-                          <td>IDR <p align="right" style="margin-top: -21px;"> <?php echo $k->amount ?></p>
+                          <td>IDR <p align="right" style="margin-top: -21px;"> <?php echo number_format($k->amount, 0, ',', '.') ?></p>
                           </td>
 
 
@@ -438,13 +460,13 @@
 
                       <tr>
 
-                        <td rowspan="8" colspan="5"><b>Terbilang :</b>
+                        <td rowspan="8" colspan="6"><b>Terbilang :</b>
                           <p id="terbilang1" name="terbilang1"></p>
                         </td>
                       </tr>
                       <tr>
-                        <th>Total Sub</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $total_sub ?></p>
+                        <th>Subtotal</th>
+                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $sub_total ?></p>
                         </th>
 
                       </tr>
@@ -455,18 +477,13 @@
 
                       </tr>
                       <tr>
-                        <th>Total</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $total ?></p>
-                        </th>
-                      </tr>
-                      <tr>
                         <th>Discount</th>
                         <th>IDR <p align="right" style="margin-top: -21px;">
                             <?php
-                            if ($diskon == "") {
+                            if ($discount == "") {
                               echo "(0)";
                             } else {
-                              echo $diskon_harga;
+                              echo '(' . $discount . ')';
                             }
 
                             ?>
@@ -476,6 +493,12 @@
 
                       </tr>
                       <tr>
+                        <th>Netto</th>
+                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $netto ?></p>
+                        </th>
+                      </tr>
+
+                      <tr>
                         <th>PPN</th>
                         <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $ppn ?></p>
                         </th>
@@ -483,13 +506,13 @@
                       </tr>
                       <tr>
                         <th>PPh23</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $pph23; ?></p>
+                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $pph; ?></p>
                         </th>
 
                       </tr>
                       <tr>
                         <th>Total Faktur</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $total_faktur; ?></p>
+                        <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $total_faktur ?></p>
                         </th>
 
                       </tr>
@@ -507,13 +530,16 @@
                           <center>No</center>
                         </th>
                         <th style="width: 10%">Barang</th>
-                        <th style="width: 20%">Deskripsi Barang</th>
-                        <th style="width: 20%">Keterangan</th>
-                        <th style="width: 10%">
+                        <th style="width: 30%">Deskripsi Barang</th>
+                        <th style="width: 15%">Keterangan</th>
+                        <th style="width: 5%">
+                          <center>Quantity</center>
+                        </th>
+                        <th style="width: 5%">
                           <center>KTS</center>
                         </th>
                         <th style="width: 15%">Harga Satuan</th>
-                        <th style="width: 30%">Ammount</th>
+                        <th style="width: 25%">Ammount</th>
                       </tr>
                     </thead>
 
@@ -528,18 +554,21 @@
                             <center><?php echo $no ?></center>
                           </td>
                           <td>
-                            <center><?php echo $k->barang ?></center>
+                            <?php echo $k->barang ?>
                           </td>
                           <td>
-                            <center><?php echo $k->deskripsi_barang ?></center>
+                            <?php echo $k->deskripsi_barang ?>
                           </td>
                           <td><?php echo $k->keterangan ?></td>
                           <td>
+                            <center><?php echo $k->quantity ?></center>
+                          </td>
+                          <td>
                             <center><?php echo $k->kts ?></center>
                           </td>
-                          <td>IDR <p align="right" style="margin-top: -21px;"> <?php echo $k->harga_satuan ?></p>
+                          <td>IDR <p align="right" style="margin-top: -21px;"> <?php echo number_format($k->harga_satuan, 0, ',', '.') ?></p>
                           </td>
-                          <td hidden="">IDR <p align="right" style="margin-top: -21px;"> <?php echo $k->amount ?></p>
+                          <td hidden="">IDR <p align="right" style="margin-top: -21px;"> <?php echo number_format($amount, 0, ',', '.') ?></p>
                           </td>
 
 
@@ -549,13 +578,13 @@
 
                       <tr>
 
-                        <td rowspan="8" colspan="5"><b>Terbilang :</b>
+                        <td rowspan="8" colspan="6"><b>Terbilang :</b>
                           <p id="terbilang1" name="terbilang1"></p>
                         </td>
                       </tr>
                       <tr>
                         <th>Total Sub</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $total_sub ?></p>
+                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $sub_total ?></p>
                         </th>
 
                       </tr>
@@ -566,18 +595,13 @@
 
                       </tr>
                       <tr>
-                        <th>Total</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $total ?></p>
-                        </th>
-                      </tr>
-                      <tr>
                         <th>Discount</th>
                         <th>IDR <p align="right" style="margin-top: -21px;">
                             <?php
-                            if ($diskon == "") {
+                            if ($discount == "") {
                               echo "(0)";
                             } else {
-                              echo $diskon_harga;
+                              echo '(' . $discount . ')';
                             }
 
                             ?>
@@ -587,14 +611,20 @@
 
                       </tr>
                       <tr>
+                        <th>Netto</th>
+                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $netto ?></p>
+                        </th>
+                      </tr>
+
+                      <tr>
                         <th>PPN</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $ppn ?></p>
+                        <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo   $ppn ?></p>
                         </th>
 
                       </tr>
                       <tr>
                         <th>PPh23</th>
-                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo $pph23; ?></p>
+                        <th>IDR <p align="right" style="margin-top: -21px;"><?php echo '(' . $pph . ')' ?></p>
                         </th>
 
                       </tr>
@@ -706,10 +736,10 @@
         $('[name="customer"]').val(hasil[0].customer);
         $('[name="title_event"]').val(hasil[0].tittle_event);
 
-        $('[name="total_summary"]').val(hasil[0].total);
+        $('[name="total_summary"]').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
 
 
-        $('[name="asf"]').val(hasil[0].asf);
+        $('[name="asf"]').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="npwp"]').val(hasil[0].npwp);
         $('[name="alamat_customer"]').val(hasil[0].address);
         $('[name="jabatan"]').val(hasil[0].jabatan);
@@ -720,12 +750,14 @@
         $('#date_faktur').val(hasil[0].date_faktur);
         $('#syarat_pembayaran').val(hasil[0].syarat_pembayaran);
         $('#diskon').val(hasil[0].diskon);
+        $('#sub_total').val(hasil[0].sub_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('#discount').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('#ref').val(hasil[0].REF);
 
 
         $('[name="kppnn"]').val(hasil[0].karakteristik_ppn);
         $('[name="kpphh"]').val(hasil[0].karakteristik_pph);
-        $('[name="totalBast"]').val(hasil[0].totalBast);
+        $('[name="totalBast"]').val(hasil[0].totalBast.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="gr_number"]').val(hasil[0].gr_number);
         $('[name="bastNumber"]').val(hasil[0].bast_number);
 

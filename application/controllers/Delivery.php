@@ -557,6 +557,7 @@ class Delivery extends CI_Controller
       $c = $this->input->post('keteranganbarang');
       $d = $this->input->post('kts');
       $e = $this->input->post('satuan');
+      $f = $this->input->post('quantity');
 
       if ($a[0] !== null) {
         foreach ($a as $row) {
@@ -567,6 +568,7 @@ class Delivery extends CI_Controller
             'deskripsi_barang' => $b[$i],
             'keterangan' => $c[$i],
             'kts' => $d[$i],
+            'quantity' => $f[$i],
             'satuan' => $e[$i],
 
 
@@ -624,6 +626,7 @@ class Delivery extends CI_Controller
       $d = $this->input->post('kts');
       $e = $this->input->post('satuan');
       $g = $this->input->post('id_delivery');
+      $f = $this->input->post('quantity');
 
       if ($a[0] !== null) {
         $this->db->where('quotation_number', $quotation_number);
@@ -636,6 +639,7 @@ class Delivery extends CI_Controller
             'deskripsi_barang' => $b[$i],
             'keterangan' => $c[$i],
             'kts' => $d[$i],
+            'quantity' => $d[$i],
             'satuan' => $e[$i]
 
 

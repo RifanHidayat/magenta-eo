@@ -628,28 +628,54 @@
 
 
 
-  $("#imagenes").fileinput({
 
-    overwriteInitial: true,
-    maxFileSize: 2000,
-    showClose: false,
-    showCaption: false,
-    browseLabel: 'browse',
-    removeLabel: 'Remove',
-    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
-    elErrorContainer: '#kv-avatar-errors-1',
-    msgErrorClass: 'alert alert-block alert-danger',
-    // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-    layoutTemplates: {
-      main2: '{preview}   {remove} {browse}'
-    },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-    initialPreview: [
-      '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo  $img ?>" ></object>'
-    ],
-  });
+  <?php if ($img != 'dafault.png') { ?>
+    $("#imagenes").fileinput({
+
+      overwriteInitial: true,
+      maxFileSize: 2000,
+      showClose: false,
+      showCaption: false,
+      browseLabel: 'browse',
+      removeLabel: 'Remove',
+      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+      removeTitle: 'Cancel or reset changes',
+      elErrorContainer: '#kv-avatar-errors-1',
+      msgErrorClass: 'alert alert-block alert-danger',
+      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+      layoutTemplates: {
+        main2: '{preview}   {remove} {browse}'
+      },
+      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+      initialPreview: [
+        '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $img ?>" ></object>'
+      ],
+    });
+  <?php } else {
+  ?>
+
+    $("#imagenes").fileinput({
+      overwriteInitial: true,
+      maxFileSize: 2000,
+      showClose: false,
+      showCaption: false,
+      browseLabel: 'browse',
+      removeLabel: 'Remove',
+      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+      removeTitle: 'Cancel or reset changes',
+      elErrorContainer: '#kv-avatar-errors-1',
+      msgErrorClass: 'alert alert-block alert-danger',
+      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+      layoutTemplates: {
+        main2: '{preview}   {remove} {browse}'
+      },
+      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+
+    });
+
+  <?php } ?>
 
 
   function sum_faktur() {

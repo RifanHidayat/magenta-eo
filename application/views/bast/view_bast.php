@@ -153,7 +153,7 @@
                 <div class="form-group" id="qnumber">
                   <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Netto</label>
                   <div class="col-sm-12">
-                    <input readonly="" type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo number_format($total_summary, 0, ',', '.') ?>">
+                    <input readonly="" type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo number_format($netto, 0, ',', '.') ?>">
                   </div>
                 </div>
                 <div class="form-group" id="qnumber">
@@ -313,10 +313,10 @@
 
 
                 </div>
-                <div class="form-group" id="qnumber" hidden="">
+                <div class="form-group" id="qnumber">
                   <label for="Date_event" style="text-align:left;" class="col-sm-8 control-label">Total BAST</label>
                   <div class="col-sm-12">
-                    <input oninput="checkBast()" value="<?php echo ($totalBast) ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
+                    <input readonly oninput="checkBast()" value="<?php echo number_format($totalBast, 0, ',', '.') ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
                   </div>
 
 

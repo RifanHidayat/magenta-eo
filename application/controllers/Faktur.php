@@ -418,7 +418,9 @@ class Faktur extends CI_Controller
 
       $row = $this->db->get()->row_array();
 
-      $this->data['ppn'] = $row['ppn'];
+
+
+
       $this->data['ref'] = $row['REF'];
       $this->data['pph23'] = $row['pph23'];
       $this->data['diskon'] = $row['diskon'];
@@ -426,13 +428,36 @@ class Faktur extends CI_Controller
       $this->data['total_faktur'] = $row['total_faktur'];
       $this->data['total_sub'] = $row['total_sub'];
       $this->data['total'] = $row['totalBast'];
+
       $totalBast = str_replace('.', '', $row['total_sub']);
-      $asff = (($row['asfp'] / 100) * $totalBast);
-      $asf = number_format($asff, 0, ",", ".");
-      $this->data['asf'] = $asf;
 
 
 
+
+
+
+
+
+
+
+
+      $pembagi = $row['totalBast'] / $row['netto'];
+      $sub_total = $pembagi * $row['sub_total'];
+      $asf = $pembagi * $row['asf'];
+      $discount = $pembagi * $row['discount'];
+      $netto = $sub_total + $asf - $discount;
+      $ppn = 0.1 * $netto;
+      $pph = 0.02 * $asf;
+      $total_faktur = $netto + $ppn - $pph;
+
+      $this->data['sub_total'] = number_format(round($sub_total), 0, ',', '.');
+      $this->data['asf'] = number_format($asf, 0, ',', '.');
+      $this->data['netto'] = number_format($netto, 0, ',', '.');
+      $this->data['ppn'] = number_format($ppn, 0, ',', '.');
+      $this->data['pph'] = number_format($pph, 0, ',', '.');
+      $this->data['total_faktur'] = number_format($total_faktur, 0, ',', '.');
+      $this->data['discount'] = number_format($discount, 0, ',', '.');
+      $this->data['netto'] = number_format($netto, 0, ',', '.');
 
       $where = array('quotation_number' => $quotation_number);
       $this->data['quotation_other'] = $this->db->get_where('faktur_item', $where)->result();
@@ -463,6 +488,9 @@ class Faktur extends CI_Controller
         //jumlah lebih besar dari 1
         $this->data['jml'] = '2';
       }
+
+
+
       $this->load->view('tamplate/header', $this->data);
       $this->load->view('tamplate/sidebar', $this->data);
       $this->load->view('faktur/view_faktur_other', $this->data);
@@ -698,6 +726,7 @@ class Faktur extends CI_Controller
       $d = $this->input->post('kts');
       $e = $this->input->post('hargasatuan');
       $f = $this->input->post('amount');
+      $g = $this->input->post('quantity');
       if ($a[0] !== null) {
         foreach ($a as $row) {
           $data = [
@@ -707,8 +736,9 @@ class Faktur extends CI_Controller
             'deskripsi_barang' => $b[$i],
             'keterangan' => $c[$i],
             'kts' => $d[$i],
-            'harga_satuan' => $e[$i],
-            'amount' => $f[$i],
+            'quantity' => $g[$i],
+            'harga_satuan' => (str_replace('.', '', $e[$i])),
+            'amount' => (str_replace('.', '', $f[$i])),
 
           ];
           // $t=+(int) $c[$i];
@@ -729,13 +759,13 @@ class Faktur extends CI_Controller
           "date_faktur" => $date_faktur,
           "REF" => $ref,
           "syarat_pembayaran" => $syarat_pembayaran,
-          "total_sub" => $subtotal,
+          "total_sub" => (str_replace('.', '', $subtotal)),
           "diskon" => $diskon,
-          "ppn" => $ppn,
-          "pph23" => $pph23,
-          "total_faktur" => $total_faktur,
+          "ppn" => (str_replace('.', '', $ppn)),
+          "pph23" => preg_replace("/[^0-9]/", "", $pph23),
+          "total_faktur" => (str_replace('.', '', $total_faktur)),
           "image" => $upload_image,
-          "diskon_harga" => $this->input->post('hasildiskon'),
+          "diskon_harga" => preg_replace("/[^0-9]/", "", $this->input->post('hasildiskon')),
           "id_bast" => $this->input->post('id_bast')
         ];
         $this->db->insert('faktur', $data1);
@@ -953,6 +983,7 @@ class Faktur extends CI_Controller
       $e = $this->input->post('hargasatuan');
       $f = $this->input->post('amount');
       $g = $this->input->post('id_faktur');
+      $j = $this->input->post('quantity');
 
       if ($a[0] != null) {
         $this->db->where('quotation_number', $quotation_number);
@@ -965,8 +996,9 @@ class Faktur extends CI_Controller
             'deskripsi_barang' => $b[$i],
             'keterangan' => $c[$i],
             'kts' => $d[$i],
-            'harga_satuan' => $e[$i],
-            'amount' => $f[$i]
+            'quantity' => $j[$i],
+            'harga_satuan' => (str_replace('.', '', $e[$i])),
+            'amount' => (str_replace('.', '', $f[$i]))
           ];
 
 
@@ -982,12 +1014,12 @@ class Faktur extends CI_Controller
             "date_faktur" => $date_faktur,
             "REF" => $ref,
             "syarat_pembayaran" => $syarat_pembayaran,
-            "total_sub" => $subtotal,
+            "total_sub" => (str_replace('.', '', $subtotal)),
             "diskon" => $diskon,
-            "ppn" => $ppn,
-            "pph23" => $pph23,
-            "total_faktur" => $total_faktur,
-            "diskon_harga" => $this->input->post('hasildiskon'),
+            "ppn" => (str_replace('.', '', $ppn)),
+            "pph23" => preg_replace("/[^0-9]/", "", $pph23),
+            "total_faktur" => (str_replace('.', '', $total_faktur)),
+            "diskon_harga" => preg_replace("/[^0-9]/", "", $this->input->post("hasildiskon")),
 
 
           ];
@@ -998,13 +1030,13 @@ class Faktur extends CI_Controller
             "date_faktur" => $date_faktur,
             "REF" => $ref,
             "syarat_pembayaran" => $syarat_pembayaran,
-            "total_sub" => $subtotal,
+            "total_sub" => (str_replace('.', '', $subtotal)),
             "diskon" => $diskon,
-            "ppn" => $ppn,
-            "pph23" => $pph23,
-            "total_faktur" => $total_faktur,
+            "ppn" => (str_replace('.', '', $ppn)),
+            "pph23" => preg_replace("/[^0-9]/", "", $pph23),
+            "total_faktur" => (str_replace('.', '', $total_faktur)),
             "image" => $upload_image,
-            "diskon_harga" => $this->input->post('hasildiskon'),
+            "diskon_harga" => preg_replace("/[^0-9]/", "", $this->input->post("hasildiskon")),
           ];
         }
 
@@ -1253,6 +1285,29 @@ class Faktur extends CI_Controller
       $this->db->select('*');
       $this->db->from('quotation_other');
       $this->db->where('quotation_number', $quotation_number);
+
+
+
+
+      $pembagi = $row['totalBast'] / $row['netto'];
+      $sub_total = $pembagi * $row['sub_total'];
+      $asf = $pembagi * $row['asf'];
+      $discount = $pembagi * $row['discount'];
+      $netto = $sub_total + $asf - $discount;
+      $ppn = 0.1 * $netto;
+      $pph = 0.02 * $asf;
+      $total_faktur = $netto + $ppn - $pph;
+
+      $this->data['sub_total'] = number_format(round($sub_total), 0, ',', '.');
+      $this->data['asf'] = number_format($asf, 0, ',', '.');
+      $this->data['netto'] = number_format($netto, 0, ',', '.');
+      $this->data['ppn'] = number_format($ppn, 0, ',', '.');
+      $this->data['pph'] = number_format($pph, 0, ',', '.');
+      $this->data['total_faktur'] = number_format($total_faktur, 0, ',', '.');
+      $this->data['discount'] = number_format($discount, 0, ',', '.');
+      //$this->data['pembagi'] = $row['totalBast'];
+
+
       $row = $this->db->get()->row_array();
       if ($row['sisa_bast'] == '0') {
         $this->db->select('COUNT(*) as jml');
@@ -1269,7 +1324,6 @@ class Faktur extends CI_Controller
         //jumlah lebih besar dari 1
         $this->data['jml'] = '2';
       }
-
 
 
       // $this->load->view('tamplate/header1',$this->data);
@@ -1489,7 +1543,7 @@ class Faktur extends CI_Controller
         $sub_array[] = $row->ser_faktur;
         $sub_array[] = $row->customer;
         $sub_array[] = $row->tittle_event;
-        $sub_array[] = $row->total_faktur;
+        $sub_array[] = number_format($row->total_faktur, 0, ',', '.');
 
         $sub_array[] = $status;
         $sub_array[] = $row->noteStatus;

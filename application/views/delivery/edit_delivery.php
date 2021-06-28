@@ -109,7 +109,6 @@
 
 
 
-
                                     <div class="form-group" id="qnumber">
                                         <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Title Event</label>
                                         <div class="col-sm-12">
@@ -117,13 +116,36 @@
                                             <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" hidden="">
                                         </div>
                                     </div>
+
+
                                     <?= form_error('title_event', '<small class="text-danger pl-3">', '</small>') ?>
 
+                                    <div class="form-group" id="qnumber">
+                                        <label for="netto" style="text-align:left;" class="col-sm-10 control-label">BAST Number</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" required="" readonly="" id="bast_number" name="bast_number" autocomplete="off">
+
+                                        </div>
+                                    </div>
 
                                     <div class="form-group" id="qnumber">
                                         <label for="netto" style="text-align:left;" class="col-sm-10 control-label">PO Number</label>
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" required="" readonly="" id="po_number" name="po_number" autocomplete="off">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="qnumber">
+                                        <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Date PO</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" required="" readonly="" id="date_po" name="date_po" autocomplete="off">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="qnumber">
+                                        <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Total BAST</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" required="" readonly="" id="total_bast" name="total_bast" autocomplete="off">
 
                                         </div>
                                     </div>
@@ -233,7 +255,7 @@
                                         <tr>
 
 
-                                            <th style="width: 1%"><a style="width: 5" class="btn btn-sm bg-gradient-secondary" data-toggle="tooltip" id="hapus">
+                                            <th style="width: 1%"><a hidden style="width: 5" class="btn btn-sm bg-gradient-secondary" data-toggle="tooltip" id="hapus">
                                                     <font color="white"> <i class="fa fa-times">
                                                             <font color="white">
                                                         </i></font>
@@ -242,11 +264,12 @@
 
                                             <th style="width: 25%">Deskripsi Barang</th>
                                             <th style="width: 25%">Keterangan</th>
+                                            <th style="width: 10%"> Quantity</th>
                                             <th style="width: 10%"> KTS</th>
                                             <th style="width: 15%">Satuan</th>
 
 
-                                            <th style="width: 3%"><button style="width: 5" class="btn btn-sm bg-gradient-secondary" id="BarisBaru"><i class="fa fa-plus"></i> </button></th>
+                                            <th style="width: 3%"><button hidden style="width: 5" class="btn btn-sm bg-gradient-secondary" id="BarisBaru"><i class="fa fa-plus"></i> </button></th>
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
@@ -336,6 +359,15 @@
                 $('[name="delivery_order"]').val(hasil[0].Delivery_number);
                 $('[name="platnomor"]').val(hasil[0].platnomor);
                 $('[name="pengirim"]').val(hasil[0].pengirim);
+                $('[name="date_po"]').val(hasil[0].date_po);
+
+
+
+                $('[name="tagihan"]').val(hasil[0].address);
+                $('[name="bast_number"]').val(hasil[0].bast_number);
+                $('[name="total_bast"]').val(hasil[0].totalBast.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+
+
 
 
             },
@@ -373,6 +405,10 @@
 
         Baris += '<td>';
         Baris += '<input onkeyup="convertToRupiah(this);"   type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription"  required="" oninput="" >';
+        Baris += '</td>';
+
+        Baris += '<td>';
+        Baris += '<input  type="text" name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
         Baris += '</td>';
 
         Baris += '<td>';
@@ -445,6 +481,10 @@
 
             Baris += '<td>';
             Baris += '<input    type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription" value="<?php echo $k->keterangan ?>"  required="" oninput="" >';
+            Baris += '</td>';
+
+            Baris += '<td>';
+            Baris += '<input  type="text"   name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" value="<?php echo $k->quantity ?>" >';
             Baris += '</td>';
 
             Baris += '<td>';

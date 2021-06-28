@@ -119,7 +119,7 @@
           <span>Menerangkan bahwa telah dilakukan pekerjaan untuk GR No.<u><?php echo $gr_number . ""; ?></u> dan PO Nomor <u><?php echo $po_number . ""; ?></u> </span>
           <br>
           <br>
-          <p>&ensp;&ensp;<b><?php echo $title_event . ""; ?></b> &ensp;&ensp;&ensp;&ensp;<b><?php echo "( IDR " . $totalBast . ")"; ?></b> </p>
+          <p>&ensp;&ensp;<b><?php echo $title_event . ""; ?></b> &ensp;&ensp;&ensp;&ensp;<b><?php echo "( IDR " . number_format($totalBast, 0, ',', '.') . ")"; ?></b> </p>
           <br>
           <br>
 

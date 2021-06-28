@@ -341,9 +341,9 @@
 
 
                       <div class="form-group" id="qnumber">
-                        <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                        <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                         <div class="col-sm-12">
-                          <input type="text" class="form-control" required="" readonly="" id="netto" name="netto" autocomplete="off" value="0">
+                          <input type="text" class="form-control" required="" readonly="" id="sub_total" name="sub_total" autocomplete="off" value="0">
                           <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" value="0" hidden="">
                         </div>
                       </div>
@@ -445,15 +445,6 @@
                     <br>
                     <br>
                     <br>
-
-
-
-
-
-
-
-
-
 
                     <!-- /.card-body -->
                   </div>
@@ -568,10 +559,10 @@
 
           $('#id_customerother').val(hasil[0].id_customer);
 
-          $('#netto').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#sub_total').val(hasil[0].sub_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#asfp').val(hasil[0].asfp);
           $('#asf_other').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-          $('#total_description').val(hasil[0].total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#total_description').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#note').val(hasil[0].note);
           $('#ppn_description').val(hasil[0].ppn.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#pph_description').val(hasil[0].pph23.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));

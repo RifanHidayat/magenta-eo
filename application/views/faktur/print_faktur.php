@@ -162,12 +162,6 @@
 
             </tr>
           </table>
-          <br>
-          <br>
-
-
-
-
         </div>
 
 
@@ -189,18 +183,6 @@
 
       <div class="row invoice-info">
 
-
-
-        <!-- /.col -->
-
-
-
-
-
-
-
-
-
       </div>
       <div class="row">
 
@@ -219,11 +201,14 @@
                 <th style="width: 10%">
                   <center>Barang</center>
                 </th>
-                <th style="width: 20%">
+                <th style="width: 30%">
                   <center>Deskripsi Barang</center>
                 </th>
                 <th style="width: 20%">
                   <center>Keterangan
+                </th>
+                <th style="width: 5%">
+                  <center>Quantity</center>
                 </th>
                 <th style="width: 5%">
                   <center>KTS</center>
@@ -231,8 +216,8 @@
                 <th style="width: 20%">
                   <center>Harga Satuan</center>
                 </th>
-                <th style="width: 30%">
-                  <center>Ammount</center>
+                <th style="width: 20%">
+                  <center>Amount</center>
                 </th>
               </tr>
             </thead>
@@ -252,13 +237,16 @@
                     <td><?php echo $k->deskripsi_barang ?></td>
                     <td><?php echo $k->keterangan ?></td>
                     <td>
+                      <center><?php echo $k->quantity ?></center>
+                    </td>
+                    <td>
                       <center><?php echo $k->kts ?></center>
                     </td>
                     <td align="right">
-                      <p align="right"><?php echo 'IDR ' . $k->harga_satuan ?></p>
+                      <p align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></p>
                     </td>
                     <td hidden="" align="right">
-                      <p align="right"><?php echo 'IDR ' . $k->amount ?></p>
+                      <p align="right"><?php echo 'IDR ' . number_format($k->amount, 0, ',', '.') ?></p>
                     </td>
 
                   </tr>
@@ -279,10 +267,13 @@
                     <td><?php echo $k->deskripsi_barang ?></td>
                     <td><?php echo $k->keterangan ?></td>
                     <td>
+                      <center><?php echo $k->quantity ?></center>
+                    </td>
+                    <td>
                       <center><?php echo $k->kts ?></center>
                     </td>
                     <td align="right">
-                      <p align="right"><?php echo 'IDR ' . $k->harga_satuan ?></p>
+                      <p align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></p>
                     </td>
 
 
@@ -292,13 +283,13 @@
 
               <tr>
 
-                <td style="border: none" rowspan="7" colspan="5" valign="top">
+                <td style="border: none" rowspan="7" colspan="6" valign="top">
                   <p style="margin-top: -150px">Terbilang : <?php terbilang(str_replace('.', '', $total_faktur)) ?></p>
                 </td>
 
-                <th style="width: 15%">Total Sub</th>
-                <th style="width: 30%" align="right">
-                  <p align="right"> <?php echo 'IDR ' . $jasa ?>
+                <th style="width: 15%">Subtotal</th>
+                <th style="width: 24%" align="right">
+                  <p align="right"> <?php echo 'IDR ' . $sub_total ?>
                 </th>
                 </p>
 
@@ -312,19 +303,7 @@
 
               </tr>
               <tr>
-                <th>Total</th>
-                <th style="width: 20%" align="right">
-                  <p align="right"> <?php echo 'IDR ' . $total ?></p>
-                </th>
-
-
-              </tr>
-              <tr>
-                <th>Discount <?php if ($diskon == "") {
-                                echo "0%";
-                              } else {
-                                echo $diskon . "%";
-                              } ?>
+                <th>Discount
 
                 <th align="right">
                   <p align="right">
@@ -332,7 +311,7 @@
                     if ($diskon == "") {
                       echo "(0)";
                     } else {
-                      echo 'IDR ' . $diskon_harga;
+                      echo 'IDR ' . $discount;
                     }
 
 
@@ -342,6 +321,15 @@
                 </th>
 
               </tr>
+              <tr>
+                <th>Netto</th>
+                <th style="width: 20%" align="right">
+                  <p align="right"> <?php echo 'IDR ' . $netto ?></p>
+                </th>
+
+
+              </tr>
+
             <tfoot>
 
               <tr>
@@ -354,7 +342,7 @@
               <tr>
                 <th>PPh23</th>
                 <th align="right">
-                  <p align="right"> <?php echo 'IDR ' . $pph23; ?></p>
+                  <p align="right"> <?php echo 'IDR ' . $pph; ?></p>
                 </th>
 
               </tr>

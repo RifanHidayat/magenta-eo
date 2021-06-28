@@ -82,17 +82,26 @@
 
 
 
-                  <div class="form-group" id="kanan">
+                  <div class="form-group" id="kanan" hidden>
                     <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Comissionable Cost</label>
                     <div class="col-sm-12">
                       <input readonly="" type="text" class="form-control" id="comissionabale_cost" name="comissionabale_cost" autocomplete="off" value="<?php echo set_value('comissionabale_cost') ?>">
                     </div>
                   </div>
 
-                  <div class="form-group" id="kanan">
+                  <div class="form-group" id="kanan" hidden>
                     <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Non-Fee Cost</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="non_fee" readonly="" name="non_fee" autocomplete="off">
+
+
+                    </div>
+
+                  </div>
+                  <div class="form-group" id="kanan">
+                    <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off">
 
 
                     </div>
@@ -122,15 +131,7 @@
                     </div>
 
                   </div>
-                  <div class="form-group" id="kanan">
-                    <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Total Summary</label>
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off">
 
-
-                    </div>
-
-                  </div>
                   <div class="form-group" id="kanan">
                     <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">BAST Number</label>
                     <div class="col-sm-12">
@@ -272,7 +273,7 @@
                   <?= form_error('title_event', '<small class="text-danger pl-3">', '</small>') ?>
 
 
-                  <div class="form-group" id="qnumber">
+                  <div class="form-group" id="qnumber" hidden>
                     <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Venue Event</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" required="" readonly="" id="venu_event" name="venue_event" autocomplete="off">
@@ -283,7 +284,7 @@
 
 
 
-                  <div class="form-group" id="qnumber">
+                  <div class="form-group" id="qnumber" hidden>
                     <label for="total" style="text-align:left;" class="col-sm-6 control-label">Date Event</label>
                     <div class="col-sm-12">
                       <input type="text" required="" class="form-control" id="date_event" name="date_event" readonly="" autocomplete="off">
@@ -398,7 +399,10 @@
                         <th style="width: 10%">Barang</th>
 
                         <th style="width: 25%">Deskripsi Barang</th>
+
                         <th style="width: 15%">Keterangan</th>
+                        <th style="width: 5%"> Quantity</th>
+
                         <th style="width: 5%"> KTS</th>
                         <th style="width: 15%">Harga Satuan</th>
                         <th style="width: 20%"> Amount</th>
@@ -414,7 +418,8 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <th>Sub Total</th>
+                        <td></td>
+                        <th>Subtotal</th>
                         <td> <input type="text" readonly="" class="form-control" id="subtotal" name="subtotal" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
 
@@ -428,22 +433,9 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <th>ASF</th>
-                        <td> <input type="text" readonly="" class="form-control" id="asf" name="asf" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
-
-
-
-
-
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <th>Total</th>
-                        <td> <input type="text" readonly="" class="form-control" id="total" name="total" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
+                        <td> <input type="text" readonly="" class="form-control" id="asf_faktur" name="asf_faktur" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
 
 
@@ -451,7 +443,9 @@
 
                       </tr>
 
+
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -459,13 +453,23 @@
                         <td></td>
 
                         <td style="display: flex; margin: 0;top: 10px;">
-                          <p><b>Discount</b></p><input readonly style="width: 70px; margin-left: 80px;" type="number" oninput="hitungdiskon();" class="form-control" id="diskon" name="diskon" autocomplete="off" placeholder="0" value="<?php echo set_value('email_other') ?>">
-                          <p style="margin-left: 5px; margin-top: 5px;">%</p>
+                          <p><b>Discount</b></p><input hidden readonly style="width: 70px; margin-left: 80px;" type="number" oninput="hitungdiskon();" class="form-control" id="diskon" name="diskon" autocomplete="off" placeholder="0" value="<?php echo set_value('email_other') ?>">
+                          <p style="margin-left: 5px; margin-top: 5px;" hidden>%</p>
                         </td>
 
 
                         <td><input readonly="" style="width: 100% " type="text" oninput="hitungdiskon();" class="form-control" id="hasildiskon" name="hasildiskon" autocomplete="off" placeholder="0"> </td>
 
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <th>Netto</th>
+                        <td> <input type="text" readonly="" class="form-control" id="total" name="total" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
 
 
@@ -473,6 +477,7 @@
 
                       </tr>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -493,6 +498,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
 
                         <th>PPh 23</th>
                         <td><input type="text" readonly="" class="form-control" id="pph23" name="pph23" autocomplete="off" value="<?php echo set_value('pph23') ?>"></td>
@@ -505,6 +511,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
 
                         <th>Total Faktur</th>
                         <td><input type="text" readonly="" class="form-control" id="total_faktur" name="total_faktur" autocomplete="off" value="<?php echo set_value('total_faktur') ?>"></td>
@@ -512,11 +519,11 @@
                       </tr>
 
                       <tr>
-                        <td colspan="7">Terbilang</td>
+                        <td colspan="8">Terbilang</td>
 
                       </tr>
                       <tr>
-                        <td colspan="7"><input type="text" readonly="" class="form-control" id="terbilang1" name="terbilang1" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
+                        <td colspan="8"><input type="text" readonly="" class="form-control" id="terbilang1" name="terbilang1" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
                       </tr>
                     </tfoot>
@@ -579,10 +586,10 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="venue_event"]').val(hasil[0].venue_event);
         $('[name="date_event"]').val(hasil[0].date_event);
-        $('[name="total_summary"]').val(hasil[0].total);
+        $('[name="total_summary"]').val(hasil[0].total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost);
         $('[name="non_fee"]').val(hasil[0].nonfee);
-        $('[name="asff"]').val(hasil[0].asf);
+        $('[name="asf"]').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="npwp"]').val(hasil[0].npwp);
         $('[name="alamat_customer"]').val(hasil[0].address);
         $('[name="jabatan"]').val(hasil[0].jabatan);
@@ -598,13 +605,13 @@
         $('[name="kppnn"]').val(hasil[0].karakteristik_ppn);
         $('[name="kpphh"]').val(hasil[0].karakteristik_pph);
         $('[name="gr_number"]').val(hasil[0].gr_number);
-        $('[name="totalBast"]').val(hasil[0].totalBast);
+        $('[name="totalBast"]').val(hasil[0].totalBast.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
         $('[name="bastNumber"]').val(hasil[0].bast_number);
         $('[name="ref"]').val(hasil[0].po_number);
         $('[name="diskon"]').val(hasil[0].discount_percent);
-        $('[name="hasildiskon"]').val(hasil[0].discount);
-        $('[name="netto_qo"]').val(hasil[0].netto);
-        $('[name="discount_qo"]').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="hasildiskon"]').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="netto_qo"]').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('[name="discount_qo"]').val('(' + hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + ')');
         // var totalBast1 =hasil[0].totalBast;
         //    var totalBast2 =totalBast1.replace(/[^\w\s]/gi, '');
         //      var asf=(Number(hasil[0].asfp)/100) * Number(totalBast2);
@@ -627,7 +634,7 @@
         } else {
         ?>
           TambahBarisBaruFaktur()
-          totalSub1();
+          // totalSub1();
         <?php
 
         }
@@ -672,6 +679,11 @@
       Baris += '<td>';
       Baris += '<input   type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription"  required=""  >';
       Baris += '</td>';
+
+      Baris += '<td>';
+      Baris += '<input  type="text" name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '</td>';
+
 
       Baris += '<td>';
       Baris += '<input  type="text" name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
@@ -734,6 +746,10 @@
 
       Baris += '<td>';
       Baris += '<input   type="text" name="keteranganbarang[]" id="keteranganbarang' + Nomor + '"  class="form-control KeteranganDescription"  required=""  >';
+      Baris += '</td>';
+
+      Baris += '<td>';
+      Baris += '<input  type="text" name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
       Baris += '</td>';
 
       Baris += '<td>';
@@ -814,11 +830,15 @@
       Baris += '</td>';
 
       Baris += '<td>';
-      Baris += '<input  type="text" value="<?php echo $k->kts; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '<input readonly  type="text" value="<?php echo $k->quantity; ?>"  name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
       Baris += '</td>';
 
       Baris += '<td>';
-      Baris += '<input  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->harga_satuan; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()">  <input   type="text" value="<?php echo $k->id; ?>" name="id_faktur[]" class="form-control id_faktur" hidden > ';
+      Baris += '<input readonly  type="text" value="<?php echo $k->kts; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '</td>';
+
+      Baris += '<td>';
+      Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo number_format($k->harga_satuan, 0, ',', '.') ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()">  <input   type="text" value="<?php echo $k->id; ?>" name="id_faktur[]" class="form-control id_faktur" hidden > ';
       Baris += '</td>';
 
       Baris += '<td>';
@@ -892,11 +912,15 @@
       Baris += '</td>';
 
       Baris += '<td>';
-      Baris += '<input  type="text" value="<?php echo $k->kts; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '<input readonly  type="text" value="<?php echo $k->quantity; ?>"  name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
       Baris += '</td>';
 
       Baris += '<td>';
-      Baris += '<input  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->harga_satuan; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()">  <input   type="text" value="<?php echo $k->id; ?>" name="id_faktur[]" class="form-control id_faktur" hidden > ';
+      Baris += '<input readonly type="text" value="<?php echo $k->kts; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '</td>';
+
+      Baris += '<td>';
+      Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo number_format($k->harga_satuan, 0, ',', '.') ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()">  <input   type="text" value="<?php echo $k->id; ?>" name="id_faktur[]" class="form-control id_faktur" hidden > ';
       Baris += '</td>';
 
       Baris += '<td>';
@@ -951,12 +975,13 @@
   function hitungFaktur() {
     var hitung = 0;
     $('#tablefaktur tbody tr').each(function() {
-      var kts = $(this).find('td:nth-child(4) input').val();
-      var unitprice = $(this).find('td:nth-child(5) input').val();
+      var quantity = $(this).find('td:nth-child(4) input').val();
+      var kts = $(this).find('td:nth-child(5) input').val();
+      var unitprice = $(this).find('td:nth-child(6) input').val();
       var unitprice1 = unitprice.replace(/[^\w\s]/gi, '');
       data = Number(kts) * Number(unitprice1)
       var ss = data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-      var amount = $(this).find('td:nth-child(6) input').val(ss);
+      var amount = $(this).find('td:nth-child(7) input').val(ss);
 
 
       hitung = Number(hitung) + Number(data);
@@ -966,12 +991,42 @@
     var a = Math.round(hitung);
     var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     $('#subtotal').val(hitung1);
-    total();
-    hitungdiskon();
+    // total();
+    // hitungdiskon();
+    // hitungppn();
+    // hitungpph();
+    // total();
+    // hitung_faktur();
+
+    var total_bast = $('#totalBast').val();
+    var total_bast1 = total_bast.replace(/[^\w\s]/gi, '');
+
+    var sub_total = $('#total_summary').val();
+    var sub_total1 = sub_total.replace(/[^\w\s]/gi, '');
+
+    var netto = $('#netto_qo').val();
+    var netto1 = netto.replace(/[^\w\s]/gi, '');
+
+    var asf = $('#asf').val();
+    var asf1 = asf.replace(/[^\w\s]/gi, '');
+
+    var discount = $('#discount_qo').val();
+    var discount1 = discount.replace(/[^\w\s]/gi, '');
+
+    var pembagi = Number(total_bast1) / Number(netto1);
+
+
+    var sub_total2 = Math.round(Number(pembagi) * Number(sub_total1));
+    var asf2 = Math.round(Number(pembagi) * Number(asf1));
+    var discount2 = Math.round(Number(pembagi) * Number(discount1));
+    var netto2 = Math.round(Number(sub_total2) + Number(asf2) - Number(discount2))
+    $('#subtotal').val(sub_total2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+    $('#asf_faktur').val(asf2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+    $('#hasildiskon').val('(' + discount2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + ')');
+    $('#total').val(netto2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
     hitungppn();
     hitungpph();
-    total();
-    hitung_faktur();
+
 
 
   }
@@ -1047,7 +1102,7 @@
     var pph1 = pph.replace(/[^\w\s]/gi, '');
     var asf = $('[name="asf"]').val();
     var asff = asf.replace(/[^\w\s]/gi, '');
-    var total_faktur = Number(subtotal1) - Number(hargadiskon1) + Number(ppn1) - Number(pph1) + Number(asff);
+    var total_faktur = Number(subtotal1) + Number(ppn1) - Number(pph1);
     var total_faktur2 = Math.round(total_faktur);
     var total_faktur1 = total_faktur2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 
@@ -1091,7 +1146,7 @@
     //2% dari management fee
     var data = $('[name="kpphh"]').val();
     if (data == 'nopph') {
-      var subtotal = $('#total').val();
+      var subtotal = $('#asf_faktur').val();
       var s = subtotal.replace(/[^\w\s]/gi, '');
 
       var hasil = Number(s) * 0;
@@ -1103,7 +1158,7 @@
 
 
     } else {
-      var subtotal = $('#total').val();
+      var subtotal = $('#asf_faktur').val();
       var s = subtotal.replace(/[^\w\s]/gi, '');
 
       var hasil = Number(s) * 0.02;
@@ -1226,28 +1281,53 @@
     });
   });
 
-  $("#imagenes").fileinput({
+  <?php if ($img != 'dafault.png') { ?>
+    $("#imagenes").fileinput({
 
-    overwriteInitial: true,
-    maxFileSize: 2000,
-    showClose: false,
-    showCaption: false,
-    browseLabel: 'browse',
-    removeLabel: 'Remove',
-    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
-    elErrorContainer: '#kv-avatar-errors-1',
-    msgErrorClass: 'alert alert-block alert-danger',
-    // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-    layoutTemplates: {
-      main2: '{preview}   {remove} {browse}'
-    },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-    initialPreview: [
-      '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $img ?>" ></object>'
-    ],
-  });
+      overwriteInitial: true,
+      maxFileSize: 2000,
+      showClose: false,
+      showCaption: false,
+      browseLabel: 'browse',
+      removeLabel: 'Remove',
+      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+      removeTitle: 'Cancel or reset changes',
+      elErrorContainer: '#kv-avatar-errors-1',
+      msgErrorClass: 'alert alert-block alert-danger',
+      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+      layoutTemplates: {
+        main2: '{preview}   {remove} {browse}'
+      },
+      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+      initialPreview: [
+        '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $img ?>" ></object>'
+      ],
+    });
+  <?php } else {
+  ?>
+
+    $("#imagenes").fileinput({
+      overwriteInitial: true,
+      maxFileSize: 2000,
+      showClose: false,
+      showCaption: false,
+      browseLabel: 'browse',
+      removeLabel: 'Remove',
+      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+      removeTitle: 'Cancel or reset changes',
+      elErrorContainer: '#kv-avatar-errors-1',
+      msgErrorClass: 'alert alert-block alert-danger',
+      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+      layoutTemplates: {
+        main2: '{preview}   {remove} {browse}'
+      },
+      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+
+    });
+
+  <?php } ?>
   $("#fakturMainNav").addClass('active');
 
   $("#openFakturNav").addClass('menu-open');

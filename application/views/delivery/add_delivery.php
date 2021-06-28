@@ -107,13 +107,36 @@
                       <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" hidden="">
                     </div>
                   </div>
+
+
                   <?= form_error('title_event', '<small class="text-danger pl-3">', '</small>') ?>
 
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">BAST Number</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="bast_number" name="bast_number" autocomplete="off">
+
+                    </div>
+                  </div>
 
                   <div class="form-group" id="qnumber">
                     <label for="netto" style="text-align:left;" class="col-sm-10 control-label">PO Number</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" required="" readonly="" id="po_number" name="po_number" autocomplete="off">
+
+                    </div>
+                  </div>
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Date PO</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="date_po" name="date_po" autocomplete="off">
+
+                    </div>
+                  </div>
+                  <div class="form-group" id="qnumber">
+                    <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Total BAST</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" required="" readonly="" id="total_bast" name="total_bast" autocomplete="off">
 
                     </div>
                   </div>
@@ -126,11 +149,6 @@
                 </div>
                 <br>
                 <br>
-
-
-
-
-
 
 
                 <br>
@@ -230,7 +248,7 @@
                       <tr>
 
 
-                        <th style="width: 1%"><a style="width: 5" class="btn btn-sm bg-gradient-secondary" data-toggle="tooltip" id="hapus">
+                        <th style="width: 1%"><a hidden style="width: 5" class="btn btn-sm bg-gradient-secondary" data-toggle="tooltip" id="hapus">
                             <font color="white"> <i class="fa fa-times">
                                 <font color="white">
                               </i></font>
@@ -239,11 +257,12 @@
 
                         <th style="width: 25%">Deskripsi Barang</th>
                         <th style="width: 15%">Keterangan</th>
+                        <th style="width: 5%"> quatity</th>
                         <th style="width: 5%"> KTS</th>
                         <th style="width: 8%">Satuan</th>
 
 
-                        <th style="width: 3%"><button style="width: 5" class="btn btn-sm bg-gradient-secondary" id="BarisBaru"><i class="fa fa-plus"></i> </button></th>
+                        <th style="width: 3%"><button hidden style="width: 5" class="btn btn-sm bg-gradient-secondary" id="BarisBaru"><i class="fa fa-plus"></i> </button></th>
                       </tr>
                     </thead>
                     <tbody></tbody>
@@ -262,12 +281,9 @@
                   </button>
 
                 </div>
-
-
-
               </form>
-
               <!-- Content form -->
+
 
             </div>
             <!-- /.box -->
@@ -304,7 +320,7 @@
     hiddenIndikator();
     DataQuotation($('#Quatations_number').val());
 
-    TambahBarisBaruFaktur();
+
     //   generet_delivery();
 
 
@@ -331,8 +347,17 @@
         $('[name="title_event"]').val(hasil[0].tittle_event);
         $('[name="alamat_customer"]').val(hasil[0].address);
         $('[name="po_number"]').val(hasil[0].po_number);
+        $('[name="tagihan"]').val(hasil[0].address);
+        $('[name="date_po"]').val(hasil[0].date_po);
+
+
 
         $('[name="tagihan"]').val(hasil[0].address);
+        $('[name="bast_number"]').val(hasil[0].bast_number);
+        $('[name="total_bast"]').val(hasil[0].totalBast.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+
+        TambahBarisBaruFaktur();
+
 
 
       },
@@ -375,7 +400,11 @@
     Baris += '</td>';
 
     Baris += '<td>';
-    Baris += '<input  type="text" name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+    Baris += '<input  type="text" readonly name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+    Baris += '</td>';
+
+    Baris += '<td>';
+    Baris += '<input  type="text" readonly name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
     Baris += '</td>';
 
     Baris += '<td>';
@@ -415,16 +444,14 @@
     var data = $('[name="title_event"]').val();
     <?php
 
-
     foreach ($quotation_other as $k) :
-
 
     ?>
       $(document).ready(function() {
         $("[data-toggle='tooltip']").tooltip();
       });
       var Nomor = $("#tablefaktur tbody tr").length + 1;
-      var d = $('[name="title_event"]').val();
+      var d = $('#title_event').val();
       var Baris = '<tr id=trfaktur' + Nomor + '>';
 
 
@@ -447,7 +474,11 @@
       Baris += '</td>';
 
       Baris += '<td>';
-      Baris += '<input  type="text" value="<?php echo $k->frequency; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '<input readonly  type="text" value="<?php echo $k->quantity; ?>"  name="quantity[]" id="quantity' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
+      Baris += '</td>';
+
+      Baris += '<td>';
+      Baris += '<input readonly type="text" value="<?php echo $k->frequency; ?>"  name="kts[]" id="kts' + Nomor + '"  class="form-control deposit"  required="" oninput="hitungFaktur();" >';
       Baris += '</td>';
 
       Baris += '<td>';

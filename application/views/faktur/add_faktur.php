@@ -86,7 +86,7 @@
 
                       </div>
                       <div class="form-group" id="kanan">
-                        <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Sub Total </label>
+                        <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Subtotal </label>
                         <div class="col-sm-12">
                           <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="0">
 
@@ -244,7 +244,7 @@
                       </div>
 
 
-                      <div class="form-group" id="qnumber">
+                      <div class="form-group" id="qnumber" hidden>
                         <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Venue Event</label>
                         <div class="col-sm-12">
                           <input type="text" class="form-control" required="" readonly="" id="venu_event" name="venue_event" autocomplete="off">
@@ -255,7 +255,7 @@
 
 
 
-                      <div class="form-group" id="qnumber">
+                      <div class="form-group" id="qnumber" hidden>
                         <label for="total" style="text-align:left;" class="col-sm-6 control-label">Date Event</label>
                         <div class="col-sm-12">
                           <input type="text" required="" class="form-control" id="date_event" name="date_event" readonly="" autocomplete="off">
@@ -396,7 +396,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <th>Sub Total</th>
+                            <th>Subtotal</th>
                             <td> <input type="text" readonly="" class="form-control" id="subtotal" name="subtotal" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
 
 
@@ -579,14 +579,15 @@
             $('[name="title_event"]').val(hasil[0].tittle_event);
             $('[name="venue_event"]').val(hasil[0].venue_event);
             $('[name="date_event"]').val(hasil[0].date_event);
-            $('[name="total_summary"]').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            $('[name="total_summary"]').val(hasil[0].sub_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('[name="comissionabale_cost"]').val(hasil[0].comissionable_cost);
             $('[name="non_fee"]').val(hasil[0].nonfee);
             $('[name="asf"]').val(hasil[0].asf.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('[name="npwp"]').val(hasil[0].npwp);
             $('[name="alamat_customer"]').val(hasil[0].address);
             $('[name="jabatan"]').val(hasil[0].jabatan);
-            $('[name="netto"]').val(hasil[0].total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            $('[name="pic_customer"]').val(hasil[0].pic_event);
+            $('[name="netto"]').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('#discount').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
             $('#diskon').val(hasil[0].discount_percent);
             $('[name="kppnn"]').val(hasil[0].karakteristik_ppn);
@@ -605,7 +606,8 @@
             } else {
             ?>
               TambahBarisBaruFaktur()
-              totalSub1();
+              //  totalSub1();
+              hitungFaktur();
             <?php
 
             }
@@ -817,11 +819,11 @@
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->unitprice; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="totalSub1()" >';
+          Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo number_format($k->unitprice, 0, ',', '.') ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="totalSub1()" >';
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input hidden readonly  oninput="totalSub1();"  value="<?php echo $k->frequency; ?>"   type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
+          Baris += '<input hidden readonly  oninput="totalSub1();"  value="<?php echo number_format($k->frequency, 0, ',', '.') ?>"   type="text" name="amount[]" id="amount' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input    type="text" name="ammountHidden[]" id="amounthidden' + Nomor + '"  class="form-control AmountHidden"  required="" readonly hidden  >';
           Baris += '</td>';
           Baris += '<td class="text-center">';
           Baris += `<a hidden class="btn btn-sm btn-danger" data-toggle="tooltip" id="HapusBaris"  data-row="${Nomor}" ><font color="white"><i class="fa fa-times"></font></a>`;
@@ -893,7 +895,7 @@
           Baris += '</td>';
 
           Baris += '<td>';
-          Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo $k->unitprice; ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()" >';
+          Baris += '<input readonly  onkeyup="convertToRupiah(this);"  type="text" value="<?php echo number_format($k->unitprice, 0, ',', '.') ?>" name="hargasatuan[]" id="HargaSatuan' + Nomor + '"  class="form-control HargaSatuan"  required="" oninput="hitungFaktur()" >';
           Baris += '</td>';
 
           Baris += '<td>';
@@ -973,26 +975,34 @@
         // hitung_faktur();
         var total_bast = $('#totalBast').val();
         var total_bast1 = total_bast.replace(/[^\w\s]/gi, '');
+
+        var sub_total = $('#total_summary').val();
+        var sub_total1 = sub_total.replace(/[^\w\s]/gi, '');
+
         var netto = $('#netto').val();
         var netto1 = netto.replace(/[^\w\s]/gi, '');
+
         var asf = $('#asf').val();
         var asf1 = asf.replace(/[^\w\s]/gi, '');
+
         var discount = $('#discount').val();
         var discount1 = discount.replace(/[^\w\s]/gi, '');
+
         var pembagi = Number(total_bast1) / Number(netto1);
 
-        var sub_total = Math.round(Number(pembagi) * Number(netto1));
+        var sub_total2 = Math.round(Number(pembagi) * Number(sub_total1));
         var asf2 = Math.round(Number(pembagi) * Number(asf1));
         var discount2 = Math.round(Number(pembagi) * Number(discount1));
-        var netto2 = Math.round(Number(sub_total) + Number(asf2) + Number(discount2))
-        $('#subtotal').val(sub_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-        $('#asf_faktur').val(asf2);
-        $('#hasildiskon_faktur').val(discount2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        var netto2 = Math.round(Number(sub_total2) + Number(asf2) - Number(discount2))
+
+        $('#subtotal').val(sub_total2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('#asf_faktur').val(asf2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+        $('#hasildiskon_faktur').val('(' + discount2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + ')');
         $('#netto_faktur').val(netto2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
 
 
-        // hitungppn();
-        // hitungpph();
+        hitungppn();
+        hitungpph();
 
 
 
@@ -1095,17 +1105,16 @@
       }
 
       function hitung_faktur() {
-        var subtotal = $('#total').val();
+        var subtotal = $('#netto_faktur').val();
         var subtotal1 = subtotal.replace(/[^\w\s]/gi, '');
-        var hasildiskon = $('#hasildiskon').val();
+        var hasildiskon = $('#hasildiskon_faktur').val();
         var hargadiskon1 = hasildiskon.replace(/[^\w\s]/gi, '');
         var ppn = $('[name="ppn"]').val();
         var ppn1 = ppn.replace(/[^\w\s]/gi, '');
         var pph = $('#pph23').val();
         var pph1 = pph.replace(/[^\w\s]/gi, '');
-        var asf = $('[name="asf"]').val();
-        var asff = asf.replace(/[^\w\s]/gi, '');
-        var total_faktur = Number(subtotal1) - Number(hargadiskon1) + Number(ppn1) - Number(pph1) + Number(asff);
+
+        var total_faktur = Number(subtotal1) + Number(ppn1) - Number(pph1)
         var total_faktur2 = Math.round(total_faktur);
         var total_faktur1 = total_faktur2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 
@@ -1122,17 +1131,18 @@
         var data = $('#kppnn').val();
         console.log('ppn  :' + data)
         if (data == "noppn") {
-          var subtotal = $('#total').val();
+          var subtotal = $('#netto_faktur').val();
           var s = subtotal.replace(/[^\w\s]/gi, '');
-          var hitung = (s) * 0;
+          var hitung = Number(s) * 0;
           var a = Math.round(hitung);
           var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
           $('[name="ppn"]').val(hitung1);
+          hitung_faktur();
         } else {
-          var subtotal = $('#total').val();
+          var subtotal = $('#netto_faktur').val();
           var s = subtotal.replace(/[^\w\s]/gi, '');
 
-          var hitung = (s) * 0.1;
+          var hitung = Number(s) * 0.1;
           var a = Math.round(hitung);
           var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
           $('[name="ppn"]').val(hitung1);
@@ -1150,7 +1160,7 @@
 
         //2% dari management fee
         if (data == 'nopph') {
-          var subtotal = $('#total').val();
+          var subtotal = $('#asf_faktur').val();
           var s = subtotal.replace(/[^\w\s]/gi, '');
 
           var hasil = Number(s) * 0;
@@ -1161,7 +1171,7 @@
           hitung_faktur();
 
         } else {
-          var subtotal = $('#total').val();
+          var subtotal = $('#asf_faktur').val();
           var s = subtotal.replace(/[^\w\s]/gi, '');
 
           var hasil = Number(s) * 0.02;

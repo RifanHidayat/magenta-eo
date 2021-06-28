@@ -112,7 +112,7 @@
                         <div class="col-md-10 col-xs-10 pull pull-right">
 
                           <div class="form-group" id="kanan">
-                            <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Comissionable Cost</label>
+                            <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Commissionable Cost</label>
                             <div class="col-sm-12">
                               <input type="text" class="form-control" readonly="" id="Comissionable_cost" name="Comissionable_cost" readonly="" autocomplete="off" value="0">
 

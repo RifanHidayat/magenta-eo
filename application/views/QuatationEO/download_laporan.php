@@ -198,7 +198,7 @@
             <td align="right">IDR <?php echo number_format($nonfee, 0, ",", ".");  ?></td>
           </tr>
           <tr>
-            <td colspan="5"><b>Comissionable Cost</b></th>
+            <td colspan="5"><b>Commissionable Cost</b></th>
           </tr>
 
 
@@ -386,7 +386,7 @@
 
 
 
-        <h4><b>Comissionable Cost</b></h4>
+        <h4><b>Commissionable Cost</b></h4>
         <?php
         foreach ($quotation_sub_item as $name) :
           $no = 0;

@@ -50,7 +50,7 @@
                       <div class="col-md-10 col-xs-10 pull pull-right">
 
                         <div class="form-group" id="kanan">
-                          <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label" id="Comissionable_cost">Comissionable Cost</label>
+                          <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label" id="Comissionable_cost">Commissionable Cost</label>
                           <div class="col-sm-12">
                             <input type="text" class="form-control" readonly="" id="Comissionable_cost" name="Comissionable_cost" readonly="" autocomplete="off" value="0">
 
@@ -1302,28 +1302,50 @@
       });
 
     }
+    <?php if ($img != 'dafault.png') { ?>
+      $("#imagenes").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 20000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        initialPreview: [
+          '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php $img ?>" ></object>'
+        ],
+      });
+    <?php } else {
+    ?>
+      $("#imagenes").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 20000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
 
-    $("#imagenes").fileinput({
-      overwriteInitial: true,
-      maxFileSize: 20000,
-      showClose: false,
-      showCaption: false,
-      browseLabel: 'browse',
-      removeLabel: 'Remove',
-      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-      removeTitle: 'Cancel or reset changes',
-      elErrorContainer: '#kv-avatar-errors-1',
-      msgErrorClass: 'alert alert-block alert-danger',
-      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-      layoutTemplates: {
-        main2: '{preview}   {remove} {browse}'
-      },
-      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-      initialPreview: [
-        '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php $img ?>" ></object>'
-      ],
-    });
+      });
+    <?php } ?>
     //get pic even even
     function DataPIC() {
       var d = $("#picEvent").val();

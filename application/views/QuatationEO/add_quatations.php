@@ -1327,7 +1327,9 @@
 
     ppn();
     netto_other_function();
+    ppn_description();
     grand_total();
+
 
   }
 
@@ -1531,8 +1533,6 @@
 
         success: function(hasil) {
 
-
-
           $('[name="customerEventOther"]').val(hasil[0].customer);
           $('[name="picEventOther1"]').val(hasil[0].pic_name);
           $('[name="id_customerother"]').val(hasil[0].id_customer);
@@ -1671,13 +1671,15 @@
     $('#netto').val(total1);
     hitungmanagement();
     total_description();
-    ppn_description();
-    pph_description();
+
+
     grand_total_other();
     discount_other_function();
 
+    pph_description();
 
 
+    ppn_description();
 
   }
 
@@ -2458,7 +2460,7 @@
     var date_quotation = $('#date_quotation_event').val();
     var pic_eventEvent = $('#picEvent').val();
     var pic_poEvent = $('#pic_event').val();
-    var pic_poEvent = $('#imagenes').val();
+    //var pic_poEvent = $('#imagenes').val();
     var date_expired_event = $('#date_expired_event').val();
 
     if (venue_event.trim() == '' || title_event.trim() == '' || date_event.trim() == '' || asf_percen_event.trim() == '' || date_quotation.trim() == '' || pic_eventEvent.trim() == '' || pic_poEvent.trim() == '' || date_expired_event.trim() == '') {

@@ -276,7 +276,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="Date_event" style="text-align:left;" class="col-sm-8 control-label">Total BAST</label>
                     <div class="col-sm-12">
-                      <input oninput="checkBast()" value="<?php echo ($totalBast) ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
+                      <input oninput="checkBast()" value="<?php echo number_format($totalBast, 0, ',', '.') ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
                     </div>
                   </div>
                   <div class="form-group" id="qnumber" hidden>

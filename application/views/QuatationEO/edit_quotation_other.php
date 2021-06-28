@@ -310,7 +310,7 @@
 
 
                         <div class="form-group" id="qnumber">
-                          <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                          <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                           <div class="col-sm-12">
                             <input type="text" class="form-control" required="" readonly="" id="netto" name="netto" autocomplete="off" value="0">
                             <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" value="0" hidden="">
@@ -661,7 +661,7 @@
         Baris += '<input  type="Number" value="<?php echo $k->frequency; ?>"  name="FrequencyDescription[]"  oninput="hitungDescription();"  id="FrequencyDescription' + Nomor + '" class="form-control FrequencyDescription" >';
         Baris += '</td>';
         Baris += '<td>';
-        Baris += '<input onkeyup="convertToRupiah(this);" value="<?php echo $k->unitprice; ?>"   oninput="hitungDescription();"  type="text" name="UniPriceDescription[]" id="UniPriceDescription' + Nomor + '"  class="form-control UniPriceDescription"  required="" >';
+        Baris += '<input onkeyup="convertToRupiah(this);" value="<?php echo  number_format($k->unitprice, 0, ',', '.') ?>"   oninput="hitungDescription();"  type="text" name="UniPriceDescription[]" id="UniPriceDescription' + Nomor + '"  class="form-control UniPriceDescription"  required="" >';
         Baris += '</td>';
         Baris += '<td>';
         Baris += '<input value="<?php echo $k->amount; ?>"   oninput="hitungDescription();"  type="text" name="AmmountDescription[]" id="AmountDescription' + Nomor + '"  class="form-control deposit"  required="" readonly  >  <input value="<?php echo $k->amount; ?>"  oninput="hitungDescription();"  type="text" name="AmmountDescriptionhidden[]" id="AmountDescriptionhidden' + Nomor + '"  class="form-control deposit"  required="" readonly hidden  > <input value="<?php echo $k->quotation_number; ?>"  oninput="hitungDescription();"  type="text" name="AmmountDescriptionhidden[]" id="quotation_number_id"  class="form-control deposit"  required="" readonly  hidden  > ';
@@ -707,6 +707,10 @@
       var Nomor = 1;
       $(this).parent().parent().remove();
       hitungDescription();
+      discount_other_function();
+      hitungnetto();
+
+
 
     });
 
@@ -990,28 +994,51 @@
 
     }
 
-    $("#imagenesother").fileinput({
+    <?php if ($image != 'dafault.png') { ?>
+      console.log('err')
+      $("#imagenesother").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 2000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        initialPreview: [
+          '<object type="application/pdf" data="<?php echo $image ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $image ?>" ></object>'
+        ]
+      });
+    <?php } else {
+    ?>
+      $("#imagenesother").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 2000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
 
-      overwriteInitial: true,
-      maxFileSize: 2000,
-      showClose: false,
-      showCaption: false,
-      browseLabel: 'browse',
-      removeLabel: 'Remove',
-      browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-      removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-      removeTitle: 'Cancel or reset changes',
-      elErrorContainer: '#kv-avatar-errors-1',
-      msgErrorClass: 'alert alert-block alert-danger',
-      // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-      layoutTemplates: {
-        main2: '{preview}   {remove} {browse}'
-      },
-      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-      initialPreview: [
-        '<object type="application/pdf" data="<?php echo $image ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $image ?>" ></object>'
-      ],
-    });
+      });
+    <?php } ?>
 
     function DataPIC() {
       var d = $("#picEvent").val();

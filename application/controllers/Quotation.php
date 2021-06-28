@@ -438,7 +438,7 @@ class Quotation extends CI_Controller
         'pic_email' => $email_pic,
         'netto' => (str_replace('.', '', $netto)),
         'asf' => (str_replace('.', '', $management)),
-        'total' => (str_replace('.', '', $netto)),
+        'total' => (str_replace('.', '', $sub_total)),
         'note' => $note,
         'ppn' => (str_replace('.', '', $ppn_description)),
         'pph23' => preg_replace("/[^0-9]/", "", $pph_description),
@@ -840,8 +840,11 @@ class Quotation extends CI_Controller
     $customer_event = $this->input->post('customer_other');
     $name_pic = $this->input->post('pic_other1');
     $email_pic = $this->input->post('email_other');
+    //column sub total
     $netto = $this->input->post('netto');
     $management = $this->input->post('asf_other');
+
+    //column netto
     $total_description = $this->input->post('total_description');
     $date_quotation = $this->input->post('date_quotation');
     $date_expired = $this->input->post('date_expired_other');
@@ -908,9 +911,9 @@ class Quotation extends CI_Controller
             'tittle_event' => $title_event,
             'pic_name' => $name_pic,
             'pic_email' => $email_pic,
-            'netto' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $total_description)),
             'asf' => (str_replace('.', '', $management)),
-            'total' => (str_replace('.', '', $total_description)),
+            'total' => (str_replace('.', '', $netto)),
             'note' => $note,
             'ppn' => (str_replace('.', '', $ppn_description)),
             'pph23' =>  preg_replace("/[^0-9]/", "", $pph_description),
@@ -925,6 +928,7 @@ class Quotation extends CI_Controller
             'revisi' => $update,
             'sisa_bast' => preg_replace("/[^0-9]/", "", $total_description),
             'discount_percent' => $discount_percent_other,
+            'sub_total' => (str_replace('.', '', $netto)),
             'discount' => (str_replace('.', '', $discount_other)),
           ];
         } else {
@@ -935,9 +939,9 @@ class Quotation extends CI_Controller
             'tittle_event' => $title_event,
             'pic_name' => $name_pic,
             'pic_email' => $email_pic,
-            'netto' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $total_description)),
             'asf' => (str_replace('.', '', $management)),
-            'total' => (str_replace('.', '', $total_description)),
+            'total' => (str_replace('.', '', $netto)),
             'note' => $note,
             'ppn' => (str_replace('.', '', $ppn_description)),
             'pph23' =>  preg_replace("/[^0-9]/", "", $pph_description),
@@ -953,6 +957,7 @@ class Quotation extends CI_Controller
             'sisa_bast' => preg_replace("/[^0-9]/", "", $total_description),
             'discount_percent' => $discount_percent_other,
             'discount' => (str_replace('.', '', $discount_other)),
+            'sub_total' => (str_replace('.', '', $netto)),
             'image' => $upload_image,
 
           ];
@@ -1009,9 +1014,9 @@ class Quotation extends CI_Controller
             'tittle_event' => $title_event,
             'pic_name' => $name_pic,
             'pic_email' => $email_pic,
-            'netto' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $total_description)),
             'asf' => (str_replace('.', '', $management)),
-            'total' => (str_replace('.', '', $total_description)),
+            'total' => (str_replace('.', '', $netto)),
             'note' => $note,
             'ppn' => (str_replace('.', '', $ppn_description)),
             'pph23' => preg_replace("/[^0-9]/", "", $pph_description),
@@ -1029,6 +1034,7 @@ class Quotation extends CI_Controller
             'discount_percent' => $discount_percent_other,
             'discount' => (str_replace('.', '', $discount_other)),
             'quotation_number_revisi' => $quotation_number_revisii,
+            'sub_total' => (str_replace('.', '', $netto)),
             'image' => $this->input->post('filequotation'),
 
           ];
@@ -1041,9 +1047,9 @@ class Quotation extends CI_Controller
             'tittle_event' => $title_event,
             'pic_name' => $name_pic,
             'pic_email' => $email_pic,
-            'netto' => (str_replace('.', '', $netto)),
+            'netto' => (str_replace('.', '', $total_description)),
             'asf' => (str_replace('.', '', $management)),
-            'total' => (str_replace('.', '', $total_description)),
+            'total' => (str_replace('.', '', $netto)),
             'note' => $note,
             'ppn' => (str_replace('.', '', $ppn_description)),
             'pph23' => preg_replace("/[^0-9]/", "", $pph_description),
@@ -1061,6 +1067,7 @@ class Quotation extends CI_Controller
             'revisi' => $revisi,
             'quotation_number' => $quotation_number_revisii . '-Rev' . $revisi,
             'quotation_number_revisi' => $quotation_number_revisii,
+            'sub_total' => (str_replace('.', '', $netto)),
 
 
           ];
@@ -1317,9 +1324,9 @@ class Quotation extends CI_Controller
 
 
       $upload_image = $this->upload_image_add($quotation_event);
-      // if ($upload_image == '') {
-      //   $upload_image = "dafault.png";
-      // }
+      if ($upload_image == '') {
+        $upload_image = "dafault.png";
+      }
 
       //$upload_image = "dafault.png";
       $data1 = [
@@ -2487,7 +2494,7 @@ class Quotation extends CI_Controller
 
       $sub_array[] = number_format($row->asf, 0, ',', '.');
       $sub_array[] = number_format($row->discount, 0, ",", ".");
-      $sub_array[] = number_format($row->total, 0, ',', '.');
+      $sub_array[] = number_format($row->netto, 0, ',', '.');
 
       $sub_array[] = number_format($row->sisa_bast, 0, ",", ".");
       $sub_array[] = $row->po_number;

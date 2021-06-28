@@ -301,7 +301,7 @@ class Bast extends CI_Controller
       $this->data['total_summary'] = $row['total_summary'];
       $this->data['netto'] = $row['netto'];
     } else {
-      $this->db->select('total,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,totalBast,quotation_other.sisa_bast');
+      $this->db->select('total,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,totalBast,quotation_other.sisa_bast,netto');
       $this->db->from('bast');
       $this->db->join('quotation_other', 'quotation_other.quotation_number = bast.quotation_number');
       $this->db->where('bast.id_bast', $id);
@@ -309,6 +309,7 @@ class Bast extends CI_Controller
       $this->data['total_summary'] = $row['total'];
       $this->data['venue_event'] = "";
       $this->data['date_event'] = "";
+      $this->data['netto'] = $row['netto'];
     }
     $this->data['sisa_bast'] = $row['sisa_bast'];
     $this->data['totalBast'] = $row['totalBast'];
@@ -367,7 +368,7 @@ class Bast extends CI_Controller
     $idd = substr($quotation_number, 0, 2);
     if ($idd == "QE") {
 
-      $this->db->select('venue_event,date_event,total_summary,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,quotations.sisa_bast,bast.totalBast');
+      $this->db->select('venue_event,date_event,total_summary,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,quotations.sisa_bast,bast.totalBast,netto');
       $this->db->from('bast');
       $this->db->join('quotations', 'quotations.quotation_number = bast.quotation_number');
       $this->db->where('id_bast', $id);
@@ -375,8 +376,9 @@ class Bast extends CI_Controller
       $this->data['venue_event'] = $row['venue_event'];
       $this->data['date_event'] = $row['date_event'];
       $this->data['total_summary'] = $row['total_summary'];
+      $this->data['netto'] = $row['netto'];
     } else {
-      $this->db->select('total,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,quotation_other.sisa_bast,bast.totalBast');
+      $this->db->select('total,bast.status as statusBast,image_gr,image_po,bast.quotation_number as quotation_number,date_quotation,customer,tittle_event,bast_number,gr_number,bast.po_number,date_bast,jabatan,pic_magenta,jabatan_magenta,date_po,pic_po,id_bast,quotation_other.sisa_bast,bast.totalBast,netto');
       $this->db->from('bast');
       $this->db->join('quotation_other', 'quotation_other.quotation_number = bast.quotation_number');
       $this->db->where('id_bast', $id);
@@ -384,6 +386,7 @@ class Bast extends CI_Controller
       $this->data['total_summary'] = $row['total'];
       $this->data['venue_event'] = "";
       $this->data['date_event'] = "";
+      $this->data['netto'] = $row['netto'];
     }
     $this->data['sisaBast'] = $row['sisa_bast'];
     $this->data['totalBast'] = $row['totalBast'];
