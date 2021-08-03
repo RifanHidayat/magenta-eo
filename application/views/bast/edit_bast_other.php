@@ -312,7 +312,7 @@
     removeTitle: 'Cancel or reset changes',
     elErrorContainer: '#kv-avatar-errors-1',
 
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"]
+    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
 
   });
@@ -334,7 +334,7 @@
     removeTitle: 'Cancel or reset changes',
     elErrorContainer: '#kv-avatar-errors-1',
 
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"]
+    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
 
   });

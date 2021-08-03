@@ -93,7 +93,7 @@
                             </div>
 
                             <div class="col-sm-12">
-                              <input type="text" readonly="" class="col-sm-12 form-control" id="asf" name="asf" autocomplete="off" readonly="" value="0">
+                              <input type="text"  class="col-sm-12 form-control" id="asf" name="asf" onkeyup="convertToRupiah(this);"  autocomplete="off" oninput="asf_event_normal()"  value="0">
 
                               <input type="text" readonly="" class="form-control" id="asf_hidden" name="asf_hidden" autocomplete="off" readonly="" value="0" hidden="">
                             </div>
@@ -1087,8 +1087,9 @@
       Baris += '<select class="form-control" style="width:400px;" name="item_value[]" id="selectNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"   onchange="cek<?php echo (str_replace(' ', '', $k->name)) ?>(' + Nomor + ');"> <option value="">Select <?php echo $k->name ?></option> <?php foreach ($core as $e) : if ($k->name == $e->name) { ?>  <option value="<?php echo $e->value ?>"><?php echo $e->value ?></option><?php } ?> <?php endforeach ?> </select> ';
       Baris += '</div></td>';
 
+
       Baris += '<td>';
-      Baris += '<input readonly class="form-control QuantityNON oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()"  type="Number" name="quantity[]" id="QuantityNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '" class="form-control Quantity" >';
+      Baris += '<input readonly class="form-control QuantityNON" oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()"  type="Number" name="quantity[]" id="QuantityNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '" class="form-control Quantity" >';
       Baris += '</td>';
 
 
@@ -1624,7 +1625,7 @@
 
     var total1 = $('#netto_other').val();
 
-    var total = total1.replace(/[^\w\s]/gi, '');;
+    var total = total1.replace(/[^\w\s]/gi, '');
     var pph = $('#pph_description_hidden').val();
     var ppn = $('#ppn_description_hidden').val();
     var grand_total = Number(Math.round(total)) + Number(Math.round(ppn)) - Number(Math.round(pph));
@@ -2025,6 +2026,18 @@
 
   }
 
+  function asf_event_normal(){
+
+  var Comissionable_cost=$('[name="Comissionable_cost"]').val().replace(/[^\w\s]/gi, '');
+  var asf=$("#asf").val().replace(/[^\w\s]/gi, '');
+  var hasil=Number(Comissionable_cost) / Number((asf));
+  var hasil = (Number(asf) / Number(Comissionable_cost)) * 100
+  $('#asf_percen').val(hasil)
+
+
+  hitungasf();
+  }
+
   function discount_event_function() {
     var total_summary = $('#total_summary').val();
     var discount_percent = $('#discount_percent_event').val();
@@ -2093,7 +2106,7 @@
 
 
     }
-    number_format($grand_total, 0, ",", ".");
+    //number_format($grand_total, 0, ",", ".");
 
   }
 
@@ -2168,7 +2181,7 @@
     layoutTemplates: {
       main2: '{preview} {remove} {browse}'
     },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
 
   });
@@ -2189,7 +2202,7 @@
     layoutTemplates: {
       main2: '{preview} {remove} {browse}'
     },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
     // initialPreview: [
     //   '<object type="application/pdf"  style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/default.png') ?>" ></object>'
     // ],

@@ -49,7 +49,7 @@
 
                         <div class="box">
 
-                            <form action="<?php echo base_url('Delivery/aksi_update_delivery') ?>" method="post" name="formid">
+                            <form id="SimpanData" action="<?php echo base_url('Delivery/aksi_update_delivery') ?>" method="post" name="formid">
 
 
 
@@ -285,7 +285,10 @@
                                 <br>
 
                                 <div class="form-group text-left">
-                                    <button style="margin-left: 20px;" type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary btnSave" type="button">
+                                        <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                                        Save Changes
+                                    </button>
 
                                 </div>
 
@@ -313,15 +316,31 @@
 <script src="<?php echo base_url('assets/lte/tiny/tinymce.min.js') ?>" referrerpolicy="origin" referrerpolicy="origin"></script>
 
 <script type="text/javascript">
+    function showIndikator() {
+        $('.btnSave').attr('disabled', 'disabled');
+        $('.loadingIndikdator').show();
+    }
+
+    function hiddenIndikator() {
+        $('.btnSave').removeAttr('disabled');
+        $('.loadingIndikdator').hide();
+
+    }
+
+    $('#SimpanData').submit(function(e) {
+        e.preventDefault();
+        showIndikator();
+        $('#SimpanData').submit();
+    });
+
     $(document).ready(function() {
+        hiddenIndikator();
 
+    });
+
+    $(document).ready(function() {
         DataQuotation($('#id').val());
-
         TambahBarisBaruFaktur();
-
-
-
-
     });
 
 

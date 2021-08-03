@@ -1012,7 +1012,7 @@
         layoutTemplates: {
           main2: '{preview}   {remove} {browse}'
         },
-        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
         initialPreview: [
           '<object type="application/pdf" data="<?php echo $image ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $image ?>" ></object>'
         ]
@@ -1035,7 +1035,7 @@
         layoutTemplates: {
           main2: '{preview}   {remove} {browse}'
         },
-        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
       });
     <?php } ?>

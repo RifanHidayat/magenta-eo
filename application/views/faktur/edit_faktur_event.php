@@ -50,7 +50,7 @@
             <div class="box">
 
 
-              <form action="<?php echo base_url('Faktur/aksi_update_faktur1') ?>" method="post" id="Simpa" name="formid" class="form-horizontal" enctype="multipart/form-data">
+              <form action="<?php echo base_url('Faktur/aksi_update_faktur1') ?>" method="post" id="SimpanData" name="formid" class="form-horizontal" enctype="multipart/form-data">
                 <!--     $("#fakturMainNav").addClass('active');
 
    $("#openFakturNav").addClass('menu-open'); -->
@@ -494,7 +494,10 @@
                   </tfoot>
                 </table>
                 <div class="form-group text-left">
-                  <button type="submit" class="btn btn-primary"></i>Save Changes</button>
+                  <button type="submit" class="btn btn-primary btnSave" type="button">
+                    <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                    Save Changes
+                  </button>
                 </div>
               </form>
             </div>
@@ -513,6 +516,29 @@
 </div>
 </div>
 <script type="text/javascript">
+  function showIndikator() {
+    $('.btnSave').attr('disabled', 'disabled');
+    $('.loadingIndikdator').show();
+  }
+
+  function hiddenIndikator() {
+    $('.btnSave').removeAttr('disabled');
+    $('.loadingIndikdator').hide();
+
+  }
+
+  $('#SimpanData').submit(function(e) {
+    e.preventDefault();
+    showIndikator();
+    $('#SimpanData').submit();
+  });
+
+  $(document).ready(function() {
+    hiddenIndikator();
+
+  });
+
+
   $(document).ready(function() {
 
 
@@ -647,7 +673,7 @@
       layoutTemplates: {
         main2: '{preview}   {remove} {browse}'
       },
-      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+      allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
       initialPreview: [
         '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $img ?>" ></object>'
       ],
@@ -671,7 +697,8 @@
       layoutTemplates: {
         main2: '{preview}   {remove} {browse}'
       },
-      allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+      // allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+      allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
     });
 

@@ -37,7 +37,8 @@ class Bast extends CI_Controller
   public function upload_image_po($file_name)
   {
     $config['upload_path']          = './assets/imagebastpo/';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+
+    $config["allowed_types"] = "*";
     $config['file_name'] =  $file_name;
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
@@ -62,7 +63,7 @@ class Bast extends CI_Controller
   {
     $name = base64_encode(random_bytes(10));
     $config['upload_path']          = './assets/imagebastgr';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config["allowed_types"] = "*";
     $config['file_name'] =  $file_name;
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
@@ -134,6 +135,8 @@ class Bast extends CI_Controller
   }
   public function aksi_add_bast()
   {
+    $date = new DateTime();
+    $timestamp = $date->getTimestamp();
     $bast_number = $this->input->post('bast_number');
 
     $po_number = $this->input->post('po_number');
@@ -141,14 +144,14 @@ class Bast extends CI_Controller
     $quotation_number = $this->input->post('Quatations_number');
     $date_bast = $this->input->post('date_bast');
     $date_po = $this->input->post('po_number');
-    $upload_image_po = $this->upload_image_po($bast_number . '-' . $date_bast . '-' . $po_number);
-    $upload_image_gr = $this->upload_image_gr($bast_number . '-' . $gr_number);
-    // if ($upload_image_po == '') {
-    //   $upload_image_po = "dafault.png";
-    // }
-    // if ($upload_image_gr == '') {
-    //   $upload_image_gr = "dafault.png";
-    // }
+    $upload_image_po = $this->upload_image_po($timestamp . '_po_' . $bast_number);
+    $upload_image_gr = $this->upload_image_gr($timestamp . '_gr_' . $bast_number);
+    if ($upload_image_po == '') {
+      $upload_image_po = "dafault.png";
+    }
+    if ($upload_image_gr == '') {
+      $upload_image_gr = "dafault.png";
+    }
 
     $data = [
       'quotation_number' => $this->input->post('Quatations_number'),

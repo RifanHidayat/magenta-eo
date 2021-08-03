@@ -594,7 +594,7 @@
     layoutTemplates: {
       main2: '{preview} {remove} {browse}'
     },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
   });
 
@@ -615,8 +615,7 @@
     layoutTemplates: {
       main2: '{preview} {remove} {browse}'
     },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-
+    allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
   });
 
   $("#bastMainNav").addClass('active');

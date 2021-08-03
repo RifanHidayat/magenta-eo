@@ -72,7 +72,7 @@
 
 
 
-                        <th colspan="1" style="width: 10%">
+                        <th colspan="1" style="width: 15%">
                           <center>Action</center>
                         </th>
 

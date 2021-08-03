@@ -42,7 +42,7 @@ class Quotation extends CI_Controller
   {
 
     $config['upload_path']          = './assets/images/';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
     $config['file_name'] =  $quotation_number;
 
     $this->load->library('upload', $config);
@@ -65,7 +65,7 @@ class Quotation extends CI_Controller
   {
 
     $config['upload_path']          = './assets/imageother/';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
     $config['file_name'] =  $quotation_number;
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
@@ -1376,7 +1376,7 @@ class Quotation extends CI_Controller
 
     $config['upload_path']          = './assets/images/';
 
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
 
     $config['max_size']             = 10000;
 
@@ -2025,7 +2025,7 @@ class Quotation extends CI_Controller
   public function aksi_upload($quotation_event)
   {
     $config['upload_path']          = './assets/images_';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
     $config['max_size']             = 10000;
     $config['max_width']            = 10000;
     $config['max_height']           = 10000;

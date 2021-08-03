@@ -45,7 +45,7 @@
 
             <div class="box">
 
-              <form action="<?php echo base_url('Bast/edit_bast/' . $quotation_number . '/' . $id) ?>" method="post" id="SimpanData1" name="formid" class="form-horizontal" enctype="multipart/form-data">
+              <form action="<?php echo base_url('Bast/edit_bast/' . $quotation_number . '/' . $id) ?>" method="post" id="SimpanData" name="formid" class="form-horizontal" enctype="multipart/form-data">
 
                 <!--           <?php if (in_array('statusBast', $user_permission)) : ?>
                     <div class="form-group" id="qnumber">
@@ -306,7 +306,10 @@
 
                 </div>
                 <div class="form-group text-left">
-                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <button type="submit" class="btn btn-primary btnSave" type="button">
+                    <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                    Save Changes
+                  </button>
 
 
 
@@ -494,5 +497,27 @@
 
 
   }
+
+  function showIndikator() {
+    $('.btnSave').attr('disabled', 'disabled');
+    $('.loadingIndikdator').show();
+  }
+
+  function hiddenIndikator() {
+    $('.btnSave').removeAttr('disabled');
+    $('.loadingIndikdator').hide();
+
+  }
+
+  $('#SimpanData').submit(function(e) {
+    e.preventDefault();
+    showIndikator();
+    $('#SimpanData').submit();
+  });
+
+  $(document).ready(function() {
+    hiddenIndikator();
+
+  });
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/rupiah.js') ?>"></script>

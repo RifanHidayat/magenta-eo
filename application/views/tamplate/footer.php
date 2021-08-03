@@ -97,6 +97,9 @@ https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js -->
 
 
 
+
+
+
 <script>
   $(function () {
      $('#example1').DataTable({

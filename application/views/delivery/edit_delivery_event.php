@@ -49,7 +49,7 @@
 
             <div class="box">
 
-              <form action="<?php base_url('Delivery/aksi_update_delivery_event/' . $quotation_number) ?>" method="post" id="SimpanData" name="formid">
+              <form id="SimpanData" action="<?php base_url('Delivery/aksi_update_delivery_event/' . $quotation_number) ?>" method="post" id="SimpanData" name="formid">
 
 
                 <div class="col-md-6 col-xs-12 pull pull-left">
@@ -270,7 +270,10 @@
                 <br>
 
                 <div class="form-group text-left">
-                  <button style="margin-left: 20px" type="submit" class="btn btn-primary">Save Changes</button>
+                  <button type="submit" class="btn btn-primary btnSave" type="button">
+                    <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                    Save Changes
+                  </button>
 
 
 
@@ -298,10 +301,29 @@
 </div>
 </div>
 <script type="text/javascript">
+  function showIndikator() {
+    $('.btnSave').attr('disabled', 'disabled');
+    $('.loadingIndikdator').show();
+  }
+
+  function hiddenIndikator() {
+    $('.btnSave').removeAttr('disabled');
+    $('.loadingIndikdator').hide();
+
+  }
+
+  $('#SimpanData').submit(function(e) {
+    e.preventDefault();
+    showIndikator();
+    $('#SimpanData').submit();
+  });
+
+  $(document).ready(function() {
+    hiddenIndikator();
+
+  });
   $(document).ready(function() {
     DataQuotation($('[name="id"]').val());
-
-
   });
 
 

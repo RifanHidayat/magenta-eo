@@ -37,7 +37,7 @@
 
             <div class="box">
 
-              <form role="form" action="<?php base_url('users/add_group') ?>" method="post">
+              <form id="SimpanData" action="<?php base_url('users/add_group') ?>" method="post">
                 <div class="box-body">
 
                   <div class="form-group">
@@ -191,12 +191,15 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-primary">Save</button>
+                  <!-- <button type="submit" class="btn btn-primary">Save</button> -->
                   <!-- <button type="submit" class="btn btn-primary btnSave" type="button">
                     <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
                     Save
                   </button> -->
-
+                  <button type="submit" class="btn btn-primary btnSave" type="button">
+                    <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                    Save
+                  </button>
                 </div>
               </form>
             </div>
@@ -222,4 +225,27 @@
           $("#groupMainNav").addClass('active');
           $("#addGroupNav").addClass('active');
           $("#openGroupNav").addClass('menu-open');
+
+
+          function showIndikator() {
+            $('.btnSave').attr('disabled', 'disabled');
+            $('.loadingIndikdator').show();
+          }
+
+          function hiddenIndikator() {
+            $('.btnSave').removeAttr('disabled');
+            $('.loadingIndikdator').hide();
+
+          }
+
+          $('#SimpanData').submit(function(e) {
+            e.preventDefault();
+            showIndikator();
+            $('#SimpanData').submit();
+          });
+
+          $(document).ready(function() {
+            hiddenIndikator();
+
+          });
         </script>

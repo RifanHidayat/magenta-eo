@@ -76,6 +76,18 @@ class Customer extends CI_Controller {
 
 	 }
 
+	 public function payment($id){
+		 $this->data['id']=$id;
+		$this->load->view('tamplate/header',$this->data);
+		$this->load->view('tamplate/sidebar',$this->data);
+		$this->load->view('customer/payment',$this->data);
+		 $this->load->view('tamplate/footer',$this->data);
+
+
+
+
+	 }
+
 	  public function edit_customer($idd){
 	  	if((!in_array('updateCustomer', $this->permission))) {
 			redirect('dashboard', 'refresh');
@@ -540,12 +552,15 @@ class Customer extends CI_Controller {
 
                 	}
 
-                	
-
+                
                 }else{
                 	$delete='';
                 	
                 } 
+				$payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Customer/payment/'.$row->id).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
+
+
+
                 $sub_array = array();  
                 $sub_array[] = $row->name;
                 $sub_array[] = $row->address;  
@@ -553,7 +568,7 @@ class Customer extends CI_Controller {
                 $sub_array[] = $row->npwp;
            		$sub_array[] = $ppn;
                 $sub_array[] = $pph;
-                $sub_array[] = '<center>'.$edit." ".$delete.'</center>';
+                $sub_array[] = '<center>'.$edit." ".$delete." ".$payment.'</center>';
 
                             
                 $data[] = $sub_array;  

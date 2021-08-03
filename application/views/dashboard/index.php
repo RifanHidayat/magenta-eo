@@ -200,11 +200,12 @@
                 final = [];
 
                 for (var i = 0; i < data.length; i++) {
+                    console.log(data);
 
                     var b = data[i].date;
-                    var b1 = b.toString();
-                    var b2 = b1.substring(5, 7);
-                    var tahun = b1.substring(0, 4);
+                    var b1 = b;
+                    var b2 = b1.substring(3, 4);
+                    var tahun = b1.substring(6, 10);
                     var bulan;
 
                     //               switch(parseInt(b2)) {
@@ -296,17 +297,7 @@
                             pointHighlightStroke: 'rgba(220,220,220,1)',
                             data: open
                         },
-                        {
-                            label: 'Close',
-                            backgroundColor: '#00a65a',
-                            borderColor: 'rgba(210, 214, 222, 1)',
-                            pointRadius: false,
-                            pointColor: 'rgba(210, 214, 222, 1)',
-                            pointStrokeColor: '#c1c7d1',
-                            pointHighlightFill: '#fff',
-                            pointHighlightStroke: 'rgba(220,220,220,1)',
-                            data: close
-                        },
+
                         {
                             label: 'Final',
                             backgroundColor: '#00FFFF',
@@ -377,9 +368,9 @@
                 for (var i = 0; i < data.length; i++) {
 
                     var b = data[i].date;
-                    var b1 = b.toString();
-                    var b2 = b1.substring(5, 7);
-                    var tahun = b1.substring(0, 4);
+                    var b1 = b;
+                    var b2 = b1.substring(4, 5);
+                    var tahun = b1.substring(6, 10);
                     var bulan;
 
                     //               switch(parseInt(b2)) {

@@ -42,13 +42,9 @@
                   <div class="box box-solid">
 
 
-                    <form action="<?php echo base_url('Quotation/aksi_update_quotation') ?>" method="post" name="formidevent" class="form-horizontal" enctype="multipart/form-data">
-
-
-
+                    <form id="SimpanData" action="<?php echo base_url('Quotation/aksi_update_quotation') ?>" method="post" name="formidevent" class="form-horizontal" enctype="multipart/form-data">
 
                       <div class="col-md-10 col-xs-10 pull pull-right">
-
                         <div class="form-group" id="kanan">
                           <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label" id="Comissionable_cost">Commissionable Cost</label>
                           <div class="col-sm-12">
@@ -455,24 +451,15 @@
                       <?php endforeach ?>
                       <br>
 
-
-
                       <br>
                       <hr>
                       <div class="form-group text-left">
-                        <button value="update" type="submit" name="btn" class="btn btn-primary"><i></i> Save Changes</button>
+
+                        <button value="update" type="submit" name="btn" class="btn btn-primary">Saave</button>
 
                         <button value="rivisi" name="btn" type="submit" class="btn btn-success"><i></i>Save as Revision</button>
-
-
                       </div>
-
-
                     </form>
-
-
-
-
                     <!-- /.card-body -->
                   </div>
                   <!-- /.card -->
@@ -495,6 +482,27 @@
 
 
   <script type="text/javascript">
+    // function showIndikator() {
+    //   $('.btnSave').attr('disabled', 'disabled');
+    //   $('.loadingIndikdator').show();
+    // }
+
+    // function hiddenIndikator() {
+    //   $('.btnSave').removeAttr('disabled');
+    //   $('.loadingIndikdator').hide();
+
+    // }
+
+    // $('#SimpanData').submit(function(e) {
+    //   e.preventDefault();
+    //   showIndikator();
+    //   $('#SimpanData').submit();
+    // });
+
+    // $(document).ready(function() {
+    //   hiddenIndikator();
+
+    // });
     var value = 0;
     $(document).ready(function() {
       DataQuotation($('[name="Quatations_number"]').val());
@@ -822,7 +830,7 @@
         Baris += '</div></td>';
 
         Baris += '<td>';
-        Baris += '<input readonly class="form-control QuantityNON oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()"  type="Number" name="quantity[]" id="QuantityNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '" class="form-control Quantity" >';
+        Baris += '<input readonly class="form-control QuantityNON" oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()"  type="Number" name="quantity[]" id="QuantityNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '" class="form-control Quantity" >';
         Baris += '</td>';
 
 
@@ -988,7 +996,7 @@
             Baris += '</div></td>';
 
             Baris += '<td>';
-            Baris += '<input  class="form-control QuantityNON oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()"  type="Number" name="quantity[]" id="QuantityNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '" class="form-control Quantity" value="<?php echo $it->quantity ?>"  >';
+            Baris += '<input  class="form-control QuantityNON" oninput="hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>()"  type="Number" name="quantity[]" id="QuantityNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '" class="form-control Quantity" value="<?php echo $it->quantity ?>"  >';
             Baris += '</td>';
 
 
@@ -1319,7 +1327,7 @@
         layoutTemplates: {
           main2: '{preview}   {remove} {browse}'
         },
-        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
         initialPreview: [
           '<object type="application/pdf" data="<?php echo $img ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php $img ?>" ></object>'
         ],
@@ -1342,7 +1350,7 @@
         layoutTemplates: {
           main2: '{preview}   {remove} {browse}'
         },
-        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
       });
     <?php } ?>

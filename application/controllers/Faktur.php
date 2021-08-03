@@ -66,7 +66,7 @@ class Faktur extends CI_Controller
   {
 
     $config['upload_path']          = './assets/imagefaktur';
-    $config['allowed_types']        = 'gif|jpg|png|pdf';
+    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
     $config['file_name'] =  $faktur_number;
 
     $this->load->library('upload', $config);

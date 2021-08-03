@@ -1334,7 +1334,7 @@
         layoutTemplates: {
           main2: '{preview} {remove} {browse}'
         },
-        allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
         initialPreview: [
           '<object type="application/pdf"  style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/default.png') ?>" ></object>'
         ],

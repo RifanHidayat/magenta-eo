@@ -94,7 +94,7 @@ class Dashboard extends CI_Controller
 	{
 
 
-		$query = $this->db->query("SELECT date_format(date_quotation,'%Y-%m') as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,SUM(IF(status='Final',1,0)) as Final ,COUNT(*) as jml FROM quotations GROUP BY YEAR(date_quotation),MONTH(date_quotation)")->result();
+		$query = $this->db->query("SELECT date_quotation as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,SUM(IF(status='Final',1,0)) as Final ,COUNT(*) as jml FROM quotations GROUP BY YEAR(date_quotation),MONTH(date_quotation)")->result();
 		echo  json_encode($query);
 	}
 
@@ -103,28 +103,28 @@ class Dashboard extends CI_Controller
 	{
 
 
-		$query = $this->db->query("SELECT date_format(date_quotation,'%Y-%m') as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,SUM(IF(status='Final',1,0)) as Final ,COUNT(*) as jml FROM quotation_other GROUP BY YEAR(date_quotation),MONTH(date_quotation)")->result();
+		$query = $this->db->query("SELECT date_quotation as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,SUM(IF(status='Final',1,0)) as Final ,COUNT(*) as jml FROM quotation_other GROUP BY YEAR(date_quotation),MONTH(date_quotation)")->result();
 		echo  json_encode($query);
 	}
 	function getStatatusFaktur()
 	{
 
 
-		$query = $this->db->query("SELECT date_format(date_faktur,'%Y-%m') as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,COUNT(*) as jml FROM faktur GROUP BY YEAR(date_faktur),MONTH(date_faktur)")->result();
+		$query = $this->db->query("SELECT date_faktur as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,COUNT(*) as jml FROM faktur GROUP BY YEAR(date_faktur),MONTH(date_faktur)")->result();
 		echo  json_encode($query);
 	}
 	function getStatatusBast()
 	{
 
 
-		$query = $this->db->query("SELECT date_format(date_bast,'%Y-%m') as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,COUNT(*) as jml FROM bast GROUP BY YEAR(date_bast),MONTH(date_bast)")->result();
+		$query = $this->db->query("SELECT date_bast as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,COUNT(*) as jml FROM bast GROUP BY YEAR(date_bast),MONTH(date_bast)")->result();
 		echo  json_encode($query);
 	}
 	function getStatatusDelivery()
 	{
 
 
-		$query = $this->db->query("SELECT date_format(date_pengiriman,'%Y-%m') as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,COUNT(*) as jml FROM delivery GROUP BY YEAR(date_pengiriman),MONTH(date_pengiriman)")->result();
+		$query = $this->db->query("SELECT date_pengiriman as date,SUM(IF(status='open',1,0)) as Open ,SUM(IF(status='Reject',1,0)) as Reject ,SUM(IF(status='Close',1,0)) as Close ,COUNT(*) as jml FROM delivery GROUP BY YEAR(date_pengiriman),MONTH(date_pengiriman)")->result();
 		echo  json_encode($query);
 	}
 }
