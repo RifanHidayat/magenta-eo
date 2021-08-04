@@ -36,7 +36,7 @@
            <div class="col-md-6 col-xs-6 row "    >
            <div class="col-md-6 col-xs-6 p-3 mb-2 bg-light text-dark" style="background-color: coral;" >
            <h5><b>Un-Finished Payment</b></h5>
-           <span id="un-finished_payment"> </b></span>
+           <span id="un-finished_payment"> IDR 0 </b></span>
            <br>
            <br>
           
@@ -77,6 +77,8 @@
             </div>
            </div>
 
+           
+
            <div class="form-group" id="qnumber">
               <label for="email_event" style="text-align:left;" class="col-sm-8 control-label">Account </label>
               <div class="col-sm-12">
@@ -88,9 +90,17 @@
             </div>
            </div>
            <div class="form-group" id="qnumber">
+              <label for="email_event" style="text-align:left;" class="col-sm-8 control-label">Date</label>
+              <div class="col-sm-12">
+              <input required   type="date" class="form-control" id="date_transaction" name="date_transaction" placeholder="">
+            
+
+            </div>
+           </div>
+           <div class="form-group" id="qnumber">
               <label for="email_event" style="text-align:left;" class="col-sm-8 control-label">Amount </label>
               <div class="col-sm-12">
-              <input required =""  style="text-align:right" type="text" class="form-control" id="amount" name="amount" placeholder="">
+              <input required ="" onkeyup="convertToRupiah(this);"  style="text-align:right" type="text" class="form-control" id="amount" name="amount" placeholder="">
             </div>
            </div>
 
@@ -245,7 +255,7 @@
       $('#payment').text(`IDR ${payment.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`)
     //  console.log(checked)
    
-});
+  });
 
 
 		}
@@ -272,6 +282,7 @@ function UnFinieshed() {
                unFinishedPayment=unFinishedPayment+remaining;
 
               baris += '<tr>' +
+              
                 '<td style="width: 20%">' + response.data.unfinished_faktur[i].faktur_number + '</td>' +
               
                 '<td style="width: 10%">' +response.data.unfinished_faktur[i].date_faktur + '</td>' +
@@ -401,6 +412,7 @@ function transactionNumber() {
 
 $('#saveData').submit(function(e) {
     e.preventDefault();
+    showIndikatorForevent()
   
     data_transactions=[]
     payment_faktur=[]
@@ -411,6 +423,7 @@ $('#saveData').submit(function(e) {
     var payment = $('#amount').val().replace(/[^\w\s]/gi, '');
     var description =$('#description').val();
     var tempTotalAmount=total_amount.replace(/[^\w\s]/gi, '');
+    var date_transaction=$('#date_transaction').val();
 
 
     // (amount,transaction_number,faktur_id,account_id)
@@ -418,96 +431,121 @@ $('#saveData').submit(function(e) {
       var payment_item;
       var tempPaymentFaktur;
       console.log(value.remaining)
-      if (tempTotalAmount>value.remaining){
-        tempTotalAmount=tempTotalAmount-value.remaining;
-        payment_item=[value.amount,transaction_number,value.faktur_number,account_id];  
-        tempPaymentFaktur={faktur_number:value.faktur_number,pembayaran:Number(value.remaining)+Number(value.jumlah_bayar)} 
+      if (payment>value.remaining.replace(/[^\w\s]/gi, '')){
+        payment=payment-value.remaining.replace(/[^\w\s]/gi, '');
+        payment_item=[value.remaining.replace(/[^\w\s]/gi, ''),transaction_number,value.faktur_number,account_id];  
+        tempPaymentFaktur={faktur_number:value.faktur_number,total_pembayaran_faktur:Number(value.remaining)+Number(value.jumlah_bayar),amount:value.remaining.replace(/[^\w\s]/gi, ''),account_id:account_id} 
 
-      }else{
-
-      tempPaymentFaktur=tempTotalAmount
-       
-        payment_item=[tempTotalAmount,transaction_number,value.faktur_number,account_id]
-
-        tempPaymentFaktur={faktur_number:value.faktur_number,pembayaran:Number(tempTotalAmount)+Number(value.jumlah_bayar)} 
-
+      }else{      
+        payment_item=[payment,transaction_number,value.faktur_number,account_id]
+        tempPaymentFaktur={faktur_number:value.faktur_number,total_pembayaran_faktur:Number(payment)+Number(value.jumlah_bayar),amount:payment,account_id:account_id} 
+        payment=0
       }
       payment_faktur.push(tempPaymentFaktur);
       data_transactions.push(payment_item);
-
-    
-     
-     
-
     })
 
-    console.log(data_faktur)
-      console.log(data_transactions);
+    console.log(payment_faktur)
+    console.log(data_transactions);
+
+    console.log(date_transaction)
 
    
 
-    // $.ajax({
-    //     type: "post",
-    //     url: '<?php echo base_url("Quotation/cekQuotationOther/") ?>',
-    //     data: 'quotation_number=' + quotation_number,
-    //     dataType: 'json',
-    //     data:{
-    //       total_amount:total_amount,
-    //       account_id:account_id,
-    //       payment:payment,
-    //       description:description,
-    //       transaction_number:transaction_number
+    $.ajax({
+        type: "post",
+        url: 'http://localhost:3000/api/faktur/payment',
+    
+        dataType: 'json',
+        data:{
+          total_amount:$('#amount').val().replace(/[^\w\s]/gi, ''),
+          date_transaction:date_transaction,
+          customer_id:<?php echo $id ?>+"",
+          account_id:account_id,
+          payment:payment,
+          description:description,
+          transaction_number:transaction_number,
+          payment_faktur:payment_faktur,
+          data_transactions:data_transactions
 
 
-    //     },
-    //     success: function(hasil) {
+        },
+        success: function(response) {
+
+          //console.log(response)
+         
+
+          Swal.fire({
+                  title: "success!",
+                  text: "Transaksi berhasil disimpan",
+                  icon: "success",
+                  timer: 2000,
+                  showCancelButton: false,
+                  showConfirmButton: false
+                });
+                
+                setTimeout(function() {
+                  window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+                }, 2500);
 
 
-    //       // if (hasil.status == 'tersedia') {
-    //       //   Swal.fire({
-    //       //     title: 'Oops',
-    //       //     text: "Quotation number sudah tersedia,lakukan update quotation dengan menekan tombol update QO  sebeleum menyimpan  data quotation other",
-    //       //     icon: 'info',
-    //       //     showCancelButton: true,
-    //       //     confirmButtonColor: '#3085d6',
-    //       //     cancelButtonColor: '#808080',
-    //       //     cancelButtonText: 'Tidak',
-    //       //     confirmButtonText: 'Update QO'
-    //       //   }).then((result) => {
-    //       //     if (result.value) {
+                hiddenindikator();
 
-    //       //       generet_quotation_other();
-    //       //       hiddenIndikatorForother();
-    //       //       Swal.fire({
-    //       //         position: 'center',
-    //       //         icon: 'success',
-    //       //         title: 'Quotation number has been updated',
-    //       //         showConfirmButton: false,
-    //       //         timer: 1500
-    //       //       });
+          // if (hasil.status == 'tersedia') {
+          //   Swal.fire({
+          //     title: 'Oops',
+          //     text: "Quotation number sudah tersedia,lakukan update quotation dengan menekan tombol update QO  sebeleum menyimpan  data quotation other",
+          //     icon: 'info',
+          //     showCancelButton: true,
+          //     confirmButtonColor: '#3085d6',
+          //     cancelButtonColor: '#808080',
+          //     cancelButtonText: 'Tidak',
+          //     confirmButtonText: 'Update QO'
+          //   }).then((result) => {
+          //     if (result.value) {
 
-
-    //       //     }
-    //       //   });
+          //       generet_quotation_other();
+          //       hiddenIndikatorForother();
+          //       Swal.fire({
+          //         position: 'center',
+          //         icon: 'success',
+          //         title: 'Quotation number has been updated',
+          //         showConfirmButton: false,
+          //         timer: 1500
+          //       });
 
 
-    //       // } else {
+          //     }
+          //   });
 
-    //       //   $("#SimpanDataOther").submit();
+
+          // } else {
+
+          //   $("#SimpanDataOther").submit();
           
-    //       // }
+          // }
 
 
-    //     },
-    //     error: function(hasil) {
+        },
+        error: function(error) {
+          Swal.fire({
+                  title: "error",
+                  text: "terjadi kesalahan",
+                  icon: "error",
+                  timer: 2000,
+                  showCancelButton: false,
+                  showConfirmButton: false
+                });
+
+          hiddenindikator();
 
 
 
 
-    //     }
+        }
 
 
-    //   });
+      });
 
 
 
@@ -515,9 +553,6 @@ $('#saveData').submit(function(e) {
  
 
   });
-
-
-
 
 
 
@@ -531,3 +566,7 @@ $('#saveData').submit(function(e) {
    $("#openCustomerNav").addClass('menu-open');
 
  </script>
+   <script type="text/javascript" src="<?php echo base_url('assets/rupiah.js') ?>"></script>
+
+
+

@@ -309,6 +309,21 @@
              <?php endif; ?>
 
 
+              
+
+               <li class="nav-item has-treeview">
+                 <a href="<?php echo base_url("Transactions/manage") ?>" class="nav-link" id="transactionsMainNav">
+                   <i class="nav-icon fas fa-file"></i>
+                   <p>
+                     Transactions
+                     <i class="right fas"></i>
+                   </p>
+                 </a>
+
+               </li>
+          
+
+
 
 
 

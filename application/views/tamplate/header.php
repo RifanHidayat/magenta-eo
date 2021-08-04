@@ -264,6 +264,8 @@
 
   <meta charset="utf-8">
 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   <!--   <link rel="stylesheet" href="/resources/demos/style.css"> -->
