@@ -22,10 +22,21 @@
         <div class="row">
           <div class="col-12">
 
+ <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
 
-            <br>
-            <br>
+              <li class="nav-item active" id="members">
+              <!-- <button type="button" class="btn btn-outline-primary">
+              <i class="fa fa-dollar"> QE
+              </button> -->
+              <button    type="button" class="btn btn-primary">Quotation Event</i></button>
+               </li>&ensp;
+              <li class="nav-item" id="budgets" to="/projects/manage" onclick="location.href='<?php echo base_url('Faktur/manage_faktur_other/') ?>'" >
 
+              
+              <button type="button" class="btn btn-outline-primary" onclick="location.href='<?php echo base_url('Faktur/manage_faktur_event/') ?>'"  >Quotation Other</button>
+               </li>&ensp;
+          </ul>
+         
             <div class="card">
               <div class="card-header">
                 <h3 class="box-title"><b>Manage Faktur</b></h3>

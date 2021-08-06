@@ -38,7 +38,7 @@
           <h3 class="box-title"><b>Add BAST</b></h3>
           <div class="card-tools" style="margin-top: -35px;margin-right: 11px">
             <a href="<?php echo base_url('Quotation/manage_quotation') ?>" class="btn btn-secondary">
-              <font color="white">Back</font>
+              <font color="white">Backk</font>
             </a>
 
           </div>
@@ -50,9 +50,9 @@
         <div class="card-header">
           <h3 class="box-title"><b>Add BAST</b></h3>
           <div class="card-tools" style="margin-top: -35px;margin-right: 11px">
-            <a href="<?php echo base_url('Quotation/manage_quotation_other') ?>" class="btn btn-secondary">
-              <font color="white">Back</font>
-            </a>
+          <a href="<?php echo substr($quotation_number, 0, 2)=="QE"?base_url('Bast/manage_quotation'):base_url('Bast/manage_quotation_other') ?>" class="btn btn-secondary">
+            <font color="white"> Back</font>
+          </a>
 
           </div>
         </div>

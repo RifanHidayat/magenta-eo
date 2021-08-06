@@ -27,6 +27,21 @@
 
             <br>
             <br>
+            <ul class="nav nav-pills mb-2" id="pills-tab" role="tablist">
+
+              <li class="nav-item active" id="members">
+              <!-- <button type="button" class="btn btn-outline-primary">
+              <i class="fa fa-dollar"> QE
+              </button> -->
+              <button  type="button" class="btn btn-primary">Quotation Event</button>
+              <button onclick="location.href='<?php echo base_url('Delivery/manage_delivery_other/') ?>'"   type="button" class="btn btn-outline-primary">Quotation Other</i></button>
+               </li>&ensp;
+              <li class="nav-item" id="budgets" to="/projects/manage">
+
+              
+              
+               </li>&ensp;
+          </ul>
 
             <div class="card">
               <div class="card-header">

@@ -27,12 +27,12 @@
               <!-- <button type="button" class="btn btn-outline-primary">
               <i class="fa fa-dollar"> QE
               </button> -->
-              <button type="button"  class="btn btn-primary" >Quotation Event</i></button>
+              <button onclick="location.href='<?php echo base_url('Customer/paymentqe/'.$id) ?>'"  type="button" class="btn btn-outline-primary">Quotation Event</i></button>
                </li>&ensp;
               <li class="nav-item" id="budgets" to="/projects/manage">
 
               
-              <button onclick="location.href='<?php echo base_url('Customer/paymentqo/'.$id) ?>'" type="button" class="btn btn-outline-primary">Quotation Other</button>
+              <button type="button" class="btn btn-primary">Quotation Other</button>
                </li>&ensp;
           </ul>
       </div>
@@ -41,7 +41,7 @@
 
      <div class="card">
        <div class="card-header">
-         <h5 class="box-title"><b>Payment</b></h5>
+         <h5 class="box-title"><b>Payment invoice <?php echo $name ?></b></h5>
          <div class="card-tools" style="margin-top: -35px;margin-right: 3px">
            <a href="<?php echo base_url('Customer/manage_customer') ?>" class="btn btn-secondary">
              <font color="white">Back</font>
@@ -73,7 +73,7 @@
            <br>
            <br>
           
-           <h5><b>Invoice Payment</b></h5>
+           <h5><b>Payment</b></h5>
            <span id="payment"> IDR 0</b></span>
            <br>
            <br>
@@ -141,13 +141,12 @@
                
             </div>
 
-            <div align="right">
-            <button type="submit" class="btn btn-primary btnSave" type="button">
+           <div align="right">
+           <button type="submit" class="btn btn-primary btnSave" type="button">
                         <span  class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
                         Save
                       </button>
-
-              </div>
+                      </div>
   
 
             
@@ -163,16 +162,16 @@
       <table id="use-datatable" class="table table-bordered table-striped tablecustomer">
                     <thead>
                       <tr>              
-                      <th style="width: 10%">No. Inovoice</th>
-                        <th style="width: 10%" >Quotation</th>
-                        <th style="width: 10%" >No. Project</th>
+                      <th style="width: 15%">No. Inovoice</th>
+                        <th style="width: 15%" >Quotation</th>
+                       
                         <th>Tanggal invoice</th>
                         <th>Syarat pembayaran</th>
                         <th>Grand Total</th>
                         <th>jumlah bayar</th>
                         <th>Sisa pembayaran</th>
                         
-                        <th></th>
+                        <th style="width: 5%"></th>
                       </tr>
                     </thead>
                     <tbody id="UnFinished"></tbody>
@@ -203,7 +202,7 @@
                       <tr>              
                         <th style="width: 10%">No. Inovoice</th>
                         <th style="width: 10%" >Quotation</th>
-                        <th style="width: 10%" >No. Project</th>
+                     
                         <th>Tanggal invoice</th>
                         <th>Syarat pembayaran</th>
                         <th>Grand Total</th>
@@ -248,27 +247,24 @@
   }
 
 
-  
   function payment() {
     var payment=0;
     data_faktur=[];
-
     $('#use-datatable tbody tr').each(function() {
-      var checked = $(this).find('td:nth-child(9) input:checked').val();
+      var checked = $(this).find('td:nth-child(8) input:checked').val();
       console.log(checked)
       if (checked=="on"){
         var faktur_number = $(this).find('td:nth-child(1)').html();
         var quotation_number = $(this).find('td:nth-child(2)').html();
-        var project_number = $(this).find('td:nth-child(3)').html();
-        var remaining = $(this).find('td:nth-child(8)').html();
-        var jumlah_bayar = $(this).find('td:nth-child(7)').html();
-        var grand_total = $(this).find('td:nth-child(6)').html();
-        console.log(project_number)
+     
+        var remaining = $(this).find('td:nth-child(7)').html();
+        var jumlah_bayar = $(this).find('td:nth-child(6)').html();
+        var grand_total = $(this).find('td:nth-child(5)').html();
+     
         
 
         var data={
           faktur_number:faktur_number,
-          project_number:project_number,
           quotation_number:quotation_number,
           grand_total:grand_total.replace(/[^\w\s]/gi, ''),
           jumlah_bayar:jumlah_bayar.replace(/[^\w\s]/gi, ''),
@@ -295,11 +291,11 @@ function UnFinieshed() {
   
       $.ajax({
         type: 'GET',
-        url: 'http://localhost:3000/api/faktur/'+<?php echo $id ?>+'/payment',
+        url: 'http://localhost:3000/api/faktur/'+<?php echo $id ?>+'/payment-qo',
         dataType: 'json',
         success: function(response) {
-          $('#total_faktur_unfinished').text(response.data.total_faktur_unfinished.amount)
           $('#total_faktur_finished').text(response.data.total_faktur_finished.amount)
+          $('#total_faktur_unfinished').text(response.data.total_faktur_unfinished.amount)
           
           
 
@@ -314,10 +310,10 @@ function UnFinieshed() {
 
               baris += '<tr>' +
               
-                '<td style="width: 10%">' + response.data.unfinished_faktur[i].faktur_number + '</td>' +
+                '<td style="width: 15%">' + response.data.unfinished_faktur[i].faktur_number + '</td>' +
              
-                '<td style="width: 10%" >' + response.data.unfinished_faktur[i].quotation_number + '</td>' +
-                '<td style="width: 10%" >' + response.data.unfinished_faktur[i].project_number + '</td>' +
+                '<td style="width: 15%" >' + response.data.unfinished_faktur[i].quotation_number + '</td>' +
+                
                 
               
                 '<td style="width: 10%">' +response.data.unfinished_faktur[i].date_faktur + '</td>' +
@@ -353,10 +349,10 @@ function UnFinieshed() {
 
 
     function Finieshed() {
-  
+   
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/api/faktur/'+<?php echo $id  ?>+'/payment',
+    url: 'http://localhost:3000/api/faktur/'+<?php echo $id  ?>+'/payment-qo',
     dataType: 'json',
     success: function(response) {
       var baris = '';
@@ -369,15 +365,14 @@ function UnFinieshed() {
           baris += '<tr>' +
             '<td style="width: 15%">' +response.data.finished_faktur[i].faktur_number + '</td>' +
             '<td style="width: 10%" >' + response.data.finished_faktur[i].quotation_number + '</td>' +
-            '<td style="width: 15%">' +response.data.finished_faktur[i].project_number + '</td>' +
            
-            
+          
             '<td style="width: 10%">' +response.data.finished_faktur[i].date_faktur + '</td>' +
             '<td style="width: 20%">' +response.data.finished_faktur[i].syarat_pembayaran + '</td>' +
 
             '<td style="width: 15%" align="right">' + response.data.finished_faktur[i].total_faktur.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + '</td>' +
-            '<td style="width: 15%" align="right">' + pembayaran.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + '</td>' +
-            '<td style="width: 15%" align="right">' + remaining.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + '</td>' +
+            '<td style="width: 15%" align="right">' + total_faktur.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + '</td>' +
+            '<td style="width: 15%" align="right">' + "0" + '</td>' +
             '<td style="width: 8%"></td>' +
             '</tr>';
 
@@ -449,7 +444,7 @@ function transactionNumber() {
 
 $('#saveData').submit(function(e) {
     e.preventDefault();
-  //  showIndikatorForevent()
+    //showIndikatorForevent()
   
     data_transactions=[]
     payment_faktur=[]
@@ -467,15 +462,17 @@ $('#saveData').submit(function(e) {
     data_faktur.map((value)=>{
       var payment_item;
       var tempPaymentFaktur;
-      console.log(value.remaining)
+      console.log('a',value.remaining)
+      console.log("payment",payment)
       if (Number(payment)>Number(value.remaining)){
         payment=payment-value.remaining.replace(/[^\w\s]/gi, '');
         payment_item=[value.remaining.replace(/[^\w\s]/gi, ''),transaction_number,value.faktur_number,account_id];  
-        tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(value.remaining)+Number(value.jumlah_bayar),amount:value.remaining.replace(/[^\w\s]/gi, ''),account_id:account_id} 
+        
+        tempPaymentFaktur={faktur_number:value.faktur_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(value.remaining)+Number(value.jumlah_bayar),amount:value.remaining.replace(/[^\w\s]/gi, ''),account_id:account_id} 
 
       }else{      
         payment_item=[payment,transaction_number,value.faktur_number,account_id]
-        tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(payment)+Number(value.jumlah_bayar),amount:payment,account_id:account_id} 
+        tempPaymentFaktur={faktur_number:value.faktur_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(payment)+Number(value.jumlah_bayar),amount:payment,account_id:account_id} 
         payment=0
       }
       payment_faktur.push(tempPaymentFaktur);
@@ -491,7 +488,7 @@ $('#saveData').submit(function(e) {
 
     $.ajax({
         type: "post",
-        url: 'http://localhost:3000/api/faktur/payment',
+        url: 'http://localhost:3000/api/faktur/payment-qo',
     
         dataType: 'json',
         data:{

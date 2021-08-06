@@ -339,12 +339,12 @@ class Transactions extends CI_Controller {
 
 	 }
 
-     public function detail(){
+     public function detail($transaction_id){
         $id=$this->session->userdata('id');
         $group_data = $this->model_groups->getGroupData($id);
         $this->data['group_data'] = $group_data;
 
-        $this->data['id']=$id;
+        $this->data['transaction_id']=$transaction_id;
 
        
         $this->load->view('tamplate/header',$this->data);

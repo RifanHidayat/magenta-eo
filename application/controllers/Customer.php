@@ -76,8 +76,18 @@ class Customer extends CI_Controller {
 
 	 }
 
-	 public function payment($id){
+	 public function paymentQE($id){
 		 $this->data['id']=$id;
+		
+		 $this->db->select('*');
+	 	 $this->db->from('customer');
+	     $this->db->where('id',$id);
+		 $row = $this->db->get()->row_array();
+	 	$this->data["name"]=$row['name'];
+
+
+
+
 		$this->load->view('tamplate/header',$this->data);
 		$this->load->view('tamplate/sidebar',$this->data);
 		$this->load->view('customer/payment',$this->data);
@@ -87,6 +97,23 @@ class Customer extends CI_Controller {
 
 
 	 }
+	 public function paymentQO($id){
+		$this->db->select('*');
+		$this->db->from('customer');
+	   $this->db->where('id',$id);
+	   $row = $this->db->get()->row_array();
+	 	$this->data["name"]=$row['name'];
+
+		$this->data['id']=$id;
+	   	$this->load->view('tamplate/header',$this->data);
+	   	$this->load->view('tamplate/sidebar',$this->data);
+	  	$this->load->view('customer/payment_other',$this->data);
+		$this->load->view('tamplate/footer',$this->data);
+
+
+
+
+	}
 
 	  public function edit_customer($idd){
 	  	if((!in_array('updateCustomer', $this->permission))) {
@@ -545,10 +572,10 @@ class Customer extends CI_Controller {
                 	$this->db->where('id_customer',$row->id);
                 	$data2=$this->db->get()->row_array();
                 	if (($data1 !="") || ($data2 !="")){
-                		$delete='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" onclick="alert()" title="Delete"><i class="fa fa-trash"></i><font size="2px"></a> </font></center>';
+                		$delete='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" onclick="alert()" title="Delete"><i class="fa fa-trash"></i><font size="2px"></a> </font>';
 
                 	}else{
-                		$delete='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" onclick="swetalert('.$row->id.')" title="Delete"><i class="fa fa-trash"></i><font size="2px"></a> </font></center>';
+                		$delete='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" onclick="swetalert('.$row->id.')" title="Delete"><i class="fa fa-trash"></i><font size="2px"></a> </font>';
 
                 	}
 
@@ -557,7 +584,7 @@ class Customer extends CI_Controller {
                 	$delete='';
                 	
                 } 
-				$payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Customer/payment/'.$row->id).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
+				$payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Customer/paymentQE/'.$row->id).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
 
 
 

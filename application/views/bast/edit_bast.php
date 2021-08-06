@@ -23,7 +23,7 @@
 
         <h3 class="box-title"><b>Edit BAST</b></h3>
         <div class="card-tools" style="margin-top: -35px;margin-right: 11px">
-          <a href="<?php echo base_url('Bast/manage_bast') ?>" class="btn btn-secondary">
+          <a href="<?php echo substr($quotation_number, 0, 2)=="QE"?base_url('Bast/manage_bast_event'):base_url('Bast/manage_bast_other') ?>" class="btn btn-secondary">
             <font color="white"> Back</font>
           </a>
 
@@ -182,20 +182,8 @@
                   $directory = "assets/image_/";
                   $images = glob($directory . "*.*");
                   ?>
-
-
-
-
                 </div>
-
-
-
-
-
                 <div class="col-md-6 col-xs-12 pull pull-left">
-
-
-
                   <div class="form-group" id="qnumber">
                     <label for="Quatations_number" style="text-align:left;" class="col-sm-8 control-label">BAST Number</label>
                     <div class="col-sm-12">
@@ -244,9 +232,7 @@
 
                   </div>
                   <?= form_error('pic_po', '<small class="text-danger pl-3">', '</small>') ?>
-
-
-
+                  
                   <div class="form-group" id="qnumber">
                     <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Jabatan</label>
                     <div class="col-sm-12">
@@ -296,13 +282,7 @@
                   <br>
                   <br>
                   <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
+             
 
                 </div>
                 <div class="form-group text-left">

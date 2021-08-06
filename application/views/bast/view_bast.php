@@ -24,8 +24,8 @@
         <h3 class="box-title"><b>Data BAST</b></h3>
 
         <div class="card-tools" style="margin-top: -35px;margin-right: 11px">
-          <a href="<?php echo base_url('Bast/manage_bast') ?>" class="btn btn-secondary">
-            <font color="white">Back</font>
+        <a href="<?php echo substr($quotation_number, 0, 2)=="QE"?base_url('Bast/manage_bast_event'):base_url('Bast/manage_bast_other') ?>" class="btn btn-secondary">
+            <font color="white"> Back</font>
           </a>
 
         </div>
@@ -483,6 +483,7 @@
           }, 2500);
 
         } else {
+          
 
           Swal.fire({
 

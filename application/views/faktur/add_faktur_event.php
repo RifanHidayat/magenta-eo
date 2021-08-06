@@ -33,7 +33,7 @@
         <h3 class="box-title"><b>Add Faktur</b></h3>
 
         <div class="card-tools" style="margin-top: -35px;margin-right: 17px">
-          <a href="<?php echo base_url('Bast/manage_bast') ?>" class="btn bg-gradient-secondary">
+          <a href="<?php echo base_url('Bast/manage_bast_event') ?>" class="btn bg-gradient-secondary">
             <font color="white">Back</font>
           </a>
         </div>
@@ -477,27 +477,15 @@
 
                       <th>Total Faktur</th>
                       <td><input type="text" readonly="" class="form-control" id="total_faktur" name="total_faktur" autocomplete="off" value="<?php echo set_value('total_faktur') ?>"></td>
-
                     </tr>
-
                     <tr>
                       <td colspan="7">Terbilang</td>
-
                     </tr>
                     <tr>
                       <td colspan="7"><input type="text" readonly="" class="form-control" id="terbilang1" name="terbilang1" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
-
                     </tr>
-
-
-
-
-
                   </tfoot>
                 </table>
-
-
-
                 <div class="form-group text-left">
                   <!--   <button type="submit" class="btn btn-primary">Create Faktur</button> -->
 

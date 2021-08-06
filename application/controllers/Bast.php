@@ -190,9 +190,9 @@ class Bast extends CI_Controller
     $this->db->insert('bast', $data);
     $this->session->set_flashdata('success', 'Successfully Created');
 
-    redirect('Bast/manage_bast', 'refresh');
+    redirect('Bast/manage_bast_event', 'refresh');
   }
-  public function manage_bast()
+  public function manage_bast_event()
   {
     if ((!in_array('updateBast', $this->permission)) and (!in_array('deleteBast', $this->permission)) and (!in_array('viewBast', $this->permission))) {
       redirect('dashboard', 'refresh');
@@ -203,20 +203,48 @@ class Bast extends CI_Controller
     $this->data['group_data'] = $group_data;
     // $this->data['bast']=$this->db->get('bast')->result();
 
-    $this->db->select('bast_number,bast.quotation_number as quotation_number,gr_number,bast.po_number,customer_event as customer,tittle_event,date_bast,bast.status as status,quotations.status as statusQuotations,total_summary,id_bast,image_po,image_gr,id_bast');
-    $this->db->from('quotations');
-    $this->db->join('bast', 'quotations.quotation_number = bast.quotation_number');
-    $this->data['bast'] = $this->db->get()->result();
+    // $this->db->select('bast_number,bast.quotation_number as quotation_number,gr_number,bast.po_number,customer_event as customer,tittle_event,date_bast,bast.status as status,quotations.status as statusQuotations,total_summary,id_bast,image_po,image_gr,id_bast');
+    // $this->db->from('quotations');
+    // $this->db->join('bast', 'quotations.quotation_number = bast.quotation_number');
+    // $this->data['bast'] = $this->db->get()->result();
 
-    $this->db->select('bast_number,bast.quotation_number as quotation_number,gr_number,bast.po_number,customer_event as customer,tittle_event,date_bast,bast.status as status,quotation_other.status as statusQuotations,total,id_bast,image_po,image_gr,quotation_other.image,id_bast');
-    $this->db->from('quotation_other');
-    $this->db->join('bast', 'quotation_other.quotation_number = bast.quotation_number');
-    $this->data['bast_other'] = $this->db->get()->result();
+    // $this->db->select('bast_number,bast.quotation_number as quotation_number,gr_number,bast.po_number,customer_event as customer,tittle_event,date_bast,bast.status as status,quotation_other.status as statusQuotations,total,id_bast,image_po,image_gr,quotation_other.image,id_bast');
+    // $this->db->from('quotation_other');
+    // $this->db->join('bast', 'quotation_other.quotation_number = bast.quotation_number');
+    // $this->data['bast_other'] = $this->db->get()->result();
     $this->load->view('tamplate/header', $this->data);
     $this->load->view('tamplate/sidebar', $this->data);
-    $this->load->view('bast/manage_bast', $this->data);
+    $this->load->view('bast/manage_bast_event', $this->data);
     $this->load->view('tamplate/footer', $this->data);
   }
+
+  public function manage_bast_other()
+  {
+    if ((!in_array('updateBast', $this->permission)) and (!in_array('deleteBast', $this->permission)) and (!in_array('viewBast', $this->permission))) {
+      redirect('dashboard', 'refresh');
+    }
+
+    $id = $this->session->userdata('id');
+    $group_data = $this->model_groups->getGroupData($id);
+    $this->data['group_data'] = $group_data;
+    // $this->data['bast']=$this->db->get('bast')->result();
+
+    // $this->db->select('bast_number,bast.quotation_number as quotation_number,gr_number,bast.po_number,customer_event as customer,tittle_event,date_bast,bast.status as status,quotations.status as statusQuotations,total_summary,id_bast,image_po,image_gr,id_bast');
+    // $this->db->from('quotations');
+    // $this->db->join('bast', 'quotations.quotation_number = bast.quotation_number');
+    // $this->data['bast'] = $this->db->get()->result();
+
+    // $this->db->select('bast_number,bast.quotation_number as quotation_number,gr_number,bast.po_number,customer_event as customer,tittle_event,date_bast,bast.status as status,quotation_other.status as statusQuotations,total,id_bast,image_po,image_gr,quotation_other.image,id_bast');
+    // $this->db->from('quotation_other');
+    // $this->db->join('bast', 'quotation_other.quotation_number = bast.quotation_number');
+    // $this->data['bast_other'] = $this->db->get()->result();
+    $this->load->view('tamplate/header', $this->data);
+    $this->load->view('tamplate/sidebar', $this->data);
+    $this->load->view('bast/manage_bast_other', $this->data);
+    $this->load->view('tamplate/footer', $this->data);
+  }
+
+
   public function hapus($id)
   {
 
@@ -542,7 +570,7 @@ class Bast extends CI_Controller
       $this->db->update('quotation_other', $dataupdate);
     }
 
-    redirect('Bast/manage_bast', 'refresh');
+    redirect('Bast/manage_bast_event', 'refresh');
   }
 
 
@@ -807,12 +835,11 @@ class Bast extends CI_Controller
     echo  json_encode($result);
   }
 
-  public function TampilDatabast()
+  public function TampilDatabastevent()
   {
     $this->load->model("model_bast");
     $fetch_data = $this->model_bast->make_datatables();
-    $fetch_data_other = $this->model_bast->make_datatables_other();
-    $result = array_merge($fetch_data, $fetch_data_other);
+
 
 
 
@@ -912,6 +939,27 @@ class Bast extends CI_Controller
         $data[] = $sub_array;
       }
     }
+ 
+    $output = array(
+      "draw"                    =>     intval($_POST["draw"]),
+      "recordsTotal"          =>      $this->model_bast->get_all_data(),
+      "recordsFiltered"     =>     $this->model_bast->get_filtered_data(),
+      "data"                    =>     $data
+    );
+    echo json_encode($output);
+  }
+
+
+
+  public function TampilDatabastother()
+  {
+    $this->load->model("model_bast");
+  
+    $fetch_data_other = $this->model_bast->make_datatables_other();
+    
+
+
+
     foreach ($fetch_data_other as $row) {
       if (in_array('updateBast', $this->permission)) {
         $edit = '<font color="#FFFFFF" size="2px"><a title="Edit" class="btn btn-sm bg-gradient-secondary" title="Edit" href="' . base_url('bast/edit_bast/' . $row->quotation_number . '/' . $row->id_bast) . '"><font color="white"><i class="fa fa-edit"></i> </font></a>';
@@ -1000,4 +1048,6 @@ class Bast extends CI_Controller
     );
     echo json_encode($output);
   }
+
+
 }

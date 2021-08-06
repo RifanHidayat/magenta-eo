@@ -571,7 +571,7 @@ class Faktur extends CI_Controller
     redirect('Faktur/manage_faktur', 'refresh');
   }
 
-  public function manage_faktur()
+  public function manage_faktur_event()
   {
     if ((!in_array('updateFaktur', $this->permission)) and (!in_array('statusFaktur', $this->permission)) and (!in_array('deleteFaktur', $this->permission)) and (!in_array('viewFaktur', $this->permission))) {
       redirect('dashboard', 'refresh');
@@ -580,26 +580,31 @@ class Faktur extends CI_Controller
     $id = $this->session->userdata('id');
     $group_data = $this->model_groups->getGroupData($id);
     $this->data['group_data'] = $group_data;
-    $this->db->select('faktur.quotation_number,faktur_number,faktur.image,ser_faktur,quotations.customer,tittle_event,total_faktur,quotations.status as statusQuotations,bast.status as statusBast,faktur.status as status,date_faktur,id_faktur');
-    $this->db->from('quotations');
-    $this->db->join('faktur', 'faktur.quotation_number = quotations.quotation_number');
-    $this->db->join('bast', 'bast.quotation_number = faktur.quotation_number');
-
-
-    $this->data['faktur'] = $this->db->get()->result();
-
-    $this->db->select('faktur.quotation_number,faktur_number,faktur.image,ser_faktur,quotation_other.customer_event as customer,tittle_event,total_faktur,quotation_other.status as statusQuotations,bast.status as statusBast,faktur.status as status,date_faktur,id_faktur');
-    $this->db->from('quotation_other');
-    $this->db->join('faktur', 'faktur.quotation_number = quotation_other.quotation_number');
-    $this->db->join('bast', 'bast.quotation_number = faktur.quotation_number');
-    $this->data['faktur_other'] = $this->db->get()->result();
-
+  
 
     $this->load->view('tamplate/header', $this->data);
     $this->load->view('tamplate/sidebar', $this->data);
     $this->load->view('faktur/manage_faktur', $this->data);
     $this->load->view('tamplate/footer', $this->data);
   }
+
+  public function manage_faktur_other()
+  {
+    if ((!in_array('updateFaktur', $this->permission)) and (!in_array('statusFaktur', $this->permission)) and (!in_array('deleteFaktur', $this->permission)) and (!in_array('viewFaktur', $this->permission))) {
+      redirect('dashboard', 'refresh');
+    }
+
+    $id = $this->session->userdata('id');
+    $group_data = $this->model_groups->getGroupData($id);
+    $this->data['group_data'] = $group_data;
+  
+
+    $this->load->view('tamplate/header', $this->data);
+    $this->load->view('tamplate/sidebar', $this->data);
+    $this->load->view('faktur/manage_faktur_other', $this->data);
+    $this->load->view('tamplate/footer', $this->data);
+  }
+
   public function AmbilDataQuotation()
   {
     $quotatoion_number = $this->input->post("quotation_number");
@@ -1413,7 +1418,7 @@ class Faktur extends CI_Controller
   {
     $this->load->model("model_faktur");
     $fetch_data = $this->model_faktur->make_datatables();
-    $fetch_data_other = $this->model_faktur->make_datatables_other();
+    
     $data = array();
     foreach ($fetch_data as $row) {
 
@@ -1452,10 +1457,6 @@ class Faktur extends CI_Controller
         $view = '';
       }
 
-
-
-
-
       if ($row->status == "Open") {
         $status = '<span class="label label-warning">Open</span>';
       } else if ($row->status == "Reject") {
@@ -1483,6 +1484,24 @@ class Faktur extends CI_Controller
         $data[] = $sub_array;
       }
     }
+
+    $output = array(
+      "draw"                    =>     intval($_POST["draw"]),
+      "recordsTotal"          =>      $this->model_faktur->get_all_data(),
+      "recordsFiltered"     =>     $this->model_faktur->get_filtered_data(),
+      "data"                    =>     $data
+    );
+    echo json_encode($output);
+  }
+
+
+  public function TampilDatafakturother()
+  {
+    $this->load->model("model_faktur");
+  
+    $fetch_data_other = $this->model_faktur->make_datatables_other();
+    $data = array();
+ 
     foreach ($fetch_data_other as $row) {
       if (in_array('updateFaktur', $this->permission)) {
         $edit = '<font color="#FFFFFF" size="2px"><a title="Edit" class="btn btn-sm bg-gradient-secondary"   href="' . base_url('Faktur/edit_faktur/' . $row->quotation_number . '/' . $row->id_faktur) . '"><font color="white"><i class="fa fa-edit"></color></i></a>';
@@ -1499,23 +1518,7 @@ class Faktur extends CI_Controller
       } else {
         $print = '';
       }
-      // if (in_array('createDelivery', $this->permission) and $row->status == "Close") {
-
-
-      //   $this->db->select('*');
-      //   $this->db->from('delivery');
-      //   $this->db->where('id_faktur', $row->id_faktur);
-      //   $data1 = $this->db->get()->row_array();
-      //   if (($data1 != '') and ($data1['id_faktur'] == $row->id_faktur)) {
-
-
-      //     $delivery = '<font color="#FFFFFF" size="2px"><a title="Edit Delivery" class="btn btn-sm bg-gradient-secondary" onclick="cekDelivery(' . $row->id_faktur . ')" ><i class="fa fa-check"></i>   Delivery</a></font>';
-      //   } else {
-      //     $delivery = '<font color="#FFFFFF" size="2px"><a title="Create Delivery" class="btn btn-sm bg-gradient-secondary" onclick="cekDelivery(' . $row->id_faktur . ')" ><i class="fa fa-plus"></i>   Delivery</a></font>';
-      //   }
-      // } else {
-      //   $delivery = '';
-      // }
+  
 
       if (in_array('viewFaktur', $this->permission) || in_array('statusFaktur', $this->permission)) {
         $view = ' <font color="#FFFFFF" size="2px"><a title="View Data" class="btn btn-sm bg-gradient-secondary"   href="' . base_url('Faktur/view_faktur/' . $row->quotation_number . '/' . $row->id_faktur) . '"  ><font color="white"><i class="fa fa-eye"></color></i></a>';

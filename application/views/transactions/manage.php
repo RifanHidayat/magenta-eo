@@ -155,7 +155,7 @@
           </td>
           <td align="center" width="100px">
           <font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  title="Delete"><i class="fa fa-trash"></i><font size="2px"></a> </font></center>
-          <font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  title="Detail"  ><i class="fa fa-eye"></i><font size="2px"></a> </font></center>
+          <font color="#FFFFFF" size="2px"><a  href="http://localhost/magentaeo/Transactions/detail/${value.id}" class="btn btn-sm bg-gradient-secondary"  title="Detail"  ><i class="fa fa-eye"></i><font size="2px"></a> </font></center>
           
           </td>
         </tr>

@@ -260,7 +260,7 @@
              <?php if (in_array('updateBast', $user_permission) || in_array('viewBast', $user_permission) || in_array('deleteBast', $user_permission)) : ?>
 
                <li class="nav-item has-treeview" id="openBastNav">
-                 <a href="<?php echo base_url("Bast/manage_bast") ?>" class="nav-link" id="bastMainNav">
+                 <a href="<?php echo base_url("Bast/manage_bast_event") ?>" class="nav-link" id="bastMainNav">
                    <i class="nav-icon fas fa-file-contract"></i>
                    <p>
                      BAST
@@ -271,7 +271,7 @@
              
                 <?php if (in_array('updateBast', $user_permission) || in_array('viewBast', $user_permission) || in_array('deleteBast', $user_permission)) : ?>
               <li class="nav-item">
-                <a href="<?php echo base_url("Bast/manage_bast") ?>" class="nav-link">
+                <a href="<?php echo base_url("Bast/manage_bast_event") ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Manage BAST</p>
                 </a>
@@ -283,7 +283,7 @@
              <?php if (in_array('updateDelivery', $user_permission) || in_array('viewDelivery', $user_permission) || in_array('deleteDelivery', $user_permission)) : ?>
 
                <li class="nav-item has-treeview">
-                 <a href="<?php echo base_url("Delivery/manage_delivery") ?>" class="nav-link" id="deliveryMainNav">
+                 <a href="<?php echo base_url("Delivery/manage_delivery_event") ?>" class="nav-link" id="deliveryMainNav">
                    <i class="nav-icon fas fa-truck"></i>
                    <p>
                      Delivery
@@ -297,7 +297,7 @@
              <?php if (in_array('updateFaktur', $user_permission) || in_array('viewFaktur', $user_permission) || in_array('deleteFaktur', $user_permission)) : ?>
 
                <li class="nav-item has-treeview">
-                 <a href="<?php echo base_url("Faktur/manage_faktur") ?>" class="nav-link" id="fakturMainNav">
+                 <a href="<?php echo base_url("Faktur/manage_faktur_event") ?>" class="nav-link" id="fakturMainNav">
                    <i class="nav-icon fas fa-file-invoice-dollar"></i>
                    <p>
                      Faktur

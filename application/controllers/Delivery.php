@@ -408,7 +408,7 @@ class Delivery extends CI_Controller
     redirect('Delivery/manage_delivery', 'refresh');
   }
 
-  public function manage_delivery()
+  public function manage_delivery_event()
   {
     if ((!in_array('updateDelivery', $this->permission)) and (!in_array('deleteDelivery', $this->permission)) and (!in_array('viewDelivery', $this->permission)) and (!in_array('deleteDelivery', $this->permission)) and (!in_array('statusDelivery', $this->permission))) {
       redirect('dashboard', 'refresh');
@@ -418,26 +418,26 @@ class Delivery extends CI_Controller
     $group_data = $this->model_groups->getGroupData($id);
     $this->data['group_data'] = $group_data;
 
-    $this->db->select('Delivery_number,delivery.quotation_number,quotations.customer_event as customer,tittle_event,gudang,date_pengiriman,bast.status as statusFaktur,bast.status as statusBast,quotations.status as statusQuotations,delivery.status as status,id_delivery');
+    // $this->db->select('Delivery_number,delivery.quotation_number,quotations.customer_event as customer,tittle_event,gudang,date_pengiriman,bast.status as statusFaktur,bast.status as statusBast,quotations.status as statusQuotations,delivery.status as status,id_delivery');
 
-    $this->db->from('quotations');
-    $this->db->join('delivery', 'quotations.quotation_number = delivery.quotation_number');
-    $this->db->join('bast', 'bast.id_bast = delivery.id_bast');
-
-
-
-
-    $this->data['delivery'] = $this->db->get()->result();
-
-    $this->db->select('Delivery_number,delivery.quotation_number,quotation_other.customer_event as customer,tittle_event,gudang,date_pengiriman,bast.status as statusFaktur,bast.status as statusBast,quotation_other.status as statusQuotations,delivery.status as status,id_delivery');
-    $this->db->from('quotation_other');
-    $this->db->join('delivery', 'quotation_other.quotation_number = delivery.quotation_number');
-    $this->db->join('bast', 'bast.quotation_number = delivery.quotation_number');
+    // $this->db->from('quotations');
+    // $this->db->join('delivery', 'quotations.quotation_number = delivery.quotation_number');
+    // $this->db->join('bast', 'bast.id_bast = delivery.id_bast');
 
 
 
 
-    $this->data['delivery_other'] = $this->db->get()->result();
+    // $this->data['delivery'] = $this->db->get()->result();
+
+    // $this->db->select('Delivery_number,delivery.quotation_number,quotation_other.customer_event as customer,tittle_event,gudang,date_pengiriman,bast.status as statusFaktur,bast.status as statusBast,quotation_other.status as statusQuotations,delivery.status as status,id_delivery');
+    // $this->db->from('quotation_other');
+    // $this->db->join('delivery', 'quotation_other.quotation_number = delivery.quotation_number');
+    // $this->db->join('bast', 'bast.quotation_number = delivery.quotation_number');
+
+
+
+
+    // $this->data['delivery_other'] = $this->db->get()->result();
 
 
     $this->load->view('tamplate/header', $this->data);
@@ -445,6 +445,42 @@ class Delivery extends CI_Controller
     $this->load->view('delivery/manage_delivery', $this->data);
     $this->load->view('tamplate/footer', $this->data);
   }
+
+  public function manage_delivery_other()
+  {
+    if ((!in_array('updateDelivery', $this->permission)) and (!in_array('deleteDelivery', $this->permission)) and (!in_array('viewDelivery', $this->permission)) and (!in_array('deleteDelivery', $this->permission)) and (!in_array('statusDelivery', $this->permission))) {
+      redirect('dashboard', 'refresh');
+    }
+
+    $id = $this->session->userdata('id');
+    $group_data = $this->model_groups->getGroupData($id);
+    $this->data['group_data'] = $group_data;
+
+    // $this->db->select('Delivery_number,delivery.quotation_number,quotations.customer_event as customer,tittle_event,gudang,date_pengiriman,bast.status as statusFaktur,bast.status as statusBast,quotations.status as statusQuotations,delivery.status as status,id_delivery');
+
+    // $this->db->from('quotations');
+    // $this->db->join('delivery', 'quotations.quotation_number = delivery.quotation_number');
+    // $this->db->join('bast', 'bast.id_bast = delivery.id_bast');
+
+
+
+
+    // $this->data['delivery'] = $this->db->get()->result();
+
+    // $this->db->select('Delivery_number,delivery.quotation_number,quotation_other.customer_event as customer,tittle_event,gudang,date_pengiriman,bast.status as statusFaktur,bast.status as statusBast,quotation_other.status as statusQuotations,delivery.status as status,id_delivery');
+    // $this->db->from('quotation_other');
+    // $this->db->join('delivery', 'quotation_other.quotation_number = delivery.quotation_number');
+    // $this->db->join('bast', 'bast.quotation_number = delivery.quotation_number');
+
+    // $this->data['delivery_other'] = $this->db->get()->result();
+    $this->load->view('tamplate/header', $this->data);
+    $this->load->view('tamplate/sidebar', $this->data);
+    $this->load->view('delivery/manage_delivery_other', $this->data);
+    $this->load->view('tamplate/footer', $this->data);
+  }
+
+
+
   public function AmbilDataQuotation()
   {
     $quotatoion_number = $this->input->post("quotation_number");
@@ -877,7 +913,7 @@ class Delivery extends CI_Controller
   {
     $this->load->model("model_delivery");
     $fetch_data = $this->model_delivery->make_datatables();
-    $fetch_data_other = $this->model_delivery->make_datatables_other();
+
     $data = array();
     foreach ($fetch_data as $row) {
       if (in_array('updateDelivery', $this->permission)) {
@@ -902,27 +938,6 @@ class Delivery extends CI_Controller
       } else {
         $view = '';
       }
-      // if (in_array('createFaktur', $this->permission) and $row->status == "Close") {
-      //   $this->db->select('*');
-      //   $this->db->from('delivery');
-      //   $this->db->where('id_delivery', $row->id_delivery);
-      //   $data1 = $this->db->get()->row_array();
-      //   if ($data1 != '') {
-
-      //     $faktur = '<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" title="Edit Faktur"   onclick="cekFaktur(' . $row->id_delivery . ')" ><i class="fa fa-check"></i>  Faktur</a></font>';
-      //   } else {
-      //     $faktur = '<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" title="Create Faktur"   onclick="cekFaktur(' . $row->id_delivery . ')" ><i class="fa fa-plus"></i>  Faktur</a></font>';
-      //   }
-      // } else {
-      //   $faktur = '';
-      // }
-
-
-
-
-
-
-
       if ($row->status == "Open") {
         $status = '<span class="label label-warning">Open</span>';
       } else if ($row->status == "Reject") {
@@ -950,6 +965,24 @@ class Delivery extends CI_Controller
         $data[] = $sub_array;
       }
     }
+ 
+    $output = array(
+      "draw"                    =>     intval($_POST["draw"]),
+      "recordsTotal"          =>      $this->model_delivery->get_all_data(),
+      "recordsFiltered"     =>     $this->model_delivery->get_filtered_data(),
+      "data"                    =>     $data
+    );
+    echo json_encode($output);
+  }
+
+
+  public function TampilDatadeliveryother()
+  {
+    $this->load->model("model_delivery");
+    
+    $fetch_data_other = $this->model_delivery->make_datatables_other();
+    $data = array();
+
     foreach ($fetch_data_other as $row) {
       if (in_array('updateDelivery', $this->permission)) {
         $edit = '<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" title="Edit" href="' . base_url('Delivery/edit_delivery/' . $row->quotation_number . '/' . $row->id_delivery) . '"   ><font color="white"><i class="fa fa-edit"></i></font> </a>';
@@ -1027,4 +1060,6 @@ class Delivery extends CI_Controller
     );
     echo json_encode($output);
   }
+
+
 }
