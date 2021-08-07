@@ -33,7 +33,7 @@
         <h3 class="box-title"><b>Data Faktur</b></h3>
 
         <div class="card-tools" style="margin-top: -35px;margin-right: 15px">
-          <a href="<?php echo base_url('Faktur/manage_faktur') ?>" class="btn bg-gradient-secondary">
+          <a href="<?php echo base_url('Faktur/manage_faktur_event') ?>" class="btn bg-gradient-secondary">
             <font color="white">Back</font>
           </a>
         </div>
@@ -756,7 +756,7 @@
           elementStatus1();
 
           setTimeout(function() {
-            window.location = "<?php echo base_url('Faktur/manage_faktur/') ?>";
+            window.location = "<?php echo base_url('Faktur/manage_faktur_event/') ?>";
           }, 2000);
 
 

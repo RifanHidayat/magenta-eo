@@ -77,6 +77,10 @@ class Customer extends CI_Controller {
 	 }
 
 	 public function paymentQE($id){
+
+		if((!in_array('paymentCustomer', $this->permission)) ) {
+			redirect('dashboard', 'refresh');
+		}
 		 $this->data['id']=$id;
 		
 		 $this->db->select('*');
@@ -98,6 +102,9 @@ class Customer extends CI_Controller {
 
 	 }
 	 public function paymentQO($id){
+		if((!in_array('paymentCustomer', $this->permission)) ) {
+			redirect('dashboard', 'refresh');
+		}
 		$this->db->select('*');
 		$this->db->from('customer');
 	   $this->db->where('id',$id);
@@ -584,7 +591,16 @@ class Customer extends CI_Controller {
                 	$delete='';
                 	
                 } 
-				$payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Customer/paymentQE/'.$row->id).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
+
+
+				if(in_array('paymentCustomer', $this->permission)){
+					$payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Customer/paymentQE/'.$row->id).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
+
+				}else{
+					$payment='';
+
+				}
+				
 
 
 

@@ -350,7 +350,7 @@ class Delivery extends CI_Controller
     $this->db->update('delivery', $data);
 
     $this->session->set_flashdata('success', 'Successfully updated');
-    redirect('Delivery/manage_delivery', 'refresh');
+    redirect('Delivery/manage_delivery_event', 'refresh');
   }
 
 
@@ -405,7 +405,7 @@ class Delivery extends CI_Controller
     $this->db->insert('delivery_item', $data1);
     $this->session->set_flashdata('success', 'Successfully created');
 
-    redirect('Delivery/manage_delivery', 'refresh');
+    redirect('Delivery/manage_delivery_event', 'refresh');
   }
 
   public function manage_delivery_event()
@@ -634,7 +634,7 @@ class Delivery extends CI_Controller
         $this->db->insert('delivery', $data1);
       }
       $this->session->set_flashdata('success', 'Successfully created');
-      redirect("Delivery/manage_delivery");
+      redirect("Delivery/manage_delivery_other");
     } else {
       $arr['success'] = false;
       $arr['notif']  = '<div class="alert alert-success">
@@ -706,7 +706,7 @@ class Delivery extends CI_Controller
       }
 
       $this->session->set_flashdata('success', 'Successfully updated');
-      redirect("Delivery/manage_delivery");
+      redirect("Delivery/manage_delivery_event");
     } else {
       $arr['success'] = false;
       $arr['notif']  = '<div class="alert alert-success">

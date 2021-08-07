@@ -131,7 +131,7 @@
                      <label for="status">Metode Perhitungan</label>
                     <option value="">Select Metode</option>
                         <option value="No-Fee Cost">No-Fee Cost</option>
-                        <option value="Comissionable Cost">Comissionable Cost</option>
+                        <option value="Comissionable Cost">Commissionable Cost</option>
                     </select>
                        <small class="text-danger pl-3" id="statusperhitungan_error_edit"></small>
                 </div>
@@ -190,7 +190,7 @@
                      <label for="status">Metode Perhitungan</label>
                     <option value="">Select Metode</option>
                         <option value="No-Fee Cost">No-Fee Cost</option>
-                        <option value="Comissionable Cost">Comissionable Cost</option>
+                        <option value="Comissionable Cost">Commissionable Cost</option>
                     </select>
                        <small class="text-danger pl-3" id="statusperhitungan_error"></small>
                 </div>

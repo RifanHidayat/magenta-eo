@@ -88,8 +88,8 @@ class Item extends CI_Controller {
 	   	$this->data['attribute']=$this->db->get('attributes')->result();
 	 	$this->load->view('tamplate/header',$this->data);
         $this->load->view('tamplate/sidebar',$this->data);
-          	$this->load->view('attribute/manage_attribute',$this->data);
-           	$this->load->view('tamplate/footer',$this->data);
+        $this->load->view('attribute/manage_attribute',$this->data);
+        $this->load->view('tamplate/footer',$this->data);
 
 
 
@@ -214,10 +214,10 @@ class Item extends CI_Controller {
                 	$addValue='';
 
                 }
-                  $this->db->select('COUNT(*) as jml');
-     	   $this->db->from('attribute_values');
-     	   $this->db->where('attribute_parent_id',$row->id);
-     	   $row1=$this->db->get()->row_array();
+        		$this->db->select('COUNT(*) as jml');
+     	   		$this->db->from('attribute_values');
+     	   		$this->db->where('attribute_parent_id',$row->id);
+     	   		$row1=$this->db->get()->row_array();
 
 
 		
@@ -227,8 +227,8 @@ class Item extends CI_Controller {
                 $sub_array = array();  
                 $sub_array[] = $row->name;
                 $sub_array[] ='<center>'.$row1['jml'].'</center>';  
-                $sub_array[] = $row->active; 
-                $sub_array[] = $row->metode;
+                $sub_array[] = $row->active=="Active"?'<center><span class="label label-success">Active</span></center>':'<center><span class="label label-danger">In Active</span></center>'; 
+                $sub_array[] = $row->metode=="No-Fee Cost"?"No-Fee Cost":"Commissionable Cost";
           
                 $sub_array[] = '<center>'.$edit.' '.$delete.' '.$addValue.'</center>';
                 $data[] = $sub_array;  

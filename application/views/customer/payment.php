@@ -41,7 +41,7 @@
 
      <div class="card">
        <div class="card-header">
-         <h5 class="box-title"><b>Payment</b></h5>
+       <h5 class="box-title"><b>Payment invoice <?php echo $name ?></b></h5>
          <div class="card-tools" style="margin-top: -35px;margin-right: 3px">
            <a href="<?php echo base_url('Customer/manage_customer') ?>" class="btn btn-secondary">
              <font color="white">Back</font>
@@ -73,8 +73,9 @@
            <br>
            <br>
           
-           <h5><b>Invoice Payment</b></h5>
-           <span id="payment"> IDR 0</b></span>
+           <h5><b>Payment</b></h5>
+           IDR <span id="payment">0</b></span><br>
+           <small class="text-danger pl-3" id="payment_error"></small>
            <br>
            <br>
            
@@ -223,7 +224,7 @@
  </div>
  </section>
  <script>
- var total_amount;
+ var total_amount=0;
  var data_transactions=[];
  var payment_faktur=[];
  var data_faktur=[];
@@ -283,7 +284,7 @@
 
       }
       total_amount=payment.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-      $('#payment').text(`IDR ${payment.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`)
+      $('#payment').text(` ${payment.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}`)
     //  console.log(checked)
    
   });
@@ -450,7 +451,14 @@ function transactionNumber() {
 $('#saveData').submit(function(e) {
     e.preventDefault();
   //  showIndikatorForevent()
-  
+  var payment_error = document.getElementById("payment_error");
+  if (total_amount==0){
+    payment_error.textContent="* Belum ada pembayaran "
+
+
+  }else{
+    payment_error.textContent="";
+
     data_transactions=[]
     payment_faktur=[]
     
@@ -584,6 +592,10 @@ $('#saveData').submit(function(e) {
 
       });
 
+
+  }
+  
+ 
 
 
 

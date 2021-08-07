@@ -289,15 +289,6 @@ public function ambilId(){
 			$this->db->where($where);
 			$this->db->update('tb_users',$data);
 
-
-      	
-
-      				
-
-
-		
-
-
 	}
 		function aksi_update_data_user_password(){
 		$group=$this->input->post('group_name');

@@ -50,7 +50,7 @@
         <div class="card-header">
           <h3 class="box-title"><b>Add BAST</b></h3>
           <div class="card-tools" style="margin-top: -35px;margin-right: 11px">
-          <a href="<?php echo substr($quotation_number, 0, 2)=="QE"?base_url('Bast/manage_quotation'):base_url('Bast/manage_quotation_other') ?>" class="btn btn-secondary">
+          <a href="<?php echo substr($quotation_number, 0, 2)=="QE"?base_url('Bast/manage_quotation'):base_url('Quotation/manage_quotation_other') ?>" class="btn btn-secondary">
             <font color="white"> Back</font>
           </a>
 
@@ -675,7 +675,19 @@
             confirmButtonText: 'Back'
           }).then((result) => {
             if (result.value) {
-              window.location = "<?php echo base_url('Bast/manage_bast/') ?>";
+              <?php if (substr($quotation_number, 0, 2)=="QE"){
+            ?>
+            window.location = "<?php echo base_url('Bast/manage_bast_event/') ?>";
+            <?php
+
+
+          }else{
+            ?>
+            window.location = "<?php echo base_url('Bast/manage_bast_other/') ?>";
+            <?php
+
+          }
+          ?>
 
             }
           });

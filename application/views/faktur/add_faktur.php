@@ -1303,7 +1303,7 @@
         var dateToday = new Date();
 
         $('#date_faktur').datepicker({
-          dateFormat: 'dd/mm/yy',
+          dateFormat: 'dd/mm/yyyy',
           showButtonPanel: true,
           changeMonth: true,
           changeYear: true,
@@ -1335,9 +1335,7 @@
           main2: '{preview} {remove} {browse}'
         },
         allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
-        initialPreview: [
-          '<object type="application/pdf"  style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/default.png') ?>" ></object>'
-        ],
+        
         msgErrorClass: 'alert alert-block alert-danger'
 
       });

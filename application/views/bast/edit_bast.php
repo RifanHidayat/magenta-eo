@@ -352,50 +352,143 @@
       inline: true
     });
   });
-  $("#imgpo").fileinput({
 
-    overwriteInitial: true,
-    maxFileSize: 2000,
-    showClose: false,
-    showCaption: false,
-    browseLabel: 'browse',
-    removeLabel: 'Remove',
-    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
-    elErrorContainer: '#kv-avatar-errors-1',
-    msgErrorClass: 'alert alert-block alert-danger',
-    // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-    layoutTemplates: {
-      main2: '{preview}   {remove} {browse}'
-    },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-    initialPreview: [
-      '<object type="application/pdf" data="<?php echo $imgpo ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $imgpo ?>" ></object>'
-    ],
-  });
-  $("#imggr").fileinput({
+  <?php if ($imgpo != 'dafault.png') { ?>
+      $("#imgpo").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 20000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
+        initialPreview: [
+          '<object type="application/pdf" data="<?php echo $imgpo ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php $imgpo ?>" ></object>'
+        ],
+      });
+    <?php } else {
+    ?>
+      $("#imgpo").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 20000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
 
-    overwriteInitial: true,
-    maxFileSize: 2000,
-    showClose: false,
-    showCaption: false,
-    browseLabel: 'browse',
-    removeLabel: 'Remove',
-    browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
-    removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
-    removeTitle: 'Cancel or reset changes',
-    elErrorContainer: '#kv-avatar-errors-1',
-    msgErrorClass: 'alert alert-block alert-danger',
-    // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
-    layoutTemplates: {
-      main2: '{preview}   {remove} {browse}'
-    },
-    allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
-    initialPreview: [
-      '<object type="application/pdf" data="<?php echo $imggr ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $imggr ?>" ></object>'
-    ],
-  });
+      });
+    <?php } ?>
+
+
+    <?php if ($imggr != 'dafault.png') { ?>
+      $("#imggr").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 20000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
+        initialPreview: [
+          '<object type="application/pdf" data="<?php echo $imggr ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php $imggr ?>" ></object>'
+        ],
+      });
+    <?php } else {
+    ?>
+      $("#imggr").fileinput({
+        overwriteInitial: true,
+        maxFileSize: 20000,
+        showClose: false,
+        showCaption: false,
+        browseLabel: 'browse',
+        removeLabel: 'Remove',
+        browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+        removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+        removeTitle: 'Cancel or reset changes',
+        elErrorContainer: '#kv-avatar-errors-1',
+        msgErrorClass: 'alert alert-block alert-danger',
+        // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+        layoutTemplates: {
+          main2: '{preview}   {remove} {browse}'
+        },
+        allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
+
+      });
+    <?php } ?>
+
+
+  // $("#imgpo").fileinput({
+
+  //   overwriteInitial: true,
+  //   maxFileSize: 2000,
+  //   showClose: false,
+  //   showCaption: false,
+  //   browseLabel: 'browse',
+  //   removeLabel: 'Remove',
+  //   browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+  //   removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+  //   removeTitle: 'Cancel or reset changes',
+  //   elErrorContainer: '#kv-avatar-errors-1',
+  //   msgErrorClass: 'alert alert-block alert-danger',
+  //   // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+  //   layoutTemplates: {
+  //     main2: '{preview}   {remove} {browse}'
+  //   },
+  //   allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+  //   initialPreview: [
+  //     '<object type="application/pdf" data="<?php echo $imgpo ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $imgpo ?>" ></object>'
+  //   ],
+  // });
+
+  // $("#imggr").fileinput({
+  //   overwriteInitial: true,
+  //   maxFileSize: 2000,
+  //   showClose: false,
+  //   showCaption: false,
+  //   browseLabel: 'browse',
+  //   removeLabel: 'Remove',
+  //   browseIcon: '<i class="glyphicon glyphicon-folder-open"></i>',
+  //   removeIcon: '<i class="glyphicon glyphicon-remove"></i>',
+  //   removeTitle: 'Cancel or reset changes',
+  //   elErrorContainer: '#kv-avatar-errors-1',
+  //   msgErrorClass: 'alert alert-block alert-danger',
+  //   // defaultPreviewContent: '<img src="/uploads/default_avatar_male.jpg" alt="Your Avatar">',
+  //   layoutTemplates: {
+  //     main2: '{preview}   {remove} {browse}'
+  //   },
+  //   allowedFileExtensions: ["jpg", "png", "gif", "pdf"],
+  //   initialPreview: [
+  //     '<object type="application/pdf" data="<?php echo $imggr ?>" style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo $imggr ?>" ></object>'
+  //   ],
+  // });
 
   function ValidateSizePO(file) {
     var FileSize = file.files[0].size / 1024 / 1024; // in MB

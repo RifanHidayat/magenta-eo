@@ -510,6 +510,7 @@
       //function comminable 
       <?php foreach ($item as $k) : ?>
         //var tablehide="#table<?php echo $k->name; ?>";
+        $("#table<?php echo (str_replace(' ', '', $k->name)) ?>").hide();
 
         //tambah baris
         $("#tambahbaris<?php echo (str_replace(' ', '', $k->name)) ?>").click(function(e) {
@@ -520,7 +521,7 @@
       //function comminable 
       <?php foreach ($item_non as $k) : ?>
         //var tablehide="#table<?php echo $k->name; ?>";
-
+        $("#table<?php echo (str_replace(' ', '', $k->name)) ?>").hide();
 
         //tambah baris
         $("#tambahbaris<?php echo (str_replace(' ', '', $k->name)) ?>").click(function(e) {
@@ -854,8 +855,6 @@
         Baris += '</td>';
 
 
-
-
         Baris += '<td hidden>';
         Baris += '<input name="metode[]"  class="form-control subtotal_creative"  required="" readonly value="Non-Fee Cost"> ';
         Baris += '</td>';
@@ -967,13 +966,14 @@
               $(this).find('td:nth-child(1) select').select2();
 
             });
+          
+        
+            $("#table<?php echo (str_replace(' ', '', $it->name_item)) ?>").show();
 
-          <?php } else { ?>
-            // $("#table<?php echo (str_replace(' ', '', $k->name)) ?>").hide();
-            // console.log("<?php echo $k->name ?>");
-          <?php } ?>
+          <?php }  ?>
         <?php endforeach ?>
       }
+      
     <?php endforeach ?>
     // ----------------------------------------------Menampilkan data edit NON----------------------   
     <?php foreach ($item_non as $k) : ?>
@@ -1040,13 +1040,12 @@
               $(this).find('td:nth-child(1) select').select2();
 
             });
+            $("#table<?php echo (str_replace(' ', '', $it->name_item)) ?>").show();
 
-
-
-          <?php } else { ?>
-            // $("#table<?php echo (str_replace(' ', '', $k->name)) ?>").hide();
           <?php } ?>
+         
         <?php endforeach ?>
+      
       }
     <?php endforeach ?>
     //---------------------------menampilkan data deposit-------------------------------------------

@@ -71,6 +71,8 @@
                             <th>Delete</th>
                             <th>Status</th>
                             <th>Print</th>
+                            <th>Payment</th>
+                            <th>Finance & Project</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -104,6 +106,10 @@
                                                                                                                   }
                                                                                                                 }
                                                                                                                 ?>></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
                           </tr>
                           <tr>
                             <td>User</td>
@@ -133,6 +139,10 @@
                                                                                                                 }
                                                                                                               }
                                                                                                               ?>></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
                           </tr>
                           <tr>
                             <td>Customer</td>
@@ -156,6 +166,14 @@
                                                                                                                       echo "checked";
                                                                                                                     }
                                                                                                                   } ?>></td>
+                                                                                                                   <td></td>
+                                                                                                                   <td></td>
+                                                                                                                   <td><input type="checkbox" name="permission[]" class="minimal"             value="paymentCustomer" <?php if ($serialize_permission) {
+                                                                                                                    if (in_array('paymentCustomer', $serialize_permission)) {
+                                                                                                                      echo "checked";
+                                                                                                                    }
+                                                                                                                  } ?>></td>
+                                                                                                                   <td></td>
                           </tr>
 
 
@@ -189,6 +207,10 @@
                                                                                                                   }
                                                                                                                 }
                                                                                                                 ?>> </td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
                           </tr>
 
                           <tr>
@@ -215,6 +237,10 @@
                                                                                                                     echo "checked";
                                                                                                                   }
                                                                                                                 } ?>></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
                           </tr>
 
                           <tr>
@@ -239,32 +265,13 @@
                                                                                                                         echo "checked";
                                                                                                                       }
                                                                                                                     } ?>></td>
+                                                                                                                     <td></td>
+                                                                                                                     <td></td>
+                                                                                                                     <td></td>
+                                                                                                                     <td></td>
                           </tr>
 
-                          <tr>
-                            <td>Saldo PIC</td>
-                            <td><input type="checkbox" name="permission[]" class="minimal" value="createBank" <?php if ($serialize_permission) {
-                                                                                                                if (in_array('createBank', $serialize_permission)) {
-                                                                                                                  echo "checked";
-                                                                                                                }
-                                                                                                              } ?>></td>
-                            <td><input type="checkbox" name="permission[]" class="minimal" value="updateBank" <?php if ($serialize_permission) {
-                                                                                                                if (in_array('updateBank', $serialize_permission)) {
-                                                                                                                  echo "checked";
-                                                                                                                }
-                                                                                                              } ?>></td>
-                            <td><input type="checkbox" name="permission[]" class="minimal" value="viewBank" <?php if ($serialize_permission) {
-                                                                                                              if (in_array('viewBank', $serialize_permission)) {
-                                                                                                                echo "checked";
-                                                                                                              }
-                                                                                                            } ?>></td>
-                            <td><input type="checkbox" name="permission[]" class="minimal" value="deleteBank" <?php if ($serialize_permission) {
-                                                                                                                if (in_array('deleteBank', $serialize_permission)) {
-                                                                                                                  echo "checked";
-                                                                                                                }
-                                                                                                              } ?>></td>
-                          </tr>
-
+            
 
 
                           <tr>
@@ -301,6 +308,8 @@
                                                                                                                       echo "checked";
                                                                                                                     }
                                                                                                                   } ?>></td>
+                                                                                                                   <td></td>
+                                                                                                                   <td></td>
 
                           </tr>
 
@@ -338,7 +347,11 @@
                                                                                                                             echo "checked";
                                                                                                                           }
                                                                                                                         } ?>></td>
+                                                                                                                         <td></td>
+                                                                                                                         <td></td>
                           </tr>
+                         
+                          
                           <tr>
                             <td>BAST</td>
                             <td><input type="checkbox" name="permission[]" class="minimal" value="createBast" <?php if ($serialize_permission) {
@@ -374,6 +387,8 @@
                                                                                                                   echo "checked";
                                                                                                                 }
                                                                                                               } ?>></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
 
                           </tr>
                           <tr>
@@ -410,6 +425,8 @@
                                                                                                                     echo "checked";
                                                                                                                   }
                                                                                                                 } ?>></td>
+                                                                                                                 <td></td>
+                                                                                                                 <td></td>
                           </tr>
                           <tr>
                             <td>Delivery</td>
@@ -445,6 +462,8 @@
                                                                                                                       echo "checked";
                                                                                                                     }
                                                                                                                   } ?>></td>
+                                                                                                                   <td></td>
+                                                                                                                   <td></td>
                           </tr>
 
                           <tr>
@@ -466,6 +485,29 @@
                                                                                                                 } ?>></td>
                             <td><input type="checkbox" name="permission[]" class="hide" value="deleteLaporan" <?php if ($serialize_permission) {
                                                                                                                 if (in_array('deleteLaporan', $serialize_permission)) {
+                                                                                                                  echo "checked";
+                                                                                                                }
+                                                                                                              } ?>></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
+                                                                                                               <td></td>
+                          </tr>
+
+
+                          <tr>
+                            <td>FInance & Project</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          
+                            
+                            <td><input type="checkbox" name="permission[]" class="hide" value="finance" <?php if ($serialize_permission) {
+                                                                                                                if (in_array('finance', $serialize_permission)) {
                                                                                                                   echo "checked";
                                                                                                                 }
                                                                                                               } ?>></td>
@@ -503,6 +545,8 @@
               $(this).find('td:nth-child(5) :checkbox').prop('checked', checkedStatus);
               $(this).find('td:nth-child(6) :checkbox').prop('checked', checkedStatus);
               $(this).find('td:nth-child(7) :checkbox').prop('checked', checkedStatus);
+              $(this).find('td:nth-child(8) :checkbox').prop('checked', checkedStatus);
+              $(this).find('td:nth-child(9) :checkbox').prop('checked', checkedStatus);
               //$(this).prop('checked', checkedStatus);
             });
           });

@@ -66,6 +66,8 @@
                           <th>Delete</th>
                           <th>Status</th>
                           <th>Print</th>
+                          <th>payment</th>
+                          <th>Project & Finance</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -75,6 +77,10 @@
                           <td><input type="checkbox" name="permission[]" value="updateGroup" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewGroup" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deleteGroup" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
                         <tr>
                           <td>User</td>
@@ -82,6 +88,10 @@
                           <td><input type="checkbox" name="permission[]" value="updateUser" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewUser" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deleteUser" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
 
                         <tr>
@@ -90,6 +100,10 @@
                           <td><input type="checkbox" name="permission[]" value="updateCustomer" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewCustomer" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deleteCustomer" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td><input type="checkbox" name="permission[]" value="paymentCustomer" class="minimal"></td>
+                          <td></td>
                         </tr>
 
 
@@ -99,6 +113,10 @@
                           <td><input type="checkbox" name="permission[]" value="updatePicPO" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewPicPO" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deletePicPO" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
                         <tr>
                           <td>Item</td>
@@ -106,6 +124,10 @@
                           <td><input type="checkbox" name="permission[]" value="updateItems" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewItems" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deleteItems" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
                         <tr>
                           <td>Item Value</td>
@@ -113,14 +135,12 @@
                           <td><input type="checkbox" name="permission[]" value="updateItemvalue" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewItemvalue" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deleteItemvalue" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                         </tr>
-                        <tr>
-                          <td>Saldo PIC PO</td>
-                          <td><input type="checkbox" name="permission[]" value="createBank" class="minimal"></td>
-                          <td><input type="checkbox" name="permission[]" value="updateBank" class="minimal"></td>
-                          <td><input type="checkbox" name="permission[]" value="viewBank" class="minimal"></td>
-                          <td><input type="checkbox" name="permission[]" value="deleteBank" class="minimal"></td>
-                        </tr>
+                       
 
 
 
@@ -133,6 +153,10 @@
                           <td><input type="checkbox" name="permission[]" value="deleteQuatations" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="statusQuatations" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="printQuotation" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                         
+                         
                         </tr>
                         <tr>
                           <td>Quotation Other</td>
@@ -142,6 +166,10 @@
                           <td><input type="checkbox" name="permission[]" value="deleteQuatationsother" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="statusQuatationsother" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="printQuotationother" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          
+                     
                         </tr>
                         <tr>
                           <td>BAST</td>
@@ -151,6 +179,10 @@
                           <td><input type="checkbox" name="permission[]" value="deleteBast" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="statusBast" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="printBast" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          
+                          
 
                         </tr>
                         <tr>
@@ -161,6 +193,9 @@
                           <td><input type="checkbox" name="permission[]" value="deleteFaktur" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="statusFaktur" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="printFaktur" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          
                         </tr>
                         <tr>
                           <td>Delivery</td>
@@ -170,6 +205,10 @@
                           <td><input type="checkbox" name="permission[]" value="deleteDelivery" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="statusDelivery" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="printDelivery" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                         
+                    
                         </tr>
 
 
@@ -180,6 +219,23 @@
                           <td><input type="checkbox" name="permission[]" value="updateLaporan" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="viewLaporan" class="minimal"></td>
                           <td><input type="checkbox" name="permission[]" value="deleteLaporan" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+
+                        </tr>
+
+                        <tr>
+                          <td>Project & Finance</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td><input type="checkbox" name="permission[]" value="finance" class="minimal"></td>
 
                         </tr>
 
@@ -218,6 +274,8 @@
               $(this).find('td:nth-child(5) :checkbox').prop('checked', checkedStatus);
               $(this).find('td:nth-child(6) :checkbox').prop('checked', checkedStatus);
               $(this).find('td:nth-child(7) :checkbox').prop('checked', checkedStatus);
+              $(this).find('td:nth-child(8) :checkbox').prop('checked', checkedStatus);
+              $(this).find('td:nth-child(9) :checkbox').prop('checked', checkedStatus);
               //$(this).prop('checked', checkedStatus);
             });
           });

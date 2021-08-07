@@ -479,7 +479,25 @@
           $('.modal-backdrop').hide();
           elementStatus1();
           setTimeout(function() {
-            window.location = "<?php echo base_url('Bast/manage_bast/') ?>";
+            // window.location = "<?php echo base_url('Bast/manage_bast/') ?>";
+
+            
+          <?php if (substr($quotation_number, 0, 2)=="QE"){
+            ?>
+            window.location = "<?php echo base_url('Bast/manage_bast_event/') ?>";
+            <?php
+
+
+          }else{
+            ?>
+            window.location = "<?php echo base_url('Bast/manage_bast_other/') ?>";
+            <?php
+
+          }
+          ?>
+            
+
+            
           }, 2500);
 
         } else {

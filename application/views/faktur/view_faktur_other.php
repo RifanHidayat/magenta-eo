@@ -885,7 +885,7 @@
           $('.modal-backdrop').hide();
           elementStatus1();
           setTimeout(function() {
-            window.location = "<?php echo base_url('Faktur/manage_faktur/') ?>";
+            window.location = "<?php echo base_url('Faktur/manage_faktur_other/') ?>";
           }, 2500);
 
         } else {

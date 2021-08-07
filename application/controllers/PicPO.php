@@ -121,11 +121,11 @@ class PicPO extends CI_Controller {
 	    	 if((!in_array('viewPicPO', $this->permission))AND(!in_array('updatePicPO', $this->permission)) AND (!in_array('deletePicPO', $this->permission))) {
       redirect('dashboard', 'refresh');
     }
-	   		$this->data['customer']=$this->db->get('customer')->result();
-	   	$id=$this->session->userdata('id');
-	    $group_data = $this->model_groups->getGroupData($id);
-		$this->data['group_data'] = $group_data;
-	   	$this->data['pic']=$this->db->get('pic_po')->result();
+	   		// $this->data['customer']=$this->db->get('customer')->result();
+	   	// $id=$this->session->userdata('id');
+	    // $group_data = $this->model_groups->getGroupData($id);
+		// $this->data['group_data'] = $group_data;
+	   	// $this->data['pic']=$this->db->get('pic_po')->result();
 	
 	 	$this->load->view('tamplate/header',$this->data);
         $this->load->view('tamplate/sidebar',$this->data);
@@ -137,11 +137,11 @@ class PicPO extends CI_Controller {
 	    	  	 if((!in_array('viewPicPO', $this->permission))AND(!in_array('updatePicPO', $this->permission)) AND (!in_array('deletePicPO', $this->permission))) {
       redirect('dashboard', 'refresh');
     }
-	   		$this->data['customer']=$this->db->get('customer')->result();
-	   	$id=$this->session->userdata('id');
-	    $group_data = $this->model_groups->getGroupData($id);
-		$this->data['group_data'] = $group_data;
-	   	$this->data['pic_event']=$this->db->get('pic_event')->result();
+	   		// $this->data['customer']=$this->db->get('customer')->result();
+	   	// $id=$this->session->userdata('id');
+	    // $group_data = $this->model_groups->getGroupData($id);
+		// $this->data['group_data'] = $group_data;
+	   	// $this->data['pic_event']=$this->db->get('pic_event')->result();
 	
 	 	$this->load->view('tamplate/header',$this->data);
         $this->load->view('tamplate/sidebar',$this->data);

@@ -867,7 +867,7 @@
             $("#notif").html(data.notif).fadeOut(5000).delay(1000);
 
           });
-          window.location.href = "<?php echo base_url("Faktur/manage_faktur") ?>";
+          window.location.href = "<?php echo base_url("Faktur/manage_faktur_event") ?>";
 
 
 
@@ -877,7 +877,7 @@
       },
 
       error: function(error) {
-        window.location.href = "<?php echo base_url("Faktur/manage_faktur") ?>";
+        window.location.href = "<?php echo base_url("Faktur/manage_faktur_event") ?>";
       }
 
     });

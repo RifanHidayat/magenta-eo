@@ -468,7 +468,7 @@
                       <div class="form-group" id="kanan">
                         <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Note</label>
                         <div class="col-sm-12">
-                          <input required="" type="text" class="form-control" id="note_desciption" name="note_desciption" autocomplete="off" value="<?php echo set_value('Quatations_number') ?>">
+                          <input type="text" class="form-control" id="note_desciption" name="note_desciption" autocomplete="off" value="<?php echo set_value('Quatations_number') ?>">
                         </div>
                       </div>
                       <div class="form-group" id="kanan">
@@ -1631,7 +1631,6 @@
     var grand_total = Number(Math.round(total)) + Number(Math.round(ppn)) - Number(Math.round(pph));
     var grand_total2 = Math.round(grand_total);
     var grand_total1 = grand_total2.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-
     $('#grand_total_other').val(grand_total1);
 
 
@@ -1672,14 +1671,9 @@
     $('#netto').val(total1);
     hitungmanagement();
     total_description();
-
-
     grand_total_other();
     discount_other_function();
-
     pph_description();
-
-
     ppn_description();
 
   }
@@ -1704,13 +1698,9 @@
   function total_description() {
     var netto1 = $('#netto_other').val();
     var netto = netto1.replace(/[^\w\s]/gi, '');
-
-
     $('#total_description').val(netto1);
     $('#total_description_hidden').val(netto);
     grand_total_other();
-
-
   }
 
   function ppn_description() {
@@ -2142,12 +2132,8 @@
   function Nonfee() {
     var hitung = 0;
     <?php foreach ($item_non as $k) : ?>
-
       var total = $("#grandtotalnonhidden<?php echo (str_replace(' ', '', $k->name)); ?>").val();
-
       var hitung = Number(total) + Number(hitung);
-
-
     <?php endforeach ?>
     var btnCust = '<button type="button" class="btn btn-secondary" title="Add picture tags" ' +
       'onclick="alert(\'Call your custom code here.\')">' +
@@ -2222,8 +2208,6 @@
 
 
   function expired() {
-
-
     startDate = new Date($('#date_quotation_event').val());
     endDate = new Date($('#date_expired_event').val());
     if (endDate < startDate) {

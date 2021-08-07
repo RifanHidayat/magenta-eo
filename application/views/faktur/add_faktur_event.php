@@ -656,9 +656,7 @@
     },
     allowedFileExtensions: ["jpg", "png", "gif", "pdf", "jpeg"],
     msgErrorClass: 'alert alert-block alert-danger',
-    initialPreview: [
-      '<object type="application/pdf"  style="height: 30vh; width:50vh"><img style="width: 10%; height: 30% "  src="<?php echo base_url('assets/images/default.png') ?>" ></object>'
-    ],
+  
 
   });
 
@@ -937,7 +935,7 @@
 
 
     $('#date_faktur').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'dd/mm/yyyy',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,
@@ -1019,7 +1017,22 @@
             confirmButtonText: 'Back'
           }).then((result) => {
             if (result.value) {
-              window.location = "<?php echo base_url('Bast/manage_bast/') ?>";
+            //  window.location = "<?php echo base_url('Bast/manage_bast/') ?>";
+
+            <?php if (substr($quotation_number, 0, 2)=="QE"){
+            ?>
+            window.location = "<?php echo base_url('Bast/manage_bast_event/') ?>";
+            <?php
+
+
+          }else{
+            ?>
+            window.location = "<?php echo base_url('Bast/manage_bast_other/') ?>";
+            <?php
+
+          }
+          ?>
+            
 
             }
           });

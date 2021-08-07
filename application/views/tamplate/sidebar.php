@@ -112,7 +112,7 @@
                  </ul>
                </li>
              <?php endif; ?>
-             <?php if (in_array('createCustomer', $user_permission) || in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)) : ?>
+             <?php if (in_array('paymentCustomer', $user_permission) || in_array('createCustomer', $user_permission) || in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)) : ?>
                <li class="nav-item has-treeview" id="openCustomerNav">
                  <a href="#" class="nav-link" id="customerMainNav">
                    <i class="nav-icon fas fa-handshake"></i>

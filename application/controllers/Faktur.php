@@ -527,7 +527,7 @@ class Faktur extends CI_Controller
     $this->db->insert('faktur', $data);
     $this->session->set_flashdata('success', 'Successfully created');
 
-    redirect('Faktur/manage_faktur', 'refresh');
+    redirect('Faktur/manage_faktur_event', 'refresh');
   }
 
   public function aksi_update_faktur_event($id)
@@ -568,7 +568,7 @@ class Faktur extends CI_Controller
     $this->db->where($where);
     $this->db->update('faktur', $data);
     $this->session->set_flashdata('success', 'Successfully updated');
-    redirect('Faktur/manage_faktur', 'refresh');
+    redirect('Faktur/manage_faktur_event', 'refresh');
   }
 
   public function manage_faktur_event()
@@ -775,7 +775,7 @@ class Faktur extends CI_Controller
         ];
         $this->db->insert('faktur', $data1);
       }
-      redirect('Faktur/manage_faktur');
+      redirect('Faktur/manage_faktur_other');
       $this->session->set_flashdata('success', 'Successfully created');
       $arr['success'] = true;
       $arr['notif']  = '<div class="alert alert-success">
@@ -790,7 +790,7 @@ class Faktur extends CI_Controller
     </div>';
       $this->load->view('tamplate/header', $this->data);
       $this->load->view('tamplate/sidebar', $this->data);
-      $this->load->view('Faktur/manage_faktur', $this->data);
+      $this->load->view('Faktur/manage_faktur_other', $this->data);
       $this->load->view('tamplate/footer', $this->data);
     }
   }
@@ -849,13 +849,13 @@ class Faktur extends CI_Controller
       if ($insert) {
         $this->db->insert('faktur_item', $data2);
         $this->session->set_flashdata('success', 'Successfully created');
-        redirect('Faktur/manage_faktur');
+        redirect('Faktur/manage_faktur_event');
       } else {
         $this->session->set_flashdata('error', 'Error');
-        redirect('Faktur/manage_faktur');
+        redirect('Faktur/manage_faktur_event');
       }
 
-      redirect('Faktur/manage_faktur');
+      redirect('Faktur/manage_faktur_event');
       $this->session->set_flashdata('success', 'Successfully created');
       $arr['success'] = true;
       $arr['notif']  = '<div class="alert alert-success">
@@ -870,7 +870,7 @@ class Faktur extends CI_Controller
     </div>';
       $this->load->view('tamplate/header', $this->data);
       $this->load->view('tamplate/sidebar', $this->data);
-      $this->load->view('Faktur/manage_faktur', $this->data);
+      $this->load->view('Faktur/manage_faktur_event', $this->data);
       $this->load->view('tamplate/footer', $this->data);
     }
   }
@@ -926,7 +926,7 @@ class Faktur extends CI_Controller
           "pph23" =>  preg_replace("/[^0-9]/", "", $pph23),
           "total_faktur" => str_replace('.', '', $total_faktur),
           "image" => $upload_image,
-          "diskon_harga" => $this->input->post('hasildiskon'),
+          "diskon_harga" => preg_replace("/[^0-9]/", "", $this->input->post('hasildiskon'))
 
         ];
       }
@@ -940,7 +940,7 @@ class Faktur extends CI_Controller
       $this->session->set_flashdata('success', 'Successfully updated');
 
 
-      redirect("Faktur/manage_faktur");
+      redirect("Faktur/manage_faktur_event");
 
       $arr['success'] = true;
       $arr['notif']  = '<div class="alert alert-success">
@@ -1051,7 +1051,7 @@ class Faktur extends CI_Controller
         $update = $this->db->update('faktur', $data1);
       }
       $this->session->set_flashdata('success', 'Successfully updated');
-      redirect("Faktur/manage_faktur");
+      redirect("Faktur/manage_faktur_other");
     } else {
       $arr['success'] = false;
       $arr['notif']  = '<div class="alert alert-success">

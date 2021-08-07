@@ -116,7 +116,7 @@
         "autoWidth": false,
         "order": [],
         "ajax": {
-          url: "<?php echo base_url("Delivery/TampilDatadelivery") ?>",
+          url: "<?php echo base_url("Delivery/TampilDatadeliveryother") ?>",
           type: "POST"
         },
         "columnDefs": [{

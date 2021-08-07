@@ -182,15 +182,20 @@ class Bast extends CI_Controller
     if ($idd == "QE") {
       $this->db->where($where);
       $this->db->update('quotations', $dataupdate);
+      $this->db->insert('bast', $data);
+      $this->session->set_flashdata('success', 'Successfully Created');
+  
+      redirect('Bast/manage_bast_event', 'refresh');
     } else {
       $this->db->where($where);
       $this->db->update('quotation_other', $dataupdate);
+      $this->db->insert('bast', $data);
+      $this->session->set_flashdata('success', 'Successfully Created');
+  
+      redirect('Bast/manage_bast_other', 'refresh');
     }
 
-    $this->db->insert('bast', $data);
-    $this->session->set_flashdata('success', 'Successfully Created');
-
-    redirect('Bast/manage_bast_event', 'refresh');
+  
   }
   public function manage_bast_event()
   {
@@ -565,12 +570,18 @@ class Bast extends CI_Controller
     if ($idd == "QE") {
       $this->db->where($where);
       $this->db->update('quotations', $dataupdate);
+
+      redirect('Bast/manage_bast_event', 'refresh');
+      $this->session->set_flashdata('success', 'Successfully updated');
     } else {
       $this->db->where($where);
       $this->db->update('quotation_other', $dataupdate);
+      
+      redirect('Bast/manage_bast_other', 'refresh');
+      $this->session->set_flashdata('success', 'Successfully updated');
     }
 
-    redirect('Bast/manage_bast_event', 'refresh');
+   
   }
 
 

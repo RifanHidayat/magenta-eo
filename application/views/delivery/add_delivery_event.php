@@ -25,7 +25,7 @@
         <h3 class="box-title"><b>Add Delivery</b></h3>
 
         <div class="card-tools" style="margin-top: -35px;margin-right: 15px">
-          <a href="<?php echo base_url('Faktur/manage_faktur') ?>" class="btn bg-gradient-secondary">
+          <a href="<?php echo base_url('Bast/manage_bast_event') ?>" class="btn bg-gradient-secondary">
             <font color="white">Back</font>
           </a>
         </div>
@@ -454,7 +454,7 @@
             confirmButtonText: 'Back'
           }).then((result) => {
             if (result.value) {
-              window.location = "<?php echo base_url('Faktur/manage_faktur/') ?>";
+              window.location = "<?php echo base_url('Bast/manage_bast_event/') ?>";
 
             }
           });

@@ -325,7 +325,7 @@
   <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 
 
-
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 
 
   <!-- summernote -->

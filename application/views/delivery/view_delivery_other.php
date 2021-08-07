@@ -33,7 +33,7 @@
         <h3 class="box-title"><b>Data Delivery</b></h3>
 
         <div class="card-tools" style="margin-top: -35px;margin-right: 15px">
-          <a href="<?php echo base_url('Delivery/manage_delivery') ?>" class="btn bg-gradient-secondary">
+          <a href="<?php echo base_url('Delivery/manage_delivery_other') ?>" class="btn bg-gradient-secondary">
             <font color="white">Back</font>
           </a>
         </div>
@@ -529,7 +529,7 @@
           $('.modal-backdrop').hide();
           elementStatus1();
           setTimeout(function() {
-            window.location = "<?php echo base_url('Delivery/manage_delivery/') ?>";
+            window.location = "<?php echo base_url('Delivery/manage_delivery_other/') ?>";
           }, 2500);
 
         } else {
