@@ -470,11 +470,8 @@ class Customer extends CI_Controller {
 
 			$this->db->where($where_pic);
 			$this->db->update('pic_event',$data1);
-
 			$this->db->where($where_pic);
 			$this->db->update('pic_po',$data1);
-
-
 			$this->db->where($where_pic);
 			$this->db->update('quotations',$dataquotation);
 
@@ -627,7 +624,6 @@ class Customer extends CI_Controller {
 
 
       }  
-
 
 
 

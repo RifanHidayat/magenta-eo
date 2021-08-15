@@ -212,9 +212,9 @@
               row+=`
               <tr>
                 <td>
-                  <span> <b>Pembayaran Faktur</b> </span><a style="color:blue"><u>#${value.faktur_number}</u></a>
+                  <span> <b>Pembayaran Faktur</b> </span><a href="/magentaeo/Faktur/payment_history/${value.faktur_number}"><u>#${value.faktur_number}</u></a>
                 </td>
-               
+                
               
                 <td align="right">
                 <span style="color:green" >IDR ${value.amount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}<span>

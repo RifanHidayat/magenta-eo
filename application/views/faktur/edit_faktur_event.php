@@ -580,11 +580,8 @@
         $('[name="jabatan"]').val(hasil[0].jabatan);
         $('[name="pic_customer"]').val(hasil[0].pic_name);
         $('#faktur_number').val(hasil[0].faktur_number);
-
         $('[name="kpph"]').val(hasil[0].karakteristik_pph);
         $('[name="kppn"]').val(hasil[0].karakteristik_ppn);
-
-
         $('#Quatations_number').val(hasil[0].quotation_number);
         $('#seri_faktur').val(hasil[0].ser_faktur);
         $('#date_faktur').val(hasil[0].date_faktur);

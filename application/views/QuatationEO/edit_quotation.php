@@ -66,7 +66,7 @@
                         <div class="form-group" id="kanan">
                           <label id="asflabel" for="Quatations_number" style="text-align:left;" class="col-sm-2 control-label" id>ASF</label>
                           <div class="col-sm-4" id="kananasf">
-                            <input type="Number" class=" col-sm-7 form-control" value="0" name="asf_percen" id="asf_percen" oninput="hitungasf();" name="asf_percen" autocomplete="off">
+                            <input type="Number" class=" col-sm-7 form-control" value="0" name="asf_percen" step="any" id="asf_percen" oninput="hitungasf();" name="asf_percen" autocomplete="off">
                             <label for="Quatations_number" style="text-align:left;" class="col-sm-1 control-label">%</label>
 
                           </div>
@@ -89,7 +89,7 @@
                         <div class="form-group" id="kanan">
                           <label id="asflabel" for="Quatations_number" style="text-align:left;" class="col-sm-2 control-label" id>Discount</label>
                           <div class="col-sm-4" id="kananasf">
-                            <input type="number" class=" col-sm-7 form-control" placeholder="0" required="" name="discount_percent_event" id="discount_percent_event" oninput="discount_event_function()" name="discount_percen" autocomplete="off">
+                            <input type="number" class=" col-sm-7 form-control" placeholder="0" required="" name="discount_percent_event" id="discount_percent_event" oninput="discount_event_function()" name="discount_percen" step="any" autocomplete="off">
                             <label for="Quatations_number" style="text-align:left;" class="col-sm-1 control-label">%</label>
 
                           </div>
@@ -195,7 +195,7 @@
                         <div class="form-group" id="qnumber">
                           <label for="Date_quotation" style="text-align:left;" class="col-sm-7 control-label">Date Quotation</label>
                           <div class="col-sm-12">
-                            <input onkeypress="return false;" type="text" oninput="expired()" onchange="expired();" placeholder="yyyy-mm-dd" required="" class="form-control" id="date_quotation_event" name="date_quotation_event" autocomplete="off" value="<?php echo set_value('Date_quotation') ?>">
+                            <input onkeypress="return false;" type="text" oninput="expired()" onchange="expired();" placeholder="dd/mm/yyyy" required="" class="form-control" id="date_quotation_event" name="date_quotation_event" autocomplete="off" value="<?php echo set_value('Date_quotation') ?>">
                           </div>
 
                         </div>
@@ -455,7 +455,7 @@
                       <hr>
                       <div class="form-group text-left">
 
-                        <button value="update" type="submit" name="btn" class="btn btn-primary">Saave</button>
+                        <button value="update" type="submit" name="btn" class="btn btn-primary">Save</button>
 
                         <button value="rivisi" name="btn" type="submit" class="btn btn-success"><i></i>Save as Revision</button>
                       </div>
@@ -1457,7 +1457,7 @@
           document.getElementById("date_expired_event").readOnly = false;
           $('#date_expired_event').datepicker({
 
-            dateFormat: 'yy-mm-dd',
+            dateFormat: 'dd/mm/yy',
             showButtonPanel: true,
             changeMonth: true,
             changeYear: true,
@@ -1488,7 +1488,7 @@
       var dateToday = new Date();
 
       $('#date_quotation_event').datepicker({
-        dateFormat: 'yy-mm-dd',
+        dateFormat: 'dd/mm/yy',
         showButtonPanel: true,
         changeMonth: true,
         changeYear: true,

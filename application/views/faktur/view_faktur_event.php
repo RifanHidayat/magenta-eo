@@ -419,7 +419,7 @@
                       <td colspan="3">Jasa-ASF</td>
 
 
-                      <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $asf ?></p>
+                      <th>IDR <p align="right" style="margin-top: -21px;"> <?php echo $as ?></p>
                       </th>
 
                     </tr>

@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Faktur extends CI_Controller
 {
   var $permission = array();
+  
   public function __construct()
   {
     parent::__construct();
@@ -17,6 +18,7 @@ class Faktur extends CI_Controller
     $this->load->model('model_bank');
     $this->load->helper(array('form', 'url'));
     $this->load->library('aws3');
+ 
 
     $group_data = array();
     if (empty($this->session->userdata('email'))) {
@@ -28,6 +30,7 @@ class Faktur extends CI_Controller
       $this->data['user_permission'] = unserialize($group_data['permission']);
       $this->permission = unserialize($group_data['permission']);
     }
+    
   }
 
   // public function upload_image_faktur($quotation_number)
@@ -64,6 +67,7 @@ class Faktur extends CI_Controller
 
   public function upload_image_faktur($faktur_number)
   {
+    
 
     $config['upload_path']          = './assets/imagefaktur';
     $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
@@ -813,6 +817,8 @@ class Faktur extends CI_Controller
     $total_faktur = $this->input->post('total_faktur');
     $id_bast = $this->input->post('id_bast');
 
+  
+
 
 
     if ($quotation_number != "") {
@@ -847,9 +853,31 @@ class Faktur extends CI_Controller
       $insert = $this->db->insert('faktur', $data1);
 
       if ($insert) {
-        $this->db->insert('faktur_item', $data2);
-        $this->session->set_flashdata('success', 'Successfully created');
-        redirect('Faktur/manage_faktur_event');
+
+      $this->db->insert('faktur_item', $data2);
+      $db2 = $this->load->database('magenta_hrd', TRUE);
+      $data_transaction=[
+        "account_id"=>"108",
+        "date"=> date('Y-m-d', strtotime($date_faktur)),
+       
+        "description"=>"Piutang  dengan No invoice ".$faktur,
+        "amount"=>str_replace('.', '', $total_faktur),
+        "type"=>"in",
+        "transaction_id"=>$faktur."_faktur"
+      ];
+      
+       
+        $insert_transaction = $db2->insert('transaction_account', $data_transaction);
+        if ($insert_transaction){
+          $this->session->set_flashdata('success', 'Successfully created');
+          redirect('Faktur/manage_faktur_event');
+
+        }else{
+          $this->session->set_flashdata('error', 'Error');
+          redirect('Faktur/manage_faktur_event');
+
+        }
+
       } else {
         $this->session->set_flashdata('error', 'Error');
         redirect('Faktur/manage_faktur_event');
@@ -1099,6 +1127,9 @@ class Faktur extends CI_Controller
 
   public function hapus($id)
   {
+    $db2 = $this->load->database('magenta_hrd', TRUE);
+
+    
     $id = $this->input->post("id");
     $this->db->select('*');
     $this->db->from('faktur');
@@ -1110,6 +1141,9 @@ class Faktur extends CI_Controller
 
     $this->db->where('faktur_number', $data['faktur_number']);
     $this->db->delete('faktur_item');
+
+    $db2->where('transaction_id',$data['faktur_number'].'_faktur');
+    $db2->delete('transaction_account');
 
     $this->db->where('id_faktur', $data['id_faktur']);
     $this->db->delete('delivery');
@@ -1123,6 +1157,9 @@ class Faktur extends CI_Controller
     $this->db->delete('delivery_item');
 
     unlink("assets/imagefaktur/" . $data['image']);
+ 
+
+
   }
 
 
@@ -1469,6 +1506,8 @@ class Faktur extends CI_Controller
 
       if (($row->statusQuotations == "Final")  and ($row->statusBast == "Close")) {
         $sub_array = array();
+        $payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Faktur/payment_history/'.$row->faktur_number).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
+
         $sub_array[] = $row->quotation_number;
         $sub_array[] = $row->faktur_number;
         $sub_array[] = $row->date_faktur;
@@ -1480,7 +1519,7 @@ class Faktur extends CI_Controller
 
         $sub_array[] = $status;
         $sub_array[] = $row->noteStatus;
-        $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view;
+        $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view. ' ' . $payment;
         $data[] = $sub_array;
       }
     }
@@ -1541,6 +1580,8 @@ class Faktur extends CI_Controller
         $sub_array = array();
         $sub_array[] = $row->quotation_number;
 
+        $payment='<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  href="'.base_url('Faktur/payment_history/'.$row->faktur_number).'"  title="payment" ><i class="fa fa-dollar-sign"></i></a>';
+
         $sub_array[] = $row->faktur_number;
         $sub_array[] = $row->date_faktur;
         $sub_array[] = $row->ser_faktur;
@@ -1551,7 +1592,7 @@ class Faktur extends CI_Controller
         $sub_array[] = $status;
         $sub_array[] = $row->noteStatus;
 
-        $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view;
+        $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view. ' ' . $payment;
         $sub_array[] = "";
         $data[] = $sub_array;
       }
@@ -1564,4 +1605,68 @@ class Faktur extends CI_Controller
     );
     echo json_encode($output);
   }
+
+  
+function payment_history($faktur_number){
+
+  $this->db->select('*');
+  $this->db->from('faktur');
+
+  $this->db->where('faktur_number=', $faktur_number);
+  $faktur = $this->db->get()->row_array();
+
+  $idd = substr($faktur['quotation_number'], 0, 2);
+  if ($idd == "QE") {
+
+  $this->db->select('*');
+  $this->db->from('quotations');
+  $this->db->join('customer', 'customer.id=quotations.id_customer');
+  $this->db->join('faktur', 'faktur.quotation_number=quotations.quotation_number');
+  $this->db->where('faktur_number=', $faktur_number);
+  $row = $this->db->get()->row_array();
+  $this->data['print_quotation']='<a href="'.base_url().'Quotation/print_quotation/'.$row['quotation_number'].'">#'.$row['quotation_number'].'</a>';
+
+  }else{
+
+  $this->db->select('*');
+  $this->db->from('quotation_other');
+  $this->db->join('customer', 'customer.id=quotation_other.id_customer');
+  $this->db->join('faktur', 'faktur.quotation_number=quotation_other.quotation_number');
+  $this->db->where('faktur_number=', $faktur_number);
+  $row = $this->db->get()->row_array();
+  $this->data['print_quotation']='<a href="'.base_url().'Quotation/print_quotation_other/'.$row['quotation_number'].'">#'.$row['quotation_number'].'</a>';
+
+  }
+
+
+
+
+
+
+
+	$this->data['faktur_number']=$faktur_number;
+  $this->data['quotation_number']=$row['quotation_number'];
+  $this->data['customer_name']=$row['name'];
+  $this->data['date_faktur']=$row['date_faktur'];
+  $this->data['paid']=$row['pembayaran'];
+  $this->data['unpaid']=$row['total_faktur']-$row['pembayaran'];
+  $this->data['total_faktur']=$row['total_faktur'];
+
+  // $this->data['faktur_number']=$faktur_number;
+  // $this->data['quotation_number']=$row['quotation_number'];
+  // $this->data['customer_name']=$row['name'];
+  // $this->data['date_faktur']=$row['date_faktur'];
+  // $this->data['paid']=$row['pembayaran'];
+  // $this->data['unpaid']=$row['total_faktur']-$row['pembayaran'];
+  // $this->data['total_faktur']=$row['total_faktur'];
+
+
+  
+
+	$this->load->view('tamplate/header',$this->data);
+	$this->load->view('tamplate/sidebar',$this->data);
+	$this->load->view('faktur/historypayment',$this->data);
+	$this->load->view('tamplate/footer',$this->data);
+
+}
 }

@@ -184,7 +184,7 @@
                           <div class="form-group" id="qnumber">
                             <label for="Date_quotation" style="text-align:left;" class="col-sm-7 control-label">Date Quotation</label>
                             <div class="col-sm-12">
-                              <input onkeypress="return false;" onchange="expired()" oninput="expired()" placeholder="yyyy/mm/dd" type="text" required="" class="form-control readonly" id="date_quotation_event" name="date_quotation_event" autocomplete="off" value="<?php echo set_value('Date_quotation') ?>">
+                              <input onkeypress="return false;" onchange="expired()" oninput="expired()" placeholder="yyyy-mm-dd" type="text" required="" class="form-control readonly" id="date_quotation_event" name="date_quotation_event" autocomplete="off" value="<?php echo set_value('Date_quotation') ?>">
                             </div>
                           </div>
 
@@ -192,7 +192,7 @@
                           <div class="form-group" id="qnumber">
                             <label for="date_expired_event" style="text-align:left;" class="col-sm-7 control-label">Date Expired</label>
                             <div class="col-sm-12">
-                              <input onkeypress="return false;" placeholder="yyyy/mm/dd" type="text" class="form-control readonly" required="" id="date_expired_event" name="date_expired_event" autocomplete="off" value="<?php echo set_value('date_expired_event') ?>">
+                              <input onkeypress="return false;" placeholder="yyyy-mm-dd" type="text" class="form-control readonly" required="" id="date_expired_event" name="date_expired_event" autocomplete="off" value="<?php echo set_value('date_expired_event') ?>">
                             </div>
                             <?= form_error('date_expired', '<small class="text-danger pl-3">', '</small>') ?>
                           </div>
@@ -520,14 +520,14 @@
                         <div class="form-group" id="qnumber">
                           <label for="Date_event" style="text-align:left;" class="col-sm-9 control-label">Date Quotation</label>
                           <div class="col-sm-12">
-                            <input onkeypress="return false;" type="text" placeholder="yyyy/mm/dd" oninput="expiredOther()" onchange="expiredOther()" class="form-control" required="" id="date_quotation" name="date_quotation" autocomplete="off" value="<?php echo set_value('Date_event') ?>">
+                            <input onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" oninput="expiredOther()" onchange="expiredOther()" class="form-control" required="" id="date_quotation" name="date_quotation" autocomplete="off" value="<?php echo set_value('Date_event') ?>">
                           </div>
                           <?= form_error('Date_event', '<small class="text-danger pl-3">', '</small>') ?>
                         </div>
                         <div class="form-group" id="qnumber">
                           <label for="Date_event" style="text-align:left;" class="col-sm-9 control-label">Date Expired</label>
                           <div class="col-sm-12">
-                            <input onkeypress="return false;" type="text" placeholder="yyyy/mm/dd" class="form-control" required="" id="date_expired_other" name="date_expired_other" autocomplete="off" value="<?php echo set_value('date_expired_other') ?>">
+                            <input onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="date_expired_other" name="date_expired_other" autocomplete="off" value="<?php echo set_value('date_expired_other') ?>">
                           </div>
                           <?= form_error('Date_event', '<small class="text-danger pl-3">', '</small>') ?>
                         </div>
@@ -1307,8 +1307,9 @@
     var total_other1 = discount_other.replace(/[^\w\s]/gi, '');
     var hasil = (Number(total_other1) / Number(total_summary1)) * 100
     $('#discount_percent_other').val(hasil);
-    ppn();
+  
     netto_other_function();
+    ppn();
     grand_total();
 
 
@@ -1978,6 +1979,7 @@
     $('[name="asf_hidden"]').val(hitung);
     totalsummary();
     pph();
+    ppn();
 
   }
 
@@ -2010,8 +2012,9 @@
     // var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     $('#discount_percent_event').val(hasil);
 
-    ppn();
+   
     netto_event_function();
+    ppn();
     grand_total();
 
   }
@@ -2039,8 +2042,9 @@
     var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     $('#discount_event').val(hasil1);
 
-    ppn();
+   
     netto_event_function();
+    ppn();
     grand_total();
 
   }
@@ -2114,12 +2118,15 @@
       grand_total();
 
     } else {
+      console.log("netto",$('#netto_event').val())
 
       var total = $('#netto_event').val();
       var total1 = total.replace(/[^\w\s]/gi, '');
       var hitung = Number(total1) * 0.1;
+      console.log('ppn',hitung)
       var a = Math.round(hitung);
       var hitung1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+      console.log('ppn',hitung1)
       $('[name="ppn"]').val(hitung1);
       $('[name="ppn_hidden"]').val(hitung);
       grand_total();
@@ -2206,10 +2213,26 @@
 
   }
 
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
   function expired() {
+   // console.log(formatDate("13/08/2021"));
     startDate = new Date($('#date_quotation_event').val());
     endDate = new Date($('#date_expired_event').val());
+    console.log($('#date_quotation_event').val())
+    console.log(startDate)
     if (endDate < startDate) {
       $('#date_expired_event').val("");
 
@@ -2221,12 +2244,12 @@
         document.getElementById("date_expired_event").readOnly = true;
       } else {
         $("#date_expired_event").datepicker({
-          format: "yyyy/mm/dd"
+          dateFormat: "yy-mm-dd"
         });
         document.getElementById("date_expired_event").readOnly = false;
         $('#date_expired_event').datepicker({
 
-          format: "yyyy/mm/dd",
+          dateFormat: "yy-mm-dd",
           showButtonPanel: true,
           changeMonth: true,
           changeYear: true,
@@ -2254,11 +2277,28 @@
 
 
 
+  // $(function() {
+  //   var dateToday = new Date();
+
+  //   $('#date_quotation_event').datepicker({
+  //     format: "dd/mm/yy",
+  //     showButtonPanel: true,
+  //     changeMonth: true,
+  //     changeYear: true,
+
+  //     buttonImageOnly: true,
+
+  //     maxDate: '+30Y',
+  //     yearRange: '1999:2030',
+  //     inline: true
+  //   });
+  // });
+
   $(function() {
     var dateToday = new Date();
 
     $('#date_quotation_event').datepicker({
-      format: "yyyy/mm/dd",
+      dateFormat: 'yy-mm-dd',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,
@@ -2270,6 +2310,7 @@
       inline: true
     });
   });
+
 
   function expiredOther() {
 
@@ -2287,12 +2328,12 @@
         document.getElementById("date_expired_other").readOnly = true;
       } else {
         $("#date_expired_other").datepicker({
-          format: "yyyy/mm/dd",
+          dateFormat: "yy-mm-dd",
         });
         document.getElementById("date_expired_other").readOnly = false;
         $('#date_expired_other').datepicker({
 
-          format: "yyyy/mm/dd",
+          dateFormat: "yy-mm-dd",
           showButtonPanel: true,
           changeMonth: true,
           changeYear: true,
@@ -2323,7 +2364,7 @@
     var dateToday = new Date();
 
     $('#date_quotation').datepicker({
-      format: "yyyy/mm/dd",
+      dateFormat: "yy-mm-dd",
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,

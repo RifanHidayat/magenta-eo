@@ -664,7 +664,9 @@ class Quotation extends CI_Controller
     $this->db->from("quotation_other_item");
     $this->db->where('quotation_number', $id);
     $this->db->where('revisi', $row['revisi']);
+    $this->db->order_by('quotation_other_item.id', 'asc');
     $this->data['quotation_other_item'] = $this->db->get()->result();
+ 
 
     $this->db->select('*');
     $this->db->from('quotation_other');
@@ -729,8 +731,10 @@ class Quotation extends CI_Controller
 
     $this->db->from("quotation_item");
     $this->db->join('attribute_values', 'attribute_values.value = quotation_item.item_value');
+    
 
     $this->db->where('quotation_number', $data1['quotation_number']);
+    $this->db->order_by('quotation_item.id', 'asc');
 
 
 
@@ -1101,6 +1105,7 @@ class Quotation extends CI_Controller
     $this->db->from("quotation_other_item");
     $this->db->where('quotation_number', $id);
     $this->db->where('revisi', $row['revisi']);
+    $this->db->order_by('quotation_other_item.id', 'asc');
     $this->data['quotation_other_item'] = $this->db->get()->result();
 
     $this->db->select('*');
@@ -1202,6 +1207,7 @@ class Quotation extends CI_Controller
     $this->db->join('attribute_values', 'attribute_values.value = quotation_item.item_value');
 
     $this->db->where('quotation_number', $id);
+    $this->db->order_by('quotation_item.id', 'asc');
 
     $this->data['quotation_item'] = $this->db->get()->result();
 

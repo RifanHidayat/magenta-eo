@@ -83,7 +83,7 @@ public function aksi_laporan_tanggal(){
 			if ($status=="All"){
 				$this->db->select('*');
 			$this->db->from('quotations');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 	
            $result['data']=$fetch_data;  
@@ -92,7 +92,7 @@ public function aksi_laporan_tanggal(){
 			}else{
 				$this->db->select('*');
 			$this->db->from('quotations');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			$result['data']=$fetch_data;  
@@ -107,7 +107,7 @@ public function aksi_laporan_tanggal(){
 			$this->db->select('*');
 			$this->db->from('quotations');
 			$this->db->join('quotation_item','quotation_item.quotation_number=quotations.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 
 
 			$fetch_data=$this->db->get()->result();
@@ -121,7 +121,7 @@ public function aksi_laporan_tanggal(){
 		   	$this->db->select('*');
 			$this->db->from('quotations');
 			$this->db->join('quotation_item','quotation_item.quotation_number=quotations.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			
 
@@ -141,7 +141,7 @@ public function aksi_laporan_tanggal(){
 				if ($status=="All"){
 					$this->db->select('*');
 				   $this->db->from('quotation_other');
-					$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 						$fetch_data=$this->db->get()->result();
 			
 							$result['data']=$fetch_data;  
@@ -151,7 +151,7 @@ public function aksi_laporan_tanggal(){
 				}else{
 						$this->db->select('*');
 				   $this->db->from('quotation_other');
-					$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 					$this->db->where('status',$status);
 						$fetch_data=$this->db->get()->result();
 			
@@ -165,7 +165,7 @@ public function aksi_laporan_tanggal(){
 					$this->db->select('*');
 			$this->db->from('quotation_other');
 			$this->db->join('quotation_other_item','quotation_other_item.quotation_number = quotation_other.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -175,7 +175,7 @@ public function aksi_laporan_tanggal(){
 					$this->db->select('*');
 			$this->db->from('quotation_other');
 			$this->db->join('quotation_other_item','quotation_other_item.quotation_number = quotation_other.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			
@@ -197,7 +197,7 @@ public function aksi_laporan_tanggal(){
 
 					$this->db->select('*');
 					$this->db->from('faktur');
-					$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -208,7 +208,7 @@ public function aksi_laporan_tanggal(){
 			$this->db->from('faktur');
 
 
-			$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 
 			$fetch_data=$this->db->get()->result();
@@ -227,7 +227,7 @@ public function aksi_laporan_tanggal(){
 			$this->db->select('*');
 			$this->db->from('faktur');
 			$this->db->join('faktur_item','faktur_item.faktur_number = faktur.faktur_number');
-			$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 		$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -237,7 +237,7 @@ public function aksi_laporan_tanggal(){
 					$this->db->select('*');
 			$this->db->from('faktur');
 			$this->db->join('faktur_item','faktur_item.faktur_number = faktur.faktur_number');
-			$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			
@@ -257,7 +257,7 @@ public function aksi_laporan_tanggal(){
 				if ($status=="All"){
 					$this->db->select('*');
 			$this->db->from('delivery');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -266,7 +266,7 @@ public function aksi_laporan_tanggal(){
 				}else{
 					$this->db->select('*');
 			$this->db->from('delivery');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 		$fetch_data=$this->db->get()->result();
 			
@@ -283,7 +283,7 @@ public function aksi_laporan_tanggal(){
 				$this->db->select('*');
 			$this->db->from('delivery');
 			$this->db->join('delivery_item','delivery.Delivery_number = delivery_item.delivery_number');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -293,7 +293,7 @@ public function aksi_laporan_tanggal(){
 				$this->db->select('*');
 			$this->db->from('delivery');
 			$this->db->join('delivery_item','delivery.Delivery_number = delivery_item.delivery_number');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/y/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 
 			$fetch_data=$this->db->get()->result();
@@ -311,7 +311,7 @@ public function aksi_laporan_tanggal(){
 					if ($status=="All"){
 					$this->db->select('*');
 					$this->db->from('bast');
-					$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 						$fetch_data=$this->db->get()->result();
 			
 						$result['data']=$fetch_data;  
@@ -321,7 +321,7 @@ public function aksi_laporan_tanggal(){
 			}else{
 						$this->db->select('*');
 						$this->db->from('bast');
-						$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+						$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 						$this->db->where('status',$status); 
 						$fetch_data=$this->db->get()->result();
 			     
@@ -336,7 +336,7 @@ public function aksi_laporan_tanggal(){
 			if ($status=="All"){
 					$this->db->select('*');
 					$this->db->from('bast');
-					$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 					$fetch_data=$this->db->get()->result();
 			
 					$result['data']=$fetch_data;  
@@ -346,7 +346,7 @@ public function aksi_laporan_tanggal(){
 			}else{
 					$this->db->select('*');
 					$this->db->from('bast');
-					$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 					  $this->db->where('status',$status); 
 					$fetch_data=$this->db->get()->result();
 			   
@@ -384,7 +384,7 @@ public function aksi_laporan_bulan(){
 			 if ($status=="All"){
 				$this->db->select('*');
 			$this->db->from('quotations');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 
 		    $fetch_data=$this->db->get()->result();
 			
@@ -394,7 +394,7 @@ public function aksi_laporan_bulan(){
 			}else{
 				$this->db->select('*');
 			$this->db->from('quotations');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			 $fetch_data=$this->db->get()->result();
 			
@@ -409,7 +409,7 @@ public function aksi_laporan_bulan(){
 			$this->db->select('*');
 			$this->db->from('quotations');
 			$this->db->join('quotation_item','quotation_item.quotation_number=quotations.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 
 
 			$fetch_data=$this->db->get()->result();
@@ -423,7 +423,7 @@ public function aksi_laporan_bulan(){
 		   	$this->db->select('*');
 			$this->db->from('quotations');
 			$this->db->join('quotation_item','quotation_item.quotation_number=quotations.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			
 
@@ -442,7 +442,7 @@ public function aksi_laporan_bulan(){
 				if ($status=="All"){
 					$this->db->select('*');
 				   $this->db->from('quotation_other');
-					$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 						$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -452,7 +452,7 @@ public function aksi_laporan_bulan(){
 				}else{
 						$this->db->select('*');
 				   $this->db->from('quotation_other');
-					$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 					$this->db->where('status',$status);
 						$fetch_data=$this->db->get()->result();
 			
@@ -466,7 +466,7 @@ public function aksi_laporan_bulan(){
 					$this->db->select('*');
 			$this->db->from('quotation_other');
 			$this->db->join('quotation_other_item','quotation_other_item.quotation_number = quotation_other.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -476,7 +476,7 @@ public function aksi_laporan_bulan(){
 					$this->db->select('*');
 			$this->db->from('quotation_other');
 			$this->db->join('quotation_other_item','quotation_other_item.quotation_number = quotation_other.quotation_number');
-			$this->db->where('date_quotation BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_quotation BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 		$fetch_data=$this->db->get()->result();
 			
@@ -498,7 +498,7 @@ public function aksi_laporan_bulan(){
 
 					$this->db->select('*');
 					$this->db->from('faktur');
-					$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+					$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -509,7 +509,7 @@ public function aksi_laporan_bulan(){
 			$this->db->from('faktur');
 
 
-			$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 
 		$fetch_data=$this->db->get()->result();
@@ -528,7 +528,7 @@ public function aksi_laporan_bulan(){
 			$this->db->from('faktur');
 			$this->db->join('faktur_item','faktur_item.faktur_number = faktur.faktur_number');
 
-			$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			//$this->db->where("faktur.quotation_number LIKE '%QO%' ");
 		$fetch_data=$this->db->get()->result();
 			
@@ -539,7 +539,7 @@ public function aksi_laporan_bulan(){
 					$this->db->select('*');
 			$this->db->from('faktur');
 			$this->db->join('faktur_item','faktur_item.faktur_number = faktur.faktur_number');
-			$this->db->where('date_faktur BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_faktur BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			
@@ -559,7 +559,7 @@ public function aksi_laporan_bulan(){
 				if ($status=="All"){
 					$this->db->select('*');
 			$this->db->from('delivery');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -568,7 +568,7 @@ public function aksi_laporan_bulan(){
 				}else{
 					$this->db->select('*');
 			$this->db->from('delivery');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			
@@ -585,7 +585,7 @@ public function aksi_laporan_bulan(){
 				$this->db->select('*');
 			$this->db->from('delivery');
 			$this->db->join('delivery_item','delivery.Delivery_number = delivery_item.delivery_number');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 			
 			$result['data']=$fetch_data;  
@@ -595,7 +595,7 @@ public function aksi_laporan_bulan(){
 				$this->db->select('*');
 			$this->db->from('delivery');
 			$this->db->join('delivery_item','delivery.Delivery_number = delivery_item.delivery_number');
-			$this->db->where('date_pengiriman BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_pengiriman BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
@@ -613,7 +613,7 @@ public function aksi_laporan_bulan(){
 				if ($status=="ALL"){
 					$this->db->select('*');
 			$this->db->from('bast');
-			$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 	
 			
@@ -623,7 +623,7 @@ public function aksi_laporan_bulan(){
 				}else{
 					$this->db->select('*');
 			$this->db->from('bast');
-			$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			
@@ -639,7 +639,7 @@ public function aksi_laporan_bulan(){
 			if ($status=="ALL"){
 					$this->db->select('*');
 			$this->db->from('bast');
-			$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$fetch_data=$this->db->get()->result();
 	
 			
@@ -649,7 +649,7 @@ public function aksi_laporan_bulan(){
 				}else{
 					$this->db->select('*');
 			$this->db->from('bast');
-			$this->db->where('date_bast BETWEEN "'. date('Y-m-d', strtotime($tanggal_mulai)). '" and "'. date('Y-m-d', strtotime($tanggal_sampai)).'"');
+			$this->db->where('date_bast BETWEEN "'. date('d/m/Y', strtotime($tanggal_mulai)). '" and "'. date('d/m/Y', strtotime($tanggal_sampai)).'"');
 			$this->db->where('status',$status);
 			$fetch_data=$this->db->get()->result();
 			

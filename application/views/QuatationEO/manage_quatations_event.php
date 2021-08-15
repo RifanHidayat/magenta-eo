@@ -116,7 +116,7 @@
 
                 <div class="form-group">
                   <label for="fname">Date Number </label>
-                  <input autocomplete="off" onkeypress="return false;" placeholder="dd/mm/yy" required style="width: 100%;" type="text" class="form-control date_number" id="date_number" name="date_number" readonly>
+                  <input autocomplete="off" onkeypress="return false;" placeholder="dd/mm/yyyy" required style="width: 100%;" type="text" class="form-control date_number" id="date_number" name="date_number" readonly>
                   <small class="text-danger pl-3" id="date_error"></small>
                 </div>
                 <div class="form-group">
@@ -139,7 +139,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('.date_number').datepicker({
-          format: "yyyy/mm/dd"
+          dateFormat: "dd/mm/yy"
         });
       });
 

@@ -152,6 +152,8 @@ class Bast extends CI_Controller
     if ($upload_image_gr == '') {
       $upload_image_gr = "dafault.png";
     }
+   
+    $date = date("Y-m-d", strtotime($date_bast));
 
     $data = [
       'quotation_number' => $this->input->post('Quatations_number'),
@@ -162,7 +164,7 @@ class Bast extends CI_Controller
       'pic_po' => $this->input->post('pic_po'),
       'bast_number' => $this->input->post('bast_number'),
       'date_po' => $this->input->post('date_po'),
-      'date_bast' => $this->input->post('date_bast'),
+      'date_bast' => $date_bast,
       'jabatan' => $this->input->post('jabatan_pic'),
       'image_gr' => $upload_image_gr,
       'image_po' => $upload_image_po,

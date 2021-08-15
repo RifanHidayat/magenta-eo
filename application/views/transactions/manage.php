@@ -137,7 +137,7 @@
           
           </td>
           <td align="right">
-          IDR ${value.amount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
+          ${value.amount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}
           
           </td>
           <td>

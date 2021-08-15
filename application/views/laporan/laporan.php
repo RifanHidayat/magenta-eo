@@ -401,17 +401,7 @@
     <!-- /.content -->
   </div>
 
-  <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.22/js/dataTables.semanticui.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.semanticui.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.colVis.min.js"></script>
 
-              
 
 
 <script type="text/javascript">
@@ -501,6 +491,9 @@ function getDataquotation(id,aksi,target,type,table){
   var title="Laporan "+jenis_laporan+" Quotation Event "+type+" "+mulai+" Sampai "+sampai+" dengan status "+status;
  
       if (jenis_laporan=="total"){
+
+        console.log(mulai)
+        console.log(sampai)
          getdatatablequotationtotal(title,table,aksi,laporan,jenis_laporan,status,mulai,sampai);
         var baris='';
              
@@ -532,12 +525,7 @@ function getDataquotation(id,aksi,target,type,table){
                            document.getElementById(target).innerHTML = baris;
 
                          
-                        
-      
-                        
-
-                   
-             
+            
 
                                    }else{
                                      getdatatablequotationdetail(title,table,aksi,laporan,jenis_laporan,status,mulai,sampai);
@@ -866,38 +854,38 @@ function getdatatablequotationtotal(title,table,aksi,laporan,jenis_laporan,statu
            { 'data': 'date_event' },
             { 'data': 'asf',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } } ,
             { 'data': 'comissionable_cost',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'nonfee',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
              { 'data': 'total_summary',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'pph',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '') :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'ppn',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '') :
-                    data;
+                    data:
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'grand_total',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data:
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'status' }         
         ], 
@@ -1070,48 +1058,48 @@ function getdatatablequotationdetail(title,table,aksi,laporan,jenis_laporan,stat
             { 'data': 'frrequency' },
             { 'data': 'rate',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'subtotal',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'asf',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } } ,
             { 'data': 'comissionable_cost',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'nonfee',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data:
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'total_summary',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'pph',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, ''):
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'ppn',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'grand_total',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'status' }         
         ], 
@@ -1281,34 +1269,34 @@ function getdatatablequotationothertotal(title,table,aksi,laporan,jenis_laporan,
            
             { 'data': 'asf',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } } ,
             { 'data': 'netto' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '') :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
            
             { 'data': 'pph23',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '') :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
              { 'data': 'total',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'ppn',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'grand_total',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'status' }         
         ], 
@@ -1480,52 +1468,52 @@ function getdatatablequotationotherdetail(title,table,aksi,laporan,jenis_laporan
             { 'data': 'desciption' },
             { 'data': 'frequency',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'unitprice',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'amount',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
 
            
             { 'data': 'asf',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } } ,
             { 'data': 'netto' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '') :
+                    data  :
 
-                    data;
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
                { 'data': 'total',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
            
             { 'data': 'pph23',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '') :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'ppn',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'grand_total',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'status' }         
         ], 
@@ -1858,28 +1846,28 @@ function getdatatablefakturtotal(title,table,aksi,laporan,jenis_laporan,status,m
             { 'data': 'syarat_pembayaran' },
             { 'data': 'total_sub',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'diskon_harga' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '')  :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'ppn',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'pph23' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '')  :
-                    data;
+                    data   :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             }},
             { 'data': 'total_faktur' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             }},
            
             { 'data': 'status' }         
@@ -2050,28 +2038,28 @@ function getdatatablefakturdetail(title,table,aksi,laporan,jenis_laporan,status,
             { 'data': 'amount' },
             { 'data': 'total_sub',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'diskon_harga' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '')  :
-                    data;
+                    data   :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'ppn',render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             } },
             { 'data': 'pph23' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace(/[^\w\s]/gi, '')  :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             }},
             { 'data': 'total_faktur' ,render: function (data, type, row) {
                 return type === 'export' ?
-                    data.replace( /[.]/g, '' ) :
-                    data;
+                    data  :
+                    data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             }},
            
             { 'data': 'status' }         

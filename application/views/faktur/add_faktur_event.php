@@ -316,7 +316,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="Date_event" style="text-align:left;" class="col-sm-6 control-label">Date Faktur</label>
                     <div class="col-sm-12">
-                      <input type="text" placeholder="dd/mm/yyyy" class="form-control" required="" id="date_faktur" onkeypress="return false;" name="date_faktur" autocomplete="off" value="<?php echo set_value('date_faktur') ?>">
+                      <input type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="date_faktur" onkeypress="return false;" name="date_faktur" autocomplete="off" value="<?php echo set_value('date_faktur') ?>">
                     </div>
                     <?= form_error('date_faktur', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
@@ -935,7 +935,7 @@
 
 
     $('#date_faktur').datepicker({
-      dateFormat: 'dd/mm/yyyy',
+      dateFormat: 'yy-mm-dd',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,

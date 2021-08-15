@@ -255,13 +255,15 @@
       var checked = $(this).find('td:nth-child(8) input:checked').val();
       console.log(checked)
       if (checked=="on"){
-        var faktur_number = $(this).find('td:nth-child(1)').html();
+    
+        var faktur_number = $(this).find('td:nth-child(1) a').html();
         var quotation_number = $(this).find('td:nth-child(2)').html();
      
         var remaining = $(this).find('td:nth-child(7)').html();
         var jumlah_bayar = $(this).find('td:nth-child(6)').html();
         var grand_total = $(this).find('td:nth-child(5)').html();
      
+        console.log("faktur_number",faktur_number)
         
 
         var data={
@@ -311,7 +313,9 @@ function UnFinieshed() {
 
               baris += '<tr>' +
               
-                '<td style="width: 15%">' + response.data.unfinished_faktur[i].faktur_number + '</td>' +
+                // '<td style="width: 15%">' + response.data.unfinished_faktur[i].faktur_number + '</td>' +
+
+                `<td style="width: 10%"><a href="/magentaeo/Faktur/payment_history/${response.data.unfinished_faktur[i].faktur_number}">${response.data.unfinished_faktur[i].faktur_number }</a></td>` +
              
                 '<td style="width: 15%" >' + response.data.unfinished_faktur[i].quotation_number + '</td>' +
                 
@@ -363,8 +367,11 @@ function UnFinieshed() {
           var pembayaran=response.data.finished_faktur[i].pembayaran==null?0:response.data.finished_faktur[i].pembayaran
          var remaining=total_faktur-pembayaran;
       
-          baris += '<tr>' +
-            '<td style="width: 15%">' +response.data.finished_faktur[i].faktur_number + '</td>' +
+          // baris += '<tr>' +
+          //   '<td style="width: 15%">' +response.data.finished_faktur[i].faktur_number + '</td>' +
+          `<td style="width: 15%"><a href="/magentaeo/Faktur/payment_history/${response.data.finished_faktur[i].faktur_number}">${response.data.finished_faktur[i].faktur_number }</a></td>` +
+
+
             '<td style="width: 10%" >' + response.data.finished_faktur[i].quotation_number + '</td>' +
            
           
@@ -401,7 +408,12 @@ function accounts() {
     dataType: 'json',
     success: function(response) {
       for (var i=0; i<response.data.length; i++){
-        $('#account').append('<option id=' + response.data[i].id + ' value=' + response.data[i].id + '>' + response.data[i].bank_name  + '</option>');
+     
+
+        if (response.data[i].id!=100){
+          $('#account').append('<option id=' + response.data[i].id + ' value=' + response.data[i].id + '>' + response.data[i].bank_name  + '</option>');
+
+        }
         
       }
     
@@ -511,9 +523,54 @@ $('#saveData').submit(function(e) {
         },
         success: function(response) {
 
-          //console.log(response)
-         
+          var data_transaction={
+      transaction_id:"<?php $name ?>_<?php echo $id ?>",
+      date:date_transaction,
+      account_id:account_id,
+      description:`<?php echo $name ?>/${description}`,
+      amount:payment,
 
+
+    }
+    
+ 
+
+        if (payment>0){
+          axios.post("http://localhost:3000/api/accounts/transaction/remaining",data_transaction).then((response)=>{
+            Swal.fire({
+                  title: "success!",
+                  text: "Transaksi berhasil disimpan",
+                  icon: "success",
+                  timer: 2000,
+                  showCancelButton: false,
+                  showConfirmButton: false
+                });
+                
+                setTimeout(function() {
+                  window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+                }, 2500);
+
+                hiddenindikator();
+            
+          })
+          .catch((error)=>{
+            Swal.fire({
+                  title: "error",
+                  text: "terjadi kesalahan",
+                  icon: "error",
+                  timer: 2000,
+                  showCancelButton: false,
+                  showConfirmButton: false
+                });
+                
+               
+
+
+                hiddenindikator();
+
+          })
+
+        }else{
           Swal.fire({
                   title: "success!",
                   text: "Transaksi berhasil disimpan",
@@ -529,40 +586,15 @@ $('#saveData').submit(function(e) {
 
 
                 hiddenindikator();
-
-          // if (hasil.status == 'tersedia') {
-          //   Swal.fire({
-          //     title: 'Oops',
-          //     text: "Quotation number sudah tersedia,lakukan update quotation dengan menekan tombol update QO  sebeleum menyimpan  data quotation other",
-          //     icon: 'info',
-          //     showCancelButton: true,
-          //     confirmButtonColor: '#3085d6',
-          //     cancelButtonColor: '#808080',
-          //     cancelButtonText: 'Tidak',
-          //     confirmButtonText: 'Update QO'
-          //   }).then((result) => {
-          //     if (result.value) {
-
-          //       generet_quotation_other();
-          //       hiddenIndikatorForother();
-          //       Swal.fire({
-          //         position: 'center',
-          //         icon: 'success',
-          //         title: 'Quotation number has been updated',
-          //         showConfirmButton: false,
-          //         timer: 1500
-          //       });
+         
 
 
-          //     }
-          //   });
+        }
+
+         
+         
 
 
-          // } else {
-
-          //   $("#SimpanDataOther").submit();
-          
-          // }
 
 
         },

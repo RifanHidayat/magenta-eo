@@ -38,7 +38,7 @@
           <h3 class="box-title"><b>Add BAST</b></h3>
           <div class="card-tools" style="margin-top: -35px;margin-right: 11px">
             <a href="<?php echo base_url('Quotation/manage_quotation') ?>" class="btn btn-secondary">
-              <font color="white">Backk</font>
+              <font color="white">Back</font>
             </a>
 
           </div>
