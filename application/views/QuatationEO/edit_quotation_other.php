@@ -64,7 +64,7 @@
                     
                    </div>
                    <hr>
-                       <?php endif; ?>
+                    <?php endif; ?>
                        -->
 
                       <!--   other -->

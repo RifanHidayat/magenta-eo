@@ -196,7 +196,7 @@
                   <th><center>Quantity</center></th>
                   <th><center>Frequency</center></th>
                   <th><center>Rate </center></th>
-                  <th><center>Sub Total</center> </th>
+                  <th><center>Subtotal</center> </th>
               </tr>
               </thead>
 
@@ -212,9 +212,6 @@
                   <?php if ($name->name==$k->name_item) { $no++; 
                     $subtotal=(str_replace('.', '', $k->subtotal));
                       $total=$total+$subtotal;
-
-
-
                     ?>
                 <tr>
                 <td><center><?php echo $no; ?></center></td>
@@ -270,7 +267,7 @@
                   <th scope="col"><center>Quantity</center></th>
                   <th scope="col"><center>Frequency</center></th>
                   <th scope="col"><center>Rate </center></th>
-                  <th scope="col"><center>Sub Total</center> </th>
+                  <th scope="col"><center>Subtotal</center> </th>
               </tr>
               </thead>
 

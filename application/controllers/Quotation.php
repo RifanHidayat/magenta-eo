@@ -1115,14 +1115,15 @@ class Quotation extends CI_Controller
     $row = $this->db->get()->row_array();
     $this->data['note'] = $row['note'];
     $this->data['alamat'] = $row['address'];
-    $this->data['grand_total'] = $row['grand_total'];
+    $this->data['grand_total'] = number_format($row['grand_total'],0,',','.');
     $this->data['quotation_number'] = $row['quotation_number_revisi'];
-    $this->data['netto'] = $row['netto'];
-    $this->data['asf'] = $row['asf'];
-    $this->data['total'] = $row['total'];
-    $this->data['ppn'] = $row['ppn'];
-    $this->data['pph23'] = $row['pph23'];
+    $this->data['netto'] = number_format($row['netto'],0,',','.');
+    $this->data['asf'] = number_format($row['asf'],0,',','.');
+    $this->data['total'] = number_format($row['total'],0,',','.');
+    $this->data['ppn'] = number_format($row['ppn'],0,',','.');
+    $this->data['pph23'] = number_format($row['pph23'],0,',','.');
     $this->data['discount'] = $row['discount'];
+    $this->data['date_quotation'] = $row['date_quotation'];
 
     $this->data['title'] = $row['tittle_event'];
     // $this->data['pic_name']=$row['pic_name'];
@@ -1178,6 +1179,8 @@ class Quotation extends CI_Controller
     $this->data['date'] = $row['date_quotation'];
     $this->data['pic_name'] = $row['pic_event'];
     $this->data['pic_email'] = $row['email_event'];
+    $this->data['title_event'] = $row['tittle_event'];
+    $this->data['quotation_number'] = $id;
 
     //    $this->data['pic_name']=$row['pic_name'];
     // $this->data['pic_email']=$row['pic_email']; 

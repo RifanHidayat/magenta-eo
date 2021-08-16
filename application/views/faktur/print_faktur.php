@@ -18,15 +18,15 @@
 
 
     #tbl1 th {
-      padding-top: 12px;
-      padding-bottom: 12px;
+      padding-top: 5px;
+      padding-bottom: 5px;
       text-align: left;
 
       color: black;
     }
 
     table tr td {
-      font-size: 8px;
+      font-size: 10px;
     }
 
     table tr th {
@@ -59,14 +59,14 @@
         <h4 style=" margin-top: 15px" align="right"><b>Faktur Penjualan</b></h4>
       </div>
 
-      <img style="margin-top: -50px" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="150" height="50">
+      <img style="margin-top: -40px" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="160" height="40">
 
       <!-- info row -->
 
       <!-- /.row -->
       <div class="row invoice-info">
         <div class="col-9 invoice-col">
-          <br>
+          
           <p>PT.Magenta Mediatama<br>
 
 
@@ -75,19 +75,18 @@
             <br>
             phone (021) 53660077-08;Fax(021)53660099
           </p>
-          <br>
-          <br>
-          <table style="margin-top: -30px">
+          
+          <table style="margin-top: 0px" style="width: 60%; " >
             <tr>
 
-              <td style="width: 100px;">Tagihan Ke</td>
-              <td style="width: 150px;"><?php echo $nama; ?></td>
+              <td style="width: 5%;">Tagihan Ke</td>
+              <td style="width: 5%;"><?php echo $nama; ?></td>
 
             </tr>
             <tr>
 
-              <td style="height: 70px"></td>
-              <td style="height: 70px; width:150px;"><?php echo $alamat; ?></td>
+              <td style="height: 10px"></td>
+              <td style="height: 10px; width:150px;"><?php echo $alamat; ?></td>
 
 
 
@@ -104,7 +103,7 @@
         <div class="float-right">
 
           <br>
-          <table align="right" style="margin-top: -180px">
+          <table align="right" style="margin-top: -120px">
 
             <tr>
 
@@ -115,7 +114,7 @@
             </tr>
             <tr>
 
-              <td>No Seri Faktur Pajak</td>
+              <td>No. Faktur Pajak</td>
               <td>:</td>
               <td><?php echo  $seri_faktur ?></td>
 
@@ -124,13 +123,11 @@
 
               <td>Tanggal Faktur</td>
               <td>:</td>
-              <td><?php echo  $date_faktur ?></td>
+              <td><?php echo date('d F Y', strtotime($date_faktur))  ?></td>
 
             </tr>
 
-            <tr style="height: 150px;">
-              <td style="height: 30px;"></td>
-            </tr>
+            
 
 
             <tr>
@@ -139,6 +136,9 @@
               <td>:</td>
               <td><?php echo $npwp; ?></td>
 
+            </tr>
+            <tr style="height: 100px;">
+              <td style="height: 10px;"></td>
             </tr>
             <tr>
 
@@ -173,11 +173,11 @@
         </div>
 
 
-        <br>
+       
 
 
       </div>
-      <hr style="height: 5px; border-width: 6px; background-color:#696969;">
+     
 
       <!-- Table row -->
 
@@ -233,7 +233,7 @@
                     <td>
                       <center><?php echo $no ?></center>
                     </td>
-                    <td><?php echo $jml ?></td>
+                    <td><?php echo $k->barang ?></td>
                     <td><?php echo $k->deskripsi_barang ?></td>
                     <td><?php echo $k->keterangan ?></td>
                     <td>
@@ -243,10 +243,10 @@
                       <center><?php echo $k->kts ?></center>
                     </td>
                     <td align="right">
-                      <p align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></p>
+                      <span align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></span>
                     </td>
                     <td hidden="" align="right">
-                      <p align="right"><?php echo 'IDR ' . number_format($k->amount, 0, ',', '.') ?></p>
+                      <span align="right"><?php echo 'IDR ' . number_format($k->amount, 0, ',', '.') ?></span>
                     </td>
 
                   </tr>
@@ -273,7 +273,7 @@
                       <center><?php echo $k->kts ?></center>
                     </td>
                     <td align="right">
-                      <p align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></p>
+                      <span align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></span>
                     </td>
 
 
@@ -289,15 +289,15 @@
 
                 <th style="width: 15%">Subtotal</th>
                 <th style="width: 24%" align="right">
-                  <p align="right"> <?php echo 'IDR ' . $sub_total ?>
+                  <span align="right"> <?php echo 'IDR ' . $sub_total ?></span>
                 </th>
-                </p>
+               
 
               </tr>
               <tr>
                 <th>ASF</th>
                 <th style="width: 20%" align="right">
-                  <p align="right"> <?php echo 'IDR ' . $asf ?></p>
+                  <span align="right"> <?php echo 'IDR ' . $asf ?></span>
                 </th>
 
 
@@ -306,7 +306,7 @@
                 <th>Discount
 
                 <th align="right">
-                  <p align="right">
+                  <span align="right">
                     <?php
                     if ($diskon == "") {
                       echo "(0)";
@@ -316,7 +316,7 @@
 
 
                     ?>
-                  </p>
+                  </span>
 
                 </th>
 
@@ -324,7 +324,7 @@
               <tr>
                 <th>Netto</th>
                 <th style="width: 20%" align="right">
-                  <p align="right"> <?php echo 'IDR ' . $netto ?></p>
+                  <span align="right"> <?php echo 'IDR ' . $netto ?></span>
                 </th>
 
 
@@ -335,21 +335,21 @@
               <tr>
                 <th>PPN</th>
                 <th align="right">
-                  <p align="right"> <?php echo 'IDR ' . $ppn ?></p>
+                  <span align="right"> <?php echo 'IDR ' . $ppn ?></span>
                 </th>
 
               </tr>
               <tr>
                 <th>PPh23</th>
                 <th align="right">
-                  <p align="right"> <?php echo 'IDR ' . $pph; ?></p>
+                  <span align="right"> <?php echo 'IDR ' . $pph; ?></span>
                 </th>
 
               </tr>
               <tr>
                 <th>Total Faktur</th>
                 <th align="right">
-                  <p align="right"> <?php echo 'IDR ' . $total_faktur; ?></p>
+                  <span align="right"> <?php echo 'IDR ' . $total_faktur; ?></span>
                 </th>
 
               </tr>

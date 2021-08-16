@@ -84,8 +84,6 @@
 }
 
 
-
-
 span{
     font-size: 16px;
     color: #57606f;

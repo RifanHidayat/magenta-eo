@@ -785,11 +785,11 @@ class Delivery extends CI_Controller
 
       $mpdf = new \Mpdf\Mpdf([
         'mode' => 'utf-8',
-        'margin_right' => '1',
-        'margin_left' => '1',
+        'margin_right' => '10',
+        'margin_left' => '10',
         'margin_bottom' => '5',
         'margin_top' => '5',
-        'format' => 'A5', 'defaultPageNumStyle' => '1'
+        'format' => 'A5-L', 'defaultPageNumStyle' => '1'
       ]);
 
       $data = $this->load->view('delivery/print_delivery_event', $this->data, TRUE);
@@ -823,9 +823,9 @@ class Delivery extends CI_Controller
 
       $mpdf = new \Mpdf\Mpdf([
         'mode' => 'utf-8',
-        'format' => 'A5', 'defaultPageNumStyle' => '1',
-        'margin_right' => '1',
-        'margin_left' => '1',
+        'format' => 'A5-L', 'defaultPageNumStyle' => '1',
+        'margin_right' => '10',
+        'margin_left' => '10',
         'margin_bottom' => '5',
         'margin_top' => '5',
       ]);

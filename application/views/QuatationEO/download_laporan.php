@@ -96,7 +96,11 @@
       <div class="row invoice-info">
         <div class="col-sm-9 invoice-col ">
 
-          <table class="col-sm-3" style="margin-top: -90px;">
+          <table class="col-sm-3" style="margin-top: -90px; width:50%" >
+          <tr>
+              
+              <th colspan="3" align="left"><span style="font-size: 18px; width:30%"><?php echo $title_event; ?></span></tg>
+            </tr>
 
             <tr>
               <td>Venue </td>
@@ -106,7 +110,7 @@
             <tr>
               <td>Date </td>
               <td>:</td>
-              <td><?php echo $date; ?></td>
+              <td><?php echo date('d F Y', strtotime($date)) ; ?></td>
             </tr>
             <tr>
               <td>To </td>
@@ -118,35 +122,24 @@
               <td>:</td>
               <td><?php echo $pic_email; ?></td>
             </tr>
+            <tr>
+              <td>No.Ref </td>
+              <td>:</td>
+              <td><?php echo $quotation_number; ?></td>
+            </tr>
           </table>
 
         </div>
         <!-- /.col -->
-
-
         <!-- /.col -->
-
-
-
-
         <!-- /.col -->
       </div>
       <!-- /.row -->
 
       <!-- Table row -->
       <div class="row">
-
-
-
-
-
       </div>
-
-
-
-
-
-      <hr style="height: 5px; border-width: 6px; width: 99.5%; background-color:#696969;">
+       <hr style="height: 3px; border-width: 6px; width: 99.5%; background-color:#696969;">
 
       <table id="tbl1" style=" width: 100%" align="center" border="3" align="center">
         <thead>
@@ -288,7 +281,7 @@
       </center>
 
 
-
+              <!-- item quotation -->
       <br>
       <h4><b>Non-Fee Cost</b></4>
         <?php
@@ -299,13 +292,19 @@
         ?>
 
 
-            <center>
+            <!-- <center>
               <h6 align="center"><?php echo  $name->name ?></h6>
-            </center>
+            </center> -->
 
+            <br>
+            <br>
+           
 
             <table class="table" style=" width: 100%" id="tbl1" align="center" border="1" align="center">
               <thead class="thead-dark">
+              <tr>
+              <td colspan="6"> <h6 align="center" style="font-size: 20px;"><?php echo  $name->name ?></h6></td>
+              </tr>
                 <tr>
                   <th style="width: 8%">
                     <center>No</center>
@@ -395,13 +394,16 @@
         ?>
 
 
-            <center>
+            <!-- <center>
               <h6 align="center"><?php echo  $name->name ?></h6>
-            </center>
+            </center> -->
 
 
             <table style=" width: 100%" id="tbl1" align="center" border="1" align="center">
               <thead class="thead-dark">
+              <tr>
+              <td colspan="6"> <h6 align="center" style="font-size: 20px;"><?php echo  $name->name ?></h6></td>
+              </tr>
                 <tr>
                   <th scope="col" style="width: 8%">
                     <center>No</center>

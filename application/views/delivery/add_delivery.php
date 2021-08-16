@@ -187,7 +187,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Tanggal Pengiriman</label>
                     <div class="col-sm-12">
-                      <input onchange="generet_delivery()" readonly type="text" class="form-control" required="" id="tanggal_pengiriman" placeholder="dd/mm/yy" name="tanggal_pengiriman" autocomplete="off">
+                      <input onchange="generet_delivery()" readonly type="text" class="form-control" required="" id="tanggal_pengiriman" placeholder="yyyy-mm-dd" name="tanggal_pengiriman" autocomplete="off">
 
                     </div>
                   </div>
@@ -612,7 +612,7 @@
     var dateToday = new Date();
 
     $('#tanggal_pengiriman').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'yy-mm-dd',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,

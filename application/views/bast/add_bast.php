@@ -226,14 +226,14 @@
                   <div class="form-group" id="qnumber">
                     <label for="date_expired_event" style="text-align:left;" class="col-sm-8 control-label">Date PO</label>
                     <div class="col-sm-12">
-                      <input readonly onkeypress="return false;" type="text" placeholder="dd/mm/yyyy" class="form-control" id="date_po" name="date_po" autocomplete="off">
+                      <input readonly onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" id="date_po" name="date_po" autocomplete="off">
                     </div>
                     <?= form_error('date_po', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
                   <div class="form-group" id="qnumber">
                     <label for="date_expired_event" style="text-align:left;" class="col-sm-8 control-label">Date BAST</label>
                     <div class="col-sm-12">
-                      <input onkeypress="return false;" type="text" placeholder="dd/mm/yyyy" class="form-control" required="" id="date_bast" name="date_bast" autocomplete="off" value="<?php echo set_value('date_bast') ?>">
+                      <input onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="date_bast" name="date_bast" autocomplete="off" value="<?php echo set_value('date_bast') ?>">
                     </div>
                     <?= form_error('date_bast', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
@@ -562,7 +562,7 @@
     var dateToday = new Date();
 
     $('#date_bast').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'yy-mm-dd',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,

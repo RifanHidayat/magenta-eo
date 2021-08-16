@@ -92,13 +92,13 @@
             </div>
             <!-- /.col -->
 
-
+            <!-- date('d F Y', strtotime($date)) -->
             <!-- /.col -->
             <div style="margin-top: -120px;">
 
               <table border="0" style="right: 0" align="right">
                 <tr>
-                  <td colspan="3">Jakarta,<?php echo date('d / M / yy'); ?></td>
+                  <td colspan="3">Jakarta,<?php echo date('d F Y', strtotime($date_quotation))?></td>
                 </tr>
                 <tr>
                   <td align="right"><b>No. Quotation</b></td>
@@ -124,7 +124,7 @@
           <br>
           <br>
           <br>
-          <hr style="height: 5px; border-width: 6px; background-color:#696969; margin-left: 45px; margin-right: 45px;">
+          <hr style="height: 3px; border-width: 6px; background-color:#696969; margin-left: 45px; margin-right: 45px;">
 
           <!-- Table row -->
 
@@ -214,28 +214,28 @@
 
                   ?>
                     <tr>
-                      <td>
+                      <td >
                         <center><?php echo $no ?></center>
                       </td>
                       <td><?php echo $k->desciption ?></td>
-                      <td>
+                      <td  style="width: 15px;">
                         <center><?php echo $k->quantity ?></center>
                       </td>
-                      <td>
+                      <td  style="width: 15px;">
                         <center><?php echo $k->frequency ?></center>
                       </td>
-                      <td align="right">IDR <?php echo number_format($k->unitprice, 0, ',', '.') ?></td>
-                      <td align="right">IDR <?php echo number_format($k->amount, 0, ',', '.') ?></td>
+                      <td align="right"  style="width: 20px;">IDR <?php echo number_format($k->unitprice, 0, ',', '.') ?></td>
+                      <td align="right"  style="width: 15px;">IDR <?php echo number_format($k->amount, 0, ',', '.') ?></td>
                     </tr>
                   <?php endforeach ?>
-                <tfoot>
+          
 
                   <tr>
 
                     <td rowspan="6" colspan="4" valign="top"><b>Note : </b><?php echo $note ?></p>
                     </td>
-                    <th>Sub Total</th>
-                    <th align="right"> <?php echo "IDR " . $netto ?></th>
+                    <th>Subtotal</th>
+                    <th align="right"> <?php echo "IDR " . $total ?></th>
 
                   </tr>
                   <tr>
@@ -250,7 +250,7 @@
                   </tr>
                   <tr>
                     <th>Netto</th>
-                    <th align="right"> IDR <?php echo $total; ?></th>
+                    <th align="right"> IDR <?php echo $netto; ?></th>
 
                   </tr>
                   <tr>
@@ -265,16 +265,18 @@
                   </tr>
                   <tr>
                     <th colspan="5">Grand Total</th>
-                    <th align="right"> <?php echo $grand_total; ?></th>
+                    <th align="right"> <?php echo 'IDR '.$grand_total; ?></th>
 
                   </tr>
-                </tfoot>
+               
 
                 </tbody>
               </table>
             </div>
             <!-- /.col -->
           </div>
+          <br>
+          
 
 
 

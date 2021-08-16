@@ -28,14 +28,26 @@
 
      }
 
-
-
      #tbl1 th {
-       padding-top: 12px;
-       padding-bottom: 12px;
+       padding-top: 5px;
+       padding-bottom: 5px;
        text-align: left;
-
        color: black;
+     }
+
+     .footer{
+       width: 50%;
+    
+    display: flex;
+    justify-content: space-between; 
+
+     }
+     .footer{
+       width: 50%;
+    
+    display: flex;
+    justify-content: space-between; 
+
      }
 
      /*   .element {
@@ -67,9 +79,10 @@
    <section class="invoice">
      <div class="float-right">
        <h4 align="right"><b>Faktur Penjualan</b></h4>
+       <br>
      </div>
 
-     <img style="margin-top: -40px" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="150" height="50">
+     <img style="margin-top: -40px" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="150" height="40">
 
 
      <!-- /.col -->
@@ -77,15 +90,15 @@
      <!-- info row -->
 
      <div class="row invoice-info">
-       <div class="col-9 invoice-col">
-         <br>
+      
+        
          <p>PT.Magenta Mediatama<br>
            Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grppl Utara<br>
            Kebayon Lama Jakarta Selatan DKI Jakarta-12210
            <br>phone (021) 53660077-08;Fax(021)53660099
          </p>
          <font size="2">
-           <table style=" font-size:80%">
+           <table style=" font-size:10%">
              <tr>
                <td style="width: 100px;">Tagihan Ke</td>
                <td style="width: 150px;"><?php echo $nama; ?></td>
@@ -104,7 +117,7 @@
          </font>
 
 
-       </div>
+       
        <!-- /.col -->
 
 
@@ -113,7 +126,8 @@
          <!-- <h2>Faktur Penjualan</h2> -->
          <br>
          <br>
-         <table align="right" style="margin-top: -180px;font-size:80%">
+         <br>
+         <table align="right" style="margin-top: -180px;font-size:80%" >
 
            <tr>
 
@@ -133,20 +147,21 @@
 
              <td>Tanggal Faktur</td>
              <td>:</td>
-             <td><?php echo  $date_faktur ?></td>
+             <td><?php echo date('d F Y', strtotime($date_faktur))  ?></td>
 
            </tr>
 
-           <tr style="height: 150px;">
-             <td style="height: 30px;"></td>
-           </tr>
-           <tr style="margin-top: 100px">
+           
+           <tr style="margin-top: 40px">
 
 
              <td>NPWP</td>
              <td>:</td>
              <td><?php echo $npwp; ?> </td>
 
+           </tr>
+           <tr style="height: 100px;">
+             <td style="height: 5px;"></td>
            </tr>
            <tr>
 
@@ -172,9 +187,9 @@
          </table>
        </div>
      </div>
-     <hr style="height: 5px; border-width: 6px; background-color:#696969; margin-top:25px  ">
+    
      <!-- Table row -->
-     <div class="row">
+     <div class="row" style="margin-top: 20px;">
 
 
        <div class="col-13 table-responsive justify-content">
@@ -348,18 +363,43 @@
          </table>
 
 
+         <div class="float-right"  >
+           <br>
 
+           <table align="right" style="width: 200px;font-size:80%">
+
+             <tr>
+               <td style="width: 200px">
+                 <center>Hormat Kami</center>
+               </td>
+             </tr>
+             <tr>
+
+               <td style="width: 150px">
+                 <center>PT. Magenta Mediatama</center>
+               </td>
+             </tr>
+             <tr>
+               <td style="height: 50px;"></td>
+             </tr>
+             <tr>
+               <td style="width: 150px">
+                 <center>Yo Tinco</center>
+               </td>
+             </tr>
+           </table>
+         </div>
        </div>
        <!-- /.col -->
 
        <!-- /.row -->
-       </dibv>
-       <div class="row">
+    
+       <div class="row" style="margin-top: -110px;"  >
          <!-- accepted payments column -->
-         <div class="col-6">
+         <div class="footer" >
            <br>
            <br>
-           <table style="width: 400px;font-size:80%">
+           <table style="width: 400px;font-size:80%" >
              <tr>
                <td colspan="3">Pembayaran dapat ditransfer ke rekening</td>
              </tr>
@@ -394,65 +434,15 @@
            </table>
 
          </div>
+ 
 
-
-         <br>
-         <br>
-         <!-- /.col -->
-         <div class="float-right">
-           <br>
-
-           <table align="right" style="width: 200px;margin-top: -140px;font-size:80%">
-
-             <tr>
-
-               <td style="width: 200px">
-                 <center>Hormat Kami</center>
-               </td>
-
-
-             </tr>
-             <tr>
-
-               <td style="width: 150px">
-                 <center>PT. Magenta Mediatama</center>
-               </td>
-
-
-             </tr>
-             <tr>
-
-               <td style="height: 50px;"></td>
-
-
-             </tr>
-             <tr>
-
-
-               <td style="width: 150px">
-                 <center>Yo Tinco</center>
-               </td>
-
-
-             </tr>
-           </table>
-           <br>
-           <br>
-
-           <br>
-           <br>
-
-
-
-
-         </div>
-
-
+ 
        </div>
 
-
-       <!-- /.row -->
+       
+      
    </section>
+   
    <?php
 
     function penyebut($nilai)
