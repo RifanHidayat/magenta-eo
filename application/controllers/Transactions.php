@@ -37,44 +37,6 @@ class Transactions extends CI_Controller {
 	}
 
 
-	//function Customer
-	  public function add_customer(){
-	  	if((!in_array('createCustomer', $this->permission))) {
-			redirect('dashboard', 'refresh');
-		}
-
-	 	$this->data['pic']=$this->db->get('pic_po')->result();
-	 	$id=$this->session->userdata('id');
-
-	     
-	  	$group_data = $this->model_groups->getGroupData($id);
-		$this->data['group_data'] = $group_data;
-	
-
-	 
-	  	$this->form_validation->set_rules('name','Customer Name','required|trim');
-
-	  	$this->form_validation->set_rules('npwp','NPWP Name','required|trim');
-	  	$this->form_validation->set_rules('address','address ','required|trim');
-
-
-		$this->form_validation->set_message('required',' *{field} masih kosong silakan diisi');
-		$this->form_validation->set_message('is_unique',' *{field} sudah digunakan silakan ganti');
-		$this->form_validation->set_message('matches','* {field} tidak cocok');
-		$this->form_validation->set_message('integer','* {field} harus diisi dengan angka');
-
-	 	
-	 	if ($this->form_validation->run()==false){
-			$this->load->view('tamplate/header',$this->data);
-          	$this->load->view('tamplate/sidebar',$this->data);
-          	$this->load->view('customer/add_customer',$this->data);
-           	$this->load->view('tamplate/footer',$this->data);
-		}else{
-			$this->aksi_add_customer();
-
-		}
-
-	 }
 
 	 public function payment($id){
 		 $this->data['id']=$id;
@@ -88,240 +50,8 @@ class Transactions extends CI_Controller {
 
 	 }
 
-	  public function edit_customer($idd){
-	  	if((!in_array('updateCustomer', $this->permission))) {
-			redirect('dashboard', 'refresh');
-		}
-		$this->db->select('*');
-	 		$this->db->from('gudang');
-	 		$this->db->where('id_customer',$idd);
-	 		$itemGudang=$this->db->get()->result();
-	 		
-	 		$this->data["itemGudang"]=$itemGudang;
-
-	 	$this->data['pic']=$this->db->get('pic_po')->result();
-	 	$id=$this->session->userdata('id');
-
-	     
-	  	$group_data = $this->model_groups->getGroupData($id);
-		$this->data['group_data'] = $group_data;
-	
-
-	 
-	  	$this->form_validation->set_rules('name','Customer Name','required|trim');
-
-	  	$this->form_validation->set_rules('npwp','NPWP Name','required|trim');
-	  	$this->form_validation->set_rules('address','address ','required|trim');
 
 
-		$this->form_validation->set_message('required',' *{field} masih kosong silakan diisi');
-		$this->form_validation->set_message('is_unique',' *{field} sudah digunakan silakan ganti');
-		$this->form_validation->set_message('matches','* {field} tidak cocok');
-	
-	 	
-	 	if ($this->form_validation->run()==false){
-	 		$this->db->select('*');
-	 		$this->db->from('customer');
-	 		$this->db->where('id',$idd);
-	 		$row=$this->db->get()->row_array();
-
-	 		
-
-	 		$this->data['name']=$row['name'];
-	 		$this->data['alamat']=$row['address'];
-	 		$this->data['phone']=$row['phone'];
-	 		$this->data['npwp']=$row['npwp'];
-	 		$this->data['pph']=$row['karakteristik_pph'];
-	 		$this->data['ppn']=$row['karakteristik_ppn'];
-
-	 		$this->data['id']=$row['id'];
-
-			$this->load->view('tamplate/header',$this->data);
-          	$this->load->view('tamplate/sidebar',$this->data);
-          	$this->load->view('customer/edit',$this->data);
-           	$this->load->view('tamplate/footer',$this->data);
-		}else{
-			$this->aksi_update_customer();
-
-		}
-
-	 }
-	 public function aksi_add_customer(){
-
-			$data=[
-				'name'=>$this->input->post('name'),
-				'address'=>$this->input->post('address'),
-				'phone'=>$this->input->post('phone'),
-				'npwp'=>$this->input->post('npwp'),
-				'karakteristik_pph'=>$this->input->post('karakteristikPPh'),
-				'karakteristik_ppn'=>$this->input->post('karakteristikPPN'),
-		
-				
-			];
-
-			$this->db->insert('customer',$data);
-		
-
-			$this->db->select('id');
-			$this->db->from('customer');
-			$this->db->where("name",$this->input->post("name"));
-			$data=$this->db->get()->row_array();
-			$dataID=$data['id'];
-
-
-
-	if ($dataID!=""){
-  	$i = 0; // untuk loopingnya
-    $a = $this->input->post('alamatGudang');
-    $b = $this->input->post('picGudang');
-    $c = $this->input->post('phoneGudang');
- 
-    if ($a[0] !== null) 
-    {
-      foreach ($a as $row) 
-      {
-        $data = [
-          'alamat'=>$row,
-          'pic'=>$b[$i],
-          'phone'=>$c[$i],
-          'id_customer'=>$dataID,
-        ];
-       // $t=+(int) $c[$i];
-
-        $this->db->insert('gudang', $data);
-        
-          
-          $i++;
-
-        
-      }
-    }
-    	$this->session->set_flashdata('success', 'Successfully created');
-
- 	redirect('Customer/manage_customer', 'refresh');
-
-
-
- }else{
-  $arr['success'] = false;
-    $arr['notif']  = '<div class="alert alert-success">
-      <i class="fa fa-check"></i> gagal menyimpan data
-    </div>';
-        $this->load->view('tamplate/header',$this->data);
-      $this->load->view('tamplate/sidebar',$this->data);
-      $this->load->view('bank/add_quatations',$this->data);
-      $this->load->view('tamplate/footer',$this->data);
-
-
-
-
- }
-	
-	        		
-		
-
-	 }
-
-	 	 public function aksi_update_customer(){
-	 	 	$id=$this->input->post("idCustomer");
-	 	 	$name=$this->input->post('name');
-
-			$data=[
-				'name'=>$this->input->post('name'),
-				'address'=>$this->input->post('address'),
-				'phone'=>$this->input->post('phone'),
-				'npwp'=>$this->input->post('npwp'),
-				'karakteristik_pph'=>$this->input->post('karakteristikPPh'),
-				'karakteristik_ppn'=>$this->input->post('karakteristikPPN'),
-		
-				
-			];
-
-		
-		
-			$where=array(
-					'id'=>$id
-					);
-
-			$where_pic=array(
-			'id_customer'=>$id
-			);
-			$data1=array(
-				'customer'=>$name
-			);
-
-			$dataquotation=array('customer'=>$name,
-				'customer_event'=>$name
-
-		);
-
-			
-			$this->db->where($where);
-			$this->db->update('customer',$data);
-
-			$this->db->where($where_pic);
-			$this->db->update('pic_po',$data1);
-
-			$this->db->where($where_pic);
-			$this->db->update('pic_event',$data1);
-
-			$this->db->where($where_pic);
-			$this->db->update('pic_po',$data1);
-
-
-			$this->db->where($where_pic);
-			$this->db->update('quotations',$dataquotation);
-
-			$this->db->where($where_pic);
-			$this->db->update('quotation_other',$dataquotation);
-
-
-
-
-	if ($id!=""){
-		
-  	$i = 0; // untuk loopingnya
-    $a = $this->input->post('alamatGudang');
-    $b = $this->input->post('picGudang');
-    $c = $this->input->post('phoneGudang');
-    $d = $this->input->post('idGudang');
- 
-    if ($a[0] !== null) 
-    {
-    	$this->db->where('id_customer',$id);
-		$this->db->delete('gudang');
-      foreach ($a as $row) 
-      {
-
-        $data = [
-          'alamat'=>$row,
-          'pic'=>$b[$i],
-          'phone'=>$c[$i],
-          'id_customer'=>$id
-          
-        ];
-        $this->db->insert('gudang', $data);
-       //  $this->db->insert('gudang', $data);
-       // // $t=+(int) $c[$i];
-       //  if ($d[$i]==''){
-       //  $this->db->insert('gudang', $data);
-       //  }else{
-       // 	$where=array('idGudang'=>$d[$i]);
-       // 	$this->db->update('gudang',$data);
-
-       //  }
-     
-       $i++;
-      }
-    }
-    $this->session->set_flashdata('success', 'Successfully created');
- 	redirect('Customer/manage_customer', 'refresh');
- }
-	
-	        		
-		
-
-	 }
 	   public function manage(){
 	   		$id=$this->session->userdata('id');
 	        $group_data = $this->model_groups->getGroupData($id);
@@ -352,172 +82,139 @@ class Transactions extends CI_Controller {
         $this->load->view('transactions/detail',$this->data);
         $this->load->view('tamplate/footer',$this->data);
 
+		
 }
-	 	public function hapus_customer($id){
-		$id=$this->input->post("id");
 
-		$where_pic=array(
-			'id_customer'=>$id
-			);
-			$data1=array(
-				'customer'=>""
-			);
+public function print($id)
+{
+//   if ((!in_array('viewFaktur', $this->permission))) {
+// 	redirect('dashboard', 'refresh');
+//   }
+// $this->db->select('*');
+// $this->db->from("faktur_item");
+// $this->db->where('faktur_number', $id);
+// $this->data['faktur_item'] = $this->db->get()->result();
 
-			
-			
-
-			$dataquotation=array('customer'=>"",
-				'customer_event'=>""
-
-		);
-			
-		$this->db->where('id',$id);
-		$this->db->delete('customer');
+$this->db->select('*,faktur.faktur_number as faktur_number,payment_faktur.amount as total_payment,payment_faktur.date as date_payment');
+$this->db->from('payment_faktur');
+$this->db->join('payment_faktur_item', 'payment_faktur.transaction_number =payment_faktur_item.transaction_number');
+$this->db->join('faktur', 'faktur.faktur_number =payment_faktur_item.faktur_number');
+$this->db->where("payment_faktur.id",$id);
+$transaction=$this->db->get()->result();
+$this->data['transactions'] =$transaction;
 
 
+//customer
+$this->db->select('*,payment_faktur.date as date_payment,payment_faktur.amount as total_payment');
+$this->db->from('payment_faktur');
+$this->db->join('customer', 'customer.id=payment_faktur.customer_id');
+$this->db->where("payment_faktur.id",$id);
+$customer=$this->db->get()->row_array();
+$this->data['customer'] =$customer;
+$this->data['total_payment']=$customer['total_payment'];
+$this->data['transaction_number']=$customer['transaction_number'];
+$this->data['date_payment']=$customer['date_payment'];
+$this->data['name']=$customer['name'];
+$this->data['address']=$customer['address'];
 
-			$this->db->where($where_pic);
-			$this->db->update('quotations',$dataquotation);
+$account_id=$customer['account_id'];
 
-			$this->db->where($where_pic);
-			$this->db->update('quotation_other',$dataquotation);
+//account id
+$db2 = $this->load->database('magenta_hrd', TRUE);
+$account=$db2->query("SELECT * FROM  bank_accounts where id='$account_id'");
+$db2->select('*');
+$db2->from('bank_accounts');
+$db2->where('id',$customer['account_id']);
+$account=$db2->get()->row_array();
+
+$this->data['account_number']=$account['account_number'];
+$this->data['bank_name']=$account['bank_name'];
 
 
 
-			$this->db->where($where_pic);
-			$this->db->update('pic_po',$data1);
 
-			$this->db->where($where_pic);
-			$this->db->update('pic_event',$data1);
-		
 
-	}
-		public function ambilIdCustomer(){
-		$id=$this->input->post("id");
-		$where=array('id'=>$id);
-		$dataa=$this->model_users->AmbilId('customer',$where)->result();
-		echo json_encode($dataa);
-	}
-		 public function aksi_update_data_customer(){
-		$name=$this->input->post('name');
-		
 
-		$phone=$this->input->post('phone');
-		$address=$this->input->post('address');
-		$npwp=$this->input->post('npwp');
-		$id=$this->input->post('id');
-		$karakteristikPPN=$this->input->post('karakteristikPPN');
-		$karakteristikPPh=$this->input->post('karakteristikPPh');
+
+
+
+
+
+
+// $row = $this->db->get()->row_array();
+// $this->data['diskon_harga'] = $row['diskon_harga'];
+// $this->data['faktur_number'] = $row['faktur_number'];
+// $this->data['seri_faktur'] = $row['ser_faktur'];
+// $this->data['date_faktur'] = $row['date_faktur'];
+// // $this->data['npwp']=$row['npwp'];
+// $this->data['syarat_pembayaran'] = $row['syarat_pembayaran'];
+// $this->data['ppn'] = $row['ppn'];
+// $this->data['po_number'] = $row['po_number'];
+// $this->data['gr_number'] = $row['gr_number'];
+// $this->data['ref'] = $row['REF'];
+// $this->data['pph23'] = $row['pph23'];
+// $this->data['npwp'] = $row['npwp'];
+// $this->data['diskon'] = $row['diskon'];
+
+// $this->data['total_faktur'] = $row['total_faktur'];
+// $this->data['total_sub'] = $row['total_sub'];
+// $this->data['nama'] = $row['name'];
+// $this->data['alamat'] = $row['address'];
+// $this->data['comissionable_cost'] = $row['comissionable_cost'];
+// $this->data['nonfee'] = $row['nonfee'];
+// $this->data['title'] = $row['tittle_event'];
+
+// $this->data['total'] = $row['total_summary'];
+// $this->data['asf'] = $row['asf'];
+
+// $totalBast = str_replace('.', '', $row['totalBast']);
+
+// $asf = ($row['asfp'] / 100) * $totalBast;
+// $asff = round($asf);
+
+// $jasa = $totalBast - $asff;
+
+// $this->data['asf'] = number_format($asff, 0, ",", ".");
+// $this->data['jasa'] = number_format($jasa, 0, ",", ".");
+
+
+
+
+
+
+
+
+
+
+// $this->load->view('tamplate/header1',$this->data);
+// //$this->load->view('tamplate/sidebar',$this->data);
+// $this->load->view('faktur/print_faktur_event',$this->data);
+//  $this->load->view('tamplate/footer1',$this->data);
+
+
+$mpdf = new \Mpdf\Mpdf([
+  'mode' => 'utf-8',
+  'format' => 'A4-p', 'defaultPageNumStyle' => '1',
+  'margin_right' => '10',
+  'margin_left' => '10',
+  'margin_bottom' => '10',
+  'margin_top' => '1',
+]);
+$mpdf->shrink_tables_to_fit = 1;
+
+
+$data = $this->load->view('transactions/print', $this->data, TRUE);
+$mpdf->WriteHTML($data);
+$mpdf->SetJS('print();');
+$mpdf->Output();
+
+}
+
 	
 
-		$data=array(
-				'name'=>$name,
-				'address'=>$address,
-				'phone'=>$phone,			
-				'npwp'=>$npwp,
-				'id'=>$id,
-				'karakteristik_ppn'=>$karakteristikPPN,
-				'karakteristik_pph'=>$karakteristikPPh
-			);
+
 
 	
-			$where=array(
-			'id'=>$id
-			);
-
-			$where_pic=array(
-			'id_customer'=>$id
-			);
-			$data1=array(
-				'customer'=>$name
-			);
-
-			$dataquotation=array('customer'=>$name,
-				'customer_event'=>$name
-
-		);
-
-			
-			
-
-			$this->db->where($where);
-			$this->db->update('customer',$data);
-
-			$this->db->where($where_pic);
-			$this->db->update('pic_po',$data1);
-
-			$this->db->where($where_pic);
-			$this->db->update('pic_event',$data1);
-
-			$this->db->where($where_pic);
-			$this->db->update('pic_po',$data1);
-
-
-			$this->db->where($where_pic);
-			$this->db->update('quotations',$dataquotation);
-
-			$this->db->where($where_pic);
-			$this->db->update('quotation_other',$dataquotation);
-
-		
-	
-	}
-	//get PIC po untuk quotation Other
-		public function AmbilDataPICEventOther(){
-		$pic_name=$this->input->post("pic_name");
-		$where=array('pic_name'=>$pic_name);
-		$dataa=$this->model_pic->AmbilId('pic_event',$where)->result();
-		echo json_encode($dataa);
-
-	}
-	//get PIC po untuk quotation Other
-		public function AmbilDataPIC(){
-		$pic_name=$this->input->post("pic_name");
-		$where=array('pic_name'=>$pic_name);
-		$dataa=$this->model_pic->AmbilId('pic_po',$where)->result();
-		echo json_encode($dataa);
-
-	}
-
-	//get PIC po untuk quotation event
-	public function AmbilDataPICQuotation(){
-	$id=$this->input->post("pic_name");
-		
-		$this->db->select('pic_po.id,customer,email,jabatan,pic_name,id_customer,customer.karakteristik_pph ,karakteristik_ppn');
-		$this->db->from('pic_po');
-	 	$this->db->join('customer','customer.id = pic_po.id_customer');  
-		$this->db->where('pic_po.id',$id);
-		$dataa=$this->db->get()->result();
-		echo json_encode($dataa);
-
-		
-
-	}
-	//get PIC eve untuk quotation event
-	public function AmbilDataPICQuotationEvent(){
-		 $pic_name=$this->input->post("pic_name");
-		
-
-		$this->db->select('pic_event.id_event,customer,email,jabatan,pic_name,id_customer,customer.karakteristik_pph ,karakteristik_ppn');
-		$this->db->from('pic_event');
-	 $this->db->join('customer','customer.id = pic_event.id_customer'); 
-
-     
-		$this->db->where('pic_event.id_event',$pic_name);
-		$dataa=$this->db->get()->result();
-		
-		echo json_encode($dataa);
-
-	}
-
-	// 	public function TampilDatacustomer(){
-	// 	$this->db->select('*');
-	// 	$this->db->from('customer');
-	// 	$data=$this->db->get()->result();
-	// 	echo json_encode($data);
-
-
-	// }
 
 	public function TampilDatacustomer(){
 		   $this->load->model("model_customer");  

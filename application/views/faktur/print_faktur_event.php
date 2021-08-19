@@ -227,8 +227,8 @@
                       
                     </td> -->
 
-               <th align="right">
-                 <p align="right"><?php echo "IDR " . $material; ?>
+               <td align="right">
+                 <p align="right"><?php echo  $material; ?>
                </th>
 
              </tr>
@@ -237,9 +237,9 @@
                  <center>2</center>
                </td>
                <td colspan="4">Jasa - ASF </td>
-               <th align="right">
-                 <p align="right"><?php echo "IDR " . $asf ?>
-               </th>
+               <td align="right">
+                 <p align="right"><?php echo  $asf ?>
+               </td>
 
              </tr>
 
@@ -256,7 +256,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . $sub_total;
+                    echo $sub_total;
                     ?>
                </th>
              </tr>
@@ -273,7 +273,7 @@
                       echo "(0)";
                     } else {
 
-                      echo '(IDR ' . number_format($diskon_harga, 0, ',', '.') . ')';
+                      echo '(' . number_format($diskon_harga, 0, ',', '.') . ')';
                     }
 
 
@@ -292,7 +292,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . $netto2;
+                    echo  $netto2;
 
 
 
@@ -311,7 +311,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . number_format($ppn, 0, ',', '.')
+                    echo number_format($ppn, 0, ',', '.')
 
 
 
@@ -329,7 +329,7 @@
                  <p align="right">
                    <?php
 
-                    echo "(IDR " . number_format($pph23, 0, ',', '.') . ')'
+                    echo "(" . number_format($pph23, 0, ',', '.') . ')'
 
 
 
@@ -348,7 +348,7 @@
                  <p align="right">
                    <?php
 
-                    echo "IDR " . number_format($total_faktur, 0, ',', '.')
+                    echo  number_format($total_faktur, 0, ',', '.')
 
 
 

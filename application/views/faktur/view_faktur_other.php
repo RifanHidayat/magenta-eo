@@ -54,7 +54,7 @@
 
 
 
-              <div class="form-group" id="qnumber">
+              <div class="form-group" id="qnumber" hidden>
 
                 <label for="pid_event" style="text-align:left;" class="col-sm-3 control-label">&ensp;Status</label>
                 <select style="width: 20%;margin-left: 2%" class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
@@ -74,11 +74,11 @@
 
 
               </div>
-              <div class="form-group" id="qnumber">
+              <div class="form-group" id="qnumber" hidden>
                 <label style="margin-left: 15px;" for="cphone">Note</label>
                 <textarea style="margin-left: -175px; width:20% " type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
               </div>
-              <hr>
+            
 
 
 

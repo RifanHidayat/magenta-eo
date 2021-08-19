@@ -144,8 +144,8 @@ class Bast extends CI_Controller
     $quotation_number = $this->input->post('Quatations_number');
     $date_bast = $this->input->post('date_bast');
     $date_po = $this->input->post('po_number');
-    $upload_image_po = $this->upload_image_po($timestamp . '_po_' . $bast_number);
-    $upload_image_gr = $this->upload_image_gr($timestamp . '_gr_' . $bast_number);
+    $upload_image_po = $this->upload_image_po($timestamp . '_po_' . $quotation_number);
+    $upload_image_gr = $this->upload_image_gr($timestamp . '_gr_' . $quotation_number);
     if ($upload_image_po == '') {
       $upload_image_po = "dafault.png";
     }

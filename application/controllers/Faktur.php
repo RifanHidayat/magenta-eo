@@ -70,7 +70,7 @@ class Faktur extends CI_Controller
     
 
     $config['upload_path']          = './assets/imagefaktur';
-    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
+    $config["allowed_types"] = "*";
     $config['file_name'] =  $faktur_number;
 
     $this->load->library('upload', $config);
@@ -724,6 +724,7 @@ class Faktur extends CI_Controller
     $ppn = $this->input->post('ppn');
     $pph23 = $this->input->post('pph23');
     $total_faktur = $this->input->post('total_faktur');
+    $due_faktur = $this->input->post('due_faktur');
 
 
 
@@ -775,7 +776,8 @@ class Faktur extends CI_Controller
           "total_faktur" => (str_replace('.', '', $total_faktur)),
           "image" => $upload_image,
           "diskon_harga" => preg_replace("/[^0-9]/", "", $this->input->post('hasildiskon')),
-          "id_bast" => $this->input->post('id_bast')
+          "id_bast" => $this->input->post('id_bast'),
+          "due_faktur"=>$due_faktur
         ];
         $this->db->insert('faktur', $data1);
       }
@@ -816,6 +818,7 @@ class Faktur extends CI_Controller
     $pph23 = $this->input->post('pph23');
     $total_faktur = $this->input->post('total_faktur');
     $id_bast = $this->input->post('id_bast');
+    $due_faktur = $this->input->post('due_faktur');
 
   
 
@@ -842,6 +845,7 @@ class Faktur extends CI_Controller
         "total_faktur" => str_replace('.', '', $total_faktur),
         "image" => $upload_image,
         "id_bast" => $id_bast,
+        "due_faktur"=>$due_faktur,
         "diskon_harga" => preg_replace("/[^0-9]/", "", $this->input->post('hasildiskon'))
       ];
       $data2 = [
@@ -1267,6 +1271,8 @@ class Faktur extends CI_Controller
         'margin_bottom' => '10',
         'margin_top' => '1',
       ]);
+      $mpdf->shrink_tables_to_fit = 1;
+
 
       $data = $this->load->view('faktur/print_faktur_event', $this->data, TRUE);
 
@@ -1381,6 +1387,8 @@ class Faktur extends CI_Controller
         'margin_top' => '5',
         'format' => 'A5-L', 'defaultPageNumStyle' => '1'
       ]);
+      $mpdf->shrink_tables_to_fit = 1;
+      
 
       $data = $this->load->view('faktur/print_faktur', $this->data, TRUE);
 
@@ -1503,6 +1511,17 @@ class Faktur extends CI_Controller
       } else {
         $status = "";
       }
+      //pembayaran
+      if ($row->pembayaran==""){
+
+        $pembayaran=0;
+      }else if ($row->pembayaran==$row->total_faktur){
+        $pembayaran='<span class="label label-success">Lunas</span>';
+
+      }else{
+        $pembayaran=number_format($row->pembayaran, 0, ',', '.');
+
+      }
 
       if (($row->statusQuotations == "Final")  and ($row->statusBast == "Close")) {
         $sub_array = array();
@@ -1517,8 +1536,8 @@ class Faktur extends CI_Controller
         $sub_array[] = $row->tittle_event;
         $sub_array[] = number_format($row->total_faktur, 0, ',', '.');
 
-        $sub_array[] = $status;
-        $sub_array[] = $row->noteStatus;
+        $sub_array[] = $pembayaran;
+        // $sub_array[] = $row->noteStatus;
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view. ' ' . $payment;
         $data[] = $sub_array;
       }
@@ -1576,6 +1595,18 @@ class Faktur extends CI_Controller
       } else {
         $status = "";
       }
+
+      //pembayaran
+      if ($row->pembayaran==""){
+
+        $pembayaran=0;
+      }else if ($row->pembayaran==$row->total_faktur){
+        $pembayaran='<span class="label label-success">Lunas</span>';
+
+      }else{
+        $pembayaran=number_format($row->pembayaran, 0, ',', '.');
+
+      }
       if (($row->statusQuotations == "Final") and ($row->statusBast == "Close")) {
         $sub_array = array();
         $sub_array[] = $row->quotation_number;
@@ -1589,8 +1620,8 @@ class Faktur extends CI_Controller
         $sub_array[] = $row->tittle_event;
         $sub_array[] = number_format($row->total_faktur, 0, ',', '.');
 
-        $sub_array[] = $status;
-        $sub_array[] = $row->noteStatus;
+        $sub_array[] = $pembayaran;
+        // $sub_array[] = $row->noteStatus;
 
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view. ' ' . $payment;
         $sub_array[] = "";

@@ -68,9 +68,8 @@
                       <th style="width: 10%">Customer</th>
                       <th style="width: 10%">Title Event</th>
                       <th style="width: 10%">Total faktur</th>
-
-                      <th style="width: 4%">Status</th>
-                      <th style="width: 4%">Note</th>
+                      <th style="width: 10%">Jumlah Bayar</th>
+                      <!-- <th style="width: 4%">Note</th> -->
 
 
 

@@ -344,13 +344,23 @@
         var date = new Date($('[name="tanggal_pengiriman"]').val());
 
         console.log(date);
-        var tahun = date.getFullYear();
-        var t = tahun.toString()
-        var bulan = date.getMonth();
-        var tanggal = date.getDate();
-        var hari = date.getDay();
+        // var tahun = date.getFullYear();
+        // var t = tahun.toString()
+        // var bulan = date.getMonth();
+        // var tanggal = date.getDate();
+        // var hari = date.getDay();
 
-        $('[name="delivery_order"]').val("QO" + t.substring(2, 4) + "" + (bulan + 1) + "" + tanggal + hasil.data)
+        // $('[name="delivery_order"]').val("QO" + t.substring(2, 4) + "" + (bulan + 1) + "" + tanggal + hasil.data)
+
+     
+    var date = new Date($('[name="tanggal_pengiriman"]').val());
+    var tahun = date.getFullYear();
+    var t = tahun.toString()
+    var bulan = ("0" + (date.getMonth() + 1)).slice(-2)
+    var tanggal = date.getDate();
+    var hari = date.getDay();
+
+    $('[name="delivery_order"]').val("QO" + tanggal +(bulan) +t.substring(2, 4) +'-'+ hasil.data)
 
       },
       error: function(hasil) {

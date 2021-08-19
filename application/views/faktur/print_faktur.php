@@ -14,8 +14,11 @@
       border: 1px solid #808080;
       padding: 8px;
     }
+    
 
-
+    .table_footer{
+      page-break-inside: avoid;
+    }
 
     #tbl1 th {
       padding-top: 5px;
@@ -26,6 +29,8 @@
     }
 
     table tr td {
+      
+      
       font-size: 10px;
     }
 
@@ -34,7 +39,7 @@
     }
 
     p {
-      font-size: 8px;
+      font-size: 10px;
 
     }
 
@@ -70,7 +75,7 @@
           <p>PT.Magenta Mediatama<br>
 
 
-            Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grppl Utara<br>
+            Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grogol Utara<br>
             Kebayon Lama Jakarta Selatan DKI Jakarta-12210
             <br>
             phone (021) 53660077-08;Fax(021)53660099
@@ -243,10 +248,10 @@
                       <center><?php echo $k->kts ?></center>
                     </td>
                     <td align="right">
-                      <span align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></span>
+                      <span align="right"><?php echo  number_format($k->harga_satuan, 0, ',', '.') ?></span>
                     </td>
                     <td hidden="" align="right">
-                      <span align="right"><?php echo 'IDR ' . number_format($k->amount, 0, ',', '.') ?></span>
+                      <span align="right"><?php echo  number_format($k->amount, 0, ',', '.') ?></span>
                     </td>
 
                   </tr>
@@ -273,7 +278,7 @@
                       <center><?php echo $k->kts ?></center>
                     </td>
                     <td align="right">
-                      <span align="right"><?php echo 'IDR ' . number_format($k->harga_satuan, 0, ',', '.') ?></span>
+                      <span align="right"><?php echo  number_format($k->harga_satuan, 0, ',', '.') ?></span>
                     </td>
 
 
@@ -288,44 +293,44 @@
                 </td>
 
                 <th style="width: 15%">Subtotal</th>
-                <th style="width: 24%" align="right">
-                  <span align="right"> <?php echo 'IDR ' . $sub_total ?></span>
-                </th>
+                <td style="width: 24%" align="right">
+                  <span align="right"> <?php echo $sub_total ?></span>
+                </td>
                
 
               </tr>
               <tr>
                 <th>ASF</th>
-                <th style="width: 20%" align="right">
-                  <span align="right"> <?php echo 'IDR ' . $asf ?></span>
-                </th>
+                <td style="width: 20%" align="right">
+                  <span align="right"> <?php echo  $asf ?></span>
+                </td>
 
 
               </tr>
               <tr>
                 <th>Discount
 
-                <th align="right">
+                <td align="right">
                   <span align="right">
                     <?php
                     if ($diskon == "") {
                       echo "(0)";
                     } else {
-                      echo 'IDR ' . $discount;
+                      echo $discount;
                     }
 
 
                     ?>
                   </span>
 
-                </th>
+                </td>
 
               </tr>
               <tr>
                 <th>Netto</th>
-                <th style="width: 20%" align="right">
-                  <span align="right"> <?php echo 'IDR ' . $netto ?></span>
-                </th>
+                <td style="width: 20%" align="right">
+                  <span align="right"> <?php echo  $netto ?></span>
+                </td>
 
 
               </tr>
@@ -334,22 +339,22 @@
 
               <tr>
                 <th>PPN</th>
-                <th align="right">
-                  <span align="right"> <?php echo 'IDR ' . $ppn ?></span>
-                </th>
+                <td align="right">
+                  <span align="right"> <?php echo $ppn ?></span>
+                </td>
 
               </tr>
               <tr>
                 <th>PPh23</th>
-                <th align="right">
-                  <span align="right"> <?php echo 'IDR ' . $pph; ?></span>
-                </th>
+                <td align="right">
+                  <span align="right"> <?php echo   $pph; ?></span>
+                </td>
 
               </tr>
               <tr>
                 <th>Total Faktur</th>
                 <th align="right">
-                  <span align="right"> <?php echo 'IDR ' . $total_faktur; ?></span>
+                  <span align="right"> <?php echo  $total_faktur; ?></span>
                 </th>
 
               </tr>
@@ -375,7 +380,7 @@
         <div class="col-6">
           <br>
           <br>
-          <table style="width: 400px;">
+          <table style="width: 400px;" class="table_footer">
             <tr>
               <td colspan="3">Pembayaran dapat ditransfer ke rekening</td>
             </tr>
@@ -408,58 +413,29 @@
               <td style="width: 250px;">48017899999</td>
             </tr>
           </table>
-
         </div>
-
-
-
-
-
-        <table align="right" style="width: 200px;margin-top: -90px">
+        <table align="right" style="width: 200px;margin-top: -90px" class="table_footer">
           <tbody>
             <tr>
-
               <td style="width: 200px">
                 <center>Hormat Kami</center>
               </td>
-
-
             </tr>
             <tr>
-
               <td style="width: 150px">
                 <center>PT. Magenta Mediatama</center>
               </td>
-
-
             </tr>
             <tr>
-
               <td style="height: 50px;"></td>
-
-
             </tr>
             <tr>
-
-
               <td style="width: 150px">
                 <center>Yo Tinco</center>
               </td>
-
-
             </tr>
-
           </tbody>
-
-
         </table>
-
-
-
-
-
-
-
       </div>
 
 

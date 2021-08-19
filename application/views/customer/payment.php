@@ -81,10 +81,7 @@
            
            </div>
            <br>
-           
-
-
-     
+              
            <br>
            <br>
            <br>
@@ -105,16 +102,17 @@
               <label for="email_event" style="text-align:left;" class="col-sm-8 control-label">Account </label>
               <div class="col-sm-12">
             
-                <select required ="" class="form-control account" id="account"  aria-label="Default select example">
-                <option selected></option>
+                <select class="form-control account" id="account"  aria-label="Default select example">
+                <option value="0" selected></option>
                 
         </select>
+        <small class="text-danger pl-3" id="account_error"></small>
             </div>
            </div>
            <div class="form-group" id="qnumber">
               <label for="email_event" style="text-align:left;" class="col-sm-8 control-label">Date</label>
               <div class="col-sm-12">
-              <input required   type="date" class="form-control" id="date_transaction" name="date_transaction" placeholder="">
+              <input required    class="form-control" id="date_transaction" name="date_transaction" placeholder="yyyy-mm-dd">
             
 
             </div>
@@ -134,10 +132,19 @@
 
             </div>
            </div>
-
-
+           <div class="form-group" id="qnumber">
+              <label for="email_event" style="text-align:left;" class="col-sm-8 control-label">Beban </label>
+              <div class="col-sm-2" style="color: red;" align="left">
+              <input id="account_beban" class="account_beban" style="color: black;" align="left" size="14" type="checkbox" id="html" name="fav_language" value="HTML">
+              </div>
+              <br>
+              <br>
+              <div  class="col-sm-7 info_beban" style="color: red;" align="left">
+              Pembayaran masuk keakun beban
+              </div>
+                  
+            </div>
            
-
            <div class="form-group">
                
             </div>
@@ -228,14 +235,32 @@
  var data_transactions=[];
  var payment_faktur=[];
  var data_faktur=[];
+ var account_beban=false;
  
   $(document).ready(function() { 
+    $('.info_beban').hide();
+
     showIndikatorForevent();
     transactionNumber()
     accounts();
     UnFinieshed()
     Finieshed();
     hiddenindikator();
+    
+
+const checkbox = document.getElementById('account_beban')
+checkbox.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    account_beban=true;
+   
+    $('.info_beban').show();
+  } else {
+    $('.info_beban').hide();
+    account_beban=false;
+   
+  }
+})
+
    
   
   });
@@ -265,8 +290,7 @@
         var jumlah_bayar = $(this).find('td:nth-child(7)').html();
         var grand_total = $(this).find('td:nth-child(6)').html();
         console.log('faktur_number',faktur_number)
-        
-
+      
         var data={
           faktur_number:faktur_number,
           project_number:project_number,
@@ -279,8 +303,6 @@
    
         payment=Number(payment)+Number(remaining.replace(/[^\w\s]/gi, ''));
         
-
-
 
       }
       total_amount=payment.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
@@ -333,9 +355,7 @@ function UnFinieshed() {
                 '<td style="width: 13%" align="right">' + remaining.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.") + '</td>' +
                 
 
-                `<td style="width: 18%" align="center"> <div class="form-check"><input type="checkbox" class="form-check-input" id="checked" oninput="payment()" ></div></td>`
-
-               
+                `<td style="width: 18%" align="center"> <div class="form-check"><input type="checkbox" class="form-check-input" id="checked" oninput="payment()" ></div></td>`           
                 '</tr>';
 
             }
@@ -444,186 +464,358 @@ function transactionNumber() {
     dataType: 'json',
     success: function(response) {
       $('#transaction_number').text(response.data)
-     
-      
-      
-
-
     },
     error: function(response) {
       console.log(response);
-
-
-
-
-    }
-
+    } 
   });
 }
 
 $('#saveData').submit(function(e) {
     e.preventDefault();
-  //  showIndikatorForevent()
+ 
+
+
   var payment_error = document.getElementById("payment_error");
+  var account_error = document.getElementById("account_error");
   if (total_amount==0){
     payment_error.textContent="* Belum ada pembayaran "
+    
 
 
   }else{
-    payment_error.textContent="";
+    if (account_beban==false){
+      if ($('#account').val()=='0'){
 
-    data_transactions=[]
-    payment_faktur=[]
-    
-
-    var transaction_number = $('#transaction_number').text();
-    var account_id = $('#account').val();
-    var payment = $('#amount').val().replace(/[^\w\s]/gi, '');
-    var description =$('#description').val();
-    var tempTotalAmount=total_amount.replace(/[^\w\s]/gi, '');
-    var date_transaction=$('#date_transaction').val();
+        account_error.textContent="Account tidak boleh kosong"
+       
 
 
-    // (amount,transaction_number,faktur_id,account_id)
-    data_faktur.map((value)=>{
-      var payment_item;
-      var tempPaymentFaktur;
-      console.log(value.remaining)
-      if (Number(payment)>Number(value.remaining)){
-        payment=payment-value.remaining.replace(/[^\w\s]/gi, '');
-        payment_item=[value.remaining.replace(/[^\w\s]/gi, ''),transaction_number,value.faktur_number,account_id];  
-        tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(value.remaining)+Number(value.jumlah_bayar),amount:value.remaining.replace(/[^\w\s]/gi, ''),account_id:account_id} 
 
-      }else{      
-        payment_item=[payment,transaction_number,value.faktur_number,account_id]
-        tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(payment)+Number(value.jumlah_bayar),amount:payment,account_id:account_id} 
-        payment=0
-      }
-      payment_faktur.push(tempPaymentFaktur);
-      data_transactions.push(payment_item);
-    })
 
-    console.log(payment_faktur)
-    console.log(data_transactions);
 
-    console.log(date_transaction)
 
-   
+      }else{
+        account_error.textContent=""
+        payment_error.textContent="";
+        
+
+data_transactions=[]
+payment_faktur=[]
+
+
+var transaction_number = $('#transaction_number').text();
+var account_id = $('#account').val();
+var payment = $('#amount').val().replace(/[^\w\s]/gi, '');
+var description =$('#description').val();
+var tempTotalAmount=total_amount.replace(/[^\w\s]/gi, '');
+var date_transaction=$('#date_transaction').val();
+
+
+// (amount,transaction_number,faktur_id,account_id)
+data_faktur.map((value)=>{
+  var payment_item;
+  var tempPaymentFaktur;
+  console.log(value.remaining)
+  if (Number(payment)>Number(value.remaining)){
+    payment=payment-value.remaining.replace(/[^\w\s]/gi, '');
+    payment_item=[value.remaining.replace(/[^\w\s]/gi, ''),transaction_number,value.faktur_number,account_id];  
+    tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(value.remaining)+Number(value.jumlah_bayar),amount:value.remaining.replace(/[^\w\s]/gi, ''),account_id:account_id,account_beban:account_beban} 
+
+  }else{      
+    payment_item=[payment,transaction_number,value.faktur_number,account_id]
+    tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(payment)+Number(value.jumlah_bayar),amount:payment,account_id:account_id,account_beban:account_beban} 
+    payment=0
+  }
+  payment_faktur.push(tempPaymentFaktur);
+  data_transactions.push(payment_item);
+})
+
+console.log(payment_faktur)
+console.log(data_transactions);
+
+console.log(date_transaction)
+
+
 var data_transaction={}
-    $.ajax({
-        type: "post",
-        url: 'http://localhost:3000/api/faktur/payment',
-    
-        dataType: 'json',
-        data:{
-          total_amount:$('#amount').val().replace(/[^\w\s]/gi, ''),
-          date_transaction:date_transaction,
-          customer_id:<?php echo $id ?>+"",
-          account_id:account_id,
-          payment:payment,
-          description:description,
-          transaction_number:transaction_number,
-          payment_faktur:payment_faktur,
-          data_transactions:data_transactions
+$.ajax({
+    type: "post",
+    url: 'http://localhost:3000/api/faktur/payment',
 
-
-        },
-        success: function(response) {
-
-
-    var data_transaction={
-      transaction_id:"<?php $name ?>_<?php echo $id ?>",
-      date:date_transaction,
+    dataType: 'json',
+    data:{
+      total_amount:$('#amount').val().replace(/[^\w\s]/gi, ''),
+      date_transaction:date_transaction,
+      customer_id:<?php echo $id ?>+"",
       account_id:account_id,
-      description:`<?php echo $name ?>/${description}`,
-      amount:payment,
+      payment:payment,
+      description:description,
+      transaction_number:transaction_number,
+      payment_faktur:payment_faktur,
+      data_transactions:data_transactions
+
+
+    },
+    success: function(response) {
+
+
+var data_transaction={
+  transaction_id:"<?php $name ?>_<?php echo $id ?>",
+  date:date_transaction,
+  account_id:account_id,
+  description:`<?php echo $name ?>/${description}`,
+  amount:payment,
+
+
+}
+
+
+
+    if (payment>0){
+      axios.post("http://localhost:3000/api/accounts/transaction/remaining",data_transaction).then((response)=>{
+        Swal.fire({
+              title: "success!",
+              text: "Transaksi berhasil disimpan",
+              icon: "success",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
+            
+            setTimeout(function() {
+              window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+            }, 2500);
+
+
+            hiddenindikator();
+        
+      })
+      .catch((error)=>{
+        Swal.fire({
+              title: "error",
+              text: "terjadi kesalahan",
+              icon: "error",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
+            
+            // setTimeout(function() {
+            //   window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+            // }, 2500);
+
+
+            hiddenindikator();
+
+      })
+
+    }else{
+      Swal.fire({
+              title: "success!",
+              text: "Transaksi berhasil disimpan",
+              icon: "success",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
+            
+            setTimeout(function() {
+              window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+            }, 2500);
+
+
+            hiddenindikator();
+     
 
 
     }
-    
-    
-
-        if (payment>0){
-          axios.post("http://localhost:3000/api/accounts/transaction/remaining",data_transaction).then((response)=>{
-            Swal.fire({
-                  title: "success!",
-                  text: "Transaksi berhasil disimpan",
-                  icon: "success",
-                  timer: 2000,
-                  showCancelButton: false,
-                  showConfirmButton: false
-                });
-                
-                setTimeout(function() {
-                  window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
-                }, 2500);
 
 
-                hiddenindikator();
+
+    },
+    error: function(error) {
+      Swal.fire({
+              title: "error",
+              text: "terjadi kesalahan",
+              icon: "error",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
+
+      hiddenindikator();
+
+
+
+
+    }
+
+
+  });
+
+
+
+      }
+      
+    }else{ 
+      payment_error.textContent="";
+
+data_transactions=[]
+payment_faktur=[]
+
+
+var transaction_number = $('#transaction_number').text();
+var account_id = $('#account').val();
+var payment = $('#amount').val().replace(/[^\w\s]/gi, '');
+var description =$('#description').val();
+var tempTotalAmount=total_amount.replace(/[^\w\s]/gi, '');
+var date_transaction=$('#date_transaction').val();
+
+
+// (amount,transaction_number,faktur_id,account_id)
+data_faktur.map((value)=>{
+  var payment_item;
+  var tempPaymentFaktur;
+  console.log(value.remaining)
+  if (Number(payment)>Number(value.remaining)){
+    payment=payment-value.remaining.replace(/[^\w\s]/gi, '');
+    payment_item=[value.remaining.replace(/[^\w\s]/gi, ''),transaction_number,value.faktur_number,account_id];  
+    tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(value.remaining)+Number(value.jumlah_bayar),amount:value.remaining.replace(/[^\w\s]/gi, ''),account_id:account_id,account_beban:account_beban} 
+
+  }else{      
+    payment_item=[payment,transaction_number,value.faktur_number,account_id]
+    tempPaymentFaktur={faktur_number:value.faktur_number,project_number:value.project_number,quotation_number:value.quotation_number,total_pembayaran_faktur:Number(payment)+Number(value.jumlah_bayar),amount:payment,account_id:account_id,account_beban:account_beban} 
+    payment=0
+  }
+  payment_faktur.push(tempPaymentFaktur);
+  data_transactions.push(payment_item);
+})
+
+console.log(payment_faktur)
+console.log(data_transactions);
+
+console.log(date_transaction)
+
+
+var data_transaction={}
+$.ajax({
+    type: "post",
+    url: 'http://localhost:3000/api/faktur/payment',
+
+    dataType: 'json',
+    data:{
+      total_amount:$('#amount').val().replace(/[^\w\s]/gi, ''),
+      date_transaction:date_transaction,
+      customer_id:<?php echo $id ?>+"",
+      account_id:account_id,
+      payment:payment,
+      description:description,
+      transaction_number:transaction_number,
+      payment_faktur:payment_faktur,
+      data_transactions:data_transactions
+
+
+    },
+    success: function(response) {
+
+
+var data_transaction={
+  transaction_id:"<?php $name ?>_<?php echo $id ?>",
+  date:date_transaction,
+  account_id:account_id,
+  description:`<?php echo $name ?>/${description}`,
+  amount:payment,
+
+
+}
+
+
+
+    if (payment>0){
+      axios.post("http://localhost:3000/api/accounts/transaction/remaining",data_transaction).then((response)=>{
+        Swal.fire({
+              title: "success!",
+              text: "Transaksi berhasil disimpan",
+              icon: "success",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
             
-          })
-          .catch((error)=>{
-            Swal.fire({
-                  title: "error",
-                  text: "terjadi kesalahan",
-                  icon: "error",
-                  timer: 2000,
-                  showCancelButton: false,
-                  showConfirmButton: false
-                });
-                
-                // setTimeout(function() {
-                //   window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
-                // }, 2500);
+            setTimeout(function() {
+              window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+            }, 2500);
 
 
-                hiddenindikator();
-
-          })
-
-        }else{
-          Swal.fire({
-                  title: "success!",
-                  text: "Transaksi berhasil disimpan",
-                  icon: "success",
-                  timer: 2000,
-                  showCancelButton: false,
-                  showConfirmButton: false
-                });
-                
-                setTimeout(function() {
-                  window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
-                }, 2500);
-
-
-                hiddenindikator();
-         
+            hiddenindikator();
+        
+      })
+      .catch((error)=>{
+        Swal.fire({
+              title: "error",
+              text: "terjadi kesalahan",
+              icon: "error",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
+            
+            // setTimeout(function() {
+            //   window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+            // }, 2500);
 
 
-        }
+            hiddenindikator();
+
+      })
+
+    }else{
+      Swal.fire({
+              title: "success!",
+              text: "Transaksi berhasil disimpan",
+              icon: "success",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
+            
+            setTimeout(function() {
+              window.location = "<?php echo base_url('Customer/manage_customer/') ?>";
+            }, 2500);
 
 
+            hiddenindikator();
+     
 
-        },
-        error: function(error) {
-          Swal.fire({
-                  title: "error",
-                  text: "terjadi kesalahan",
-                  icon: "error",
-                  timer: 2000,
-                  showCancelButton: false,
-                  showConfirmButton: false
-                });
 
-          hiddenindikator();
+    }
 
 
 
+    },
+    error: function(error) {
+      Swal.fire({
+              title: "error",
+              text: "terjadi kesalahan",
+              icon: "error",
+              timer: 2000,
+              showCancelButton: false,
+              showConfirmButton: false
+            });
 
-        }
+      hiddenindikator();
 
 
-      });
+
+
+    }
+
+
+  });
+
+
+    }
+  
 
 
   }
@@ -638,7 +830,22 @@ var data_transaction={}
 
 
 
+  $(function() {
 
+
+$('#date_transaction').datepicker({
+  dateFormat: 'yy-mm-dd',
+  showButtonPanel: true,
+  changeMonth: true,
+  changeYear: true,
+
+  buttonImageOnly: true,
+
+  maxDate: '+30Y',
+  yearRange: '1999:2030',
+  inline: true
+});
+});
  
     
 

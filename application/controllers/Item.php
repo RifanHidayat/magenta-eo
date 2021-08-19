@@ -230,7 +230,7 @@ class Item extends CI_Controller {
                 $sub_array[] = $row->active=="Active"?'<center><span class="label label-success">Active</span></center>':'<center><span class="label label-danger">In Active</span></center>'; 
                 $sub_array[] = $row->metode=="No-Fee Cost"?"No-Fee Cost":"Commissionable Cost";
           
-                $sub_array[] = '<center>'.$edit.' '.$delete.' '.$addValue.'</center>';
+                $sub_array[] = '<center>'.$edit.' '.$addValue.'</center>';
                 $data[] = $sub_array;  
 
            }  

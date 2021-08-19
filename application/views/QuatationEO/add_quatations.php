@@ -100,7 +100,7 @@
 
                           </div>
                           <div class="form-group" id="kanan">
-                            <label for="total_summary" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                            <label for="total_summary" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                             <div class="col-sm-12">
                               <input type="text" readonly="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="0">
 
@@ -636,7 +636,7 @@
                         </div>
 
                         <div class="form-group" id="qnumber">
-                          <label for="netto" style="text-align:left;" class="col-sm-9 control-label">Sub total</label>
+                          <label for="netto" style="text-align:left;" class="col-sm-9 control-label">Subtotal</label>
                           <div class="col-sm-12">
                             <input type="text" class="form-control" required="" readonly="" id="netto" name="netto" autocomplete="off" value="0">
                             <input type="text" class="form-control" readonly="" id="netto_hidden" name="netto_hidden" autocomplete="off" value="0" hidden="">
@@ -653,7 +653,7 @@
                           </div>
 
                           <div class="col-sm-12">
-                            <input type="text" readonly="" class="col-sm-15 form-control" id="asf_other" name="asf_other" autocomplete="off" readonly="" value="0">
+                            <input type="text" onkeyup="convertToRupiah(this);"  class="col-sm-15 form-control" id="asf_other" name="asf_other" autocomplete="off" value="0" oninput="asf_event_other()" >
 
                             <input type="text" readonly="" class="form-control" id="asf_other_hidden" name="asf_other_hidden" autocomplete="off" readonly="" value="0" hidden="">
                           </div>
@@ -1038,7 +1038,7 @@
 
       }
 
-
+ 
     }
 
     function hitunggrandtotalnonfee<?php echo (str_replace(' ', '', $k->name)) ?>() {
@@ -1309,6 +1309,7 @@
     $('#discount_percent_other').val(hasil);
   
     netto_other_function();
+    ppn_description();
     ppn();
     grand_total();
 
@@ -1327,9 +1328,10 @@
     var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     $('#discount_other').val(hasil1);
 
-    ppn();
+    
     netto_other_function();
     ppn_description();
+    ppn();
     grand_total();
 
 
@@ -1663,6 +1665,18 @@
     grand_total_other();
 
   }
+  function asf_event_other(){
+
+var Comissionable_cost=$('[name="netto"]').val().replace(/[^\w\s]/gi, '');
+var asf=$("#asf_other").val().replace(/[^\w\s]/gi, '');
+var hasil=Number(Comissionable_cost) / Number((asf));
+var hasil = (Number(asf) / Number(Comissionable_cost)) * 100
+$('#asf_percen_other').val(hasil)
+hitungasf();
+hitungnetto();
+
+
+}
 
   function hitungnetto() {
     var total = $('#grandtotaldescriptionhidden').val();
@@ -2107,7 +2121,6 @@
   function ppn() {
     var karakteristikPpn = $('[name="kppn"]').val();
     if (karakteristikPpn == 'noppn') {
-
       var total = $('#netto_event').val();
       var total1 = total.replace(/[^\w\s]/gi, '');
       var hitung = Number(total1) * 0;
@@ -2119,7 +2132,6 @@
 
     } else {
       console.log("netto",$('#netto_event').val())
-
       var total = $('#netto_event').val();
       var total1 = total.replace(/[^\w\s]/gi, '');
       var hitung = Number(total1) * 0.1;
@@ -2158,9 +2170,8 @@
 
 
   $("#imagenes").fileinput({
-
     overwriteInitial: true,
-    maxFileSize: 2048,
+    maxFileSize: 1000000,
     showClose: false,
     showCaption: false,
     browseLabel: 'browse',
@@ -2181,7 +2192,7 @@
 
   $("#imagenesother").fileinput({
     overwriteInitial: true,
-    maxFileSize: 2000,
+    maxFileSize: 1000000,
     showClose: false,
     showCaption: false,
     browseLabel: 'browse',

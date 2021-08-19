@@ -84,11 +84,9 @@
             <div class="col-9 invoice-col">
               <br>
               <p>PT.Magenta Mediatama<br>
-                Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grppl Utara<br>
+                Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grogol Utara<br>
                 Kebayon Lama Jakarta Selatan DKI Jakarta-12210<br>
                 phone (021) 53660077-08;Fax(021)53660099</p>
-
-
             </div>
             <!-- /.col -->
 
@@ -162,11 +160,6 @@
 
 
             </div>
-
-
-
-
-
             <br>
             <br>
             <br>
@@ -202,7 +195,7 @@
                     <th style="width: 5%;background-color: #808080">
                       <center>Frequency</center>
                     </th>
-                    <th style="width: 15%;background-color: #808080">Unit Price</th>
+                    <th style="width: 20%;background-color: #808080">Unit Price</th>
                     <th style="width: 20%;background-color: #808080">Amount</th>
                   </tr>
                 </thead>
@@ -224,8 +217,8 @@
                       <td  style="width: 15px;">
                         <center><?php echo $k->frequency ?></center>
                       </td>
-                      <td align="right"  style="width: 20px;">IDR <?php echo number_format($k->unitprice, 0, ',', '.') ?></td>
-                      <td align="right"  style="width: 15px;">IDR <?php echo number_format($k->amount, 0, ',', '.') ?></td>
+                      <td align="right"  style="width: 20px;"> <?php echo number_format($k->unitprice, 0, ',', '.') ?></td>
+                      <td align="right"  style="width: 15px;"> <?php echo number_format($k->amount, 0, ',', '.') ?></td>
                     </tr>
                   <?php endforeach ?>
           
@@ -235,37 +228,37 @@
                     <td rowspan="6" colspan="4" valign="top"><b>Note : </b><?php echo $note ?></p>
                     </td>
                     <th>Subtotal</th>
-                    <th align="right"> <?php echo "IDR " . $total ?></th>
+                    <tD align="right"> <?php echo  $total ?></tD>
 
                   </tr>
                   <tr>
                     <th>Discount</th>
-                    <th align="right"> IDR <?php echo '(' . number_format($discount, 0, ',', '.') . ')' ?></th>
+                    <tD align="right">  <?php echo '(' . number_format($discount, 0, ',', '.') . ')' ?></tD>
 
                   </tr>
                   <tr>
                     <th>ASF</th>
-                    <th align="right"> IDR <?php echo $asf ?></th>
+                    <tD align="right"> <?php echo $asf ?></tD>
 
                   </tr>
                   <tr>
                     <th>Netto</th>
-                    <th align="right"> IDR <?php echo $netto; ?></th>
+                    <td align="right"> <?php echo $netto; ?></td>
 
                   </tr>
                   <tr>
                     <th>PPN</th>
-                    <th align="right"> IDR <?php echo $ppn ?></th>
+                    <td align="right"> <?php echo $ppn ?></td>
 
                   </tr>
                   <tr>
                     <th>PPh23</th>
-                    <th align="right">IDR <?php echo $pph23; ?></th>
+                    <td align="right"> <?php echo '('.$pph23.')'; ?></td>
 
                   </tr>
                   <tr>
                     <th colspan="5">Grand Total</th>
-                    <th align="right"> <?php echo 'IDR '.$grand_total; ?></th>
+                    <th align="right"> <?php echo $grand_total; ?></th>
 
                   </tr>
                

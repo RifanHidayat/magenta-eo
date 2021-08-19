@@ -555,7 +555,7 @@
           $('#picEvent1').val(hasil[0].pic_event);
           $('#status').val(hasil[0].status);
           $('#discount_percent_other').val(hasil[0].discount_percent);
-          $('#discount_other').val(hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#discount_other').val(`(${hasil[0].discount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")})`);
 
           $('#id_customerother').val(hasil[0].id_customer);
 
@@ -565,7 +565,7 @@
           $('#total_description').val(hasil[0].netto.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#note').val(hasil[0].note);
           $('#ppn_description').val(hasil[0].ppn.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
-          $('#pph_description').val(hasil[0].pph23.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+          $('#pph_description').val(`(${hasil[0].pph23.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")})`);
           $('#grand_total_other').val(hasil[0].grand_total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
           $('#revisi').val(hasil[0].revisi);
 

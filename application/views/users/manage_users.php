@@ -68,6 +68,7 @@
                   <th>Name</th>
                   <th>Phone</th>
                   <th>Group</th>
+                  <th>Status</th>
 
                   <th colspan="1"><center>Action</center></th>
                

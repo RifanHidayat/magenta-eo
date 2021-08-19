@@ -191,7 +191,7 @@
                                     <div class="form-group" id="qnumber">
                                         <label for="netto" style="text-align:left;" class="col-sm-10 control-label">Tanggal Pengiriman</label>
                                         <div class="col-sm-12">
-                                            <input onchange="generet_delivery()" onkeypress="return false;" type="text" class="form-control" required="" id="tanggal_pengiriman" placeholder="dd/mm/yy" name="tanggal_pengiriman" autocomplete="off">
+                                            <input onchange="generet_delivery()" onkeypress="return false;" type="text" class="form-control" required="" id="tanggal_pengiriman" placeholder="yyyy-mm-dd" name="tanggal_pengiriman" autocomplete="off">
 
                                         </div>
                                     </div>
@@ -328,7 +328,7 @@
     }
 
     $('#SimpanData').submit(function(e) {
-        e.preventDefault();
+      //  e.preventDefault();
         showIndikator();
         $('#SimpanData').submit();
     });
@@ -616,7 +616,7 @@
         var dateToday = new Date();
 
         $('#tanggal_pengiriman').datepicker({
-            dateFormat: 'dd/mm/yy',
+            dateFormat: 'yy-mm-dd',
             showButtonPanel: true,
             changeMonth: true,
             changeYear: true,
@@ -638,15 +638,27 @@
     function generet_delivery() {
         // var date = $('[name="tanggal_pengiriman"]').val();
 
-        var id = $('[name="id"]').val()
-        var date = new Date($('[name="tanggal_pengiriman"]').val());
-        var tahun = date.getFullYear();
-        var t = tahun.toString()
-        var bulan = date.getMonth();
-        var tanggal = date.getDate();
-        var hari = date.getDay();
+        // var id = $('[name="id"]').val()
+        // var date = new Date($('[name="tanggal_pengiriman"]').val());
+        // var tahun = date.getFullYear();
+        // var t = tahun.toString()
+        // var bulan = date.getMonth();
+        // var tanggal = date.getDate();
+        // var hari = date.getDay();
 
-        $('[name="delivery_order"]').val("QO" + t.substring(2, 4) + "" + (bulan + 1) + "" + tanggal + id)
+        // $('[name="delivery_order"]').val("QO" + t.substring(2, 4) + "" + (bulan + 1) + "" + tanggal + id)
+
+        var id = $('[name="id"]').val()
+    var date = new Date($('[name="tanggal_pengiriman"]').val());
+    var tahun = date.getFullYear();
+    var t = tahun.toString()
+    var bulan = ("0" + (date.getMonth() + 1)).slice(-2)
+    var tanggal = date.getDate();
+    var hari = date.getDay();
+
+    $('[name="delivery_order"]').val("QO" + tanggal +(bulan) +t.substring(2, 4) +'-'+ id)
+
+        
 
     }
 

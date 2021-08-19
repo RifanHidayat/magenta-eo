@@ -30,7 +30,7 @@
     <div class="card">
       <div class="card-header">
 
-        <h3 class="box-title"><b>Edit Delivery</b></h3>
+        <h3 class="box-title"><b>Edit Delivery <?php echo $id ?></b></h3>
 
         <div class="card-tools" style="margin-top: -35px;margin-right: 15px">
           <a href="<?php echo base_url('Delivery/manage_delivery_event') ?>" class="btn bg-gradient-secondary">
@@ -49,7 +49,7 @@
 
             <div class="box">
 
-              <form id="SimpanData" action="<?php base_url('Delivery/aksi_update_delivery_event/' . $quotation_number) ?>" method="post" id="SimpanData" name="formid">
+              <form  action="<?php base_url('Delivery/aksi_update_delivery_event/' . $id) ?>" method="post" id="simpan" name="formid">
 
 
                 <div class="col-md-6 col-xs-12 pull pull-left">
@@ -200,7 +200,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="netto" style="text-align:left;" class="col-sm-7 control-label">Tanggal Pengiriman</label>
                     <div class="col-sm-12">
-                      <input onchange="generet_delivery()" onkeypress="return false;" type="text" placeholder="dd/mm/yy" class="form-control" required="" id="tanggal_pengiriman" name="tanggal_pengiriman" autocomplete="off">
+                      <input onchange="generet_delivery()" onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="tanggal_pengiriman" name="tanggal_pengiriman" autocomplete="off">
 
                     </div>
                   </div>
@@ -312,10 +312,10 @@
 
   }
 
-  $('#SimpanData').submit(function(e) {
-    e.preventDefault();
+  $('#simpan').submit(function(e) {
+    //e.preventDefault();
     showIndikator();
-    $('#SimpanData').submit();
+    $('#simpan').submit();
   });
 
   $(document).ready(function() {
@@ -339,34 +339,24 @@
       success: function(hasil) {
         console.log(hasil);
         $('#kirimm').select2();
-
         $('[name="Quatations_number"]').val(hasil[0].quotation_number);
         $('[name="date_quotation"]').val(hasil[0].date_quotation);
         $('[name="customer"]').val(hasil[0].customer);
-
         $('[name="title_event"]').val(hasil[0].tittle_event);
-
         $('[name="alamat_customer"]').val(hasil[0].address);
         $('[name="platnomor"]').val(hasil[0].platnomor);
-
         $('[name="po_number"]').val(hasil[0].po_number);
-
         $('[name="kirim"]').val(hasil[0].kirim).change();
         $('[name="kirimm"]').val(hasil[0].kirim).change();
-
         $('[name="tagihan"]').val(hasil[0].tagihan);
         $('[name="gudang"]').val(hasil[0].gudang);
-
         $('[name="tanggal_pengiriman"]').val(hasil[0].date_pengiriman);
         $('[name="status"]').val(hasil[0].status);
         $('[name="delivery_order"]').val(hasil[0].Delivery_number);
-
         $('[name="pengirim"]').val(hasil[0].pengirim);
         $('[name="venue_event"]').val(hasil[0].venue_event);
         $('[name="date_po"]').val(hasil[0].date_po);
         $('[name="date_event"]').val(hasil[0].date_event);
-
-
         $('[name="tagihan"]').val(hasil[0].address);
         $('[name="bast_number"]').val(hasil[0].bast_number);
         $('[name="total_bast"]').val(hasil[0].totalBast.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
@@ -388,7 +378,7 @@
     var dateToday = new Date();
 
     $('#tanggal_pengiriman').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'yy-mm-dd',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,
@@ -408,11 +398,11 @@
     var date = new Date($('[name="tanggal_pengiriman"]').val());
     var tahun = date.getFullYear();
     var t = tahun.toString()
-    var bulan = date.getMonth();
+    var bulan = ("0" + (date.getMonth() + 1)).slice(-2)
     var tanggal = date.getDate();
     var hari = date.getDay();
 
-    $('[name="delivery_order"]').val("QO" + t.substring(2, 4) + "" + (bulan + 1) + "" + tanggal + id)
+    $('[name="delivery_order"]').val("QO" + tanggal +(bulan) +t.substring(2, 4) +'-'+ id)
 
   }
 

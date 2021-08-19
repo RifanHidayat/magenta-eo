@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-12" style="margin: 10px;">
                   <div class="box box-solid">
-                    <form action="<?php echo base_url('Quotation/aksi_update_quotation_other') ?>" method="post" name="formid" class="form-horizontal" enctype="multipart/form-data">
+                    <form action="<?php echo base_url('Quotation/aksi_update_quotation_other') ?>" method="post" name="formid" class="form-horizontal" enctype="multipart/form-data" id="SimpanData">
 
                       <!--  <?php if (in_array('statusQuatationsother', $user_permission)) : ?>
              
@@ -328,9 +328,9 @@
                           </div>
 
                           <div class="col-sm-12">
-                            <input type="text" readonly="" class="col-sm-12 form-control" id="asf_other" name="asf_other" autocomplete="off" readonly="" value="0">
+                            <input onkeyup="convertToRupiah(this);"  type="text" class="col-sm-12 form-control" id="asf_other" name="asf_other" autocomplete="off" value="0" onkeyup="convertToRupiah(this);" oninput="asf_event_other()" >
 
-                            <input type="text" readonly="" class="form-control" id="asf_other_hidden" name="asf_other_hidden" autocomplete="off" readonly="" value="0" hidden="">
+                            <input type="text" class="form-control" id="asf_other_hidden" name="asf_other_hidden" autocomplete="off"  value="0" hidden="" readonly>
                           </div>
 
                         </div>
@@ -407,7 +407,7 @@
                         </tfoot>
                       </table>
                       <div class="form-group text-left">
-                        <button value="update" type="submit" name="btn" class="btn btn-primary btnSave"></i>
+                        <button value="update" type="submit" name="btn" class="btn btn-primary"></i>
                           <span class="spinner-border spinner-border-sm loadingIndikdatorRevision" role="status" aria-hidden="true"></span>
                           Save Changes</button>
                         <!--    <button value="revisi" type="submit" class="btn btn-success" name="btn"></i>Save as Revision</button> -->
@@ -469,6 +469,11 @@
       $('.loadingIndikdator').hide();
 
     }
+    $('#SimpanData').submit(function(e) {
+      showIndikatorRevisi();
+      showIndikator();
+     // e.preventDefault();
+    })
     $(document).ready(function() {
       hiddenIndikatorRevisi();
       hiddenIndikator();
@@ -482,14 +487,8 @@
 
 
     });
-    // $('#SimpanData').submit(function(e) {
-    //   showIndikatorRevisi();
-    //   showIndikator();
-    //   e.preventDefault();
+   
 
-
-
-    // })
     $('#hapusdeskription').click(function(e) {
       $("tableLoopDescription").closest("tr").remove();
 
@@ -736,6 +735,8 @@
       $('#grandtotaldescription').val(hitung1);
       $('#grandtotaldescriptionhidden').val(hitung);
       hitungnetto();
+      discount_other_function();
+       discount_other_normal();
       total_description();
 
 
@@ -777,12 +778,12 @@
       var total1 = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
       $('#netto_hidden').val(total);
       $('#netto').val(total1);
+     
       hitungmanagement();
       total_description();
       ppn_description();
       pph_description();
-      // discount_other_function();
-      // discount_other_normal();
+       
 
 
     }
@@ -870,6 +871,19 @@
 
     }
 
+    function asf_event_other(){
+
+var Comissionable_cost=$('[name="netto"]').val().replace(/[^\w\s]/gi, '');
+var asf=$("#asf_other").val().replace(/[^\w\s]/gi, '');
+var hasil=Number(Comissionable_cost) / Number((asf));
+var hasil = (Number(asf) / Number(Comissionable_cost)) * 100
+$('#asf_percen_other').val(hasil)
+//hitungasf();
+hitungnetto();
+
+
+}
+
 
     function grand_total_other() {
       var total = $('#total_description_hidden').val();
@@ -887,54 +901,54 @@
 
 
 
-    $('#SimpanData').submit(function(e) {
-      e.preventDefault();
+    // $('#SimpanData').submit(function(e) {
+    //   e.preventDefault();
 
 
-      save_quotation_other();
+    //   save_quotation_other();
 
-    });
-
-
-    function save_quotation_other() {
-
-      showIndikator();
-      showIndikatorRevisi();
-
-      $.ajax({
-        url: $("#SimpanData").attr('action'),
-        type: 'post',
-        cache: false,
-        dataType: "json",
-        data: $("#SimpanData").serialize(),
-        success: function(data) {
-          if (data.success == true) {
-            $('#notif').fadeIn(800, function() {
-              $("#notif").html(data.notif).fadeOut(5000).delay(1000);
-
-            });
-            window.location.href = "<?php echo base_url("Quotation/manage_quotation_other") ?>";
-            hiddenIndikator();
-            hiddenIndikatorRevisi();
+    // });
 
 
+    // function save_quotation_other() {
 
-          } else {
-            hiddenIndikator();
-            hiddenIndikatorRevisi();
-            $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan</div>')
-          }
-        },
+    //   showIndikator();
+    //   showIndikatorRevisi();
 
-        error: function(error) {
-          hiddenIndikator();
-          hiddenIndikatorRevisi();
-          alert(error);
+    //   $.ajax({
+    //     url: $("#SimpanData").attr('action'),
+    //     type: 'post',
+    //     cache: false,
+    //     dataType: "json",
+    //     data: $("#SimpanData").serialize(),
+    //     success: function(data) {
+    //       if (data.success == true) {
+    //         $('#notif').fadeIn(800, function() {
+    //           $("#notif").html(data.notif).fadeOut(5000).delay(1000);
 
-        }
+    //         });
+    //         window.location.href = "<?php echo base_url("Quotation/manage_quotation_other") ?>";
+    //         hiddenIndikator();
+    //         hiddenIndikatorRevisi();
 
-      });
-    }
+
+
+    //       } else {
+    //         hiddenIndikator();
+    //         hiddenIndikatorRevisi();
+    //         $('#notif').html('<div class="alert alert-danger">Data Gagal Disimpan</div>')
+    //       }
+    //     },
+
+    //     error: function(error) {
+    //       hiddenIndikator();
+    //       hiddenIndikatorRevisi();
+    //       alert(error);
+
+    //     }
+
+    //   });
+    // }
 
 
 

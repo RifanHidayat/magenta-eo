@@ -23,7 +23,7 @@ class model_faktur extends CI_Model
 
          function make_query()  
       {  
-            $this->db->select('faktur.quotation_number,faktur_number,faktur.image,ser_faktur,quotations.customer,tittle_event,total_faktur,quotations.status as statusQuotations,bast.status as statusBast,faktur.status as status,date_faktur,id_faktur,faktur.noteStatus');
+            $this->db->select('faktur.quotation_number,faktur_number,faktur.image,ser_faktur,quotations.customer,tittle_event,total_faktur,quotations.status as statusQuotations,bast.status as statusBast,faktur.status as status,date_faktur,id_faktur,faktur.noteStatus,faktur.pembayaran');
        $this->db->from('quotations');
        $this->db->join('bast','bast.quotation_number = quotations.quotation_number');
        $this->db->join('faktur','faktur.id_bast= bast.id_bast'); 
@@ -70,7 +70,7 @@ class model_faktur extends CI_Model
 
                function make_query_other()  
       {  
-             $this->db->select('faktur.quotation_number,faktur_number,faktur.image,ser_faktur,quotation_other.customer_event as customer,tittle_event,total_faktur,quotation_other.status as statusQuotations,bast.status as statusBast,faktur.status as status,date_faktur,id_faktur,faktur.noteStatus');
+             $this->db->select('faktur.quotation_number,faktur_number,faktur.image,ser_faktur,quotation_other.customer_event as customer,tittle_event,total_faktur,quotation_other.status as statusQuotations,bast.status as statusBast,faktur.status as status,date_faktur,id_faktur,faktur.noteStatus,faktur.pembayaran');
        // $this->db->from('quotation_other');
        //      $this->db->join('faktur','faktur.quotation_number = quotation_other.quotation_number');    
        //       $this->db->join('bast','bast.quotation_number = faktur.quotation_number');  

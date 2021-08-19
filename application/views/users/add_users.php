@@ -64,7 +64,7 @@
                     <label for="groups">Groups</label>
 
 
-                    <select required="" style="width: 50%" class="form-group" reqired="" id="groups" name="groups">
+                    <select   style="width: 50%" class="form-group" reqired="" id="groups" name="groups">
                       <option value="" style="height: 100px;">Select Groups</option>
                       <?php foreach ($groups as $k) : ?>
                         <option value="<?php echo $k->group_name ?>"><?php echo $k->group_name ?></option>
@@ -102,7 +102,7 @@
                   </div>
                   <div class="form-group" id="kanan1" style="margin-top: -75px;">
                     <label for="phone">Phone</label>
-                    <input required="" type="text" class="form-control" id="phone" name="phone" required="" autocomplete="off" value="<?php echo set_value('phone') ?>">
+                    <input  type="text" class="form-control" id="phone" name="phone" autocomplete="off" value="<?php echo set_value('phone') ?>">
                     <?= form_error('phone', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
                   <div class="form-group">
@@ -138,11 +138,49 @@
                     </div>
                   </div>
                   <!-- <button style="margin-left: 10px" type="submit" class="btn btn-primary">Save</button> -->
+                    <div class="col-md-3 col-xs-12">
 
-                  <button type="submit" class="btn btn-primary btnSave" type="button">
+                    <div class="form-group" value="<?php echo set_value('gender') ?>">
+                      <label for="gender">Projects & Finance
+                      
+                      </label>
+                      <br>
+                      <div class="radio">
+                       
+                        <label>
+                          <input  type="checkbox" name="checked" id="checked" value="2" value="<?php echo set_value('gender') ?>">
+                          
+                        </label>
+                      </div>
+                      <?= form_error('gender', '<small class="text-danger pl-3">', '</small>') ?>
+                    </div>
+                  </div>
+                 <div class=" finance">
+                  <label>Select menu</label>
+
+                  <select  class="js-example-basic-multiple" name="finance[]" multiple="multiple" style="width: 50%; height:30%;color:black;">
+                 
+                   <option value="projects">Manage Projecs</option>
+    
+                   <option value="mapping">Mapping Projets</option>   
+                   <option value="tb">PIC TB</option>   
+                   <option value="inout">In Out</option>   
+                   <option value="account">Akun</option>      
+                </select>
+                 </div>
+                <br>
+                <br>
+
+
+ 
+
+                  <div class="form-group text-left">
+
+                  <button align="right" type="submit" class="btn btn-primary btnSave" type="button">
                     <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
                     Save
                   </button>
+                  </div>
               </form>
             </div>
             <!-- /.box -->
@@ -159,9 +197,35 @@
   <!-- /.content -->
 </div>
 </div>
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
 <script type="text/javascript">
+ $('.finance').hide();
+
+const checkbox = document.getElementById('checked')
+checkbox.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    account_beban=true;
+   
+    $('.finance').show();
+  } else {
+    $('.finance').hide();
+    $('.js-example-basic-multiple').val(null).trigger('change');
+    account_beban=false;
+   
+  }
+})
+
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+      
+    
+    });
+});
+
+
   function showIndikator() {
     $('.btnSave').attr('disabled', 'disabled');
     $('.loadingIndikdator').show();

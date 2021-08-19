@@ -345,6 +345,15 @@
                     <?= form_error('date_faktur', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
 
+                  <div class="form-group" id="qnumber">
+                        <label for="Date_event" style="text-align:left;" class="col-sm-6 control-label">Due Faktur</label>
+                        <div class="col-sm-12">
+                          <input onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="due_faktur" name="due_faktur" autocomplete="off" value="<?php echo set_value('date_faktur') ?>">
+                        </div>
+                        <?= form_error('due_faktur', '<small class="text-danger pl-3">', '</small>') ?>
+                      </div>
+
+
 
                   <div class="form-group" id="qnumber">
 
@@ -1292,7 +1301,24 @@
     var dateToday = new Date();
 
     $('#date_faktur').datepicker({
-      dateFormat: 'dd/mm/yy',
+      dateFormat: 'yy-mm-dd',
+      showButtonPanel: true,
+      changeMonth: true,
+      changeYear: true,
+
+      buttonImageOnly: true,
+
+      maxDate: '+30Y',
+      yearRange: '1999:2030',
+      inline: true
+    });
+  });
+
+  $(function() {
+    var dateToday = new Date();
+
+    $('#due_faktur').datepicker({
+      dateFormat: 'yy-mm-dd',
       showButtonPanel: true,
       changeMonth: true,
       changeYear: true,

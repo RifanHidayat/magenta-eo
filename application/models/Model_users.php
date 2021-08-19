@@ -4,7 +4,7 @@
 class model_users extends CI_Model
 {
 		var $table = "tb_users";  
-      	var $select_column = array("id", "username", "group_name", "email","firstname","lastname","phone","gender","password");  
+      	var $select_column = array("id", "username", "group_name", "email","firstname","lastname","phone","gender","password",'is_active');  
       	var $order_column = array(null,"username",null,"email", "firstname", "lastname", null, null,null);  
 	
 

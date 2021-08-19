@@ -42,8 +42,9 @@ class Quotation extends CI_Controller
   {
 
     $config['upload_path']          = './assets/images/';
-    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
+    $config["allowed_types"] = "*";
     $config['file_name'] =  $quotation_number;
+    // $extension   = end($typefile);
 
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
@@ -65,7 +66,7 @@ class Quotation extends CI_Controller
   {
 
     $config['upload_path']          = './assets/imageother/';
-    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
+    $config["allowed_types"] = "*";
     $config['file_name'] =  $quotation_number;
     $this->load->library('upload', $config);
     $this->upload->initialize($config);
@@ -1143,8 +1144,8 @@ class Quotation extends CI_Controller
       'A4', 'defaultPageNumStyle' => '1',
       'margin_right' => '5',
       'margin_left' => '5',
-      'margin_bottom' => '5',
-      'margin_top' => '10',
+      'margin_bottom' => '10',
+      'margin_top' => '6',
 
     ]);
 
@@ -1220,8 +1221,8 @@ class Quotation extends CI_Controller
       'defaultPageNumStyle' => '1',
       'margin_right' => '5',
       'margin_left' => '5',
-      'margin_bottom' => '5',
-      'margin_top' => '10',
+      'margin_bottom' => '10',
+      'margin_top' => '6',
     ]);
 
     $data = $this->load->view('QuatationEO/download_laporan', $this->data, TRUE);
@@ -1385,7 +1386,7 @@ class Quotation extends CI_Controller
 
     $config['upload_path']          = './assets/images/';
 
-    $config['allowed_types']        = 'gif|jpg|png|pdf|jpeg';
+    $config["allowed_types"] = "*";
 
     $config['max_size']             = 10000;
 

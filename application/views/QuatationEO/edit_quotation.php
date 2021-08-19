@@ -72,14 +72,14 @@
                           </div>
 
                           <div class="col-sm-12">
-                            <input type="text" readonly="" class="col-sm-12 form-control" id="asf" name="asf" autocomplete="off" readonly="" value="0">
+                            <input type="text" class="col-sm-12 form-control" id="asf" name="asf" autocomplete="off" value="0" oninput="asf_event_normal()">
 
                             <input type="text" readonly="" class="form-control" id="asf_hidden" name="asf_hidden" autocomplete="off" readonly="" value="0" hidden="">
                           </div>
 
                         </div>
                         <div class="form-group" id="kanan">
-                          <label for="total_summary" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                          <label for="total_summary" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                           <div class="col-sm-12">
                             <input type="text" readonly="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="0">
 
@@ -95,7 +95,7 @@
                           </div>
 
                           <div class="col-sm-12">
-                            <input type="text" readonly="" class="col-sm-12 form-control" id="discount_event" name="discount_event" autocomplete="off" readonly="" value="0">
+                            <input onkeyup="convertToRupiah(this);"  type="text" class="col-sm-12 form-control" id="discount_event" name="discount_event" autocomplete="off" value="0" oninput="discount_event_normal()">
                             <input type="text" readonly="" class="form-control" id="discount_event_hidden" name="discount_event_hidden" autocomplete="off" readonly="" value="0" hidden="">
                           </div>
 
@@ -455,9 +455,13 @@
                       <hr>
                       <div class="form-group text-left">
 
-                        <button value="update" type="submit" name="btn" class="btn btn-primary">Save</button>
+                        <button value="update" type="submit" name="btn" class="btn btn-primary">
+                        <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                        Save</button>
 
-                        <button value="rivisi" name="btn" type="submit" class="btn btn-success"><i></i>Save as Revision</button>
+                        <button value="rivisi" name="btn" type="submit" class="btn btn-success btnSaveRevisi"><i></i>
+                        <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                        Save as Revision</button>
                       </div>
                     </form>
                     <!-- /.card-body -->
@@ -482,27 +486,29 @@
 
 
   <script type="text/javascript">
-    // function showIndikator() {
-    //   $('.btnSave').attr('disabled', 'disabled');
-    //   $('.loadingIndikdator').show();
-    // }
+    function showIndikator() {
+    //  $('.btnSaveUpdate').attr('disabled', 'disabled');
+      $('.btnSaveRevisi').attr('disabled', 'disabled');
+      $('.loadingIndikdator').show();
+    }
 
-    // function hiddenIndikator() {
-    //   $('.btnSave').removeAttr('disabled');
-    //   $('.loadingIndikdator').hide();
+    function hiddenIndikator() {
+     // $('.btnSaveUpdate').removeAttr('disabled');
+      $('.btnSaveRevisi').removeAttr('disabled')
+      $('.loadingIndikdator').hide();
 
-    // }
+    }
 
-    // $('#SimpanData').submit(function(e) {
-    //   e.preventDefault();
-    //   showIndikator();
-    //   $('#SimpanData').submit();
-    // });
+    $('#SimpanData').submit(function(e) {
+    //  e.preventDefault();
+      showIndikator();
+      $('#SimpanData').submit();
+    });
 
-    // $(document).ready(function() {
-    //   hiddenIndikator();
+    $(document).ready(function() {
+      hiddenIndikator();
 
-    // });
+    });
     var value = 0;
     $(document).ready(function() {
       DataQuotation($('[name="Quatations_number"]').val());
@@ -554,13 +560,6 @@
       //  Nonfee();
       pph();
       ppn();
-
-
-
-
-
-
-
     });
 
 
@@ -569,8 +568,6 @@
     <?php foreach ($item as $k) : ?>
       $("#btn<?php echo (str_replace(' ', '', $k->name)) ?>").click(function(e) {
         $("#table<?php echo (str_replace(' ', '', $k->name)) ?>").show();
-
-
         <?php echo (str_replace(' ', '', $k->name)) ?>();
 
       });
@@ -1123,6 +1120,17 @@
       hitungasf();
 
     }
+    function asf_event_normal(){
+
+var Comissionable_cost=$('[name="Comissionable_cost"]').val().replace(/[^\w\s]/gi, '');
+var asf=$("#asf").val().replace(/[^\w\s]/gi, '');
+var hasil=Number(Comissionable_cost) / Number((asf));
+var hasil = (Number(asf) / Number(Comissionable_cost)) * 100
+$('#asf_percen').val(hasil)
+
+
+hitungasf();
+}
 
     function hitungasf() {
       var Comissionable = $('[name="Comissionable_costhidden"]').val();
@@ -1406,6 +1414,27 @@
 
     }
 
+  function discount_event_normal() {
+    var total_summary = $('#total_summary').val();
+    var discount_event = $('#discount_event').val();
+    var total_summary1 = total_summary.replace(/[^\w\s]/gi, '');
+    var discount_event1 = discount_event.replace(/[^\w\s]/gi, '');
+
+    //var hasil = Number(total_summary1) * Number((discount_percent / 100));
+    var hasil = (Number(discount_event1) / Number(total_summary1)) * 100
+
+
+    // var a = Math.round(hasil);
+    // var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+    $('#discount_percent_event').val(hasil);
+
+   
+    netto_event_function();
+    ppn();
+    grand_total();
+
+  }
+
     function discount_event_function() {
       var total_summary = $('#total_summary').val();
       var discount_percent = $('#discount_percent_event').val();
@@ -1415,7 +1444,7 @@
       var hasil = Number(total_summary1) * Number((discount_percent / 100));
       var a = Math.round(hasil);
       var hasil1 = a.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-      $('#discount_event').val('(' + hasil1 + ')');
+      $('#discount_event').val(hasil1);
 
       ppn();
       netto_event_function();

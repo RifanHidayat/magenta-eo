@@ -201,7 +201,9 @@ public function aksi_add_user(){
 					'phone'=>$this->input->post('phone'),
 					'is_active'=>0,
 					'id_group'=>$row['id'],
+					'finance_permission'=>json_encode($this->input->post('finance'))
 			];
+			
 				$email=$this->input->post("email");
 			
 				$token=base64_encode(random_bytes(32));
@@ -346,12 +348,21 @@ public function ambilId(){
                 	$delete='';
                 	
                 } 
+				$status='';
+				if ($row->is_active==1){
+					$status='<span class="label label-success">Active</span>';
+ 
+				}else{
+				 $status='<span class="label label-danger">In Active</span>';
+ 
+				}
                 $sub_array = array();  
                 $sub_array[] = $row->username;
                 $sub_array[] = $row->email;  
                 $sub_array[] = $row->firstname." ".$row->lastname; 
                 $sub_array[] = $row->phone;
                 $sub_array[] = $row->group_name;
+				$sub_array[] = $status;  
 
                  
                  $sub_array[] = '<center>'.$edit.' '.$delete.'</center>';
@@ -383,14 +394,25 @@ function fetch_user(){
            $data = array();  
            foreach($fetch_data as $row)  
            {  
+			   $status='';
+			   if ($row->is_active==1){
+				   $status='<span classs="label label-success">Active</span>';
+
+			   }else{
+				$status='<span classs="label label-danger">In Active</span>';
+
+			   }
                 $sub_array = array();  
                 $sub_array[] = $row->username;
                 $sub_array[] = $row->email;  
                 $sub_array[] = $row->firstname." ".$row->lastname; 
                  $sub_array[] = $row->phone;  
+				 $sub_array[] = $status;  
+
                 $sub_array[] = '<button type="button" name="update" id="'.$row->id.'" class="btn btn-warning btn-xs">Update</button>';  
                 $sub_array[] = '<button type="button" name="delete" id="'.$row->id.'" class="btn btn-danger btn-xs">Delete</button>';  
                 $data[] = $sub_array;  
+
            }  
            $output = array(  
                 "draw"                    =>     intval($_POST["draw"]),  

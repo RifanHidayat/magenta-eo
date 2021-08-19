@@ -205,11 +205,11 @@ class Values extends CI_Controller {
                 $sub_array[] = $row->value;
                 $sub_array[] = $row->satuanf;  
                 $sub_array[] = $row->satuanq; 
-                $sub_array[] = $row->status;
+				$sub_array[] = $row->status=="Active"?'<center><span class="label label-success">Active</span></center>':'<center><span class="label label-danger">In Active</span></center>'; 
                 
 
                  
-                 $sub_array[] = '<center>'.$edit.' '.$delete.'</center>';
+                 $sub_array[] = '<center>'.$edit.'</center>';
 
 
 

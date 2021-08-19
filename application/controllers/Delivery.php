@@ -336,7 +336,7 @@ class Delivery extends CI_Controller
       'quotation_number' => $this->input->post('Quatations_number'),
       'tagihan' => $this->input->post('tagihan'),
       'kirim' => $this->input->post('kirim'),
-      'delivery_number' => $this->input->post('delivery_order'),
+      'Delivery_number' => $this->input->post('delivery_order'),
       'gudang' => $this->input->post('gudang'),
       'date_pengiriman' => $this->input->post('tanggal_pengiriman'),
       'platnomor' => $this->input->post('platnomor'),
@@ -345,10 +345,8 @@ class Delivery extends CI_Controller
     ];
 
     $where = array("id_delivery" => $id);
-
     $this->db->where($where);
     $this->db->update('delivery', $data);
-
     $this->session->set_flashdata('success', 'Successfully updated');
     redirect('Delivery/manage_delivery_event', 'refresh');
   }
@@ -706,7 +704,7 @@ class Delivery extends CI_Controller
       }
 
       $this->session->set_flashdata('success', 'Successfully updated');
-      redirect("Delivery/manage_delivery_event");
+      redirect("Delivery/manage_delivery_other");
     } else {
       $arr['success'] = false;
       $arr['notif']  = '<div class="alert alert-success">
