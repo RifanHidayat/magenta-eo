@@ -1,3 +1,6 @@
+<style>
+
+</style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <div class="content-header">
@@ -158,19 +161,19 @@
                  <div class=" finance">
                   <label>Select menu</label>
 
-                  <select  class="js-example-basic-multiple" name="finance[]" multiple="multiple" style="width: 50%; height:30%;color:black;">
+                  <select  class="js-example-basic-multiple" name="finance[]" multiple="multiple" style="width: 50%; height:30%;color:black;" multiple>
                  
-                   <option value="projects">Manage Projecs</option>
+                   <option value="manage">Manage Projecs</option>
     
                    <option value="mapping">Mapping Projets</option>   
-                   <option value="tb">PIC TB</option>   
+                   <option value="pictb">PIC TB</option>   
                    <option value="inout">In Out</option>   
                    <option value="account">Akun</option>      
                 </select>
                  </div>
                 <br>
                 <br>
-
+    
 
  
 

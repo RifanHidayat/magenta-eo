@@ -594,6 +594,7 @@
         $('#Quatations_number').val(hasil[0].quotation_number);
         $('#seri_faktur').val(hasil[0].ser_faktur);
         $('#date_faktur').val(hasil[0].date_faktur);
+        $('#due_faktur').val(hasil[0].due_faktur);
         $('#syarat_pembayaran').val(hasil[0].syarat_pembayaran);
         $('#ref').val(hasil[0].REF);
         $('[name="ref"]').val(hasil[0].po_number);

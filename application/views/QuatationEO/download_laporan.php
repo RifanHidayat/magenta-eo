@@ -299,7 +299,7 @@
             </center> -->
 
             <br>
-            <br>
+           
            
 
             <table class="table" style=" width: 100%" id="tbl1" align="center" border="1" align="center">
@@ -324,7 +324,7 @@
                     <center>Rate </center>
                   </th>
                   <th>
-                    <center style="width: 20%">Sub Total</center>
+                    <center style="width: 20%">Subtotal</center>
                   </th>
                 </tr>
               </thead>
@@ -370,7 +370,7 @@
                 <tr>
                   <td colspan="5"><b>Grand Total</b></td>
 
-                  <td align="right"><b>IDR <?php echo number_format($total, 0, ",", "."); ?></b></td>
+                  <td align="right"><b> <?php echo number_format($total, 0, ",", "."); ?></b></td>
                 </tr>
               </tfoot>
             </table>

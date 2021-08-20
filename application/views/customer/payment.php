@@ -432,7 +432,7 @@ function accounts() {
     dataType: 'json',
     success: function(response) {
       for (var i=0; i<response.data.length; i++){
-        if ((response.data[i].id==100) || (response.data[i].id==108) ){
+        if ((response.data[i].id==100) || (response.data[i].id==108) || (response.data[i].id==101) ){
         
 
         }else{

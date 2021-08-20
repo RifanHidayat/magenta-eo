@@ -781,7 +781,30 @@ class Faktur extends CI_Controller
         ];
         $this->db->insert('faktur', $data1);
       }
-      redirect('Faktur/manage_faktur_other');
+
+      $db2 = $this->load->database('magenta_hrd', TRUE);
+      $data_transaction=[
+        "account_id"=>"108",
+        "date"=> date('Y-m-d', strtotime($date_faktur)),
+       
+        "description"=>"Piutang  dengan No invoice ".$faktur,
+        "amount"=>str_replace('.', '', $total_faktur),
+        "type"=>"in",
+        "transaction_id"=>$faktur."_faktur"
+      ];
+      
+       
+        $insert_transaction = $db2->insert('transaction_account', $data_transaction);
+        if ($insert_transaction){
+          $this->session->set_flashdata('success', 'Successfully created');
+          redirect('Faktur/manage_faktur_other');
+
+        }else{
+          $this->session->set_flashdata('error', 'Error');
+          redirect('Faktur/manage_faktur_other');
+
+        }
+    
       $this->session->set_flashdata('success', 'Successfully created');
       $arr['success'] = true;
       $arr['notif']  = '<div class="alert alert-success">
@@ -914,6 +937,7 @@ class Faktur extends CI_Controller
     $faktur = $this->input->post('faktur_number');
     $seri_faktur = $this->input->post('seri_faktur');
     $date_faktur = $this->input->post('date_faktur');
+    $due_faktur = $this->input->post('due_faktur');
     $ref = $this->input->post('ref');
     $syarat_pembayaran = $this->input->post('syarat_pembayaran');
     $subtotal = $this->input->post('subtotal');
@@ -933,6 +957,7 @@ class Faktur extends CI_Controller
           "quotation_number" => $quotation_number,
           "ser_faktur" => $seri_faktur,
           "date_faktur" => $date_faktur,
+          "due_faktur" => $due_faktur,
           "REF" => $ref,
           "syarat_pembayaran" => $syarat_pembayaran,
           "total_sub" => str_replace('.', '', $subtotal),
@@ -950,6 +975,7 @@ class Faktur extends CI_Controller
           "quotation_number" => $quotation_number,
           "ser_faktur" => $seri_faktur,
           "date_faktur" => $date_faktur,
+          "due_faktur" => $due_faktur,
           "REF" => $ref,
           "syarat_pembayaran" => $syarat_pembayaran,
           "total_sub" => str_replace('.', '', $subtotal),
@@ -1008,6 +1034,7 @@ class Faktur extends CI_Controller
     $ppn = $this->input->post('ppn');
     $pph23 = $this->input->post('pph23');
     $total_faktur = $this->input->post('total_faktur');
+    $due_faktur = $this->input->post('due_faktur');
 
 
 
@@ -1049,6 +1076,7 @@ class Faktur extends CI_Controller
             "quotation_number" => $quotation_number,
             "ser_faktur" => $seri_faktur,
             "date_faktur" => $date_faktur,
+            "due_faktur" => $due_faktur,
             "REF" => $ref,
             "syarat_pembayaran" => $syarat_pembayaran,
             "total_sub" => (str_replace('.', '', $subtotal)),
@@ -1065,6 +1093,7 @@ class Faktur extends CI_Controller
             "quotation_number" => $quotation_number,
             "ser_faktur" => $seri_faktur,
             "date_faktur" => $date_faktur,
+            "due_faktur" => $due_faktur,
             "REF" => $ref,
             "syarat_pembayaran" => $syarat_pembayaran,
             "total_sub" => (str_replace('.', '', $subtotal)),

@@ -1713,7 +1713,7 @@ class Quotation extends CI_Controller
 
 
 
-    echo "IDR " . number_format($hitung, 0, ",", ".");
+    echo number_format($hitung, 0, ",", ".");
   }
 
   public function AmbilDataQuotation()
@@ -1790,6 +1790,12 @@ class Quotation extends CI_Controller
       $this->data['asf'] = $row['asf'];
       $this->data['ppn'] = $row['ppn'];
       $this->data['pph'] = $row['pph'];
+      $this->data['title_event'] = $row['tittle_event'];
+      $this->data['quotation_number'] = $row['quotation_number'];
+      $this->data['discount'] = $row['discount'];
+      $this->data['netto'] = $row['netto'];
+
+
       $this->data['grand_total'] = $row['grand_total'];
       $this->data['total'] = $row['total_summary'];
       $this->db->distinct();
@@ -1830,6 +1836,7 @@ class Quotation extends CI_Controller
       $this->data['discount'] = $row['discount'];
       $this->data['ppn'] = $row['ppn'];
       $this->data['pph23'] = $row['pph23'];
+      $this->data['date_quotation'] = $row['date_quotation'];
       $this->data['customer'] = $row['customer'];
       $this->data['title'] = $row['tittle_event'];
       $this->data['pic_name'] = $row['pic_name'];
@@ -1966,6 +1973,8 @@ class Quotation extends CI_Controller
     $this->data['asf'] = $row['asf'];
     $this->data['ppn'] = $row['ppn'];
     $this->data['pph'] = $row['pph'];
+    $this->data['title_event'] = $row['tittle_event'];
+    $this->data['quotation_number'] = $id;
     $this->data['grand_total'] = $row['grand_total'];
     $this->data['total'] = $row['total_summary'];
     $this->db->distinct();

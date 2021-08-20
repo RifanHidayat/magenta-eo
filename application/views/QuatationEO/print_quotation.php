@@ -115,7 +115,7 @@
                 </tr>
                   <tr>
              
-            <th colspan="4">Grand Total</th><th><p align="right"><?php echo  "IDR ".$nonfee; ?></th>
+            <th colspan="4">Grand Total</th><th><p align="right"><?php echo  $nonfee; ?></th>
            </tr>
            <tr>
                 <?php } ?>         
@@ -145,7 +145,7 @@
           <tfoot>
            <tr>
             
-            <th colspan="4">Grand Total</th><th> <p align="right"><?php echo  "IDR ".$comissionable_cost; ?></th>
+            <th colspan="4">Grand Total</th><th> <p align="right"><?php echo  $comissionable_cost; ?></th>
            </tr>
            <tr>
          
