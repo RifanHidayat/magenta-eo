@@ -346,12 +346,24 @@
                   </div>
 
                   <div class="form-group" id="qnumber">
-                        <label for="Date_event" style="text-align:left;" class="col-sm-6 control-label">Due Faktur</label>
-                        <div class="col-sm-12">
-                          <input onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="due_faktur" name="due_faktur" autocomplete="off" value="<?php echo set_value('date_faktur') ?>">
-                        </div>
-                        <?= form_error('due_faktur', '<small class="text-danger pl-3">', '</small>') ?>
-                      </div>
+
+                    <label for="email_event" style="text-align:left;" class="col-sm-6 control-label">Due Faktur </label>
+                    <div class="col-sm-12">
+                      <select class="form-control" required="" id="due_faktur" name="due_faktur" style="width:99%;" >
+                        <option value=""></option>
+
+                        <option value="15">15 Hari</option>
+                        <option value="30">30 Hari </option>
+                        <option value="45">45 Hari </option>
+                        <option value="60">60 Hari</option>
+                        <option value="75">75 Hari</option>
+                        <option value="90">90 Hari </option>
+
+                      </select>
+                    </div>
+
+
+                  </div>
 
 
 
@@ -365,32 +377,19 @@
                     <?= form_error('customer_other', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
 
-
-                  <div class="form-group" id="qnumber">
+                          <div class="form-group" id="qnumber">
 
                     <label for="email_event" style="text-align:left;" class="col-sm-6 control-label">Syarat Pembayaran </label>
                     <div class="col-sm-12">
-                      <div class="col-sm-12">
-                        <select style="margin-left: -10px;" class="form-control" required="" id="syarat_pembayaran" name="syarat_pembayaran" style="width:100%;" onchange="DataPIC()"> value="<?php echo set_value('picEvent') ?>">
-                          <option value=""></option>
-
-                          <option value="15 Hari">15 Hari</option>
-                          <option value="30 hari">30 Hari </option>
-                          <option value="60 hari">60 Hari</option>
-                          <option value="90 hari">90 Hari </option>
-
-                        </select>
-                      </div>
-
-
+                    <input  type="text"  class="form-control" required="" id="syarat_pembayaran" name="syarat_pembayaran" autocomplete="off" >
                     </div>
-                    <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
-
-
-
 
 
                   </div>
+                  <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
+
+
+                 
                 </div>
 
                 <br>
@@ -565,6 +564,9 @@
 </div>
 </div>
 <script src="<?php echo base_url('assets/lte/tiny/tinymce.min.js') ?>" referrerpolicy="origin" referrerpolicy="origin"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+
 
 <script type="text/javascript">
   function showIndikator() {
@@ -612,6 +614,8 @@
 
       success: function(hasil) {
         console.log(hasil);
+      
+        $('#due_faktur').val(hasil[0].due_faktur);
 
         $('[name="Quatations_number"]').val(hasil[0].quotation_number);
         $('[name="date_quotation"]').val(hasil[0].date_quotation);
@@ -630,7 +634,8 @@
         $('#Quatations_number').val(hasil[0].quotation_number);
         $('#seri_faktur').val(hasil[0].ser_faktur);
         $('#date_faktur').val(hasil[0].date_faktur);
-        $('#due_faktur').val(hasil[0].due_faktur);
+ 
+    
         $('#syarat_pembayaran').val(hasil[0].syarat_pembayaran);
         $('#diskon').val(hasil[0].diskon);
         $('#ref').val(hasil[0].REF);

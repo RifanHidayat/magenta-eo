@@ -44,62 +44,77 @@
                 <div class="col-md-12" style="margin: 10px;">
                   <div class="box box-solid">
 
+                  <div class="col-md-6 col-xs-12 pull pull-left">
+                      
+                      <?php if ($key_quotation == "1") { ?>
+                          <div class="form-group" id="qnumber">
+
+                          <label class="col-sm-6 control-label" for="pid_event" style="text-align:left;" class="col-sm-6 control-label">Status</label>
+                          <div class="col-sm-8">
+                          <select  readOnly class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
+
+                            <option value="Open"> Open</option>
+                            <option value="Reject"> Reject</option>
+                            <!-- <option value="Close"> Close</option> -->
+                            <option value="Final">Final</option>
 
 
-
-                    <?php if ($key_quotation == "1") { ?>
-                      <div class="form-group" id="qnumber">
-                        <label for="pid_event" style="text-align:left;" class="col-sm-3 control-label">&ensp;Status</label>
-                        <select readonly style="width: 20%;margin-left: 2%" class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
-
-                          <option value="Open"> Open</option>
-                          <option value="Reject"> Reject</option>
-
-                          <option value="Final"> Final</option>
-
-
-                        </select>
-
-                        <?php if (in_array('statusQuatationsother', $user_permission)) : ?>
-                          <button style="border: none; border-radius: 5px;margin-left: 5%" for="pid_event" disabled="" style="width: 50%;" class="col-sm-2 control-label btn-primary">
-                            <font color="white">Save Changes</font>
-                          </button>
-                        <?php endif; ?>
-
-
-                      </div>
-                      <div class="form-group" id="qnumber">
-                        <label style="margin-left: 15px;" for="cphone">Note</label>
-                        <textarea readonly="" style="margin-left: -170px; width:20% " type="text" class="form-control" id="noteother" name="noteother" autocomplete="off"></textarea>
-                      </div>
-                    <?php  } else { ?>
-                      <div class="form-group" id="qnumber">
-                        <label for="pid_event" style="text-align:left;" class="col-sm-3 control-label">&ensp;Status</label>
-                        <select style="width: 20%;margin-left: 2%" class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
-
-                          <option value="Open"> Open</option>
-                          <option value="Reject"> Reject</option>
-
-                          <option value="Final"> Final</option>
-
-
-                        </select>
-
-                        <?php if (in_array('statusQuatationsother', $user_permission)) : ?>
-                          <button style="border: none; border-radius: 5px;margin-left: 5%" for="pid_event" onclick="updateStatus();" style="width: 50%;" class="col-sm-2 control-label btn-primary">
-                            <font color="white">Save Changes</font>
-                          </button>
-                        <?php endif; ?>
-
-
-                      </div>
-                      <div class="form-group" id="qnumber">
-                        <label style="margin-left: 20px;" for="cphone">Note</label>
-                        <textarea style="margin-left: -210px; width:20% " type="text" class="form-control" id="noteother" name="noteother" autocomplete="off"></textarea>
+                          </select>
                       </div>
 
-                    <?php  }
-                    ?>
+                          
+                      
+                        </div>
+                        <div class="form-group" id="qnumber">
+                          <label  class="col-sm-6 control-label">Note</label>
+                          <div class="col-sm-12">
+                          <textarea readonly type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                          </div>
+                        </div>
+                      <?php  } else { ?>
+                        <div class="form-group" id="qnumber">
+
+                          <label class="col-sm-6 control-label" for="pid_event" style="text-align:left;" class="col-sm-6 control-label">Status</label>
+                          <div class="col-sm-8">
+                          <select  class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
+
+                            <option value="Open"> Open</option>
+                            <option value="Reject"> Reject</option>
+                            <!-- <option value="Close"> Close</option> -->
+                            <option value="Final">Final</option>
+
+
+                          </select>
+                      </div>
+
+                          <?php if (in_array('statusQuatations', $user_permission)) : ?>
+                            <button style="border: none; border-radius: 5px;" for="pid_event" onclick="updateStatus();" style="width: 100%;" class="col-sm-4 control-label btn-primary">
+                              <font color="white">Save Changes</font>
+                            </button>
+                          <?php endif; ?>
+                      
+                        </div>
+                        <div class="form-group" id="qnumber">
+                          <label  class="col-sm-6 control-label">Note</label>
+                          <div class="col-sm-12">
+                          <textarea type="text" class="form-control" id="noteother" name="noteother" autocomplete="off"></textarea>
+                          </div>
+                        </div>
+                        <!-- <div class="form-group" id="qnumber">
+                          <label  for="cphone">Note</label>
+                          <textarea type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                        </div> -->
+
+                      <?php  }
+                      ?>
+
+
+
+                          </div>
+
+
+
+
 
                     <hr>
 

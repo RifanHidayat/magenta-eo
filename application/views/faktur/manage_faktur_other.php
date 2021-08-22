@@ -61,15 +61,16 @@
                   <thead>
                     <tr>
 
-                      <th style="width: 13%">Quotation Number</th>
-                      <th style="width: 10%">Faktur Number</th>
-                      <th style="width: 10%">Date Faktur</th>
+                      <th style="width: 9%">Quotation Number</th>
+                      <th style="width: 9%">Faktur Number</th>
+                      <th style="width: 8%">Date Faktur</th>
                       <th style="width: 10%">Seri Faktur Pajak Number</th>
                       <th style="width: 10%">Customer</th>
                       <th style="width: 10%">Title Event</th>
                       <th style="width: 10%">Total faktur</th>
 
                       <th style="width: 10%">Jumlah Bayar</th>
+                      <th style="width: 10%">Sisa bayar</th>
                       <!-- <th style="width: 4%">Note</th> -->
 
 

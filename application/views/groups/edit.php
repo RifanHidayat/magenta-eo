@@ -465,6 +465,39 @@
                                                                                                                    <td></td>
                                                                                                                    <td></td>
                           </tr>
+                          <tr>
+                            <td>Transactions</td>
+                            <td><input type="checkbox" name="permission[]" class="minimal" value="createTransactions" <?php if ($serialize_permission) {
+                                                                                                                    if (in_array('createTransactions', $serialize_permission)) {
+                                                                                                                      echo "checked";
+                                                                                                                    }
+                                                                                                                  } ?>></td>
+                            <td><input type="checkbox" name="permission[]" class="minimal" value="updateTransactions" <?php if ($serialize_permission) {
+                                                                                                                    if (in_array('updateTransactions', $serialize_permission)) {
+                                                                                                                      echo "checked";
+                                                                                                                    }
+                                                                                                                  } ?>></td>
+                            <td><input type="checkbox" name="permission[]" class="minimal" value="viewTransactions" <?php if ($serialize_permission) {
+                                                                                                                  if (in_array('viewTransactions', $serialize_permission)) {
+                                                                                                                    echo "checked";
+                                                                                                                  }
+                                                                                                                } ?>></td>
+                            <td><input type="checkbox" name="permission[]" class="minimal" value="deleteTransactions" <?php if ($serialize_permission) {
+                                                                                                                    if (in_array('deleteTransactions', $serialize_permission)) {
+                                                                                                                      echo "checked";
+                                                                                                                    }
+                                                                                                                  } ?>></td>
+
+                            <td></td>
+
+                            <td><input type="checkbox" name="permission[]" class="minimal" value="printTransactions" <?php if ($serialize_permission) {
+                                                                                                                    if (in_array('printTransactions', $serialize_permission)) {
+                                                                                                                      echo "checked";
+                                                                                                                    }
+                                                                                                                  } ?>></td>
+                                                                                                                   <td></td>
+                                                                                                                   <td></td>
+                          </tr>
 
                           <tr>
                             <td>Laporan</td>
@@ -492,26 +525,11 @@
                                                                                                                <td></td>
                                                                                                                <td></td>
                                                                                                                <td></td>
-                          </tr>
+                                                                                                               </tr>
+                                                                                                               </tr>
 
 
-                          <tr>
-                            <td>FInance & Project</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          
-                            
-                            <td><input type="checkbox" name="permission[]" class="hide" value="finance" <?php if ($serialize_permission) {
-                                                                                                                if (in_array('finance', $serialize_permission)) {
-                                                                                                                  echo "checked";
-                                                                                                                }
-                                                                                                              } ?>></td>
-                          </tr>
+                                                                                                               
 
 
                         </tbody>

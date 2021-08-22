@@ -186,10 +186,10 @@
 
               ?>
           <tr>
-            
+     
             <td align="left"><?php echo $k->faktur_number ?></td>
             <td><center><?php echo date('d F Y', strtotime($k->date_faktur)) ?></center></td>
-            <td><center><?php echo date('d F Y', strtotime($k->due_faktur)) ?></center></td>
+            <td><center><?php echo date('d F Y ', strtotime($k->date_faktur. ' + '.$k->due_faktur.' days')); ?></center></td>
             <td align="right"><?php echo number_format($k->total_faktur ,0,',','.')?></td>
              <td align="right"> <?php echo number_format($k->amount ,0,',','.') ?></td>
          

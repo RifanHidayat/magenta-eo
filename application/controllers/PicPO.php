@@ -121,7 +121,7 @@ class PicPO extends CI_Controller {
 	    	 if((!in_array('viewPicPO', $this->permission))AND(!in_array('updatePicPO', $this->permission)) AND (!in_array('deletePicPO', $this->permission))) {
       redirect('dashboard', 'refresh');
     }
-	   		// $this->data['customer']=$this->db->get('customer')->result();
+	   		$this->data['customer']=$this->db->get('customer')->result();
 	   	// $id=$this->session->userdata('id');
 	    // $group_data = $this->model_groups->getGroupData($id);
 		// $this->data['group_data'] = $group_data;
@@ -137,8 +137,8 @@ class PicPO extends CI_Controller {
 	    	  	 if((!in_array('viewPicPO', $this->permission))AND(!in_array('updatePicPO', $this->permission)) AND (!in_array('deletePicPO', $this->permission))) {
       redirect('dashboard', 'refresh');
     }
-	   		// $this->data['customer']=$this->db->get('customer')->result();
-	   	// $id=$this->session->userdata('id');
+	   	$this->data['customer']=$this->db->get('customer')->result();
+	   	 $id=$this->session->userdata('id');
 	    // $group_data = $this->model_groups->getGroupData($id);
 		// $this->data['group_data'] = $group_data;
 	   	// $this->data['pic_event']=$this->db->get('pic_event')->result();
@@ -182,7 +182,7 @@ class PicPO extends CI_Controller {
 			$this->db->where($where1);
 			$this->db->update('quotations',$data1);
 
-			$this->db->where($where);
+			$this->db->where($where1);
 			$this->db->update('quotation_other',$data1);
 	}
 	public function ambilIdPIC(){

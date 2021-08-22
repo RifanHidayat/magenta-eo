@@ -42,30 +42,47 @@
 
             <div class="box">
 
-              <div class="form-group" id="qnumber">
+            
 
-                <label for="pid_event" style="text-align:left;" class="col-sm-3 control-label">&ensp;Status</label>
-                <select style="width: 20%;margin-left: 11%" class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
+                <div class="col-md-6 col-xs-12 pull pull-left">
+                      
+                     
+                           <div class="form-group" id="qnumber">
 
-                  <option value="Open"> Open</option>
+                            <label class="col-sm-8 control-label" for="pid_event" style="text-align:left;" class="col-sm-8 control-label">Status</label>
+                            <div class="col-sm-8">
+                            <select  class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
+
+                              <option value="Open"> Open</option>
                   <option value="Reject"> Reject</option>
                   <option value="Close"> Close</option>
 
 
-                </select>
+                            </select>
+                        </div>
 
-                <?php if (in_array('statusQuatations', $user_permission)) : ?>
-                  <button style="border: none; border-radius: 5px;margin-left: 5%" for="pid_event" onclick="updateStatus();" style="width: 50%;" class="col-sm-2 control-label btn-primary">
-                    <font color="white">Save Changes</font>
-                  </button>
-                <?php endif; ?>
+                            <?php if (in_array('statusQuatations', $user_permission)) : ?>
+                              <button style="border: none; border-radius: 5px;" for="pid_event" onclick="updateStatus();" style="width: 100%;" class="col-sm-4 control-label btn-primary">
+                                <font color="white">Save Changes</font>
+                              </button>
+                            <?php endif; ?>
+                        
+                          </div>
+                          <div class="form-group" id="qnumber">
+                            <label  class="col-sm-8 control-label">Note</label>
+                            <div class="col-sm-12">
+                            <textarea type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                            </div>
+                          </div>
+                      </div>
 
 
-              </div>
-              <div class="form-group" id="qnumber">
-                <label style="margin-left: 15px;" for="cphone">Note</label>
-                <textarea style="margin-left: -115px; width:20% " type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
-              </div>
+
+
+
+
+                   
+
 
 
               <!-- <div class="form-group" id="qnumber">
@@ -153,20 +170,20 @@
                 <div class="form-group" id="qnumber">
                   <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Netto</label>
                   <div class="col-sm-12">
-                    <input readonly="" type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo number_format($netto, 0, ',', '.') ?>">
+                    <input style="text-align: rigth;" readonly="" type="text" required="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="<?php echo number_format($netto, 0, ',', '.') ?>">
                   </div>
                 </div>
                 <div class="form-group" id="qnumber">
                   <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Sisa BAST</label>
                   <div class="col-sm-12">
-                    <input type="text" required="" value="<?php echo number_format($sisaBast, 0, ",", ".") ?>" class="form-control" id="total_summary" readonly="" name="sisaBast" autocomplete="off" value="<?php echo set_value('title_event') ?>">
+                    <input style="text-align: rigth;" type="text" required="" value="<?php echo number_format($sisaBast, 0, ",", ".") ?>" class="form-control" id="total_summary" readonly="" name="sisaBast" autocomplete="off" value="<?php echo set_value('title_event') ?>">
                   </div>
                 </div>
 
                 <div class="form-group" id="qnumber" hidden="">
                   <label for="title_event" style="text-align:left;" class="col-sm-8 control-label">Sisa BAST </label>
                   <div class="col-sm-12">
-                    <input type="text" required="" class="form-control" value="<?php echo ($sisaBast) ?>" id="total_summary" readonly="" name="sisaBast1" autocomplete="off" value="<?php echo set_value('title_event') ?>">
+                    <input style="text-align: rigth;"  type="text" required="" class="form-control" value="<?php echo ($sisaBast) ?>" id="total_summary" readonly="" name="sisaBast1" autocomplete="off" value="<?php echo set_value('title_event') ?>">
                   </div>
                 </div>
 
@@ -316,7 +333,7 @@
                 <div class="form-group" id="qnumber">
                   <label for="Date_event" style="text-align:left;" class="col-sm-8 control-label">Total BAST</label>
                   <div class="col-sm-12">
-                    <input readonly oninput="checkBast()" value="<?php echo number_format($totalBast, 0, ',', '.') ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
+                    <input style="text-align: right;" readonly oninput="checkBast()" value="<?php echo number_format($totalBast, 0, ',', '.') ?>" onkeyup="convertToRupiah(this);" type="text" required="" class="form-control" id="totalBast" name="totalBast" autocomplete="off">
                   </div>
 
 

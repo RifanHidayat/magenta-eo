@@ -50,7 +50,7 @@
             
                 <div class="form-group">
                   <label for="name">New Password</label>
-                  <input  style="width: 45%" type="password" class="form-control" id="password" name="password" required="" autocomplete="off">
+                  <input  style="width: 45%" type="password" class="form-control" id="password" name="password" required="" autocomplete="off" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" >
                 
                 </div>
                
@@ -58,7 +58,7 @@
                 
                   <div class="form-group">
                   <label for="npwp">Confirm Password</label>
-                  <input style="width: 45%" type="password" class="form-control"  required="" id="cpassword" name="npwp" autocomplete="off"  >
+                  <input style="width: 45%" type="password" class="form-control"  required="" id="cpassword" name="npwp" autocomplete="off"  type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"  >
                   
                 </div>
 

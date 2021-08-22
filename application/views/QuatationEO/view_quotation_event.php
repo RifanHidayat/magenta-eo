@@ -44,13 +44,14 @@
                     <div class="col-md-12" style="margin: 10px;">
                       <div class="box box-solid">
 
-
-
+                      <div class="col-md-6 col-xs-12 pull pull-left">
+                      
                         <?php if ($key_quotation == "1") { ?>
-                          <div class="form-group" id="qnumber">
+                            <div class="form-group" id="qnumber">
 
-                            <label for="pid_event" style="text-align:left;" class="col-sm-3 control-label">&ensp;Status</label>
-                            <select readonly style="width: 20%;margin-left: 6%" class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
+                            <label class="col-sm-7 control-label" for="pid_event" style="text-align:left;" class="col-sm-7 control-label">Status</label>
+                            <div class="col-sm-8">
+                            <select  readOnly class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
 
                               <option value="Open"> Open</option>
                               <option value="Reject"> Reject</option>
@@ -59,24 +60,23 @@
 
 
                             </select>
+                        </div>
 
-                            <?php if (in_array('statusQuatations', $user_permission)) : ?>
-                              <button style="border: none; border-radius: 5px;margin-left: 5%" for="pid_event" disabled="" style="width: 50%;" class="col-sm-2 control-label btn-primary">
-                                <font color="white">Save Changes</font>
-                              </button>
-                            <?php endif; ?>
-
-
+                            
+                        
                           </div>
                           <div class="form-group" id="qnumber">
-                            <label style="margin-left: 20px;" for="cphone">Note</label>
-                            <textarea readonly="" style="margin-left: -150px; width:20% " type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                            <label  class="col-sm-7 control-label">Note</label>
+                            <div class="col-sm-12">
+                            <textarea readonly type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                            </div>
                           </div>
                         <?php  } else { ?>
                           <div class="form-group" id="qnumber">
 
-                            <label for="pid_event" style="text-align:left;" class="col-sm-3 control-label">&ensp;Status</label>
-                            <select style="width: 20%;margin-left: 6%" class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
+                            <label class="col-sm-7 control-label" for="pid_event" style="text-align:left;" class="col-sm-7 control-label">Status</label>
+                            <div class="col-sm-8">
+                            <select  class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
 
                               <option value="Open"> Open</option>
                               <option value="Reject"> Reject</option>
@@ -85,25 +85,32 @@
 
 
                             </select>
+                        </div>
 
                             <?php if (in_array('statusQuatations', $user_permission)) : ?>
-                              <button style="border: none; border-radius: 5px;margin-left: 5%" for="pid_event" onclick="updateStatus();" style="width: 50%;" class="col-sm-2 control-label btn-primary">
+                              <button style="border: none; border-radius: 5px;" for="pid_event" onclick="updateStatus();" style="width: 100%;" class="col-sm-4 control-label btn-primary">
                                 <font color="white">Save Changes</font>
                               </button>
                             <?php endif; ?>
-
-
+                        
                           </div>
                           <div class="form-group" id="qnumber">
-                            <label style="margin-left: 15px;" for="cphone">Note</label>
-                            <textarea style="margin-left: -170px; width:20% " type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                            <label  class="col-sm-7 control-label">Note</label>
+                            <div class="col-sm-12">
+                            <textarea type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                            </div>
                           </div>
+                          <!-- <div class="form-group" id="qnumber">
+                            <label  for="cphone">Note</label>
+                            <textarea type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
+                          </div> -->
 
                         <?php  }
                         ?>
 
 
 
+                            </div>
 
 
                         <hr>
@@ -114,15 +121,15 @@
                           <div class="form-group" id="kanan">
                             <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Commissionable Cost</label>
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" readonly="" id="Comissionable_cost" name="Comissionable_cost" readonly="" autocomplete="off" value="0">
+                              <input type="text" class="form-control" readonly="" id="Comissionable_cost" name="Comissionable_cost" readonly="" autocomplete="off" value="0" style="text-align: right;" >
 
-                              <input type="text" class="form-control" readonly="" id="Comissionable_costhidden" name="Comissionable_costhidden" readonly="" autocomplete="off" value="0" hidden="">
+                              <input type="text" class="form-control" readonly="" id="Comissionable_costhidden" name="Comissionable_costhidden" readonly="" autocomplete="off" value="0" hidden="" >
                             </div>
                           </div>
                           <div class="form-group" id="kanan">
                             <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Non-Fee Cost</label>
                             <div class="col-sm-12">
-                              <input type="text" class="form-control" readonly="" id="non_fee" name="non_fee" readonly="" autocomplete="off" value="0">
+                              <input type="text" class="form-control" readonly="" id="non_fee" name="non_fee" readonly="" autocomplete="off" value="0" style="text-align: right;">
 
                               <input type="text" class="form-control" readonly="" id="non_feehidden" name="non_feehidden" readonly="" autocomplete="off" value="0" hidden="">
                             </div>
@@ -130,13 +137,13 @@
                           <div class="form-group" id="kanan">
                             <label id="asflabel" for="Quatations_number" style="text-align:left;" class="col-sm-2 control-label" id>ASF</label>
                             <div class="col-sm-4" id="kananasf">
-                              <input type="Number" readonly="" class=" col-sm-7 form-control" value="0" name="asf_percen" id="asf_percen" oninput="hitungasf();" name="asf_percen" autocomplete="off">
+                              <input type="Number" readonly="" class=" col-sm-7 form-control" value="0" name="asf_percen" id="asf_percen" oninput="hitungasf();" name="asf_percen" autocomplete="off" style="text-align: right;">
                               <label for="Quatations_number" style="text-align:left;" class="col-sm-1 control-label">%</label>
 
                             </div>
 
                             <div class="col-sm-12">
-                              <input type="text" readonly="" class="col-sm-12 form-control" id="asf" name="asf" autocomplete="off" readonly="" value="0">
+                              <input type="text" readonly="" class="col-sm-12 form-control" id="asf" name="asf" autocomplete="off" readonly="" value="0" style="text-align: right;">
 
                               <input type="text" readonly="" class="form-control" id="asf_hidden" name="asf_hidden" autocomplete="off" readonly="" value="0" hidden="">
                             </div>
@@ -145,7 +152,7 @@
                           <div class="form-group" id="kanan">
                             <label for="total_summary" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
                             <div class="col-sm-12">
-                              <input type="text" readonly="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="0">
+                              <input type="text" readonly="" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="0" style="text-align: right;">
 
                               <input type="text" readonly="" class="form-control" id="total_summaryhidden" readonly="" name="total_summaryhidden" autocomplete="off" value="0" hidden="">
                             </div>
@@ -154,14 +161,14 @@
                           <div class="form-group" id="kanan">
                             <label id="asflabel" for="Quatations_number" style="text-align:left;" class="col-sm-2 control-label" id>Discount</label>
                             <div class="col-sm-4" id="kananasf">
-                              <input type="number" readonly class=" col-sm-7 form-control" placeholder="0" required="" name="discount_percent_event" id="discount_percent_event" oninput="discount_event_function()" name="discount_percen" autocomplete="off">
-                              <label for="Quatations_number" style="text-align:left;" class="col-sm-1 control-label">%</label>
+                              <input type="number" readonly class=" col-sm-7 form-control" placeholder="0" required="" name="discount_percent_event" id="discount_percent_event" oninput="discount_event_function()" name="discount_percen" autocomplete="off" style="text-align: right;">
+                              <label for="Quatations_number" class="col-sm-1 control-label">%</label>
 
                             </div>
 
                             <div class="col-sm-12">
-                              <input type="text" readonly="" class="col-sm-12 form-control" id="discount_event" name="discount_event" autocomplete="off" readonly="" value="0">
-                              <input type="text" readonly="" class="form-control" id="discount_event_hidden" name="discount_event_hidden" autocomplete="off" readonly="" value="0" hidden="">
+                              <input type="text" readonly="" class="col-sm-12 form-control" id="discount_event" name="discount_event" autocomplete="off" readonly="" value="0" style="text-align: right;">
+                              <input type="text" readonly="" class="form-control" id="discount_event_hidden" name="discount_event_hidden" autocomplete="off" readonly="" value="0" hidden="" style="text-align: right;">
                             </div>
 
                           </div>
@@ -169,7 +176,7 @@
                           <div class="form-group" id="kanan">
                             <label for="netto" style="text-align:left;" class="col-sm-6 control-label">Netto</label>
                             <div class="col-sm-12">
-                              <input type="text" readonly="" class="form-control" id="netto_event" readonly="" name="netto_event" autocomplete="off" value="0">
+                              <input type="text" readonly="" class="form-control" id="netto_event" readonly="" name="netto_event" autocomplete="off" value="0" style="text-align: right;">
 
                               <input type="text" readonly="" class="form-control" id="nettohidden" readonly="" name="nettohidden" autocomplete="off" value="0" hidden="">
                             </div>
@@ -179,8 +186,8 @@
                           <div class="form-group" id="kanan">
                             <label for="ppn" style="text-align:left;" class="col-sm-6 control-label">PPh</label>
                             <div class="col-sm-6">
-                              <input type="text" readonly="" class="form-control" id="pph" name="pph" readonly="" autocomplete="off" value="0">
-                              <input type="text" readonly="" class="form-control" id="pph_hidden" name="pph_hidden" readonly="" autocomplete="off" value="0" hidden="">
+                              <input type="text" readonly="" class="form-control" id="pph" name="pph" readonly="" autocomplete="off" value="0" style="text-align: right;">
+                              <input type="text" readonly="" class="form-control" id="pph_hidden" name="pph_hidden" readonly="" autocomplete="off" value="0" hidden="" style="text-align: right;">
                             </div>
 
                           </div>
@@ -188,15 +195,15 @@
                           <div class="form-group" id="kanan">
                             <label for="pph" style="text-align:left;" class="col-sm-6 control-label">PPN</label>
                             <div class="col-sm-6">
-                              <input type="text" class="form-control" id="ppn" name="ppn" readonly="" autocomplete="off" value="0">
-                              <input type="Number" class="form-control" id="ppn_hidden" name="ppn_hidden" readonly="" autocomplete="off" value="0" hidden="">
+                              <input type="text" class="form-control" id="ppn" name="ppn" readonly="" autocomplete="off" value="0" style="text-align: right;">
+                              <input type="Number" class="form-control" id="ppn_hidden" name="ppn_hidden" readonly="" autocomplete="off" value="0" hidden="" style="text-align: right;">
                             </div>
 
                           </div>
                           <div class="form-group" id="kanan">
                             <label for="total_summary" style="text-align:left;" class="col-sm-6 control-label">Grand Total</label>
                             <div class="col-sm-12">
-                              <input type="text" readonly="" class="form-control" id="grand_total" readonly="" name="grand_total" autocomplete="off" value="0">
+                              <input type="text" readonly="" class="form-control" id="grand_total" readonly="" name="grand_total" autocomplete="off" value="0" style="text-align: right;">
 
                               <input type="text" readonly="" class="form-control" id="grand_total_hidden" readonly="" name="grand_total_hidden" autocomplete="off" value="0" hidden="">
                             </div>
@@ -525,7 +532,7 @@
 
 
 
-                        <h3 style="margin-left: 10px;">Comissionable Cost</h3>
+                        <h3 style="margin-left: 10px;">Commissionable Cost</h3>
 
 
 

@@ -230,8 +230,8 @@ class Customer extends CI_Controller {
         
       }
     }
-    	$this->session->set_flashdata('success', 'Successfully created');
 
+    $this->session->set_flashdata('success', 'Successfully created');
  	redirect('Customer/manage_customer', 'refresh');
 
 
@@ -347,7 +347,11 @@ class Customer extends CI_Controller {
      
        $i++;
       }
-    }
+    }else{
+		$this->db->where('id_customer',$id);
+		$this->db->delete('gudang'); 
+
+	}
     $this->session->set_flashdata('success', 'Successfully created');
  	redirect('Customer/manage_customer', 'refresh');
  }
@@ -384,6 +388,7 @@ class Customer extends CI_Controller {
 			$data1=array(
 				'customer'=>""
 			);
+			
 
 			
 			
@@ -411,6 +416,9 @@ class Customer extends CI_Controller {
 
 			$this->db->where($where_pic);
 			$this->db->update('pic_event',$data1);
+
+			$this->db->where('id_customer',$id);
+			$this->db->delete('gudang'); 
 		
 
 	}

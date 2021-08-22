@@ -60,7 +60,7 @@
 
                    <div class="form-group" id="kanan1" style="margin-top: -75px;">
                      <label for="phone">Customer Phone</label>
-                     <input type="text" class="form-control" id="phone" name="phone" required="" autocomplete="off" value="<?php echo set_value('phone') ?>">
+                     <input type="text" class="form-control" id="phone" name="phone"  autocomplete="off" value="<?php echo set_value('phone') ?>">
                      <?= form_error('phone', '<small class="text-danger pl-3">', '</small>') ?>
                    </div>
                    <div class="form-group">

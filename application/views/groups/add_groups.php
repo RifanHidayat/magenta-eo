@@ -227,6 +227,19 @@
                         </tr>
 
                         <tr>
+                          <td>Transactions</td>
+                          <td><input type="checkbox" name="permission[]" value="createTransactions" class="minimal"></td>
+                          <td><input type="checkbox" name="permission[]" value="updateTransactions" class="minimal"></td>
+                          <td><input type="checkbox" name="permission[]" value="viewTransactions" class="minimal"></td>
+                          <td><input type="checkbox" name="permission[]" value="deleteTransactions" class="minimal"></td>
+                          <td></td>
+                          <td><input type="checkbox" name="permission[]" value="printTransactions" class="minimal"></td>
+                          <td></td>
+                          <td></td>
+
+                        </tr>
+
+                        <!-- <tr>
                           <td>Project & Finance</td>
                           <td></td>
                           <td></td>
@@ -237,7 +250,7 @@
                           <td></td>
                           <td><input type="checkbox" name="permission[]" value="finance" class="minimal"></td>
 
-                        </tr>
+                        </tr> -->
 
                       </tbody>
                     </table>

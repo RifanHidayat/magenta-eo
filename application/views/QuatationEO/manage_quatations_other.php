@@ -190,10 +190,10 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('.date_number').datepicker({
-      format: "yyyy/mm/dd"
-    });
-  });
+        $('.date_number').datepicker({
+          dateFormat: "yy-mm-dd"
+        });
+      });
   $(document).ready(function() {
     var dataTable = $('#quotationotherTable').DataTable({
       "processing": true,
@@ -329,10 +329,14 @@
       },
       dataType: 'json',
       success: function(hasil) {
+        
 
 
         $('[name="id"]').val(hasil[0].id);
         $('[name="po_number"]').val(hasil[0].po_number);
+       
+        $('[name="date_number"]').val(hasil[0].date_po_number);
+
 
 
       },
@@ -586,6 +590,7 @@
 
         $('[name="id"]').val(hasil[0].id);
         $('[name="po_number"]').val(hasil[0].po_number);
+        $('[name="date_number"]').val(hasil[0].date_po_number);
 
 
       },

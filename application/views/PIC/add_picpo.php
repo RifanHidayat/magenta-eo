@@ -173,7 +173,7 @@
                       <span class="spinner-border spinner-border-sm loadingIndikdatorEvent" role="status" aria-hidden="true"></span>
                       Save
                     </button>
-                    <a href="<?php echo base_url('PicPO/manage_pic') ?>" class="btn btn-secondary">
+                    <a href="<?php echo base_url('PicPO/manage_pic_event') ?>" class="btn btn-secondary">
                       <font color="white">Back</font>
                     </a>
 

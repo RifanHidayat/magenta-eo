@@ -1,5 +1,37 @@
 <style>
+.select2-selection__rendered {
+    line-height: 20px !important;
+}
+.select2-container .select2-selection--single {
+    height: 35px !important;
+}
 
+.select2-selection__arrow {
+    height: 35px !important;
+}
+select[multiple]:focus option:checked {
+  background: red linear-gradient(0deg, red 0%, red 100%);
+}
+.select2-selection__choice{
+ 
+   
+    padding-right: 5px!important;
+ 
+    
+  
+   
+}
+
+.select2-selection__choice__remove{
+    border: none!important;
+    border-radius: 0!important;
+    padding: 0 2px!important;
+}
+
+.select2-selection__choice__remove:hover{
+    background-color: transparent!important;
+    color: #ef5454 !important;
+}
 </style>
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -53,7 +85,7 @@
 
             <div class="box">
 
-              <form id="SimpanData" action="<?php base_url('Users/add_user') ?>" method="post" class="form-horizontal" enctype="multipart/form-data">
+              <form id="SimpanData" action="<?php base_url('Users/add_user') ?>" method="post" class="form-horizontal" enctype="multipart/form-data" autocomplete="off">
                 <div class="box-body">
                   <div class="col-md-10 col-xs-10 pull pull-right">
 
@@ -67,7 +99,7 @@
                     <label for="groups">Groups</label>
 
 
-                    <select   style="width: 50%" class="form-group" reqired="" id="groups" name="groups">
+                    <select  style="width: 50%" class="form-group" reqired="" id="groups" name="groups">
                       <option value="" style="height: 100px;">Select Groups</option>
                       <?php foreach ($groups as $k) : ?>
                         <option value="<?php echo $k->group_name ?>"><?php echo $k->group_name ?></option>
@@ -77,13 +109,19 @@
 
 
                   </div>
-                  <div class="form-group" id="kanan1" style="margin-top: -75px;">
+                  <!-- <div class="form-group" id="kanan1" style="margin-top: -75px;">
                     <label for="username">Username</label>
                     <br>
                     <div class="col-md-12">
-                      <input required="" style="width: 100%" type="text" required="" class="form-control" id="username" name="username" autocomplete="off" value="<?php echo set_value('username') ?>">
+                      <input required="" type="text" required="" class="form-control" id="username" name="username" autocomplete="off" value="<?php echo set_value('username') ?>">
                       <?= form_error('username', '<small class="text-danger pl-3">', '</small>') ?>
                     </div>
+                  </div> -->
+
+                  <div class="form-group" id="kanan1" style="margin-top: -75px;">
+                    <label for="username">Username</label>
+                    <input required="" type="text" class="form-control" id="usernamee" name="username" required="">
+                    <?= form_error('username', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
                   <div class="form-group">
                     <br>
@@ -94,7 +132,7 @@
 
                   <div class="form-group" id="kanan1" style="margin-top: -75px;">
                     <label for="lname">Last name</label>
-                    <input required="" type="text" class="form-control" id="lname" name="lname" required="" autocomplete="off" value="<?php echo set_value('lname') ?>">
+                    <input  type="text" class="form-control" id="lname" name="lname" required="" autocomplete="off" value="<?php echo set_value('lname') ?>">
                     <?= form_error('lname', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
                   <div class="form-group">
@@ -159,9 +197,9 @@
                     </div>
                   </div>
                  <div class=" finance">
-                  <label>Select menu</label>
+                  <label>Select Menu</label>
 
-                  <select  class="js-example-basic-multiple" name="finance[]" multiple="multiple" style="width: 50%; height:30%;color:black;" multiple>
+                  <select  class="js-example-basic-multiple" name="finance[]" multiple="multiple" style="width: 50%; height:50%;color:black;" multiple>
                  
                    <option value="manage">Manage Projecs</option>
     
@@ -200,8 +238,7 @@
   <!-- /.content -->
 </div>
 </div>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
 <script type="text/javascript">

@@ -44,11 +44,7 @@
             <div class="row">
 
               <div class="col-md-12 col-xs-12">
-
-
-
                 <div class="box">
-
                   <form action="<?php echo base_url('Faktur/aksi_add_faktur') ?>" method="post" id="SimpanData" name="formid" class="form-horizontal" enctype="multipart/form-data">
 
                     <!--   other -->
@@ -332,13 +328,25 @@
                         <?= form_error('date_faktur', '<small class="text-danger pl-3">', '</small>') ?>
                       </div>
 
-                      <div class="form-group" id="qnumber">
-                        <label for="Date_event" style="text-align:left;" class="col-sm-6 control-label">Due Faktur</label>
-                        <div class="col-sm-12">
-                          <input onkeypress="return false;" type="text" placeholder="yyyy-mm-dd" class="form-control" required="" id="due_faktur" name="due_faktur" autocomplete="off" value="<?php echo set_value('date_faktur') ?>">
-                        </div>
-                        <?= form_error('due_faktur', '<small class="text-danger pl-3">', '</small>') ?>
-                      </div>
+                        <div class="form-group" id="qnumber">
+
+                    <label for="email_event" style="text-align:left;" class="col-sm-6 control-label">Due faktur </label>
+                    <div class="col-sm-12">
+                      <select class="form-control" required="" id="due_faktur" name="due_faktur" style="width:99%;" onchange="DataPIC()"> value="<?php echo set_value('picEvent') ?>">
+                        <option value=""></option>
+
+                        <option value="15">15 Hari</option>
+                        <option value="30">30 Hari </option>
+                        <option value="45">45 Hari </option>
+                        <option value="60">60 Hari</option>
+                        <option value="75">75 Hari</option>
+                        <option value="90">90 Hari </option>
+
+                      </select>
+                    </div>
+
+
+                  </div>
 
 
                       <div class="form-group" id="qnumber">
@@ -351,7 +359,7 @@
                         <?= form_error('customer_other', '<small class="text-danger pl-3">', '</small>') ?>
                       </div>
 
-
+<!-- 
                       <div class="form-group" id="qnumber">
 
                         <label for="email_event" style="text-align:left;" class="col-sm-6 control-label">Syarat Pembayaran </label>
@@ -368,8 +376,20 @@
                         </div>
 
 
-                      </div>
-                      <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
+                      </div> -->
+
+                      <div class="form-group" id="qnumber">
+
+                    <label for="email_event" style="text-align:left;" class="col-sm-6 control-label">Syarat Pembayaran </label>
+                    <div class="col-sm-12">
+                    <input  type="text"  class="form-control" required="" id="syarat_pembayaran" name="syarat_pembayaran" autocomplete="off" >
+                    </div>
+
+
+                  </div>
+                  <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
+
+                    >
 
                     </div>
                     <div style="overflow-x:auto;width:100%">

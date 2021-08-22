@@ -41,7 +41,7 @@ class Quotation extends CI_Controller
   public function upload_image_add($quotation_number)
   {
 
-    $config['upload_path']          = './assets/images/';
+    $config['upload_path']          = './assets/images_/';
     $config["allowed_types"] = "*";
     $config['file_name'] =  $quotation_number;
     // $extension   = end($typefile);
@@ -882,7 +882,7 @@ class Quotation extends CI_Controller
         $e = $this->input->post('id');
         $f = $this->input->post('QuantityDescription');
 
-        if ($a[1] != null) {
+        if ($a[0] != null) {
           $where = array('quotation_number' => $quotation_number, 'revisi' => $update);
           $this->db->where($where);
           $this->db->delete('quotation_other_item');
@@ -903,6 +903,11 @@ class Quotation extends CI_Controller
             $this->db->insert('quotation_other_item', $data);
             $i++;
           }
+        }else{
+          $where = array('quotation_number' => $quotation_number, 'revisi' => $update);
+          $this->db->where($where);
+          $this->db->delete('quotation_other_item');
+
         }
 
         $note = $this->input->post('note_desciption');
@@ -927,6 +932,7 @@ class Quotation extends CI_Controller
             'customer_event' => $customerEvent,
             'pic_event' => $picEvent,
             'id_po' => $id_po,
+            'email_event' => $emailEvent,
             'id_event' => $id_event,
             'id_customer' => $id_customer,
             'grand_total' => (str_replace('.', '', $grand_total_other)),
@@ -954,6 +960,7 @@ class Quotation extends CI_Controller
             'asfp' => $asfp,
             'customer_event' => $customerEvent,
             'pic_event' => $picEvent,
+            'email_event' => $emailEvent,
             'id_po' => $id_po,
             'id_event' => $id_event,
             'id_customer' => $id_customer,
@@ -999,6 +1006,7 @@ class Quotation extends CI_Controller
               'quantity' => $f[$i],
               'grandtotal' => (str_replace('.', '', $total_description)),
               'quotation_number' => $quotation_number_revisii . '-Rev' . $revisi,
+              
 
               'revisi' => $revisi
 
@@ -1028,8 +1036,9 @@ class Quotation extends CI_Controller
             'date_expired' => $date_expired,
             'asfp' => $asfp,
             'customer_event' => $customerEvent,
-            'pic_event' => $picEvent,
+            'pic_event' =>  $this->input->post("picEvent1"),
             'id_po' => $id_po,
+            'email_event' => $emailEvent,
             'id_event' => $id_event,
             'id_customer' => $id_customer,
             'grand_total' => (str_replace('.', '', $grand_total_other)),
@@ -1734,6 +1743,7 @@ class Quotation extends CI_Controller
 
   public function send_email()
   {
+    $user_email = $this->session->userdata('email');
     $quotation_number = $this->input->post('quotation_number');
     $email = $this->input->post('email');
     $subject = $this->input->post('subject');
@@ -1765,7 +1775,7 @@ class Quotation extends CI_Controller
     $mail->addAddress($this->input->post('email_event'));
 
     // Add cc or bcc 
-    // $mail->addCC('rifanhidayat0811@gmail.com');
+    $mail->addCC($user_email);
     // $mail->addBCC('rifanhidayat0811@gmail.com');
 
     // Email subject
@@ -2500,6 +2510,7 @@ class Quotation extends CI_Controller
       } else if ($row->status == "Close") {
         $status = '<span class="label label-success">Close</span>';
       } else if ($row->status == "Final") {
+        $note="2";
         $status = '<span class="label infoo fa fa-lock"> Final</span>';
       } else {
         $status = "";

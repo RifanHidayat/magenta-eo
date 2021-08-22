@@ -111,6 +111,7 @@
                         <option value="Open">Open</option>
                         <option value="Reject"> Reject </option>
                         <option value="Close">Close</option>
+                        <option value="Final">Final</option>
                     
                     
                   </select>
@@ -676,7 +677,8 @@ function getDatafaktur(id,aksi,target,type,table){
                           '<th>PPN</th>'+
                           '<th>PPh23</th>'+
                           '<th>Total Faktur</th>'+
-                          '<th>Status</th>'+
+                          '<th>Jumlah bayar</th>'+
+                         
                           '</tr>'+
                           '</thead>'+
                         '</table>';
@@ -712,7 +714,8 @@ function getDatafaktur(id,aksi,target,type,table){
                                                 '<th>PPN</th>'+
                                                 '<th>PPh23</th>'+
                                                 '<th>Total Faktur</th>'+
-                                                '<th>Status</th>'+
+                                                '<th>Jumlah bayar</th>'+
+                                                
 
                                             '</tr>'+
                                             '</thead>'+
@@ -1869,8 +1872,14 @@ function getdatatablefakturtotal(title,table,aksi,laporan,jenis_laporan,status,m
                     data :
                     data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             }},
+            { 'data': 'pembayaran' ,render: function (data, type, row) {
+                return type === 'export' ?
+                    data :
+                    (data==null?0:data==""?0:data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            }},
+            
            
-            { 'data': 'status' }         
+                 
         ], 
         
         dom: 'Bfrtip',
@@ -2061,8 +2070,13 @@ function getdatatablefakturdetail(title,table,aksi,laporan,jenis_laporan,status,
                     data  :
                     data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
             }},
+            { 'data': 'pembayaran' ,render: function (data, type, row) {
+                return type === 'export' ?
+                    data :
+                    (data==null?0:data==""?0:data.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));
+            }},
            
-            { 'data': 'status' }         
+               
         ], 
         
         dom: 'Bfrtip',

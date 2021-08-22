@@ -473,28 +473,17 @@ function transactionNumber() {
 
 $('#saveData').submit(function(e) {
     e.preventDefault();
- 
+   
 
-
-  var payment_error = document.getElementById("payment_error");
-  var account_error = document.getElementById("account_error");
-  if (total_amount==0){
+    var payment_error = document.getElementById("payment_error");
+    var account_error = document.getElementById("account_error");
+    if (total_amount==0){
     payment_error.textContent="* Belum ada pembayaran "
-    
-
 
   }else{
     if (account_beban==false){
       if ($('#account').val()=='0'){
-
         account_error.textContent="Account tidak boleh kosong"
-       
-
-
-
-
-
-
       }else{
         account_error.textContent=""
         payment_error.textContent="";

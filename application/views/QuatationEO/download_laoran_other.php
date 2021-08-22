@@ -74,7 +74,7 @@
       <div class="row">
         <div class="col-12">
 
-          <img style="margin-left: 45px; margin-top: 20px;" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="200" height="100" style="top: 30px;">
+          <img style="margin-left: 45px; margin-top: 10px;" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="200" height="50" style="top: 30px;">
 
 
           <!-- info row -->
@@ -84,15 +84,15 @@
             <div class="col-9 invoice-col">
               <br>
               <p>PT.Magenta Mediatama<br>
-                Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grogol Utara<br>
+                Jl. Raya kebayon Lama No 15.RT.04 RW.03 Grogol Utara,<br>
                 Kebayon Lama Jakarta Selatan DKI Jakarta-12210<br>
-                phone (021) 53660077-08;Fax(021)53660099</p>
+                phone (021) 53660077-08; Fax (021) 53660099</p>
             </div>
             <!-- /.col -->
 
             <!-- date('d F Y', strtotime($date)) -->
             <!-- /.col -->
-            <div style="margin-top: -120px;">
+            <div style="margin-top: -90px;">
 
               <table border="0" style="right: 0" align="right">
                 <tr>
@@ -117,11 +117,11 @@
 
 
           </div>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
+        <br>
+        <br>
+      
+        
+          
           <hr style="height: 3px; border-width: 6px; background-color:#696969; margin-left: 45px; margin-right: 45px;">
 
           <!-- Table row -->
@@ -141,7 +141,7 @@
 
 
             <!-- /.col -->
-            <div style="right: 0" class="element" align="right" style="margin-top: -170px;">
+            <div style="right: 0" class="element" align="right" style="margin-top: -150px;">
               <!--     
          <b>PIC Event : <?php echo $pic_name ?></b><br>
 <b>Title Event :<?php echo $title; ?></b> -->
@@ -164,9 +164,8 @@
             <br>
             <br>
             <br>
-            <br>
-            <br>
-            <br>
+          <br>
+           
 
 
 

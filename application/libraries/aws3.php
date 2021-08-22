@@ -35,7 +35,7 @@ class Aws3
             "Bucket" => $bucketName,
             'Key' => $path,
             'SourceFile' => $filename['tmp_name'],
-           
+            'ContentType'=>'image/png',
             'StorageClass' => 'STANDARD',
             'ACL' => 'public-read',
         ));

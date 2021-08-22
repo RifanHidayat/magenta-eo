@@ -138,7 +138,7 @@
 
                       <div class="form-group">
                   <label for="email">Customr Name</label>
-                     <select disabled=" class="form-control customer" id="customer" name="customer" style="width:99%;"  value="<?php echo set_value('pic')?>">
+                     <select  class="form-control customer" id="customer" name="customer" style="width:99%;"  value="<?php echo set_value('pic')?>">
                   
                     <?php foreach ($customer as $k): ?>
                       <option  value="<?php echo $k->name ?>"><?php echo $k->name ?></option>

@@ -309,7 +309,7 @@
              <?php endif; ?>
 
 
-              
+             <?php if (in_array('viewTransactions', $user_permission) || in_array('printTransactions', $user_permission)) : ?>
 
                <li class="nav-item has-treeview">
                  <a href="<?php echo base_url("Transactions/manage") ?>" class="nav-link" id="transactionsMainNav">
@@ -321,6 +321,7 @@
                  </a>
 
                </li>
+               <?php endif; ?>
           
 
 

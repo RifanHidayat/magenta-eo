@@ -38,6 +38,9 @@ p{
   color: black;
   
 }
+.table_footer{
+      page-break-inside: avoid;
+    }
 </style> 
  
 
@@ -227,7 +230,7 @@ p{
             <div class="float-right" >
         <br>
         
-             <table align="right" >
+             <table align="right" class="table_footer" >
           
           <tr>
             

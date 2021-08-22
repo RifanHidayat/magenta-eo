@@ -161,7 +161,7 @@
             </tr>
             <tr>
 
-              <td>Syarat Pembayaran</td>
+              <td>Term of Payment</td>
               <td>:</td>
               <td><?php echo  $syarat_pembayaran ?></td>
 

@@ -1541,16 +1541,25 @@ class Faktur extends CI_Controller
         $status = "";
       }
       //pembayaran
+      $sisa_pembayaran=0;
+      $pembayaran=0;
       if ($row->pembayaran==""){
 
+        $sisa_pembayaran=number_format($row->total_faktur, 0, ',', '.');
+        
         $pembayaran=0;
       }else if ($row->pembayaran==$row->total_faktur){
-        $pembayaran='<span class="label label-success">Lunas</span>';
+        $sisa_pembayaran='<span class="label label-success">Lunas</span>';
+        $pembayaran= number_format($row->pembayaran, 0, ',', '.');
+        
 
       }else{
-        $pembayaran=number_format($row->pembayaran, 0, ',', '.');
+        $pembayaran=$row->pembayaran;
+        $sisa_pembayaran= number_format(($row->total_faktur-$row->pembayaran), 0, ',', '.');
+      
 
       }
+     // $sisa_pembayaran=($row->total_faktur)-($row->pembayaran);
 
       if (($row->statusQuotations == "Final")  and ($row->statusBast == "Close")) {
         $sub_array = array();
@@ -1566,6 +1575,7 @@ class Faktur extends CI_Controller
         $sub_array[] = number_format($row->total_faktur, 0, ',', '.');
 
         $sub_array[] = $pembayaran;
+        $sub_array[] = $sisa_pembayaran;
         // $sub_array[] = $row->noteStatus;
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view. ' ' . $payment;
         $data[] = $sub_array;
@@ -1625,15 +1635,23 @@ class Faktur extends CI_Controller
         $status = "";
       }
 
-      //pembayaran
+      
+      $sisa_pembayaran=0;
+      $pembayaran=0;
       if ($row->pembayaran==""){
 
+        $sisa_pembayaran=number_format($row->total_faktur, 0, ',', '.');
+        
         $pembayaran=0;
       }else if ($row->pembayaran==$row->total_faktur){
-        $pembayaran='<span class="label label-success">Lunas</span>';
+        $sisa_pembayaran='<span class="label label-success">Lunas</span>';
+        $pembayaran= number_format($row->pembayaran, 0, ',', '.');
+        
 
       }else{
-        $pembayaran=number_format($row->pembayaran, 0, ',', '.');
+        $pembayaran=$row->pembayaran;
+        $sisa_pembayaran= number_format(($row->total_faktur-$row->pembayaran), 0, ',', '.');
+      
 
       }
       if (($row->statusQuotations == "Final") and ($row->statusBast == "Close")) {
@@ -1650,6 +1668,7 @@ class Faktur extends CI_Controller
         $sub_array[] = number_format($row->total_faktur, 0, ',', '.');
 
         $sub_array[] = $pembayaran;
+        $sub_array[] = $sisa_pembayaran;
         // $sub_array[] = $row->noteStatus;
 
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view. ' ' . $payment;

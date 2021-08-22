@@ -172,7 +172,7 @@
           </tfoot>
         </table></center>
         <br>
-        <br>
+        
         <h3 style="margin-left: 45px;"><b>Non-Fee Cost</b></h3> 
        
   
@@ -236,15 +236,13 @@
          <?php }?>
          <?php endforeach ?>
          <?php $total=0; ?>
-         <br>
-         <br>
-
+         
 
      
 
 
       
-        <h3 style="margin-left: 45px;"><b>Comissionable Cost</b></h3>
+        <h3 style="margin-left: 45px;"><b>Comissionable Cost1</b></h3>
           
      
      
@@ -254,7 +252,7 @@
               if ($name->metode=="Comissionable Cost"){
           
               ?>
-              <br>
+            
 
               <center><h4><?php  echo  $name->name ?></h4></center>
             

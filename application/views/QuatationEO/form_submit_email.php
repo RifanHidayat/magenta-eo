@@ -64,7 +64,7 @@
 
              <div class="box">
 
-               <form action="<?php echo base_url('Quotation/send_email') ?>" method="post">
+               <form action="<?php echo base_url('Quotation/send_email') ?>" method="post"  id="SimpanData">
                  <div class="box-body">
                    <div class="form-group">
                      <label for="name">Email PIC Event</label>
@@ -102,7 +102,12 @@
                    <br>
 
                    <div class="box-footer">
-                     <button type="submit" class="btn btn-primary">Send</button>
+                     <!-- <button type="submit" class="btn btn-primary">Send</button> -->
+
+                     <button type="submit" class="btn btn-primary btnSave" type="button">
+                            <span class="spinner-border spinner-border-sm loadingIndikdator" role="status" aria-hidden="true"></span>
+                            Send
+                          </button>
 
                    </div>
 
@@ -128,6 +133,16 @@
  <script src="<?php echo base_url('assets/lte/tiny/tinymce.min.js') ?>" referrerpolicy="origin" referrerpolicy="origin"></script>
 
  <script type="text/javascript">
+ function showIndikatorForevent() {
+    $('.btnSave').attr('disabled', 'disabled');
+    $('.loadingIndikdator').show();
+  }
+
+  function hiddenIndikatorForevent() {
+    $('.btnSave').removeAttr('disabled');
+    $('.loadingIndikdator').hide();
+
+  }
    tinymce.init({
      selector: 'textarea#basic-example',
      height: 500,
@@ -171,5 +186,23 @@
 
     }
 
+
+
     ?>
+
+$(document).ready(function() {
+    
+    hiddenIndikatorForevent();
+   
+  });
+    
+    $('#SimpanData').submit(function(e) {
+      e.preventDefault();
+      showIndikatorForevent();
+      $("#SimpanData").submit();
+  
+  
+  
+    });
+  
  </script>

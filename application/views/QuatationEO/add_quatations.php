@@ -1188,6 +1188,21 @@
   $('#BarisBaruDescription').click(function(e) {
     e.preventDefault();
     BarisBaruDescription();
+    tinymce.init({
+      selector: 'textarea.description',
+      height: 200,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+      ],
+      toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
   });
 
 
@@ -1267,10 +1282,6 @@
     Baris += '</tr>';
     // onkeyup="convertToRupiah(this);"
 
-    $("#tableLoopDescription tbody").append(Baris);
-    $("#tableLoopDescription tbody tr").each(function() {
-      // $(this).find('td:nth-child(2) input').focus(); 
-    });
 
     tinymce.init({
       selector: 'textarea.description',
@@ -1287,6 +1298,30 @@
         'removeformat | help',
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     });
+
+
+    $("#tableLoopDescription tbody").append(Baris);
+    $("#tableLoopDescription tbody tr").each(function() {
+      // $(this).find('td:nth-child(2) input').focus(); 
+    });
+
+
+    tinymce.init({
+      selector: '.description',
+      height: 200,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+      ],
+      toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
 
   }
 

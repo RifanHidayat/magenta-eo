@@ -280,7 +280,8 @@ public function ambilId(){
 				'lastname'=>$lname,			
 				'username'=>$username,
 				'phone'=>$phone,
-				'id_group'=>$row['id']
+				'id_group'=>$row['id'],
+				'finance_permission'=>json_encode($this->input->post('finance'))
 			);
 
 	
@@ -315,7 +316,8 @@ public function ambilId(){
 				'lastname'=>$lname,			
 				'username'=>$username,
 				'password'=> password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-				'id_group'=>$row['id']
+				'id_group'=>$row['id'],
+				'finance_permission'=>json_encode($this->input->post('finance'))
 			);
 
 	

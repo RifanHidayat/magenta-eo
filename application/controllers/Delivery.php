@@ -789,6 +789,7 @@ class Delivery extends CI_Controller
         'margin_top' => '5',
         'format' => 'A5-L', 'defaultPageNumStyle' => '1'
       ]);
+      $mpdf->shrink_tables_to_fit = 1;
 
       $data = $this->load->view('delivery/print_delivery_event', $this->data, TRUE);
 
@@ -827,6 +828,7 @@ class Delivery extends CI_Controller
         'margin_bottom' => '5',
         'margin_top' => '5',
       ]);
+      $mpdf->shrink_tables_to_fit = 1;
 
       $data = $this->load->view('delivery/print_delivery', $this->data, TRUE);
 

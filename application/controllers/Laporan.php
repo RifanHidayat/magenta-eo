@@ -215,12 +215,7 @@ public function aksi_laporan_tanggal(){
 			
 			$result['data']=$fetch_data;  
            echo json_encode($result); 
-
-
 				}
-			
-		
-
 		}else{
 			if ($status=="All"){
 			

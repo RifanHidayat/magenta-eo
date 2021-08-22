@@ -1050,6 +1050,7 @@ class Bast extends CI_Controller
         $sub_array[] = $status;
         $sub_array[] = $row->noteStatus;
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view . ' ' . ' ' . $faktur . ' ' . $delivery;
+        $sub_array[] = "";
         $data[] = $sub_array;
       }
     }

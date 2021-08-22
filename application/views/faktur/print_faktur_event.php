@@ -93,21 +93,21 @@
       
         
          <p>PT.Magenta Mediatama<br>
-           Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grppl Utara<br>
-           Kebayon Lama Jakarta Selatan DKI Jakarta-12210
+           Jl. Raya kebayon Lama No.15 RT.04 RW.03 Grogol Utara,<br>
+           Kebayon Lama,Jakarta Selatan DKI Jakarta-12210
            <br>phone (021) 53660077-08;Fax(021)53660099
          </p>
          <font size="2">
-           <table style=" font-size:10%">
+           <table style=" font-size:10%" style="width:50%" >
              <tr>
-               <td style="width: 100px;">Tagihan Ke</td>
-               <td style="width: 150px;"><?php echo $nama; ?></td>
+               <td style="width: 15%;">Tagihan Ke</td>
+               <td style="width: 35%;"><?php echo $nama; ?></td>
 
              </tr>
              <tr>
 
-               <td style="height: 10px"></td>
-               <td style="width: 150px;" text-align: justify;><?php echo $alamat; ?></td>
+               <td style="height: 15%"></td>
+               <td style="width: 35%;" text-align: justify;><?php echo $alamat; ?></td>
 
 
 
@@ -145,7 +145,7 @@
            </tr>
            <tr>
 
-             <td>Tanggal Faktur</td>
+             <td>Tgl Faktur</td>
              <td>:</td>
              <td><?php echo date('d F Y', strtotime($date_faktur))  ?></td>
 
@@ -179,7 +179,7 @@
            </tr>
            <tr>
 
-             <td>Syarat Pembayaran</td>
+             <td>Term of Payment</td>
              <td>:</td>
              <td><?php echo  $syarat_pembayaran ?></td>
 
@@ -248,17 +248,17 @@
              <tr>
 
                <td style="border: none" colspan="4" rowspan="6" valign="top">
-                 <p style="margin-top: -150px">Terbilang : <?php terbilang(str_replace('.', '', $total_faktur)) ?>
+                 <p style="margin-top: -150px" style="font-size: 10px;">Terbilang : <?php terbilang(str_replace('.', '', $total_faktur))?>
                </td>
                <th style="width: 20%">Subtotal</th>
 
-               <th style="width: 30%;" align="right">
+               <td style="width: 30%;" align="right">
                  <p align="right">
                    <?php
 
                     echo $sub_total;
                     ?>
-               </th>
+               </td>
              </tr>
              <tr>
 
@@ -266,7 +266,7 @@
 
                </th>
 
-               <th align="right">
+               <td align="right">
                  <p align="right">
                    <?php
                     if ($diskon == "") {
@@ -280,7 +280,7 @@
                     ?>
 
 
-               </th>
+               </td>
 
 
              </tr>
@@ -288,7 +288,7 @@
 
                <th>Netto</th>
 
-               <th align="right">
+               <td align="right">
                  <p align="right">
                    <?php
 
@@ -299,7 +299,7 @@
                     ?>
 
 
-               </th>
+               </td>
 
              </tr>
 
@@ -307,7 +307,7 @@
 
                <th>PPN</th>
 
-               <th align="right">
+               <td align="right">
                  <p align="right">
                    <?php
 
@@ -318,14 +318,14 @@
                     ?>
 
 
-               </th>
+               </td>
 
              </tr>
              <tr>
 
                <th>PPh23</th>
 
-               <th align="right" s>
+               <td align="right" s>
                  <p align="right">
                    <?php
 
@@ -336,7 +336,7 @@
                     ?>
 
 
-               </th>
+               </td>
 
              </tr>
 
@@ -422,7 +422,7 @@
 
                <td>Alamat Bank</td>
                <td>:</td>
-               <td style="width: 270px;">Jl Mangga Dua Raya, Kom.ITC Mangga Dua LT.IV JKT</td>
+               <td style="width: 270px;">Jl. Mangga Dua Raya, Kom.ITC Mangga Dua LT.IV JKT</td>
              </tr>
 
              <tr>
@@ -481,7 +481,7 @@
       } else {
         $hasil = trim(penyebut($nilai));
       }
-      echo $hasil;
+      echo $hasil." rupiah";
     }
     ?>
 
@@ -493,7 +493,7 @@
 
        terbilang(data);
        //   $('#tbl1').hidden();
-       $('#tes').val("aaaaaaa");
+      
 
 
      });

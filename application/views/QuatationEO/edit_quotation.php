@@ -195,7 +195,7 @@
                         <div class="form-group" id="qnumber">
                           <label for="Date_quotation" style="text-align:left;" class="col-sm-7 control-label">Date Quotation</label>
                           <div class="col-sm-12">
-                            <input onkeypress="return false;" type="text" oninput="expired()" onchange="expired();" placeholder="dd/mm/yyyy" required="" class="form-control" id="date_quotation_event" name="date_quotation_event" autocomplete="off" value="<?php echo set_value('Date_quotation') ?>">
+                            <input onkeypress="return false;" type="text" oninput="expired()" onchange="expired();" placeholder="yyyy-mm-dd" required="" class="form-control" id="date_quotation_event" name="date_quotation_event" autocomplete="off" value="<?php echo set_value('Date_quotation') ?>">
                           </div>
 
                         </div>
@@ -1486,7 +1486,7 @@ hitungasf();
           document.getElementById("date_expired_event").readOnly = false;
           $('#date_expired_event').datepicker({
 
-            dateFormat: 'dd/mm/yy',
+            dateFormat: 'yy-mm-dd',
             showButtonPanel: true,
             changeMonth: true,
             changeYear: true,
@@ -1517,7 +1517,7 @@ hitungasf();
       var dateToday = new Date();
 
       $('#date_quotation_event').datepicker({
-        dateFormat: 'dd/mm/yy',
+        dateFormat: 'yy-mm-dd',
         showButtonPanel: true,
         changeMonth: true,
         changeYear: true,
@@ -1528,6 +1528,19 @@ hitungasf();
         yearRange: '1999:2030',
         inline: true
       });
+
+       $('#date_expired_event').datepicker({
+
+            dateFormat: 'yy-mm-dd',
+            showButtonPanel: true,
+            changeMonth: true,
+            changeYear: true,
+            buttonImageOnly: true,
+            minDate: $('#date_quotation_event').val(),
+            maxDate: '+30Y',
+            yearRange: '1999:2030',
+            inline: true
+          });
     });
 
     $("#quotationMainNav").addClass('active');

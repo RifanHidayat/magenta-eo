@@ -1,4 +1,30 @@
+<style>
+  .select2-selection__rendered {
+    line-height: 20px !important;
+}
+.select2-selection--multiple{
+    overflow: hidden !important;
+    height: auto !important;
+}
+.select2-selection__arrow {
+    height: 35px !important;
+}
+select[multiple]:focus option:checked {
+  background: red linear-gradient(0deg, red 0%, red 100%);
+}
 
+
+.select2-selection__choice__remove{
+    border: none!important;
+    border-radius: 0!important;
+    padding: 0 2px!important;
+}
+
+.select2-selection__choice__remove:hover{
+    background-color: transparent!important;
+    color: #ef5454 !important;
+}
+</style>
     
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -139,16 +165,25 @@
                 </div>
                 <small class="text-danger pl-3" id="email_error"></small>
 
-               
-
-
-              
-
             <div class="form-group" id="kanan1" style="margin-top: -75px;">
                   <label for="phone">Phone</label>
                   <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" autocomplete="off">
                 <small class="text-danger pl-3" id="phone_error"></small>
                 </div>
+
+                <div >
+                  <label>Select menu Finance & Projects</label>
+
+                  <select id="finance"  class="js-example-basic-multiple" name="finance[]" multiple="multiple" style="width: 100%; color:black;" multiple>
+                 
+                   <option value="manage">Manage Projecs</option>
+    
+                   <option value="mapping">Mapping Projets</option>   
+                   <option value="pictb">PIC TB</option>   
+                   <option value="inout">In Out</option>   
+                   <option value="account">Akun</option>      
+                </select>
+                 </div>
                 <br>
    <div class="alert alert-info" role="alert">
  kosongkan password  jika tidak akan diubah
@@ -209,6 +244,10 @@
 
  
  $(document).ready(function(){  
+  $('.js-example-basic-multiple').select2({
+      
+    
+    });
       var dataTable = $('#userTable').DataTable({  
            "processing":true,  
            "serverSide":true,
@@ -313,6 +352,8 @@
             $('[name="groups"]').val(hasil[0].group_name).change();
             $('[name="id"]').val(hasil[0].id);
              $('[name="id_group"]').val(hasil[0].id_group);
+          
+             $("#finance").select2().val(JSON.parse(hasil[0].finance_permission)).change();
          
              console.log(hasil[0].group_name);
 
@@ -327,6 +368,7 @@
   
 }
 function Ubahdata(){
+  
 
     var id=$('[name="id"]').val();
     var id_group=$('[name="id_group"]').val();
@@ -338,6 +380,7 @@ function Ubahdata(){
     var phone=$("[name='phone']").val();
     var cpassword=$("[name='cpassword']").val();
      var password=$("[name='password']").val();
+     var finance=$("#finance").val();
 
     var nama_error=document.getElementById("name_error");
     var group_error=document.getElementById("group_error");
@@ -349,12 +392,13 @@ function Ubahdata(){
  
 
 
-    if (group.trim()==''){
-      group_error.style.border="1 px solid red";
-      group_error.textContent=" *Group belum dipilih ,silahkan dipilih!";
-      $('#groups').focus();
-      return false;
-    }else if (username.trim()==''){
+    // if (group.trim()==''){
+    //   group_error.style.border="1 px solid red";
+    //   group_error.textContent=" *Group belum dipilih ,silahkan dipilih!";
+    //   $('#groups').focus();
+    //   return false;
+    // }else 
+    if (username.trim()==''){
       username_error.style.border="1 px solid red";
       username_error.textContent=" *Username belum dipilih.silahkan pilih terlebih dahulu";
       $('#username').focus();
@@ -375,33 +419,35 @@ function Ubahdata(){
       return false;
 
     }
-      else if (fname.trim()==''){
-      fname_error.style.border="1 px solid red";
-      fname_error.textContent=" *First Name belum diiisi,Silahkan isi terlebih dahulu!";
-      $('#fname').focus();
+    //   else if (fname.trim()==''){
+    //   fname_error.style.border="1 px solid red";
+    //   fname_error.textContent=" *First Name belum diiisi,Silahkan isi terlebih dahulu!";
+    //   $('#fname').focus();
       
-      username_error.style.border="1 px solid red";
-      username_error.textContent="";
-      email_error.style.border="1 px solid red";
-      email_error.textContent="";
-      group_error.style.border="1 px solid red";
-      group_error.textContent="";
-      return false;
+    //   username_error.style.border="1 px solid red";
+    //   username_error.textContent="";
+    //   email_error.style.border="1 px solid red";
+    //   email_error.textContent="";
+    //   group_error.style.border="1 px solid red";
+    //   group_error.textContent="";
+    //   return false;
 
-    }else if (phone.trim()==''){
-      phone_error.style.border="1 px solid red";
-      phone_error.textContent=" *Phone belum diiisi,Silahkan isi terlebih dahulu!";
-      $('#phone').focus();
+    // }
+    // else if (phone.trim()==''){
+    //   phone_error.style.border="1 px solid red";
+    //   phone_error.textContent=" *Phone belum diiisi,Silahkan isi terlebih dahulu!";
+    //   $('#phone').focus();
       
-      username_error.style.border="1 px solid red";
-      username_error.textContent="";
-      email_error.style.border="1 px solid red";
-      email_error.textContent="";
-      group_error.style.border="1 px solid red";
-      group_error.textContent="";
-      return false;
+    //   username_error.style.border="1 px solid red";
+    //   username_error.textContent="";
+    //   email_error.style.border="1 px solid red";
+    //   email_error.textContent="";
+    //   group_error.style.border="1 px solid red";
+    //   group_error.textContent="";
+    //   return false;
 
-    }else{
+    // }
+    else{
   
      username_error.style.border="1 px solid red";
       username_error.textContent="";
@@ -417,7 +463,7 @@ function Ubahdata(){
         $.ajax({
         type:'POST',
         // data:'id='+id+'&group_name='+group+'&email='+email+'&username='+username+'&lname='+lname+'&fname='+fname+'&phone='+phone+'&password='+password+'&id_group='+id_group,
-            data:{id:id,group_name:group,email:email,username:username,lname:lname,fname:fname,phone:phone,password:password,id_group:id_group},
+            data:{id:id,group_name:group,email:email,username:username,lname:lname,fname:fname,phone:phone,password:password,id_group:id_group,finance:finance},
             url :'<?php echo base_url("Users/aksi_update_data_user_password") ?>',
         dataType:'json',
         success:function(hasil){
@@ -470,7 +516,7 @@ $('#userTable').DataTable().ajax.reload();
     $.ajax({
     type:'POST',
     // data:'id='+id+'&group_name='+group+'&email='+email+'&username='+username+'&lname='+lname+'&fname='+fname+'&phone='+phone+'&id_group='+id_group,
-     data:{id:id,group_name:group,email:email,username:username,lname:lname,fname:fname,phone:phone,id_group:id_group},
+     data:{id:id,group_name:group,email:email,username:username,lname:lname,fname:fname,phone:phone,id_group:id_group,finance:finance},
     url :'<?php echo base_url("Users/aksi_update_data_user") ?>',
     dataType:'json',
     success:function(hasil){

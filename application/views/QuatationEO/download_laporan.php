@@ -84,7 +84,7 @@
 
 <body>
   <div class="wrapper">
-    <img id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="200" height="100" style="float: right; " />
+    <img style="margin-top: 100px;" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="200" height="50" style="float: right; " />
 
 
     <section class="invoice">
@@ -98,7 +98,7 @@
       <div class="row invoice-info">
         <div class="col-sm-9 invoice-col ">
 
-          <table class="col-sm-3" style="margin-top: -90px; width:50%" >
+          <table class="col-sm-3" style="margin-top: -50px; width:50%" >
           <tr>
               
               <th colspan="3" align="left"><span style="font-size: 18px; width:30%"><?php echo $title_event; ?></span></tg>
@@ -284,7 +284,7 @@
 
 
               <!-- item quotation -->
-      <br>
+     
       <h4><b>Non-Fee Cost</b></4>
         <?php
         foreach ($quotation_sub_item as $name) :
@@ -298,8 +298,7 @@
               <h6 align="center"><?php echo  $name->name ?></h6>
             </center> -->
 
-            <br>
-           
+          
            
 
             <table class="table" style=" width: 100%" id="tbl1" align="center" border="1" align="center">
@@ -379,26 +378,20 @@
           <?php } ?>
         <?php endforeach ?>
         <?php $total = 0; ?>
-        <br>
-        <br>
+        
 
 
 
 
 
 
-        <h4><b>Commissionable Cost</b></h4>
+        <h4><b>Commissionable Cost</b></4>
         <?php
         foreach ($quotation_sub_item as $name) :
           $no = 0;
           if ($name->metode == "Comissionable Cost") {
 
         ?>
-
-
-            <!-- <center>
-              <h6 align="center"><?php echo  $name->name ?></h6>
-            </center> -->
 
 
             <table style=" width: 100%" id="tbl1" align="center" border="1" align="center">
