@@ -97,7 +97,7 @@ class Faktur extends CI_Controller
     redirect('Faktur/add_faktur', 'refresh');
   }
 
-  public function create_faktur($id, $id_bast)
+  public function create_faktur($id,$project_number,$id_bast)
   {
     if ((!in_array('createFaktur', $this->permission))) {
       redirect('dashboard', 'refresh');
@@ -116,7 +116,9 @@ class Faktur extends CI_Controller
     $this->data['id_bast'] = $id_bast;
     $idd = substr($id, 0, 2);
     if ($idd == "QE") {
+      //$this->data['projects'] = $this->db->query("SELECT * FROM projects WHERE projects.status!='closed' ")->result();
 
+     
 
       $this->data['controller'] = $this;
       $this->db->select('*');
@@ -135,6 +137,11 @@ class Faktur extends CI_Controller
       $this->data['total'] = $row['total_summary'];
       $this->data['netto'] = $row['netto'];
       $this->data['discount'] = $row['discount'];
+      $this->data['project_number'] = $project_number;
+
+ 
+      
+      
 
       $this->db->distinct();
       $this->db->select('name ,metode,quotation_number');
@@ -616,8 +623,8 @@ class Faktur extends CI_Controller
 
     $this->db->select('*');
     $this->db->from('quotations');
-    $this->db->join('pic_event', 'pic_event.email = quotations.email_event');
-    $this->db->join('customer', 'customer.name = quotations.customer');
+    $this->db->join('pic_event', 'pic_event.id_event = quotations.id_pic_event');
+    $this->db->join('customer', 'customer.id = quotations.id_customer');
     $this->db->join('bast', 'bast.quotation_number = quotations.quotation_number');
     $this->db->where('quotations.quotation_number', $quotatoion_number);
     $dataa = $this->db->get()->result();
@@ -702,7 +709,7 @@ class Faktur extends CI_Controller
     $id = $data['id_faktur'];
 
     $id++;
-    $data = sprintf("%04s", $id);
+    $data = sprintf("%05s", $id);
     $result["data"] = $data;
     echo json_encode($result);
   }
@@ -842,6 +849,7 @@ class Faktur extends CI_Controller
     $total_faktur = $this->input->post('total_faktur');
     $id_bast = $this->input->post('id_bast');
     $due_faktur = $this->input->post('due_faktur');
+    $project_number = $this->input->post('project_number');
 
   
 
@@ -856,6 +864,7 @@ class Faktur extends CI_Controller
 
       $data1 = [
         "quotation_number" => $quotation_number,
+        "project_id"=>$project_number,
         "faktur_number" => $faktur,
         "ser_faktur" => $seri_faktur,
         "date_faktur" => $date_faktur,
@@ -1445,6 +1454,11 @@ class Faktur extends CI_Controller
     $this->db->from('faktur');
     $this->db->where('id_bast', $id_bast);
     $data1 = $this->db->get()->row_array();
+
+    $this->db->select('*');
+    $this->db->from('quotations');
+    $this->db->where('quotation_number', $data['quotation_number']);
+    $quotations = $this->db->get()->row_array();
     // $json= json_encode($data1);
 
     if ($data1 != '') {
@@ -1454,9 +1468,38 @@ class Faktur extends CI_Controller
       $result['id_faktur'] = $data1['id_faktur'];
     } else {
       $result['status'] = "kosong";
-      $result['quotation_number'] = $data['quotation_number'];;
+      $result['quotation_number'] = $data['quotation_number'];
+      $result['id']=$quotations['id'];
     }
     echo json_encode($result);
+  }
+
+  function cekProjects(){
+    $id = $this->input->post('id');
+    $this->db->select('*');
+    $this->db->from('projects');
+    $this->db->join('projects_quotations','projects.id=projects_quotations.project_id');
+    $this->db->where('projects_quotations.quotation_id', $id);
+    $row=$this->db->get()->row_array();
+
+   
+   
+    if ($row ==null){
+      $result['status'] = 200;
+      $result['data'] = 0;
+   
+    }else{
+      $this->db->select('*');
+      $this->db->from('projects');
+      $this->db->where('id', $row['project_id']);
+      $dataProjects=$this->db->get()->row_array();
+      $result['status']=200;
+      $result['data']=$dataProjects;
+
+    }
+    echo json_encode($result);
+    
+
   }
   function cekFaktur1()
   {
@@ -1649,7 +1692,7 @@ class Faktur extends CI_Controller
         
 
       }else{
-        $pembayaran=$row->pembayaran;
+        $pembayaran=number_format($row->pembayaran, 0, ',', '.');
         $sisa_pembayaran= number_format(($row->total_faktur-$row->pembayaran), 0, ',', '.');
       
 

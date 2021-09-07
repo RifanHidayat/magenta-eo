@@ -91,7 +91,7 @@ class users extends CI_Controller {
 
                  
         // Load PHPMailer library
-        $this->load->library('phpmailer_lib');
+        $this->load->library('PHPMailer_Lib');
         
         // PHPMailer object
         $mail = $this->phpmailer_lib->load();
@@ -103,7 +103,7 @@ class users extends CI_Controller {
         $mail->Username = 'rifanhidayat0811@gmail.com';//email pengirim
         $mail->Password = 'capucino';//password pengirim
     
-		$mail->Port = 587;
+		$mail->Port = 465;
 		$mail->SMTPSecure = 'tls';
         
         //email pengirim

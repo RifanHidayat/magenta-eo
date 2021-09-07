@@ -56,13 +56,13 @@
        <div class="row ">
            <div class="col-md-6 col-xs-6 row "    >
            <div class="col-md-6 col-xs-6 p-3 mb-2 bg-light text-dark" style="background-color: coral;" >
-           <h5><b>Un-Finished Payment</b></h5>
+           <h5><b>Total Unfinished Payments</b></h5>
            <span id="un-finished_payment"> IDR 0 </b></span>
            <br>
            <br>
           
           
-           <h5><b>Total Un-Finished Invoice</b></h5>
+           <h5><b>Total Unfinished Invoice</b></h5>
            <span id="total_faktur_unfinished">0 </b></span>
            <br>
            <br>
@@ -73,7 +73,7 @@
            <br>
            <br>
           
-           <h5><b>Payment</b></h5>
+            <h5><b>Total Payment Selected</b></h5>
            IDR <span id="payment"> 0</b></span><br>
            <small class="text-danger pl-3" id="payment_error"></small>
            <br>
@@ -201,7 +201,7 @@
  
    <div class="card">
        <div class="card-header">
-         <h5 class="box-title"><b>Payment Finished</b></h5>
+         <h5 class="box-title"><b>Invoice Paid off</b></h5>
          <div class="card-tools" style="margin-top: -35px;margin-right: 3px">
            
            </a>
@@ -386,20 +386,22 @@ function UnFinieshed() {
 
     function Finieshed() {
    
+   
   $.ajax({
     type: 'GET',
     url: 'http://localhost:3000/api/faktur/'+<?php echo $id  ?>+'/payment-qo',
     dataType: 'json',
     success: function(response) {
       var baris = '';
+      console.log(response.data.finished_faktur.length)
       if (response.data.finished_faktur.length > 0) {
          for (var i = 0; i < response.data.finished_faktur.length; i++) {
           var total_faktur=response.data.finished_faktur[i].total_faktur;
           var pembayaran=response.data.finished_faktur[i].pembayaran==null?0:response.data.finished_faktur[i].pembayaran
          var remaining=total_faktur-pembayaran;
       
-          // baris += '<tr>' +
-          //   '<td style="width: 15%">' +response.data.finished_faktur[i].faktur_number + '</td>' +
+           baris += '<tr>' +
+          //  '<td style="width: 15%">' +response.data.finished_faktur[i].faktur_number + '</td>' +
           `<td style="width: 15%"><a href="/magentaeo/Faktur/payment_history/${response.data.finished_faktur[i].faktur_number}">${response.data.finished_faktur[i].faktur_number }</a></td>` +
 
 

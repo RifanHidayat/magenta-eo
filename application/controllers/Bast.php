@@ -168,6 +168,7 @@ class Bast extends CI_Controller
       'jabatan' => $this->input->post('jabatan_pic'),
       'image_gr' => $upload_image_gr,
       'image_po' => $upload_image_po,
+      'status'=>"Close",
       'totalBast' => str_replace('.', '', $this->input->post('totalBast')),
 
     ];
@@ -876,7 +877,7 @@ class Bast extends CI_Controller
         $print = '';
       }
 
-      if (in_array('createFaktur', $this->permission) and $row->status == "Close") {
+      if (in_array('createFaktur', $this->permission)) {
 
         $this->db->select('*');
         $this->db->from('faktur');
@@ -945,8 +946,8 @@ class Bast extends CI_Controller
         $sub_array[] = $row->po_number_bast;
         $sub_array[] = $row->gr_number;
         $sub_array[] = number_format($row->total, 0, ",", ".");
-        $sub_array[] = $status;
-        $sub_array[] = $row->noteStatus;
+        // $sub_array[] = $status;
+        // $sub_array[] = $row->noteStatus;
         $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view . ' ' . $faktur . ' ' . $delivery;
         $sub_array[] = "";
         $data[] = $sub_array;
@@ -967,13 +968,15 @@ class Bast extends CI_Controller
   public function TampilDatabastother()
   {
     $this->load->model("model_bast");
-  
-    $fetch_data_other = $this->model_bast->make_datatables_other();
-    
+    $fetch_data = $this->model_bast->make_datatables_other();
 
 
 
-    foreach ($fetch_data_other as $row) {
+
+
+    $data = array();
+    foreach ($fetch_data as $row) {
+
       if (in_array('updateBast', $this->permission)) {
         $edit = '<font color="#FFFFFF" size="2px"><a title="Edit" class="btn btn-sm bg-gradient-secondary" title="Edit" href="' . base_url('bast/edit_bast/' . $row->quotation_number . '/' . $row->id_bast) . '"><font color="white"><i class="fa fa-edit"></i> </font></a>';
       } else {
@@ -989,24 +992,15 @@ class Bast extends CI_Controller
       } else {
         $print = '';
       }
-      if (in_array('createDelivery', $this->permission) and $row->status == "Close") {
-        $this->db->select('*');
-        $this->db->from('delivery');
-        $this->db->where('id_bast', $row->id_bast);
-        $data1 = $this->db->get()->row_array();
-        if (($data1 != '') and ($data1['id_bast'] == $row->id_bast)) {
-          $delivery = '<font color="#FFFFFF" size="2px"><a title="Edit Delivery" class="btn btn-sm bg-gradient-secondary" onclick="cekDelivery(' . $row->id_bast . ')" ><i class="fa fa-check"></i>   Delivery</a></font>';
-        } else {
-          $delivery = '<font color="#FFFFFF" size="2px"><a title="Create Delivery" class="btn btn-sm bg-gradient-secondary" onclick="cekDelivery(' . $row->id_bast . ')" ><i class="fa fa-plus"></i>   Delivery</a></font>';
-        }
-      } else {
-        $delivery = '';
-      }
-      if (in_array('createFaktur', $this->permission) and $row->status == "Close") {
+
+      if (in_array('createFaktur', $this->permission)) {
+
         $this->db->select('*');
         $this->db->from('faktur');
         $this->db->where('id_bast', $row->id_bast);
         $data1 = $this->db->get()->row_array();
+
+
         if ($data1 != '') {
 
           $faktur = '<font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary" title="Edit Faktur"   onclick="cekFaktur(' . $row->id_bast . ')" ><i class="fa fa-check"></i>  Faktur</a></font>';
@@ -1017,12 +1011,31 @@ class Bast extends CI_Controller
         $faktur = '';
       }
 
+      if (in_array('createDelivery', $this->permission) and $row->status == "Close") {
+        $this->db->select('*');
+        $this->db->from('delivery');
+        $this->db->where('id_bast', $row->id_bast);
+
+
+        $data1 = $this->db->get()->row_array();
+        if (($data1 != '') and ($data1['id_bast'] == $row->id_bast)) {
+          $delivery = '<font color="#FFFFFF" size="2px"><a title="Edit Delivery" class="btn btn-sm bg-gradient-secondary" onclick="cekDelivery(' . $row->id_bast . ')" ><i class="fa fa-check"></i>   Delivery</a></font>';
+        } else {
+          $delivery = '<font color="#FFFFFF" size="2px"><a title="Create Delivery" class="btn btn-sm bg-gradient-secondary" onclick="cekDelivery(' . $row->id_bast . ')" ><i class="fa fa-plus"></i>   Delivery</a></font>';
+        }
+      } else {
+        $delivery = '';
+      }
+
+
+
 
       if (in_array('viewBast', $this->permission) || in_array('statusBast', $this->permission)) {
         $view = '<font color="#FFFFFF" size="2px"><a href="' . base_url('bast/view_bast/' . $row->quotation_number . '/' . $row->id_bast) . '" title="View Data" class="btn btn-sm bg-gradient-secondary"><i class="fa fa-eye"></i><font size="2px"> </font></a></font>';
       } else {
         $view = '';
       }
+
 
 
 
@@ -1037,6 +1050,8 @@ class Bast extends CI_Controller
       }
       if ($row->statusQuotations == "Final") {
         $sub_array = array();
+        // $sub_array[] = '<p hidden>'.$row->id_bast.'</p>';
+
         $sub_array[] = $row->quotation_number;
         $sub_array[] = $row->bast_number;
         $sub_array[] = $row->date_bast;
@@ -1046,14 +1061,15 @@ class Bast extends CI_Controller
         $sub_array[] = $row->tittle_event;
         $sub_array[] = $row->po_number_bast;
         $sub_array[] = $row->gr_number;
-        $sub_array[] = number_format($row->total, 0, ',', '.');
-        $sub_array[] = $status;
-        $sub_array[] = $row->noteStatus;
-        $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view . ' ' . ' ' . $faktur . ' ' . $delivery;
+        $sub_array[] = number_format($row->total, 0, ",", ".");
+        // $sub_array[] = $status;
+        // $sub_array[] = $row->noteStatus;
+        $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $view . ' ' . $faktur . ' ' . $delivery;
         $sub_array[] = "";
         $data[] = $sub_array;
       }
     }
+ 
     $output = array(
       "draw"                    =>     intval($_POST["draw"]),
       "recordsTotal"          =>      $this->model_bast->get_all_data(),

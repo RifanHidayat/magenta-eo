@@ -157,16 +157,16 @@
             <th colspan="2">Total Summary</th><th><p align="right"><?php echo  "IDR ".$total; ?></th>
            </tr>
              
-          <tr>
+          <!-- <tr>
            <th colspan="2" style="">PPN</td><th> <p align="right"><?php echo  "IDR ".$ppn; ?></th>
            </tr>
             
            <th colspan="2">PPh</th><th> <p align="right"><?php echo  "IDR ".$pph; ?></th>
-           </tr>
-           <tr>
+           </tr> -->
+           <!-- <tr>
           
             <th colspan="2"> Grand Total</th><th><p align="right"><?php echo  "IDR ".$grand_total; ?></p></th>
-           </tr>
+           </tr> -->
              
             
           </tfoot>

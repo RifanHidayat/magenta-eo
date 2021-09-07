@@ -459,6 +459,7 @@ class Quotation extends CI_Controller
         'discount' => (str_replace('.', '', $discount)),
         'sub_total' => (str_replace('.', '', $sub_total)),
         'revisi' => '0',
+        'status'=>"Final"
 
 
       ];
@@ -728,12 +729,11 @@ class Quotation extends CI_Controller
     $this->db->where('quotation_number', $data1['quotation_number']);
     $this->data['quotation_sub_item'] = $this->db->get()->result();
 
-    $this->db->select('quotation_item.item_value,attribute_values.satuanq,attribute_values.satuanf,quotation_item.rate,quotation_item.quantity,quotation_item.frrequency,quotation_item.subtotal,quotation_item.name_item');
 
+    $this->db->distinct();
+    $this->db->select('quotation_item.item_value,attribute_values.satuanq,attribute_values.satuanf,quotation_item.rate,quotation_item.quantity,quotation_item.frrequency,quotation_item.subtotal,quotation_item.name_item');
     $this->db->from("quotation_item");
     $this->db->join('attribute_values', 'attribute_values.value = quotation_item.item_value');
-    
-
     $this->db->where('quotation_number', $data1['quotation_number']);
     $this->db->order_by('quotation_item.id', 'asc');
 
@@ -1050,6 +1050,7 @@ class Quotation extends CI_Controller
             'quotation_number_revisi' => $quotation_number_revisii,
             'sub_total' => (str_replace('.', '', $netto)),
             'image' => $this->input->post('filequotation'),
+            'status'=>"Final"
 
           ];
         } else {
@@ -1082,6 +1083,7 @@ class Quotation extends CI_Controller
             'quotation_number' => $quotation_number_revisii . '-Rev' . $revisi,
             'quotation_number_revisi' => $quotation_number_revisii,
             'sub_total' => (str_replace('.', '', $netto)),
+            'status'=>"Final"
 
 
           ];
@@ -1205,23 +1207,23 @@ class Quotation extends CI_Controller
 
 
     $this->data['total'] = $row['total_summary'];
+    
     $this->db->distinct();
     $this->db->select('name ,metode,quotation_number');
     $this->db->from("quotation_sub_item");
     $this->db->where('quotation_number', $id);
+    
     $this->data['quotation_sub_item'] = $this->db->get()->result();
 
 
 
-    // $this->db->distinct(); 
+    $this->db->distinct(); 
     $this->db->select('quotation_item.item_value,attribute_values.satuanq,attribute_values.satuanf,quotation_item.rate,quotation_item.quantity,quotation_item.frrequency,quotation_item.subtotal,quotation_item.name_item');
-
     $this->db->from("quotation_item");
     $this->db->join('attribute_values', 'attribute_values.value = quotation_item.item_value');
-
+    $this->db->join('attributes', 'attributes.name = quotation_item.name_item');
     $this->db->where('quotation_number', $id);
     $this->db->order_by('quotation_item.id', 'asc');
-
     $this->data['quotation_item'] = $this->db->get()->result();
 
     $mpdf = new \Mpdf\Mpdf([
@@ -1378,6 +1380,7 @@ class Quotation extends CI_Controller
         'netto' => (str_replace('.', '', $netto)),
         'discount_percent' => $discount_percent,
         'discount' => $discount,
+        'status'=>"Final"
 
       ];
       $this->db->insert('quotations', $data1);
@@ -1649,6 +1652,7 @@ class Quotation extends CI_Controller
             'netto' => (str_replace('.', '', $netto)),
             'discount_percent' => $discount_percent,
             'discount' => preg_replace("/[^0-9]/", "", $discount),
+            'status'=>"Final"
 
 
 
@@ -1687,6 +1691,7 @@ class Quotation extends CI_Controller
             'netto' => (str_replace('.', '', $netto)),
             'discount_percent' => $discount_percent,
             'discount' => preg_replace("/[^0-9]/", "", $discount),
+            'status'=>"Final"
 
 
           ];
@@ -2328,7 +2333,8 @@ class Quotation extends CI_Controller
       } else {
         $print = '';
       }
-      if (in_array('createBast', $this->permission) and $row->status == "Final" and $row->po_number != "") {
+
+      if (in_array('createBast', $this->permission)  and $row->po_number != "") {
         $this->db->select('*');
         $this->db->from('bast');
         $this->db->where('quotation_number', $row->quotation_number);
@@ -2353,18 +2359,50 @@ class Quotation extends CI_Controller
       } else {
         $view = '';
       }
-      if ($row->status == "Final") {
+
+      // if (in_array('createBast', $this->permission) and $row->status == "Final" and $row->po_number != "") {
+      //   $this->db->select('*');
+      //   $this->db->from('bast');
+      //   $this->db->where('quotation_number', $row->quotation_number);
+      //   $data1 = $this->db->get()->row_array();
+
+      //   $this->db->select('*');
+      //   $this->db->from('quotations');
+      //   $this->db->where('quotation_number', $row->quotation_number);
+      //   $data2 = $this->db->get()->row_array();
+
+      //   if (($data1 != '') and ($data2['sisa_bast'] == '0')) {
+      //     $bast = '<font color="#FFFFFF" size="2px"><a title="Edit Bast" class="btn btn-sm bg-gradient-secondary" onclick="Createbast(' . $row->id . ');" ><i class="fa fa-check"></i><font size="2px"> BAST</a>';
+      //   } else {
+      //     $bast = '<font color="#FFFFFF" size="2px"><a title="Create Bast" class="btn btn-sm bg-gradient-secondary" onclick="Createbast(' . $row->id . ');" ><i class="fa fa-plus"></i><font size="2px"> BAST</a>';
+      //   }
+      // } else {
+      //   $bast = '';
+      // }
+
+      // if (in_array('viewQuatations', $this->permission) || in_array('statusQuatations', $this->permission)) {
+      //   $view = '<font color="#FFFFFF" size="2px"><a   href="' . base_url('Quotation/view_quotation_event/' . $row->id) . '" title="View Data" class="btn btn-sm bg-gradient-secondary btn-view-file"><i class="fa fa-eye"></i><font size="2px"> </font></a>';
+      // } else {
+      //   $view = '';
+      // }
+      // if ($row->status == "Final") {
 
 
-        if ($row->po_number == "") {
-          $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-plus"></i><font size="2px" > PO</a>';
-        } else {
-          $po = '<font color="#FFFFFF" size="2px"><a title="Edit PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-edit"></i><font size="2px" > PO</a>';
-        }
+      //   if ($row->po_number == "") {
+      //     $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-plus"></i><font size="2px" > PO</a>';
+      //   } else {
+      //     $po = '<font color="#FFFFFF" size="2px"><a title="Edit PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-edit"></i><font size="2px" > PO</a>';
+      //   }
+      // } else {
+      //   $po = '';
+      // }
+
+
+      if ($row->po_number == "") {
+        $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-plus"></i><font size="2px" > PO</a>';
       } else {
-        $po = '';
+        $po = '<font color="#FFFFFF" size="2px"><a title="Edit PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-edit"></i><font size="2px" > PO</a>';
       }
-
 
 
 
@@ -2402,8 +2440,8 @@ class Quotation extends CI_Controller
       $sub_array[] = number_format($row->netto, 0, ",", ".");
       $sub_array[] = number_format($row->sisa_bast, 0, ",", ".");
       $sub_array[] = $row->po_number;
-      $sub_array[] = $status;
-      $sub_array[] = $row->noteStatus;
+      // $sub_array[] = $status;
+      // $sub_array[] = $row->noteStatus;
 
       $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $email . ' ' . $view . ' ' . $po . ' ' . $bast;
       $data[] = $sub_array;
@@ -2450,7 +2488,27 @@ class Quotation extends CI_Controller
       } else {
         $print = '';
       }
-      if (in_array('createBast', $this->permission) and  $row->status == "Final" and $row->po_number != "") {
+      // if (in_array('createBast', $this->permission) and  $row->status == "Final" and $row->po_number != "") {
+      //   $this->db->select('*');
+      //   $this->db->from('bast');
+      //   $this->db->where('quotation_number', $row->quotation_number);
+      //   $data1 = $this->db->get()->row_array();
+
+      //   $this->db->select('*');
+      //   $this->db->from('quotation_other');
+      //   $this->db->where('quotation_number', $row->quotation_number);
+      //   $data2 = $this->db->get()->row_array();
+
+      //   if (($data1 != '') and ($data2['sisa_bast'] == '0')) {
+      //     $bast = '<font color="#FFFFFF" size="2px"><a title="Edit Bast" class="btn btn-sm bg-gradient-secondary" onclick="Createbast(' . $row->id . ');" ><i class="fa fa-check"></i><font size="2px"> BAST</a>';
+      //   } else {
+      //     $bast = '<font color="#FFFFFF" size="2px"><a title="Create Bast" class="btn btn-sm bg-gradient-secondary" onclick="Createbast(' . $row->id . ');" ><i class="fa fa-plus"></i><font size="2px"> BAST</a>';
+      //   }
+      // } else {
+      //   $bast = '';
+      // }
+
+       if (in_array('createBast', $this->permission) and $row->po_number != "") {
         $this->db->select('*');
         $this->db->from('bast');
         $this->db->where('quotation_number', $row->quotation_number);
@@ -2475,18 +2533,24 @@ class Quotation extends CI_Controller
       } else {
         $view = '';
       }
-      if ($row->status == "Final") {
+      // if ($row->status == "Final") {
 
-        if ($row->po_number == "") {
-          $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" ><i class="fa fa-plus"></i><font size="2px" data-toggle="modal" data-target="#po_number"> PO</a>';
-        } else {
-          $po = '<font color="#FFFFFF" size="2px"><a title="Edit PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-edit"></i><font size="2px" > PO</a>';
-        }
+      //   if ($row->po_number == "") {
+      //     $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" ><i class="fa fa-plus"></i><font size="2px" data-toggle="modal" data-target="#po_number"> PO</a>';
+      //   } else {
+      //     $po = '<font color="#FFFFFF" size="2px"><a title="Edit PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-edit"></i><font size="2px" > PO</a>';
+      //   }
+      // } else {
+      //   $po = '';
+      // }
+
+      // $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" ><i class="fa fa-plus"></i><font size="2px" data-toggle="modal" data-target="#po_number"> PO</a>';
+
+      if ($row->po_number == "") {
+        $po = '<font color="#FFFFFF" size="2px"><a title="Add PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" ><i class="fa fa-plus"></i><font size="2px" data-toggle="modal" data-target="#po_number"> PO</a>';
       } else {
-        $po = '';
+        $po = '<font color="#FFFFFF" size="2px"><a title="Edit PO" onclick="AmbilData(' . $row->id . ')" class="btn btn-sm bg-gradient-secondary" data-toggle="modal" data-target="#po_number" ><i class="fa fa-edit"></i><font size="2px" > PO</a>';
       }
-
-
 
 
       $email = '<font color="#FFFFFF" size="2px"><a title="Email" class="btn btn-sm bg-gradient-secondary" href="' . base_url('Quotation/form_submit_laporan/' . $row->quotation_number) . '" ><i class="fa fa-envelope"></i></a></font>';
@@ -2529,8 +2593,8 @@ class Quotation extends CI_Controller
       $sub_array[] = number_format($row->sisa_bast, 0, ",", ".");
       $sub_array[] = $row->po_number;
 
-      $sub_array[] = $status;
-      $sub_array[] = $row->noteStatus;
+      // $sub_array[] = $status;
+      // $sub_array[] = $row->noteStatus;
 
       $sub_array[] = $edit . ' ' . $delete . ' ' . $print . ' ' . $email . ' ' . $view . ' ' . $po . ' ' . $bast;
       $data[] = $sub_array;

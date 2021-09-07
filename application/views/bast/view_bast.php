@@ -44,38 +44,7 @@
 
             
 
-                <div class="col-md-6 col-xs-12 pull pull-left">
-                      
-                     
-                           <div class="form-group" id="qnumber">
-
-                            <label class="col-sm-8 control-label" for="pid_event" style="text-align:left;" class="col-sm-8 control-label">Status</label>
-                            <div class="col-sm-8">
-                            <select  class="form-control" required="" id="status" name="status" style="width:100%;" value="<?php echo set_value('pic') ?>">
-
-                              <option value="Open"> Open</option>
-                  <option value="Reject"> Reject</option>
-                  <option value="Close"> Close</option>
-
-
-                            </select>
-                        </div>
-
-                            <?php if (in_array('statusQuatations', $user_permission)) : ?>
-                              <button style="border: none; border-radius: 5px;" for="pid_event" onclick="updateStatus();" style="width: 100%;" class="col-sm-4 control-label btn-primary">
-                                <font color="white">Save Changes</font>
-                              </button>
-                            <?php endif; ?>
-                        
-                          </div>
-                          <div class="form-group" id="qnumber">
-                            <label  class="col-sm-8 control-label">Note</label>
-                            <div class="col-sm-12">
-                            <textarea type="text" class="form-control" id="note" name="note" autocomplete="off"></textarea>
-                            </div>
-                          </div>
-                      </div>
-
+           
 
 
 

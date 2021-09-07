@@ -68,8 +68,8 @@
                       <th>Sisa BAST</th>
                       <th>PO Number</th>
 
-                      <th>Status</th>
-                      <th>Note</th>
+                      <!-- <th>Status</th>
+                      <th>Note</th> -->
                       <th style="width:20%">Action</th>
 
 

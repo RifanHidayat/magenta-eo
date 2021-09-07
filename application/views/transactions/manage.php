@@ -127,6 +127,7 @@
       console.log(response.data.data)
       
       response.data.data.map((value)=>{
+        const print= value.account.id!=null?`<font color="#FFFFFF"  size="2px"><a title="Print" class="btn btn-sm bg-gradient-secondary"   href="http://localhost/magentaeo/Transactions/print/${value.id}" target="_blank"><i class="fa fa-print"></i><font size="2px"> </a>`:"";
         row+=`
         <tr>
           <td>
@@ -155,13 +156,12 @@
           </td>
           <td align="center" width="100px">
           
-          <font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  title="Delete"><i class="fa fa-trash"></i><font size="2px"></a>
-          </font></center>
+          
           <?php if (in_array('viewTransactions', $user_permission)) : ?>
           <font color="#FFFFFF" size="2px"><a  href="http://localhost/magentaeo/Transactions/detail/${value.id}" class="btn btn-sm bg-gradient-secondary"  title="Detail"  ><i class="fa fa-eye"></i><font size="2px"></a> </font></center>
           <?php endif ?>
           <?php if (in_array('printTransactions', $user_permission)) : ?>
-          <font color="#FFFFFF"  size="2px"><a title="Print" class="btn btn-sm bg-gradient-secondary"   href="http://localhost/magentaeo/Transactions/print/${value.id}" target="_blank"><i class="fa fa-print"></i><font size="2px"> </a>
+          ${print}
           <?php endif ?>
           
           </td>
@@ -169,7 +169,8 @@
 
         `
 
-
+        // <font color="#FFFFFF" size="2px"><a class="btn btn-sm bg-gradient-secondary"  title="Delete"><i class="fa fa-trash"></i><font size="2px"></a>
+        //   </font></center>
       })
       $("#transaction-row").html(row);
       $('#use-datatable').DataTable({});

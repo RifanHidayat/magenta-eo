@@ -63,7 +63,7 @@
 
 
                   <div class="form-group" id="kanan">
-                    <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Comissionable Cost</label>
+                    <label for="Quatations_number" style="text-align:left;" class="col-sm-6 control-label">Commissionable Cost</label>
                     <div class="col-sm-12">
                       <input readonly="" type="text" class="form-control" id="comissionabale_cost" name="comissionabale_cost" autocomplete="off" value="<?php echo set_value('comissionabale_cost') ?>">
                     </div>
@@ -88,7 +88,7 @@
 
                   </div>
                   <div class="form-group" id="kanan">
-                    <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Sub Total</label>
+                    <label for="pph_description" style="text-align:left;" class="col-sm-6 control-label">Subtotal</label>
                     <div class="col-sm-12">
                       <input type="text" class="form-control" id="total_summary" readonly="" name="total_summary" autocomplete="off" value="0">
 
@@ -298,7 +298,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="Quatations_number_other" style="text-align:left;" class="col-sm-6 control-label">Faktur Number</label>
                     <div class="col-sm-12">
-                      <input readonly="" type="text" class="form-control" id="faktur_number" name="faktur_number" autocomplete="off" value="<?php echo set_value('Quatations_number_other') ?>">
+                      <input  type="text" class="form-control" id="faktur_number" name="faktur_number" autocomplete="off" value="<?php echo set_value('Quatations_number_other') ?>">
                     </div>
 
                   </div>
@@ -335,14 +335,15 @@
                     <div class="col-sm-12">
                       <select class="form-control" required="" id="due_faktur" name="due_faktur" style="width:99%;" onchange="DataPIC()"> value="<?php echo set_value('picEvent') ?>">
                         <option value=""></option>
-
+                        <option value="1">COD</option>
+                        <option value="7">7 Hari</option>
+                        <option value="14">14 Hari</option>
                         <option value="15">15 Hari</option>
                         <option value="30">30 Hari </option>
                         <option value="45">45 Hari </option>
                         <option value="60">60 Hari</option>
                         <option value="75">75 Hari</option>
                         <option value="90">90 Hari </option>
-
                       </select>
                     </div>
 
@@ -371,6 +372,14 @@
 
                   </div>
                   <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
+
+                  <div class="form-group" id="qnumber">
+
+              <label for="pid_event" style="text-align:left;" class="col-sm-6 control-label">Projects Number</label>
+              <div class="col-sm-12">
+              <input readonly  type="text"  class="form-control" required="" id="project_number" name="project_number" autocomplete="off" value="<?php echo $project_number ?>" >
+</div>
+</div>
 
 
 
@@ -440,7 +449,7 @@
                       <td></td>
                       <td></td>
 
-                      <th style="width: 20%">Sub Total</th>
+                      <th style="width: 20%">Subtotal</th>
                       <td> <input type="text" readonly="" class="form-control" id="subtotal" name="subtotal" autocomplete="off" value="<?php echo set_value('email_other') ?>"></td>
                     </tr>
                     <tr>
@@ -547,6 +556,7 @@
   $(document).ready(function() {
     hiddenIndikator();
     generetfaktur();
+    
     DataQuotation($('#Quatations_number').val());
 
 
@@ -554,23 +564,37 @@
 
   });
 
-  function generetfaktur() {
-    $.ajax({
-      type: "post",
-      url: '<?php echo base_url("Faktur/generet_faktur_number") ?>',
-      dataType: 'json',
-      success: function(hasil) {
-        console.log(hasil);
-        $('[name="faktur_number"]').val("MM-XX-" + hasil.data);
-      },
-      error: function(hasil) {
+  // function generetfaktur() {
+  //   $.ajax({
+  //     type: "post",
+  //     url: '<?php echo base_url("Faktur/generet_faktur_number") ?>',
+  //     dataType: 'json',
+  //     success: function(hasil) {
+  //   //     console.log(hasil);
+  //   //     var date = new Date();
+  //   // var tahun = date.getFullYear();
+  //   //     if (isNaN(tahun))
+  //   //     return NaN;
+  //   // var digits = String(+tahun).split(""),
+  //   //     key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+  //   //            "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+  //   //            "","I","II","III","IV","V","VI","VII","VIII","IX"],
+  //   //     roman = "",
+  //   //     i = 3;
+  //   // while (i--)
+  //   //     roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+  //   // var a= Array(+digits.join("") + 1).join("M") + roman;
 
-      }
+  //   //     $('[name="faktur_number"]').val("MM-"+a+"-" + hasil.data);
+  //     },
+  //     error: function(hasil) {
+
+  //     }
 
 
-    });
+  //   });
 
-  }
+  // }
 
 
 
@@ -802,10 +826,25 @@
       url: '<?php echo base_url("Faktur/generet_faktur_number") ?>',
       dataType: 'json',
       success: function(hasil) {
-        console.log(hasil);
+       
+        var date = new Date();
+        var tahun = date.getFullYear();
+        if (isNaN(tahun))
+        return NaN;
+        var digits = String(+tahun).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+       while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+      var a= Array(+digits.join("") + 1).join("M");
+
+        $('[name="faktur_number"]').val(a+"-"+roman+"-" + hasil.data);
 
 
-        $('[name="faktur_number"]').val("MM-XX-" + hasil.data);
+       // $('[name="faktur_number"]').val("MM-XX-" + hasil.data);
 
       },
       error: function(hasil) {
@@ -1092,3 +1131,4 @@
   }
 </script>
 <script type="text/javascript" src="<?php echo base_url('assets/rupiah.js') ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>

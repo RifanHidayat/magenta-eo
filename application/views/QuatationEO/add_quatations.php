@@ -1151,7 +1151,29 @@
     $('#tableLoopDescription').show();
     for (B = 1; B <= 1; B++) {
       BarisBaruDescription();
+   
     }
+    setTimeout(function() {
+        tinymce.init({
+      selector: '.description',
+      height: 200,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
+      ],
+      toolbar: 'undo redo | formatselect | ' +
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
+      content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+
+
+
+      
+         }, 500);
 
   });
 
@@ -1188,7 +1210,9 @@
   $('#BarisBaruDescription').click(function(e) {
     e.preventDefault();
     BarisBaruDescription();
-    tinymce.init({
+
+    setTimeout(function() {
+        tinymce.init({
       selector: 'textarea.description',
       height: 200,
       menubar: false,
@@ -1203,17 +1227,23 @@
         'removeformat | help',
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     });
+
+
+
+      
+         }, 100);
+   
   });
 
 
 
-  $(document).on('click', '#HapusBarisDeskription', function(e) {
-    e.preventDefault();
-    var Nomor = 1;
-    $(this).parent().parent().remove();
-    hitungDescription();
+  // $(document).on('click', '#HapusBarisDeskription', function(e) {
+  //   e.preventDefault();
+  //   var Nomor = 1;
+  //   $(this).parent().parent().remove();
+  //   hitungDescription();
 
-  });
+  // });
 
 
 
@@ -1230,21 +1260,21 @@
 
 
 
-  tinymce.init({
-    selector: 'textarea.description',
-    height: 10,
-    menubar: false,
-    plugins: [
-      'advlist autolink lists link image charmap print preview anchor',
-      'searchreplace visualblocks code fullscreen',
-      'insertdatetime media table paste code help wordcount'
-    ],
-    toolbar: 'undo redo | formatselect | ' +
-      'bold italic backcolor | alignleft aligncenter ' +
-      'alignright alignjustify | bullist numlist outdent indent | ' +
-      'removeformat | help',
-    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-  });
+  // tinymce.init({
+  //   selector: 'textarea.description',
+  //   height: 10,
+  //   menubar: false,
+  //   plugins: [
+  //     'advlist autolink lists link image charmap print preview anchor',
+  //     'searchreplace visualblocks code fullscreen',
+  //     'insertdatetime media table paste code help wordcount'
+  //   ],
+  //   toolbar: 'undo redo | formatselect | ' +
+  //     'bold italic backcolor | alignleft aligncenter ' +
+  //     'alignright alignjustify | bullist numlist outdent indent | ' +
+  //     'removeformat | help',
+  //   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+  // });
 
   // ---------------------------------------------------------Baris Baru Description----------------------------------------  
   function BarisBaruDescription() {
@@ -1284,7 +1314,7 @@
 
 
     tinymce.init({
-      selector: 'textarea.description',
+      selector: 'description',
       height: 200,
       menubar: false,
       plugins: [

@@ -65,8 +65,8 @@
                       <th>Netto</th>
                       <th>Sisa BAST</th>
                       <th>PO number</th>
-                      <th>status</th>
-                      <th>Note</th>
+                      <!-- <th>status</th>
+                      <th>Note</th> -->
                       <th style="width: 20%">Action</th>
                     </tr>
                   </thead>

@@ -329,7 +329,9 @@
                     <div class="col-sm-12">
                       <select class="form-control" required="" id="due_faktur" name="due_faktur" style="width:99%;" onchange="DataPIC()"> value="<?php echo set_value('picEvent') ?>">
                         <option value=""></option>
-
+                        <option value="1">COD</option>
+                        <option value="7">7 Hari</option>
+                        <option value="14">14 Hari</option>
                         <option value="15">15 Hari</option>
                         <option value="30">30 Hari </option>
                         <option value="45">45 Hari </option>

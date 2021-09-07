@@ -133,15 +133,15 @@
                 <p>Kepada Yth,</p>
               </b>
 
-              <p style="margin-left: 60px;"><?php echo $customer; ?></p>
-              <p style="margin-left: 60px; width: 450px;"><?php echo $alamat; ?></p>
+              <p style="margin-left: 60px;"><b><?php echo $customer; ?></b><br><?php echo $alamat; ?></p>
+              
 
             </div>
             <!-- /.col -->
 
 
             <!-- /.col -->
-            <div style="right: 0" class="element" align="right" style="margin-top: -150px;">
+            <div style="right: 0" class="element" align="right" style="margin-top: -100px;">
               <!--     
          <b>PIC Event : <?php echo $pic_name ?></b><br>
 <b>Title Event :<?php echo $title; ?></b> -->
@@ -154,7 +154,7 @@
                   <td>Event</td>
                   <td>:</td>
                   <td><?php echo $title ?></td>
-                </tr>
+                </tr>    
               </table>
 
 
@@ -162,18 +162,16 @@
             </div>
             <br>
             <br>
-            <br>
-            <br>
-          <br>
+           <br>
            
 
 
 
 
             <p> Dengan Hormat,<br>
-              Bersama ini kami ingin menyampaikan penawaran harga, dengan detail sebagai berikut :</p>
+              Bersama ini kami ingin menyampaikan penawaran harga, dengan detail sebagai beri :</p>
           </div>
-          <div class="row">
+          <div class="roqw">
 
 
 

@@ -75,8 +75,8 @@
 
                       <th style="width: 10%">Gudang</th>
 
-                      <th style="width: 5%">Status</th>
-                      <th style="width: 15%">Note</th>
+                      <!-- <th style="width: 5%">Status</th>
+                      <th style="width: 15%">Note</th> -->
 
 
                       <th style="width: 20%">

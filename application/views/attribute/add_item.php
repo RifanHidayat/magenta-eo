@@ -54,7 +54,7 @@
             
                 <div class="form-group">
                   <label for="username">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Name Item" autocomplete="off" value="<?php echo set_value('name')?>">
+                  <input  type="text" class="form-control" id="name" name="name" placeholder="Name Item" autocomplete="off" value="<?php echo set_value('name')?>">
                 </div>
                  <?= form_error('name','<small class="text-danger pl-3">','</small>')?>
 

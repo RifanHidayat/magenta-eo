@@ -5,6 +5,7 @@
     if ($ses == null) {
       redirect("Login");
     }
+    
     ?>
 
    <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -354,11 +355,11 @@
 
            </li>
 
-           <li hidden="" class="nav-item has-treeview">
+           <li  class="nav-item has-treeview">
              <a href="<?php echo base_url("Profile") ?>" class="nav-link" id="ProfileMainNav">
-               <i class="nav-icon fas fa-building"></i>
+               <i class="nav-icon fas fa-cog"></i>
                <p>
-                 Profile Perusahaan
+                 Settingan
                  <i class="right fas"></i>
                </p>
              </a>

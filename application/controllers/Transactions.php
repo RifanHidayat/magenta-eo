@@ -194,7 +194,7 @@ $this->data['bank_name']=$account['bank_name'];
 
 $mpdf = new \Mpdf\Mpdf([
   'mode' => 'utf-8',
-  'format' => 'A4-p', 'defaultPageNumStyle' => '1',
+  'format' => 'A5-l', 'defaultPageNumStyle' => '1',
   'margin_right' => '10',
   'margin_left' => '10',
   'margin_bottom' => '10',

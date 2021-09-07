@@ -81,9 +81,7 @@
                         <th>Total BAST</th>
 
 
-                        <th>Status</th>
-                        <th>Note</th>
-
+                      
 
                         <th>
                           <center>Action</center>
@@ -142,6 +140,77 @@
 
         <br>
         <br>
+      </div>
+    </div>
+  </div>
+
+    <!-- Modal infor project -->
+    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+        <div class="alert alert-info" role="alert" style="width: 100%;">
+        <span> Info Projects</span>
+ 
+        </div>
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+
+          
+        </div>
+        <div class="modal-body">
+          <form role="form" >
+            <div class="form-group" style="width: 45%;"  >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> No. Project</label><br>
+              <input type="text" class="form-control" id="project_number" name="project_number" readonly>
+            </div>
+              
+            <div class="form-group" style="width: 50%; flex-direction: row;float:right;margin-top:-16%" >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> No.Quotation</label><br>
+              <input type="text" class="form-control"  id="quotation_number" name="quotation_number" readonly>
+            </div>
+
+            <div class="form-group" style="width: 45%;"  >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Tanggal Mulai</label><br>
+              <input type="date" class="form-control" id="project_start_date" name="project_start_date" readonly>
+            </div>
+              
+            <div class="form-group" style="width: 50%; flex-direction: row;float:right;margin-top:-16%" >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Tanggal Akhir</label><br>
+              <input type="date" class="form-control" id="project_end_date" name="project_end_date" readonly>
+            </div>
+
+            <div class="form-group" style="width: 45%;"  >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Customer </label><br>
+              <input type="text" class="form-control" id="customer" name="customer" readonly>
+            </div>
+              
+            <div class="form-group" style="width: 50%; flex-direction: row;float:right;margin-top:-16%" >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> PIC</label><br>
+              <input type="text" class="form-control" id="pic" name="pic" readonly>
+            </div>
+
+            <div class="form-group" style="width: 100%;"  >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Deskripsi </label><br>
+              <input type="text" class="form-control" id="description" name="description" readonly>
+            </div>
+
+            <div class="form-group" style="width: 100%;"  >
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Nominal </label><br>
+              <input type="text" class="form-control" id="amount" name="amount" readonly >
+            </div>
+
+
+            
+           
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button  class="btn btn-primary  pull-left btnContinue" ><span class="glyphicon glyphicon-remove"></span> Lanjut</button>
+         
+        </div>
       </div>
     </div>
   </div>
@@ -282,7 +351,7 @@
         dataType: 'json',
 
         success: function(hasil) {
-          console.log(hasil);
+          
 
           if (hasil.status == 'tersedia') {
             <?php if (in_array('updateBast', $user_permission)) { ?>
@@ -310,7 +379,66 @@
             <?php } ?>
 
           } else {
-            window.location = "<?php echo base_url('Faktur/create_faktur/') ?>" + hasil.quotation_number + '/' + id;
+             // window.location = "<?php echo base_url('Faktur/create_faktur/') ?>" + hasil.quotation_number + '/' + id;
+             $.ajax({
+        type: "post",
+        url: '<?php echo base_url("Faktur/cekProjects/") ?>',
+        data:{id:hasil.id},
+        dataType: 'json',
+        success: function(result) {
+          console.log(result);
+          if (result.data=='0'){
+            Swal.fire({
+                  icon: 'info',
+                  title: 'Oops...',
+                  text: 'Project belum dibuat',
+
+                });
+
+
+          }else{
+            
+            
+            $('#pic').val(result.data.event_pic);
+            $('#customer').val(result.data.event_customer);
+            $('#amount').val(result.data.grand_total);
+            $('#project_number').val(result.data.project_number);
+            $('#quotation_number').val(result.data.quotation_number);
+            $('#description').val(result.data.description);
+            $('#project_start_date').val(result.data.project_start_date);
+            $('#project_end_date').val(result.data.project_end_date);
+         
+            // $('#project_start_date').val(result.data.project_start_date);
+
+
+
+            $("#myModal").modal()
+            $('.btnContinue').click(function(e){
+          e.preventDefault();
+         
+           window.location = "<?php echo base_url('Faktur/create_faktur/') ?>" + hasil.quotation_number + '/' + result.data.project_number+ '/' + id;
+        
+     });
+           
+
+
+          }
+
+        
+
+
+        },
+        error: function(error) {
+       
+
+
+
+
+        }
+
+
+      });
+          
           }
 
 

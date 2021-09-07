@@ -13,10 +13,15 @@
       color: black;
     }
 
-    #tbl1 td,
-    #tbl1 th {
+    .tbl1 td,
+    .tbl1 th {
    
       padding: 8px;
+    }
+
+    .tbl2 tr td{
+      font-size: 13px
+
     }
 
     table tr td {
@@ -32,13 +37,6 @@
     }
 
 
-    #tbl1 th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      text-align: left;
-
-      
-    }
     .terbilang {
       font-family: "Times New Roman", Times, serif;
 }
@@ -86,61 +84,55 @@
 
           <!-- /.row -->
           <div class="row invoice-info">
-            <div class="col-9 invoice-col">
+            <div class="col-9 invoice-col" >
               <br>
-              <table style="width: 50%;">
+              <table style="width: 50%;" id="tbl1">
                 <tr>
-                <th style="width:25%" align="left" valign="top" >Received</th>
+                <td style="width:20%" align="left" valign="top" >Received</td>
                 <th valign="top" style="width: 5%;" >:</th>
-                <td><?php echo $name ?><br>
-                <?php echo $address ?>
+                <td style="width: 90%;" ><?php echo $name ?><br>
+               <p style="font-size: 11px;"> <?php echo $address ?></p>
 
                 </td>
                 <tr>
 
               
               </table>
+              <table border="0" style="right: 0" align="right" style="margin-top: -100px;" class="tbl2">
+  <tr>
+    <th colspan="3"><h3>Penerimaan Pelanggan</h3></th>
+  </tr>
+  <tr>
+    <td align="left" style="font-size: 12px;">Form No.</td>
+    <td align="left" style="font-size: 12px;">:</td>
+    <td align="left" style="font-size: 12px;"><?php echo $transaction_number?> </td>
+  </tr>
+  <tr>
+    <td align="left" style="font-size: 12px;">Cheque Date</td>
+    <td align="left" style="font-size: 12px;">:</td>
+    <td align="left" style="font-size: 12px;"><?php echo date('d F Y', strtotime($date_payment))?> </td>
+  </tr>
+
+  <tr>
+    <td align="left" style="font-size: 12px;">Cheque No.</td>
+    <td align="left" style="font-size: 12px;">:</td>
+    <td align="left" style="font-size: 12px;"><?php echo ""?> </td>
+  </tr>
+
+  <tr>
+    <td align="left" style="font-size: 12px;">Bank</td>
+    <td align="left" style="font-size: 12px;">:</td>
+    <td align="left" style="font-size: 12px;"><?php echo $account_number.'-'.$bank_name?> </td>
+  </tr>
+</table>
+
+
             
             </div>
             <!-- /.col -->
 
             <!-- date('d F Y', strtotime($date)) -->
             <!-- /.col -->
-            <div style="margin-top: -100px;">
-
-              <table border="0" style="right: 0" align="right">
-                <tr>
-                  <th colspan="3"><h3>Penerimaan Pelanggan</h3></th>
-                </tr>
-                <tr>
-                  <td align="left">Form No.</td>
-                  <td align="left">:</td>
-                  <td align="left"><?php echo $transaction_number?> </td>
-                </tr>
-                <tr>
-                  <td align="left">Cheque Date</td>
-                  <td align="left">:</td>
-                  <td align="left"><?php echo date('d F Y', strtotime($date_payment))?> </td>
-                </tr>
-
-                <tr>
-                  <td align="left">Cheque No.</td>
-                  <td align="left">:</td>
-                  <td align="left"><?php echo ""?> </td>
-                </tr>
-
-                <tr>
-                  <td align="left">Bank</td>
-                  <td align="left">:</td>
-                  <td align="left"><?php echo $account_number.'-'.$bank_name?> </td>
-                </tr>
-              </table>
-
-
-
-
-
-            </div>
 
 
 
@@ -162,19 +154,19 @@
                 <thead class="thead-dark">
                   <tr>
                     <th style="width: 15%">
-                    <span style="color:black"><center>Invoide No.</center></span>
+                    <span style="color:black; font-size: 12px;" ><center>Invoide No.</center></span>
                     </th>
                     <th style="width: 15%">
-                    <span style="color:black"><center>Date</center></span>
+                    <span style="color:black; font-size: 12px;" ><center>Date</center></span>
                     </th>
                     <th style="width: 15%">
-                    <span style="color:black"></center>Due</center></span>
+                    <span style="color:black; font-size: 12px;" ></center>Due</center></span>
                     </th>
                     <th style="width: 20%">
-                    <span style="color:black"><center>Amount<center></span>
+                    <span style="color:black; font-size: 12px;" ><center>Amount<center></span>
                     </th>
                     <th style="width: 20%">
-                    <span style="color:black">Payment Amount</span>
+                    <span style="color:black;font-size: 12px; " >Payment Amount</span>
                     </th>
                    
                   </tr>
@@ -187,11 +179,11 @@
               ?>
           <tr>
      
-            <td align="left"><?php echo $k->faktur_number ?></td>
-            <td><center><?php echo date('d F Y', strtotime($k->date_faktur)) ?></center></td>
-            <td><center><?php echo date('d F Y ', strtotime($k->date_faktur. ' + '.$k->due_faktur.' days')); ?></center></td>
-            <td align="right"><?php echo number_format($k->total_faktur ,0,',','.')?></td>
-             <td align="right"> <?php echo number_format($k->amount ,0,',','.') ?></td>
+            <td align="left" style="font-size: 12px;"><?php echo $k->faktur_number ?></td>
+            <td style="font-size: 12px;"><center ><?php echo date('d F Y', strtotime($k->date_faktur)) ?></center></td>
+            <td style="font-size: 12px;"><center><?php echo date('d F Y ', strtotime($k->date_faktur. ' + '.$k->due_faktur.' days')); ?></center></td>
+            <td align="right" style="font-size: 12px;"><?php echo number_format($k->total_faktur ,0,',','.')?></td>
+             <td align="right" style="font-size: 12px;"> <?php echo number_format($k->amount ,0,',','.') ?></td>
          
           </tr>
            <?php endforeach ?>
@@ -207,10 +199,10 @@
           <table style="width:30%"   align="right">
           <tr>
           <td>
-          <span>Total P ayment :</span>
+          <span font-size: 12px;>Total Payment :</span>
           <td>
           <td align="right">
-          <span><?php echo number_format($total_payment ,0,',','.')?></span>
+          <span font-size: 12px;><?php echo number_format($total_payment ,0,',','.')?></span>
           <td>
           </tr>
           </table>
@@ -241,20 +233,20 @@
           <div class="float-right" >
         <br>
         
-             <table align="right" style="width: 100%;" >
+             <table align="right" id="tbl1" style="width: 100%;">
           
           <tr>
             
-            <td ><center><font size="50px">Prepared By</center></td>
-            <td ><center>Reviewed By</center></td>
+            <td style="font-size: 12px;" ><center><font size="50px" >Prepared By</center></td>
+            <td style="font-size: 12px;" ><center>Reviewed By</center></td>
            
-            <td ><center>Received By</center></td>
+            <td style="font-size: 12px;" ><center>Received By</center></td>
           <tr >
             
-            <td style="height: 50px"><center></center></td>
-               <td ><center></center></td>
+            <td style="height: 50px;font-size: 12px;"><center></center></td>
+               <td style="height: 50px;font-size: 12px;" ><center></center></td>
              
-               <td><center></center></td>
+               <td style="height: 50px;font-size: 12px;"><center></center></td>
            
 
           </tr>
@@ -264,13 +256,26 @@
           </tr>
            <tr>
             
-               <td style="width: 200px;" ><center><hr style="  border: 1px solid black; width: 50%"></center></td>
+               <td style="width: 200px;font-size: 12px;" ><center><hr style="  border: 1px solid black; width: 50%"></center></td>
              
-               <td style="width: 200px;"><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
-             <td style="width: 200px;" ><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
+               <td style="width: 200px;font-size: 12px;"><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
+             <td style="width: 200px;font-size: 12px;" ><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
            
+             
 
           </tr>
+
+          <tr>
+            
+            <td style="width: 200px;font-size: 12px;" ><center>Tanggal</center></td>
+          
+            <td style="width: 200px;font-size: 12px;" ><center>Tanggal</center></td>
+            <td style="width: 200px;font-size: 12px;" ><center>Tanggal</center></td>
+        
+          
+
+       </tr>
+      
          
         </table>
         <br>

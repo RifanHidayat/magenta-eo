@@ -422,7 +422,7 @@
                         </th>
 
                         <th style="width: 15%">Harga Satuan</th>
-                        <th style="width: 30%">Ammount</th>
+                        <th style="width: 30%">Amount</th>
                       </tr>
                     </thead>
 
@@ -539,7 +539,7 @@
                           <center>KTS</center>
                         </th>
                         <th style="width: 15%">Harga Satuan</th>
-                        <th style="width: 25%">Ammount</th>
+                        <th style="width: 25%">Amount</th>
                       </tr>
                     </thead>
 

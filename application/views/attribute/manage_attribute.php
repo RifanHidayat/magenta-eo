@@ -116,9 +116,10 @@
                 </div>
               
                   <div class="form-group">
+                  <label for="status">Status</label>
                   <select class="form-control" id="status" name="status" style="width:99%;"  >
-                     <label for="status">Status</label>
-                    <option value="">Select Status</option>
+                    
+                   
                         <option value="Active">Active</option>
                         <option value="In Active">In Active</option>
                     </select>
@@ -175,9 +176,10 @@
                 </div>
         
                  <div class="form-group">
+                 <label for="status">Status</label>
                   <select class="form-control" id="statusdd" name="statusadd" style="width:99%;"  >
-                     <label for="status">Status</label>
-                    <option value="">Select Status</option>
+                     
+                   
                         <option value="Active">Active</option>
                         <option value="In Active">In Active</option>
                     </select>
@@ -356,7 +358,8 @@ function Ubahdata(){
 
 $.ajax({
 type:'POST',
-data:'id='+id+'&name='+name+'&status='+status+'&metode='+metode,
+// data:'id='+id+'&name='+name+'&status='+status+'&metode='+metode,
+data:{id:id,name:name,status:status,metode:metode},
 url :'<?php echo base_url("Item/aksi_update_data_attribute")?>',
 dataType:'json',
 
@@ -409,6 +412,7 @@ function SimpanData(){
     var name=$('[name="nameadd"]').val();
     var status=$("[name='statusadd']").val();
      var perhitungan=$("[name='statusperhitungan']").val();
+     console.log(name)
   
 
 
@@ -445,7 +449,8 @@ function SimpanData(){
 
       $.ajax({
 type:'POST',
-data:'name='+name+'&status='+status+'&metode='+perhitungan,
+// data:'name='+name+'&status='+status+'&metode='+perhitungan,
+data:{name:name,status:status,metode:perhitungan},
 url :'<?php echo base_url("Item/aksi_add_data_item")?>',
 dataType:'json',
 success:function(hasil){

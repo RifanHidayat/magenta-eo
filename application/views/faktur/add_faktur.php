@@ -17,13 +17,13 @@
       <!-- Main content -->
 
       <style type="text/css">
-        .hidden {
+        /* .hidden {
           display: none;
 
             {
             .visible {
               display: block;
-            }
+            } */
       </style>
 
       <section class="content">
@@ -305,7 +305,7 @@
                       <div class="form-group" id="qnumber">
                         <label for="Quatations_number_other" style="text-align:left;" class="col-sm-6 control-label">Faktur Number</label>
                         <div class="col-sm-12">
-                          <input readonly="" type="text" class="form-control" id="faktur_number" name="faktur_number" autocomplete="off" value="<?php echo set_value('Quatations_number_other') ?>">
+                          <input type="text" class="form-control" id="faktur_number" name="faktur_number" autocomplete="off" value="<?php echo set_value('Quatations_number_other') ?>">
                         </div>
 
                       </div>
@@ -335,6 +335,9 @@
                       <select class="form-control" required="" id="due_faktur" name="due_faktur" style="width:99%;" onchange="DataPIC()"> value="<?php echo set_value('picEvent') ?>">
                         <option value=""></option>
 
+                        <option value="1">COD</option>
+                        <option value="7">7 Hari</option>
+                        <option value="14">14 Hari</option>
                         <option value="15">15 Hari</option>
                         <option value="30">30 Hari </option>
                         <option value="45">45 Hari </option>
@@ -1222,8 +1225,22 @@
           url: '<?php echo base_url("Faktur/generet_faktur_number") ?>',
           dataType: 'json',
           success: function(hasil) {
-            console.log("tes");
-            $('[name="faktur_number"]').val("MM-XX-" + hasil.data);
+            var date = new Date();
+        var tahun = date.getFullYear();
+        if (isNaN(tahun))
+        return NaN;
+        var digits = String(+tahun).split(""),
+        key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
+               "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
+               "","I","II","III","IV","V","VI","VII","VIII","IX"],
+        roman = "",
+        i = 3;
+       while (i--)
+        roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+      var a= Array(+digits.join("") + 1).join("M");
+
+        $('[name="faktur_number"]').val(a+"-"+roman+"-" + hasil.data);
+          //$('[name="faktur_number"]').val("MM-XX-" + hasil.data);
 
           },
           error: function(hasil) {

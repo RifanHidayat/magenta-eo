@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://localhost/magentaeo/';
+$config['API_URL'] = 'http://localhost:3000';
 
 /*
 |--------------------------------------------------------------------------

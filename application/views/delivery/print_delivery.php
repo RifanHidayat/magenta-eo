@@ -11,7 +11,7 @@
 
 #tbl1 td, #tbl1 th {
   border: 1px solid #808080;
-  padding: 5px;
+  padding: 1px;
 }
 table tr td{
 font-size:8px;
@@ -25,8 +25,8 @@ p{
 }
 
 #tbl1 th {
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   text-align: left;
   
   color: black;
@@ -54,7 +54,7 @@ p{
       <div class="col-12">
 
                         <div class="float-right" >
-                              <img style="margin-top: -0px;" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="150" height="50" >
+                              <img style="margin-top: -0px;" id="imagedeposit" src="<?php echo base_url('images/logo.png') ?>" alt="" class="logo" width="180" height="50" >
                               <br>
                               <br>
         
@@ -81,7 +81,7 @@ p{
         </table>
      
      
-     <table style="width: 30%;" border="1" align="right" >
+     <table style="width: 30%;" border="1" align="right" id="tbl1"  >
           
           <tr>
             
@@ -121,7 +121,7 @@ p{
                       <p style="margin-top: -100px;">PT.Magenta Mediatama<br>
   
          
-          Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grppl Utara<br>
+          Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grogol Utara<br>
           Kebayon Lama Jakarta Selatan DKI Jakarta-12210
          <br>
         phone (021) 53660077-08;Fax(021)53660099</p>
@@ -138,15 +138,18 @@ p{
 
 
       
-          <table style=" width: 400px" border="1">
+      <table class="table" style="width: 50%;" id="tbl1" border="1"  >
+          <thead class="thead-dark">
           
           <tr>
+          
             
-            <th style="width: 100px"><center>Tagihan Ke</center></th>
-            <th style="width: 100px"><center>Kirim Ke</center></th>
+            <th  style="width: 100px" align="left">Tagihan Ke</th>
+            <th style="width: 100px" align="left">Kirim Ke</th>
            
 
           </tr>
+          </thead>
           <tr>
             
             <td style="width: 150px" valign="top"><?php echo $nama; ?><br><?php echo $tagihan; ?> </td>
@@ -195,12 +198,12 @@ p{
 
               ?>
           <tr>
-            <td><center><?php echo $no ?></center></td>
-            <td><center><?php echo $k->barang ?></center></td>
-            <td><?php echo $k->deskripsi_barang ?></td>
-            <td><?php echo $k->keterangan ?></td>
-            <td><center><?php echo $k->kts ?></center></td>
-             <td><center><?php echo $k->satuan ?></center></td>
+            <td valign="top"><center><?php echo $no ?></center></td>
+            <td valign="top"><?php echo $k->barang ?></td>
+            <td valign="top"><?php echo $k->deskripsi_barang ?></td>
+            <td valign="top"><?php echo $k->keterangan ?></td>
+            <td valign="top"><center><?php echo $k->quantity ?></center></td>
+             <td valign="top"><center><?php echo $k->satuan ?></center></td>
          
           </tr>
            <?php endforeach ?>
@@ -228,7 +231,7 @@ p{
      
       <!-- /.col -->
             <div class="float-right" >
-        <br>
+        
         
              <table align="right" class="table_footer" >
           
@@ -253,10 +256,10 @@ p{
           </tr>
            <tr>
             
-               <td style="width: 200px;" ><center><hr style="  border: 1px solid black; width: 50%"></center></td>
-              <td  style="width: 200px;"><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
-               <td style="width: 200px;"><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
-             <td style="width: 200px;" ><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
+               <td style="width: 100px;" ><center><hr style="  border: 1px solid black; width: 50%"></center></td>
+              <td  style="width: 100px;"><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
+               <td style="width: 100px;"><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
+             <td style="width: 100px;" ><center><hr style="  border: 1px solid black;  width: 50%"></center></td>
            
 
           </tr>

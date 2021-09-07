@@ -228,7 +228,7 @@
           </tr>
           <tr>
 
-            <td colspan="1"><b>Sub Total</b></td>
+            <td colspan="1"><b>Subtotal</b></td>
             <td align="right"> <?php echo  number_format($total, 0, ",", ".");; ?></td>
           </tr></b>
           <tr>
@@ -239,19 +239,19 @@
             <td colspan="1" style=""><b>Netto</b></td>
             <td align="right"><?php echo number_format($netto, 0, ",", ".");; ?></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <td colspan="1" style=""><b>PPN</b></td>
             <td align="right"><?php echo number_format($ppn, 0, ",", ".");; ?></td>
-          </tr>
-          <tr>
+          </tr> -->
+          <!-- <tr>
             <td colspan="1"><b>PPh</b></td>
             <td align="right">(<?php echo number_format($pph, 0, ",", ".");; ?>)</td>
-          </tr>
-          <tr>
+          </tr> -->
+          <!-- <tr>
 
             <td colspan="1"><b>Grand Total</b></td>
             <td align="right"><b> <?php echo  number_format($grand_total, 0, ",", "."); ?></b></td>
-          </tr>
+          </tr> -->
 
 
 
@@ -284,8 +284,9 @@
 
 
               <!-- item quotation -->
+     <div style="page-break-after:always"></div>         
      
-      <h4><b>Non-Fee Cost</b></4>
+      <h4 ><b>Non-Fee Cost</b></4>
         <?php
         foreach ($quotation_sub_item as $name) :
           $no = 0;
@@ -301,7 +302,7 @@
           
            
 
-            <table class="table" style=" width: 100%" id="tbl1" align="center" border="1" align="center">
+            <table class="table" style="width: 100%;" id="tbl1" align="center" border="1" align="center" >
               <thead class="thead-dark">
               <tr>
               <td colspan="6"> <h6 align="center" style="font-size: 20px;"><?php echo  $name->name ?></h6></td>

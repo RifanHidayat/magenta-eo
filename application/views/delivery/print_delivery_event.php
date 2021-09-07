@@ -170,7 +170,7 @@
           <p style="margin-top: -90px;">PT.Magenta Mediatama<br>
 
 
-            Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grppl Utara<br>
+            Jl. Raya kebayon Lama No 15 RT.04 RW.03 Grogol Utara<br>
             Kebayon Lama Jakarta Selatan DKI Jakarta-12210
             <br>
             phone (021) 53660077-08;Fax(021)53660099

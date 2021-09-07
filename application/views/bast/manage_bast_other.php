@@ -71,8 +71,7 @@
                         <th>PO Number </th>
                         <th>GR Number</th>
                         <th>Total BAST</th>
-                        <th>Status</th>
-                        <th>Note</th>
+                       
                         <th>
                           <center>Action</center>
                         </th>
@@ -285,7 +284,8 @@
             <?php } ?>
 
           } else {
-            window.location = "<?php echo base_url('Faktur/create_faktur/') ?>" + hasil.quotation_number + '/' + id;
+           window.location = "<?php echo base_url('Faktur/create_faktur/') ?>" + hasil.quotation_number + '/' + '-'+ '/' + id;
+           
           }
 
 

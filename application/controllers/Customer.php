@@ -634,5 +634,35 @@ class Customer extends CI_Controller {
       }  
 
 
+	  public function aksi_update_profile(){
+		
 
+		$data=[
+			'name'=>$this->input->post('name'),
+			'address'=>$this->input->post('address'),
+			'phone'=>$this->input->post('phone'),
+			'fax'=>$this->input->post('fax'),
+			'signer'=>$this->input->post('signer'),
+  
+	
+			
+		];
+  
+	
+		$where=array(
+		'id'=>1
+		);
+	  
+		
+		$this->db->where($where);
+		$this->db->update('company',$data);
+  
+		$this->session->set_flashdata('success', 'Successfully created');
+		redirect('Customer/manage_customer', 'refresh');
+  
+  
+  
+  
+  
+	  }
 }

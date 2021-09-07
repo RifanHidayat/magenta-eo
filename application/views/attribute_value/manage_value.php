@@ -125,7 +125,7 @@
 
                     <select class="form-control" id="status_update" name="status_update" style="width:99%;"  >
                      <label for="status">Status</label>
-                    <option value="">Select Status</option>
+                    
                         <option value="Active">Active</option>
                         <option value="In Active">In Active</option>
                     </select>
@@ -212,7 +212,7 @@
 
                     <select class="form-control" id="statusadd" name="statusadd" style="width:99%;"  >
                      <label for="status">Status</label>
-                    <option value="">Select Status</option>
+                 
                         <option value="Active">Active</option>
                         <option value="In Active">In Active</option>
                     </select>
@@ -437,7 +437,8 @@ function Ubahdata(){
 
       $.ajax({
 type:'POST',
-data:'id='+id+'&value='+value+'&status='+status1+'&satuanf='+satuan_valuef+'&satuanq='+satuan_valueq,
+// data:'id='+id+'&value='+value+'&status='+status1+'&satuanf='+satuan_valuef+'&satuanq='+satuan_valueq,
+data:{value:value,id:id,status:status1,satuanf:satuan_valuef,satuanq:satuan_valueq},
 url :'<?php echo base_url("Values/aksi_update_data_value_attribute") ?>',
 dataType:'json',
 success:function(hasil){
@@ -554,7 +555,8 @@ function SimpanData(){
         satuanf_error.textContent="";
       $.ajax({
 type:'POST',
-data:'value='+value+'&id='+id+'&status='+status+'&satuanf='+satuanf+'&satuanq='+satuanq,
+// data:'value='+value+'&id='+id+'&status='+status+'&satuanf='+satuanf+'&satuanq='+satuanq,
+data:{value:value,id:id,status:status,satuanf:satuanf,satuanq:satuanq},
 
 url :'<?php echo base_url("Values/aksi_value_add_attribute")?>',
 dataType:'json',
@@ -587,7 +589,7 @@ error:function(){
    
     $('[name="satuan_valuef"]').val("");
     $('[name="satuan_valueq"]').val("");
-    $('[name="statusadd"]').val("");
+    $('[name="statusadd"]').val("Active");
 
 
     $('#add').hide();
@@ -669,4 +671,7 @@ function datatable(){
 $("#itemMainNav").addClass('active');
 </script>
  
-
+<!-- // data:'id='+id+'&value='+value+'&status='+status1+'&satuanf='+satuan_valuef+'&satuanq='+satuan_valueq,
+data:{value:value,id:id,status:status1,satuanf:satuan_valuef,satuanq:satuan_valueq}
+// data:'value='+value+'&id='+id+'&status='+status+'&satuanf='+satuanf+'&satuanq='+satuanq,
+data:{value:value,id:id,status:status,satuanf:satuanf,satuanq:satuanq} -->

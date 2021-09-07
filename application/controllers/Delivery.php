@@ -957,8 +957,8 @@ class Delivery extends CI_Controller
         $sub_array[] = $row->gudang;
 
 
-        $sub_array[] = $status;
-        $sub_array[] = $row->noteStatus;
+        // $sub_array[] = $status;
+        // $sub_array[] = $row->noteStatus;
 
         $sub_array[] = '' . $edit . ' ' . $delete . ' ' . $print . ' ' . $view . '';
 
@@ -1043,8 +1043,8 @@ class Delivery extends CI_Controller
         $sub_array[] = $row->gudang;
 
 
-        $sub_array[] = $status;
-        $sub_array[] = $row->noteStatus;
+        // $sub_array[] = $status;
+        // $sub_array[] = $row->noteStatus;
 
         $sub_array[] = '' . $edit . ' ' . $delete . ' ' . $print . ' ' . $view . '';
 

@@ -81,17 +81,17 @@
             phone (021) 53660077-08;Fax(021)53660099
           </p>
           
-          <table style="margin-top: 0px" style="width: 60%; " >
+          <table style="margin-top: 0px" style="width: 50%; " >
             <tr>
 
-              <td style="width: 5%;">Tagihan Ke</td>
-              <td style="width: 5%;"><?php echo $nama; ?></td>
+              <td style="width: 5px;">Tagihan Ke</td>
+              <td style="width: 55%;"><?php echo $nama; ?></td>
 
             </tr>
             <tr>
 
-              <td style="height: 10px"></td>
-              <td style="height: 10px; width:150px;"><?php echo $alamat; ?></td>
+              <td style="height: 5x"></td>
+              <td style="height: 55%; width:150px;"><?php echo $alamat; ?></td>
 
 
 

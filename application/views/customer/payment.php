@@ -56,13 +56,13 @@
        <div class="row ">
            <div class="col-md-6 col-xs-6 row "    >
            <div class="col-md-6 col-xs-6 p-3 mb-2 bg-light text-dark" style="background-color: coral;" >
-           <h5><b>Un-Finished Payment</b></h5>
+           <h5><b>Total Unfinished Payments</b></h5>
            <span id="un-finished_payment"> IDR 0 </b></span>
            <br>
            <br>
           
           
-           <h5><b>Total Un-Finished Invoice</b></h5>
+           <h5><b>Total Unfinished Invoice</b></h5>
            <span id="total_faktur_unfinished">0 </b></span>
            <br>
            <br>
@@ -73,7 +73,7 @@
            <br>
            <br>
           
-           <h5><b>Payment</b></h5>
+           <h5><b>Total Payment Selected</b></h5>
            IDR <span id="payment">0</b></span><br>
            <small class="text-danger pl-3" id="payment_error"></small>
            <br>

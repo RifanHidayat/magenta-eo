@@ -132,7 +132,7 @@ select[multiple]:focus option:checked {
 
                   <div class="form-group" id="kanan1" style="margin-top: -75px;">
                     <label for="lname">Last name</label>
-                    <input  type="text" class="form-control" id="lname" name="lname" required="" autocomplete="off" value="<?php echo set_value('lname') ?>">
+                    <input  type="text" class="form-control" id="lname" name="lname"  autocomplete="off" value="<?php echo set_value('lname') ?>">
                     <?= form_error('lname', '<small class="text-danger pl-3">', '</small>') ?>
                   </div>
                   <div class="form-group">

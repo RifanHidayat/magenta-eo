@@ -179,7 +179,7 @@
                   <div class="form-group" id="qnumber">
                     <label for="Date_quotation" style="text-align:left;" class="col-sm-8 control-label">GR Number</label>
                     <div class="col-sm-12">
-                      <input type="text" required="" class="form-control" id="gr_number" name="gr_number" autocomplete="off" value="<?php echo $gr_number ?>">
+                      <input type="text"  class="form-control" id="gr_number" name="gr_number" autocomplete="off" value="<?php echo $gr_number ?>">
                     </div>
 
                   </div>
