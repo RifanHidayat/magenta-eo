@@ -938,7 +938,7 @@
 
 
       Baris += '<td >  <div class="form-group"> ';
-      Baris += '<select required class="form-control select_group ItemValue" name="item_value[]" style="width:400px;" id="select<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"   onchange="cek<?php echo (str_replace(' ', '', $k->name)) ?>(' + Nomor + ');"> <option value="">Select <?php echo $k->name ?></option> <?php foreach ($core as $e) : if ($k->name == $e->name) { ?>  <option value="<?php echo $e->value ?>"><?php echo $e->value ?></option><?php } ?> <?php endforeach ?> </select> ';
+      Baris += "<select required class='form-control select_group ItemValue' name='item_value[]' style='width:400px;' id='select<?php echo (str_replace(' ', '', $k->name)) ?>" + Nomor + "'   onchange='cek<?php echo (str_replace(' ', '', $k->name)) ?>(" + Nomor + ");'> <option value=''>Select <?php echo $k->name ?></option> <?php foreach ($core as $e) : if ($k->name == $e->name) { ?>  <option value='<?php echo $e->value ?>'><?php echo $e->value ?></option><?php } ?> <?php endforeach ?> </select> ";
       Baris += '</div></td>';
 
       Baris += '<td>';
@@ -1084,7 +1084,7 @@
 
 
       Baris += '<td >  <div class="form-group"> ';
-      Baris += '<select class="form-control" style="width:400px;" name="item_value[]" id="selectNON<?php echo (str_replace(' ', '', $k->name)) ?>' + Nomor + '"   onchange="cek<?php echo (str_replace(' ', '', $k->name)) ?>(' + Nomor + ');"> <option value="">Select <?php echo $k->name ?></option> <?php foreach ($core as $e) : if ($k->name == $e->name) { ?>  <option value="<?php echo $e->value ?>"><?php echo $e->value ?></option><?php } ?> <?php endforeach ?> </select> ';
+      Baris += "<select class='form-control' style='width:400px;' name='item_value[]' id='selectNON<?php echo (str_replace(' ', '', $k->name)) ?>" + Nomor + "'   onchange='cek<?php echo (str_replace(' ', '', $k->name)) ?>(" + Nomor + ");'> <option value=''>Select <?php echo $k->name ?></option> <?php foreach ($core as $e) : if ($k->name == $e->name) { ?>  <option value='<?php echo $e->value ?>''><?php echo $e->value ?></option><?php } ?> <?php endforeach ?> </select> ";
       Baris += '</div></td>';
 
 

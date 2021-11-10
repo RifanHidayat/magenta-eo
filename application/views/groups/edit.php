@@ -569,9 +569,9 @@
             });
           });
 
-          $("#groupMainNav").addClass('active');
-          $("#manageGroupNav").addClass('active');
-          $("#openGroupNav").addClass('menu-open');
+          $("#userMainNav").addClass('active');
+ $("#manageGroupNav").addClass('active');
+   $("#openUserNav").addClass('menu-open');
 
           function showIndikator() {
             $('.btnSave').attr('disabled', 'disabled');

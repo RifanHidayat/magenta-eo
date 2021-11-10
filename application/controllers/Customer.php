@@ -162,6 +162,7 @@ class Customer extends CI_Controller {
 	 		
 
 	 		$this->data['name']=$row['name'];
+			 $this->data['code']=$row['code'];
 	 		$this->data['alamat']=$row['address'];
 	 		$this->data['phone']=$row['phone'];
 	 		$this->data['npwp']=$row['npwp'];
@@ -184,13 +185,12 @@ class Customer extends CI_Controller {
 
 			$data=[
 				'name'=>$this->input->post('name'),
+				'code'=>$this->input->post('code'),
 				'address'=>$this->input->post('address'),
 				'phone'=>$this->input->post('phone'),
 				'npwp'=>$this->input->post('npwp'),
 				'karakteristik_pph'=>$this->input->post('karakteristikPPh'),
-				'karakteristik_ppn'=>$this->input->post('karakteristikPPN'),
-		
-				
+				'karakteristik_ppn'=>$this->input->post('karakteristikPPN'),		
 			];
 
 			$this->db->insert('customer',$data);
@@ -262,6 +262,7 @@ class Customer extends CI_Controller {
 
 			$data=[
 				'name'=>$this->input->post('name'),
+				'code'=>$this->input->post('code'),
 				'address'=>$this->input->post('address'),
 				'phone'=>$this->input->post('phone'),
 				'npwp'=>$this->input->post('npwp'),
@@ -635,20 +636,13 @@ class Customer extends CI_Controller {
 
 
 	  public function aksi_update_profile(){
-		
-
 		$data=[
 			'name'=>$this->input->post('name'),
 			'address'=>$this->input->post('address'),
 			'phone'=>$this->input->post('phone'),
 			'fax'=>$this->input->post('fax'),
 			'signer'=>$this->input->post('signer'),
-  
-	
-			
 		];
-  
-	
 		$where=array(
 		'id'=>1
 		);
@@ -656,13 +650,9 @@ class Customer extends CI_Controller {
 		
 		$this->db->where($where);
 		$this->db->update('company',$data);
-  
 		$this->session->set_flashdata('success', 'Successfully created');
 		redirect('Customer/manage_customer', 'refresh');
-  
-  
-  
-  
+
   
 	  }
 }

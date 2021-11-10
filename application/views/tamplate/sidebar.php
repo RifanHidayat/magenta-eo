@@ -49,7 +49,7 @@
 
              <!--  Menu group -->
 
-             <?php if (in_array('createGroup', $user_permission) || in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)) : ?>
+             <!-- <?php if (in_array('createGroup', $user_permission) || in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission)) : ?>
                <li class="nav-item has-treeview" id="openGroupNav">
                  <a href="#" class="nav-link" id="groupMainNav">
                    <i class="nav-icon fas fa-users-cog"></i>
@@ -80,35 +80,36 @@
 
                  </ul>
                </li>
-             <?php endif; ?>
-             <?php if (in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)) : ?>
+             <?php endif; ?> -->
+             <?php if (in_array('createUser', $user_permission) || in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission) || (in_array('createGroup', $user_permission) || in_array('updateGroup', $user_permission) || in_array('viewGroup', $user_permission) || in_array('deleteGroup', $user_permission))) : ?>
                <li class="nav-item has-treeview" id="openUserNav">
                  <a href="#" class="nav-link" id="userMainNav">
                    <i class="nav-icon fas fa-users"></i>
                    <p>
-                     Users
+                     Administrator
                      <i class="right fas fa-angle-left"></i>
                    </p>
                  </a>
 
                  <ul class="nav nav-treeview">
+                     <?php if (in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)) : ?>
+                     <li class="nav-item">
+                       <a href="<?php echo base_url("Users/manage_users") ?> " class="nav-link" id="manageUserNav">
+                         <i class="far fa-circle nav-icon"></i>
+                         <p> Users</p>
+                       </a>
+                     </li>
+                   <?php endif; ?>
                    <?php if (in_array('createUser', $user_permission)) : ?>
                      <li class="nav-item">
-                       <a href="<?php echo base_url("Users/add_user") ?>" class="nav-link" id="addUserNav">
+                       <a href="<?php echo base_url("Group/manage_groups") ?>" class="nav-link" id="manageGroupNav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Add User</p>
+                         <p>Group</p>
                        </a>
                      </li>
                    <?php endif; ?>
 
-                   <?php if (in_array('updateUser', $user_permission) || in_array('viewUser', $user_permission) || in_array('deleteUser', $user_permission)) : ?>
-                     <li class="nav-item">
-                       <a href="<?php echo base_url("Users/manage_users") ?> " class="nav-link" id="manageUserNav">
-                         <i class="far fa-circle nav-icon"></i>
-                         <p>Manage Users</p>
-                       </a>
-                     </li>
-                   <?php endif; ?>
+               
 
                  </ul>
                </li>
@@ -116,29 +117,71 @@
              <?php if (in_array('paymentCustomer', $user_permission) || in_array('createCustomer', $user_permission) || in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)) : ?>
                <li class="nav-item has-treeview" id="openCustomerNav">
                  <a href="#" class="nav-link" id="customerMainNav">
-                   <i class="nav-icon fas fa-handshake"></i>
+                   <i class="nav-icon fas fa-th-list"></i>
                    <p>
-                     Customers
+                     Master Data
+                     <i class="right fas fa-angle-left"></i>
+                   </p>
+                 </a>
+                 <ul class="nav nav-treeview">
+                  
+                   <?php if (in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)) : ?>
+                     <li class="nav-item">
+                       <a href="<?php echo base_url("Customer/manage_customer") ?>" class="nav-link" id="manageCustomerNav">
+                         <i class="far fa-circle nav-icon"></i>
+                         <p>Customer</p>
+                       </a>
+                     </li>
+                   <?php endif; ?>
+                    <?php if (in_array('createCustomer', $user_permission)) : ?>
+                     <li class="nav-item">
+                       <a href="<?php echo base_url("supplier") ?>" class="nav-link" id="addSupplierNav">
+                         <i class="far fa-circle nav-icon"></i>
+                         <p>Supplier</p>
+                       </a>
+                     </li>
+                   <?php endif; ?>
+
+                 </ul>
+               </li>
+             <?php endif; ?>
+
+
+                 <?php if (in_array('paymentCustomer', $user_permission) || in_array('createCustomer', $user_permission) || in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)) : ?>
+               <li class="nav-item has-treeview" id="openPurchaseNav">
+                 <a href="#" class="nav-link" id="purchaseMainNav">
+                   <i class="nav-icon fas fa-shopping-cart"></i>
+                   <p>
+                     Pembelian
                      <i class="right fas fa-angle-left"></i>
                    </p>
                  </a>
                  <ul class="nav nav-treeview">
                    <?php if (in_array('createCustomer', $user_permission)) : ?>
                      <li class="nav-item">
-                       <a href="<?php echo base_url("Customer/add_customer") ?>" class="nav-link" id="addCustomerNav">
+                       <a href="<?php echo base_url("Purchase") ?>" class="nav-link" id="purchaseNav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Add Customer</p>
+                         <p>Manage</p>
                        </a>
                      </li>
                    <?php endif; ?>
-                   <?php if (in_array('updateCustomer', $user_permission) || in_array('viewCustomer', $user_permission) || in_array('deleteCustomer', $user_permission)) : ?>
+                    <?php if (in_array('createCustomer', $user_permission)) : ?>
                      <li class="nav-item">
-                       <a href="<?php echo base_url("Customer/manage_customer") ?>" class="nav-link" id="manageCustomerNav">
+                       <a href="<?php echo base_url("PurchaseTransaction") ?>" class="nav-link" id="TransactionsNav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Manage Customers</p>
+                         <p>Transactions</p>
                        </a>
                      </li>
-                   <?php endif; ?>
+                   <!-- <?php endif; ?>
+                    <?php if (in_array('createCustomer', $user_permission)) : ?>
+                     <li class="nav-item">
+                       <a href="<?php echo base_url("PurchaseReturn") ?>" class="nav-link" id="purchaseReturnNav">
+                         <i class="far fa-circle nav-icon"></i>
+                         <p>Retur barang</p>
+                       </a>
+                     </li>
+                   <?php endif; ?> -->
+                  
 
                  </ul>
                </li>
@@ -158,7 +201,7 @@
                    </p>
                  </a>
                  <ul class="nav nav-treeview">
-                   <?php if (in_array('createPicPO', $user_permission)) : ?>
+                   <!-- <?php if (in_array('createPicPO', $user_permission)) : ?>
                      <li class="nav-item">
                        <a href="<?php echo base_url("PicPO/add_pic") ?>" class="nav-link" id="addPICNav">
                          <i class="far fa-circle nav-icon"></i>
@@ -166,12 +209,12 @@
                        </a>
                      </li>
 
-                   <?php endif; ?>
+                   <?php endif; ?> -->
                    <?php if (in_array('updatePicPO', $user_permission) || in_array('viewPicPO', $user_permission) || in_array('deletePicPO', $user_permission)) : ?>
                      <li class="nav-item">
                        <a href="<?php echo base_url("PicPO/manage_pic") ?>" class="nav-link" id="managePICPONav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Manage PIC PO</p>
+                         <p>PIC PO</p>
                        </a>
                      </li>
                    <?php endif; ?>
@@ -179,7 +222,7 @@
                      <li class="nav-item">
                        <a href="<?php echo base_url("PicPO/manage_pic_event") ?>" class="nav-link" id="managePICEventNav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Manage PIC Event</p>
+                         <p>PIC Event</p>
                        </a>
                      </li>
                    <?php endif; ?>
@@ -230,19 +273,19 @@
                    </p>
                  </a>
                  <ul class="nav nav-treeview">
-                   <?php if (in_array('createQuatations', $user_permission) || in_array('createQuatationsother', $user_permission)) : ?>
+                   <!-- <?php if (in_array('createQuatations', $user_permission) || in_array('createQuatationsother', $user_permission)) : ?>
                      <li class="nav-item">
                        <a href="<?php echo base_url("Quotation/add_quotation") ?>" class="nav-link" id="addQuotationNav">
                          <i class="far fa-circle nav-icon"></i>
                          <p>Add Quotation</p>
                        </a>
                      </li>
-                   <?php endif; ?>
+                   <?php endif; ?> -->
                    <?php if (in_array('updateQuatations', $user_permission) || in_array('viewQuatations', $user_permission) || in_array('deleteQuatations', $user_permission)) : ?>
                      <li class="nav-item">
                        <a href="<?php echo base_url("Quotation/manage_quotation") ?>" class="nav-link" id="manageQuotationeventNav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Manage Quotation Event</p>
+                         <p>Quotation Event</p>
                        </a>
                      </li>
                    <?php endif; ?>
@@ -251,7 +294,7 @@
                      <li class="nav-item">
                        <a href="<?php echo base_url("Quotation/manage_quotation_other") ?>" class="nav-link" id="manageQuotationotherNav">
                          <i class="far fa-circle nav-icon"></i>
-                         <p>Manage Quotation Other</p>
+                         <p>Quotation Other</p>
                        </a>
                      </li>
                    <?php endif; ?>

@@ -149,26 +149,46 @@
       <div class="modal-body">
 
         <form id="formmodal" method="post" action="<?php echo base_url('Quotation/add_po_other'); ?>">
-          <div class="box-body">
+        <div class="box-body">
 
-            <div class="form-group">
-              <label for="fname">PO Number </label>
-              <input required style="width: 100%;" type="text" class="form-control" id="po_number" name="po_number">
-              <small class="text-danger pl-3" id="po_error"></small>
-            </div>
-
-            <div class="form-group">
-              <label for="fname">Date Number </label>
-              <input autocomplete="off" onkeypress="return false;" placeholder="yyyy-mm-dd" required style="width: 100%;" type="text" class="form-control date_number" id="date_number" name="date_number" readonly>
-              <small class="text-danger pl-3" id="date_error"></small>
-            </div>
-
-            <div class="form-group">
-              <input type="hidden" name="id" id="id">
-            </div>
+<div class="form-group" hidden>
+    <label for="fname">Quotation Id </label>
+    <input required style="width: 100%;" type="text" class="form-control" id="quotationId" name="quotationId">
+    <small class="text-danger pl-3" id="po_error" name="po_error"></small>
+  </div>
+  <div class="form-group"  hidden>
+                  <label for="fname">Quotation Number</label>
+                  <input required style="width: 100%;" type="text" class="form-control" id="quotationNumber" name="quotationNumber">
+                  <small class="text-danger pl-3" id="po_error" name="p_error"></small>
+                </div>
 
 
-          </div>
+  <div class="form-group">
+    <label for="fname">PO Number </label>
+    <input required style="width: 100%;" type="text" class="form-control" id="poNumber" name="poNumber">
+    <small class="text-danger pl-3" id="po_error" name="po_error"></small>
+  </div>
+  <div class="form-group">
+    <label for="fname">Date Number </label>
+    <input autocomplete="off"  type="date" placeholder="yyyy-mm-dd" required style="width: 100%;" type="date  " class="form-control date_number" id="date" name="date">
+    <small class="text-danger pl-3" id="date_error"></small>
+  </div>
+  <div class="form-group">
+    <label for="fname">Title Event</label>
+    <input required style="width: 100%;" type="text" class="form-control" id="titleEvent" name="titleEvent">
+    <small class="text-danger pl-3" id="po_error" name="po_error"></small>
+  </div>
+  <div class="form-group">
+    <label for="fname">Jumlah</label>
+    <input required style="width: 100%;" type="text" class="form-control" id="amount" name="amount">
+    <small class="text-danger pl-3" id="po_error" name="po_error"></small>
+  </div>
+
+  
+  <div class="form-group">
+    <input type="text" name="id" id="id" hidden>
+  </div>
+</div>
           <!-- /.box-body -->
 
         </form>
@@ -189,11 +209,11 @@
 
 
 <script type="text/javascript">
-  $(document).ready(function() {
-        $('.date_number').datepicker({
-          dateFormat: "yy-mm-dd"
-        });
-      });
+  // $(document).ready(function() {
+  //       $('.date_number').datepicker({
+  //         dateFormat: "yy-mm-dd"
+  //       });
+  //     });
   $(document).ready(function() {
     var dataTable = $('#quotationotherTable').DataTable({
       "processing": true,
@@ -300,12 +320,7 @@
 
 
         } else {
-          //          Swal.fire(
-
-          //       'gagal menghapus data.',
-          //       'error'
-          //     );
-          // //console.log("tes");
+  
 
         }
       },
@@ -320,33 +335,26 @@
 
 
 
-  function AmbilData(id) {
-    $.ajax({
-      type: "post",
-      url: '<?php echo base_url("Quotation/getDataquotationother/3") ?>',
-      data: {
-        id: id
-      },
-      dataType: 'json',
-      success: function(hasil) {
-        
+  // function AmbilData(id) {
+  //   console.log("e")
+  //   $.ajax({
+  //     type: "post",
+  //     url: '<?php echo base_url("Quotation/getDataquotationother/3") ?>',
+  //     data: {
+  //       id: id
+  //     },
+  //     dataType: 'json',
+  //     success: function(hasil) {
+  //       $('[name="quotationId"]').val(hasil[0].id);
+  //       $('[name="poNumber"]').val(hasil[0].po_number);
+  //       $('[name="date"]').val(hasil[0].date_po_number);
+  //     },
+  //     error: function(hasil) {
+  //     }
+  //   });
+    
 
-
-        $('[name="id"]').val(hasil[0].id);
-        $('[name="po_number"]').val(hasil[0].po_number);
-       
-        $('[name="date_number"]').val(hasil[0].date_po_number);
-
-
-
-      },
-      error: function(hasil) {
-
-      }
-
-    });
-
-  }
+  // }
 
   function Ubahdata() {
     var id = $('[name="id"]').val();
@@ -576,6 +584,7 @@
   }
 
   function AmbilData(id) {
+    console.log("w")
     $.ajax({
       type: "post",
       url: '<?php echo base_url("Quotation/getDataquotationother/3") ?>',
@@ -584,15 +593,10 @@
       },
       dataType: 'json',
       success: function(hasil) {
-
-
-
-
-        $('[name="id"]').val(hasil[0].id);
-        $('[name="po_number"]').val(hasil[0].po_number);
-        $('[name="date_number"]').val(hasil[0].date_po_number);
-
-
+        $('[name="quotationId"]').val(hasil[0].id);
+        $('[name="poNumber"]').val(hasil[0].po_number);
+        $('[name="date"]').val(hasil[0].date_po_number);
+        $('[name="quotationNumber"]').val(hasil[0].quotation_number);
       },
       error: function(hasil) {
 
@@ -603,71 +607,73 @@
   }
 
   function AddPonumber() {
-    var id = $('[name="id"]').val();
-    var po_number = $('[name="po_number"]').val();
-    var date_po = $('[name="date_number"]').val();
+        
+        var quotationId = $('[name="quotationId"]').val();
+        var poNumber = $('[name="poNumber"]').val();
+        var datePo = $('[name="date"]').val();
+        var titleEvent = $('[name="titleEvent"]').val();
+        var amount = $('[name="amount"]').val();
+        var quotationNumber = $('[name="quotationNumber"]').val();
+ 
+        // if (po_number.trim() == '') {
+        //   po_error.textContent = "PO number masih kosog";
+        //   console.log("PO number masih kosog");
+        // } else if (date_po.trim() == '') {
+        //   po_number_error.textContent = ""
+        //   date_error.textContent = "tanggal  masih kosong";
+        //   console.log("tanggal  masih kosong");
+        // } else {
+        //   po_error.textContent = ""
+        //   date_error.textContent = "";
 
-    if (po_number.trim() == '') {
-      po_error.textContent = "*PO number masih kosog";
+        
+          $.ajax({
+            type: 'POST',
+            data: {
+              quotation_id: quotationId,
+              po_number: poNumber,
+              date: datePo,
+              title_event:titleEvent,
+              amount:amount,
+              quotation_number:quotationNumber
 
-    } else if (date_po.trim() == '') {
-      po_error.textContent = ""
-      date_error.textContent = "*tanggal  masih kosong";
+            },
+            url: '<?php echo base_url("quotationPo/create") ?>',
+            dataType: 'json',
+            success: function(hasil) {
+              console.log(hasil);
+              Swal.fire({
+                title: "success!",
+                text: "Po Number berhasil disimpan",
+                icon: "success",
+                timer: 2000,
+                showCancelButton: false,
+                showConfirmButton: false
+              });
+              $('#quotationotherTable').DataTable().ajax.reload();
+              $('#po_number').hide();
+              $('.modal-backdrop').hide();
+              $('#quotationotherTable').DataTable().ajax.reload
+            },
+            error: function() {
+              Swal.fire({
+                title: "success!",
+                text: "Po Number berhasil disimpan",
+                icon: "success",
+                timer: 2000,
+                showCancelButton: false,
+                showConfirmButton: false
+              });
+              $('#quotationotherTable').DataTable().ajax.reload();
+              $('#po_number').hide();
+              $('.modal-backdrop').hide();
+              $('#quotationotherTable').DataTable().ajax.reload
+            }
 
-    } else {
-
-      po_error.textContent = ""
-      date_error.textContent = "";
-
-      $.ajax({
-        type: 'POST',
-        data: {
-          id: id,
-          po_number: po_number,
-          date_po: date_po,
-        },
-        url: '<?php echo base_url("Quotation/add_ponumber_other") ?>',
-        dataType: 'json',
-        success: function(hasil) {
-          console.log(hasil);
-          Swal.fire({
-            title: "success!",
-            text: "Po Number berhasil disimpan",
-            icon: "success",
-            timer: 2000,
-            showCancelButton: false,
-            showConfirmButton: false
           });
-          $('#po_number').hide();
-          $('.modal-backdrop').hide();
-          $('#quotationotherTable').DataTable().ajax.reload();
-        },
-        error: function() {
-          Swal.fire({
-            title: "success!",
-            text: "Po Number berhasil disimpan",
-            icon: "success",
-            timer: 2000,
-            showCancelButton: false,
-            showConfirmButton: false
-          });
 
-
-          $('#po_number').hide();
-          $('.modal-backdrop').hide();
-          $('#quotationotherTable').DataTable().ajax.reload();
 
         }
-
-      });
-
-    }
-
-
-
-
-
-  }
 
 
 

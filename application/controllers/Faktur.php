@@ -864,7 +864,7 @@ class Faktur extends CI_Controller
 
       $data1 = [
         "quotation_number" => $quotation_number,
-        "project_id"=>$project_number,
+        "project_number"=>$project_number,
         "faktur_number" => $faktur,
         "ser_faktur" => $seri_faktur,
         "date_faktur" => $date_faktur,

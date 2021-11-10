@@ -149,11 +149,7 @@
               <div  class="col-sm-7" style="color: red;" align="left">
               <small class="text-danger pl-10" id="info_beban"></small>
               </div>
-              
-                  
             </div>
-           
-
            <div class="form-group">
                
             </div>

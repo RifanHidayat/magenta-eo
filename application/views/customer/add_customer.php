@@ -52,44 +52,38 @@
 
 
                    <div class="form-group">
-                     <label for="name">Customer Name</label>
-                     <input style="width: 45%" type="text" class="form-control" id="name" name="name" required="" autocomplete="off" value="<?php echo set_value('name') ?>">
+                     <label for="name">Code</label>
+                     <input style="width: 45%" type="text" class="form-control" id="code" name="code" required="" autocomplete="off" value="<?php echo set_value('code') ?>">
                      <?= form_error('name', '<small class="text-danger pl-3">', '</small>') ?>
                    </div>
 
 
                    <div class="form-group" id="kanan1" style="margin-top: -75px;">
-                     <label for="phone">Customer Phone</label>
-                     <input type="text" class="form-control" id="phone" name="phone"  autocomplete="off" value="<?php echo set_value('phone') ?>">
-                     <?= form_error('phone', '<small class="text-danger pl-3">', '</small>') ?>
+                     <label for="phone">Name</label>
+                     <input type="text" class="form-control" id="name" name="name"  autocomplete="off" value="<?php echo set_value('name') ?>">
+                     <?= form_error('name', '<small class="text-danger pl-3">', '</small>') ?>
                    </div>
                    <div class="form-group">
+                     <label for="npwp">Phone</label>
+                     <input style="width: 45%" type="text" class="form-control" required="" id="phone" name="phone" autocomplete="off" value="<?php echo set_value('npwp') ?>">
+                     <?= form_error('phone', '<small class="text-danger pl-3">', '</small>') ?>
+                   </div>
+                   <div class="form-group" id="kanan1" style="margin-top: -75px;" >
                      <label for="npwp">NPWP</label>
-                     <input style="width: 45%" type="text" class="form-control" required="" id="npwp" name="npwp" autocomplete="off" value="<?php echo set_value('npwp') ?>">
+                     <input  type="text" class="form-control" required="" id="npwp" name="npwp" autocomplete="off" value="<?php echo set_value('npwp') ?>">
                      <?= form_error('npwp', '<small class="text-danger pl-3">', '</small>') ?>
                    </div>
 
-                   <div class="form-group" id="kanan1" style="margin-top: -75px;">
+                   <div class="form-group" >
                      <label for="email">Karakteristik Pajak PPN</label>
-                     <select required="" class="form-control customerEvent" id="karakteristikPPN" name="karakteristikPPN" style="width:99%;" value="<?php echo set_value('karakteristikPPN') ?>">
+                     <select style="width: 45%" required="" class="form-control customerEvent" id="karakteristikPPN" name="karakteristikPPN" style="width:99%;" value="<?php echo set_value('karakteristikPPN') ?>">
                        <option value=""></option>
-
                        <option value="ppn">With PPN</option>
                        <option value="noppn">No PPN</option>
-
-
                      </select>
-
-
+                     
                    </div>
-                   <div class="form-group">
-                     <label for="address">Customer Address</label>
-                     <textarea style="width: 45%" type="text" rows="4" cols="50" row="6" class="form-control" id="address" name="address" required="" autocomplete="off" value="<?php echo set_value('address') ?>"></textarea>
-                     <?= form_error('address', '<small class="text-danger pl-3">', '</small>') ?>
-
-                   </div>
-
-                   <div class="form-group" id="kanan1" style="margin-top: -130px;">
+                   <div class="form-group" id="kanan1" style="margin-top: -75px;">
                      <label for="email">Karakteristik Pajak PPh</label>
                      <select required="" class="form-control " id="karakteristikPPh" name="karakteristikPPh" style="width:99%;" value="<?php echo set_value('karakteristikPPh') ?>">
                        <option value=""></option>
@@ -100,6 +94,12 @@
 
                      </select>
 
+                   </div>
+                   <div class="form-group">
+                   <label for="address">Customer Address</label>
+                     <input type="text" rows="4" cols="50" row="6" class="form-control" id="address" name="address" required="" autocomplete="off" value="<?php echo set_value('address') ?>"/>
+                     <?= form_error('address', '<small class="text-danger pl-3">', '</small>') ?>
+                     
                    </div>
                    <div class="form-group">
                      <label for="email">Gudang</label>

@@ -236,6 +236,8 @@
  var payment_faktur=[];
  var data_faktur=[];
  var account_beban=false;
+ let API_URL="http://localhost:3000";
+let FINANCE_API="http://localhost:3002";
  
   $(document).ready(function() { 
     $('.info_beban').hide();
@@ -428,15 +430,17 @@ function accounts() {
   
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/api/accounts',
+    url: `${FINANCE_API}/api/account`,
     dataType: 'json',
     success: function(response) {
+      console.log(response)
+      
       for (var i=0; i<response.data.length; i++){
-        if ((response.data[i].id==100) || (response.data[i].id==108) || (response.data[i].id==101) ){
+        if ((response.data[i].is_default==1) || (response.data[i].active==0)){
         
 
         }else{
-          $('#account').append('<option id=' + response.data[i].id + ' value=' + response.data[i].id + '>' + response.data[i].bank_name  + '</option>');
+          $('#account').append('<option id=' + response.data[i].id + ' value=' + response.data[i].id + '>' + response.data[i].name  + '</option>');
 
         }
       
@@ -717,9 +721,6 @@ var data_transaction={
 
 
 }
-
-
-
     if (payment>0){
       axios.post("http://localhost:3000/api/accounts/transaction/remaining",data_transaction).then((response)=>{
         Swal.fire({

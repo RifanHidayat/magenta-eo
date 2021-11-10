@@ -366,6 +366,13 @@
 
 
                   </div>
+                  <div class="form-group" id="qnumber">
+
+<label for="pid_event" style="text-align:left;" class="col-sm-6 control-label">Project Number</label>
+<div class="col-sm-12">
+<input readonly  type="text"  class="form-control" required="" id="project_number" name="project_number" autocomplete="off">
+</div>
+</div>
                   <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
                   <?= form_error('syarat_pembayaran', '<small class="text-danger pl-3">', '</small>') ?>
                 </div>
@@ -606,6 +613,7 @@
         $('#ref').val(hasil[0].REF);
         $('[name="ref"]').val(hasil[0].po_number);
         $('[name="gr_number"]').val(hasil[0].gr_number);
+        $('[name="project_number"]').val(hasil[0].project_number); 
 
         $('[name="bastNumber"]').val(hasil[0].bast_number);
         $('[name="totalBast"]').val(hasil[0].totalBast.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1."));

@@ -147,12 +147,12 @@
 <b>Title Event :<?php echo $title; ?></b> -->
               <table style="right: 0" align="right" style="width: 25%;">
                 <tr>
-                  <td>Attn</td>
-                  <td>:</td>:<td><?php echo $pic_name ?></td>
+                  <td valign="top">Attn</td>
+                  <td valign="top">:</td>:<td><?php echo $pic_name ?></td>
                 </tr>
                 <tr>
-                  <td>Event</td>
-                  <td>:</td>
+                  <td valign="top">Event</td>
+                  <td valign="top">:</td>
                   <td><?php echo $title ?></td>
                 </tr>    
               </table>
@@ -182,18 +182,18 @@
               <table id="tbl1" align="center" style="width: 100%" border="1" align="center">
                 <thead class="thead-dark">
                   <tr>
-                    <th style="width: 5%;background-color: #808080">
+                    <th style="width: 5%;background-color: #808080" valign="top">
                       <center>No</center>
                     </th>
-                    <th style="width: 35%;background-color: #808080">Description</th>
-                    <th style="width: 5%;background-color: #808080">
+                    <th style="width: 35%;background-color: #808080" valign="top">Description</th>
+                    <th style="width: 5%;background-color: #808080" valign="top">
                       <center>Quantity</center>
                     </th>
-                    <th style="width: 5%;background-color: #808080">
+                    <th style="width: 5%;background-color: #808080" valign="top">
                       <center>Frequency</center>
                     </th>
-                    <th style="width: 20%;background-color: #808080">Unit Price</th>
-                    <th style="width: 20%;background-color: #808080">Amount</th>
+                    <th style="width: 20%;background-color: #808080" valign="top">Unit Price</th>
+                    <th style="width: 20%;background-color: #808080" valign="top">Amount</th>
                   </tr>
                 </thead>
 

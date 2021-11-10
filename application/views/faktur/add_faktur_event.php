@@ -289,12 +289,7 @@
 
                 </div>
 
-
                 <div class="col-md-6 col-xs-12 pull pull-left">
-
-
-
-
                   <div class="form-group" id="qnumber">
                     <label for="Quatations_number_other" style="text-align:left;" class="col-sm-6 control-label">Faktur Number</label>
                     <div class="col-sm-12">
@@ -375,7 +370,7 @@
 
                   <div class="form-group" id="qnumber">
 
-              <label for="pid_event" style="text-align:left;" class="col-sm-6 control-label">Projects Number</label>
+              <label for="pid_event" style="text-align:left;" class="col-sm-6 control-label">Project Number</label>
               <div class="col-sm-12">
               <input readonly  type="text"  class="form-control" required="" id="project_number" name="project_number" autocomplete="off" value="<?php echo $project_number ?>" >
 </div>

@@ -293,9 +293,9 @@
             });
           });
 
-          $("#groupMainNav").addClass('active');
-          $("#addGroupNav").addClass('active');
-          $("#openGroupNav").addClass('menu-open');
+          $("#userMainNav").addClass('active');
+ $("#manageGroupNav").addClass('active');
+   $("#openUserNav").addClass('menu-open');
 
 
           function showIndikator() {

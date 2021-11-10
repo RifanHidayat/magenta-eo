@@ -57,26 +57,33 @@
                      <input hidden="" type="text" class="form-control" id="name" name="idCustomer" required="" autocomplete="off" value="<?php echo ($id) ?>">
                    </div>
                    <div class="form-group">
-                     <label for="name">Customer Name</label>
-                     <input style="width: 45%" type="text" class="form-control" id="name" name="name" required="" autocomplete="off" value="<?php echo ($name) ?>">
+                     <label for="name">Code</label>
+                     <input style="width: 45%" type="text" class="form-control" id="code" name="code" required="" autocomplete="off" value="<?php echo ($code) ?>">
                      <?= form_error('name', '<small class="text-danger pl-3">', '</small>') ?>
                    </div>
                    <div class="form-group" id="kanan1" style="margin-top: -75px;">
-                     <label for="phone">Customer Phone</label>
-                     <input type="text" class="form-control" id="phone" name="phone" autocomplete="off" value="<?php echo ($phone) ?>">
+                     <label for="phone">Customner Name</label>
+                     <input type="text" class="form-control" id="name" name="name" autocomplete="off" value="<?php echo ($name) ?>">
                      <?= form_error('phone', '<small class="text-danger pl-3">', '</small>') ?>
                    </div>
 
                    <div class="form-group">
-                     <label for="npwp">NPWP</label>
-                     <input style="width: 45%" type="text" class="form-control" required="" id="npwp" name="npwp" autocomplete="off" value="<?php echo ($npwp) ?>">
+                     <label for="npwp">Customer Phone</label>
+                     <input style="width: 45%" type="text" class="form-control" required="" id="phone" name="phone" autocomplete="off" value="<?php echo ($phone) ?>">
                      <?= form_error('npwp', '<small class="text-danger pl-3">', '</small>') ?>
 
                    </div>
 
                    <div class="form-group" id="kanan1" style="margin-top: -75px;">
+                     <label for="phone">NPWP</label>
+                     <input type="text" class="form-control" id="npwp" name="npwp" autocomplete="off" value="<?php echo ($npwp) ?>">
+                     <?= form_error('phone', '<small class="text-danger pl-3">', '</small>') ?>
+                   </div>
+
+
+                   <div class="form-group">
                      <label for="email">Karakteristik Pajak PPN</label>
-                     <select required="" class="form-control customerEvent" id="karakteristikPPN" name="karakteristikPPN" style="width:99%;">
+                     <select style="width: 45%;"   required="" class="form-control customerEvent" id="karakteristikPPN" name="karakteristikPPN" style="width:99%;">
                        <option value=""></option>
 
 
@@ -88,13 +95,13 @@
 
 
                    </div>
-                   <div class="form-group">
+                   <!-- <div class="form-group">
                      <label for="address">Customer Address</label>
                      <textarea style="width: 45%" type="text" rows="4" cols="50" row="6" class="form-control" id="address" name="address" required="" autocomplete="off" value="<?php echo ($alamat) ?>"><?php echo ($alamat) ?></textarea>
                      <?= form_error('address', '<small class="text-danger pl-3">', '</small>') ?>
-                   </div>
+                   </div> -->
 
-                   <div class="form-group" id="kanan1" style="margin-top: -130px;">
+                   <div class="form-group"  id="kanan1" style="margin-top: -75px;" >
                      <label for="email">Karakteristik Pajak PPh</label>
                      <select required="" class="form-control " id="karakteristikPPh" name="karakteristikPPh" style="width:99%;">
                        <option value=""></option>
@@ -107,14 +114,11 @@
 
                    </div>
 
-
-
-
-
-
-
-
-
+                   <div class="form-group">
+                   <label for="address">Customer Address</label>
+                     <input type="text" rows="4" cols="50" row="6" class="form-control" id="address" name="address" required="" autocomplete="off" value="<?php echo ($alamat) ?>">
+                     <?= form_error('address', '<small class="text-danger pl-3">', '</small>') ?>  
+                   </div>
                    <div class="form-group">
                      <label for="email">Gudang</label>
                      <table class="table" border="0" id="tableLoopDescription">

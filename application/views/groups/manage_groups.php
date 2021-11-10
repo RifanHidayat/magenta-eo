@@ -220,7 +220,8 @@
 
     });
   }
-  $("#groupMainNav").addClass('active');
-  $("#manageGroupNav").addClass('active');
-  $("#openGroupNav").addClass('menu-open');
+
+   $("#userMainNav").addClass('active');
+ $("#manageGroupNav").addClass('active');
+   $("#openUserNav").addClass('menu-open');
 </script>

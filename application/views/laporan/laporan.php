@@ -917,6 +917,7 @@ function getdatatablequotationtotal(title,table,aksi,laporan,jenis_laporan,statu
 
                 extend: 'excelHtml5',
                
+                title:''+title,
                 autoFilter: true,
                 exportOptions: {
                 columns: ':visible',
